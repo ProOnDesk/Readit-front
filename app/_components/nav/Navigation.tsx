@@ -7,7 +7,7 @@ import { FaUserCircle } from "react-icons/fa";
 import Dropdown from "../ui/Dropdown";
 
 export default function Navigation() {
-  const isAuth = true;
+  const isAuth = false;
 
   return (
     <div className="fixed top-0 left-0 w-full h-16 md:h-20 shadow-md  z-[60] bg-white px-4 sm:px-8">

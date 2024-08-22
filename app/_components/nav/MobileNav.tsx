@@ -12,7 +12,7 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ closeNav }: MobileNavProps) {
-  const isAuth = true;
+  const isAuth = false;
 
   return (
     <div className="text-webAccentWhite dark:text-webYellow w-full h-full flex flex-col justify-between">
@@ -65,7 +65,11 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
         </Link>
         {!isAuth ? (
           <div className="w-full justify-between items-center mt-5 gap-4 font-medium flex md:hidden">
-            <Link href="login" className="group w-1/2 text-center">
+            <Link
+              href="login"
+              className="group w-1/2 text-center"
+              onClick={closeNav}
+            >
               <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300">
                 Zaloguj
               </span>
@@ -73,6 +77,7 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
             <Link
               href="register"
               className="w-1/2 text-center rounded-full bg-mainGreen hover:bg-mainGreenSecond text-white transition-colors duration-300 py-2"
+              onClick={closeNav}
             >
               Zarejestruj
             </Link>
