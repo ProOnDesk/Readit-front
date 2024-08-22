@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-interface TitleElementProps {
+interface TextElementProps {
 	element: { type: string; content: string };
 	index: number;
 	setArticleList: React.Dispatch<
@@ -8,11 +8,11 @@ interface TitleElementProps {
 	>;
 }
 
-export default function TitleElement({
+export default function TextElement({
 	element,
 	index,
 	setArticleList,
-}: TitleElementProps) {
+}: TextElementProps) {
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
 	useEffect(() => {
@@ -27,8 +27,7 @@ export default function TitleElement({
 		<textarea
 			ref={textAreaRef}
 			value={element?.content}
-			className='w-full text-2xl focus:outline-none resize-none'
-			maxLength={100}
+			className='w-full focus:outline-none resize-none'
 			onChange={(e) => {
 				setArticleList((prev) => {
 					const newList = [...prev];

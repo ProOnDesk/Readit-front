@@ -1,5 +1,6 @@
 import React from 'react';
 import TitleElement from './TitleElement';
+import TextElement from './TextElement';
 
 export default function Article({
 	articleList,
@@ -21,7 +22,11 @@ export default function Article({
 							setArticleList={setArticleList}
 						/>
 					) : element?.type === 'text' ? (
-						<p>{element.content}</p>
+						<TextElement
+							element={element}
+							index={index}
+							setArticleList={setArticleList}
+						/>
 					) : element?.type === 'image' ? (
 						<img
 							src={element?.content}
