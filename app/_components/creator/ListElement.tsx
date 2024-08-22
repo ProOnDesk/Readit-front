@@ -2,7 +2,7 @@ import { FaArrowDown, FaArrowUp, FaMinus } from 'react-icons/fa';
 
 interface ListElementProps {
 	leftIcon?: React.ReactNode;
-	text: string;
+	type: string;
 	isChoosen?: boolean;
 	index?: number;
 	onUp?: () => void;
@@ -12,7 +12,7 @@ interface ListElementProps {
 
 export default function ListElement({
 	leftIcon,
-	text,
+	type,
 	isChoosen,
 	onUp,
 	onDown,
@@ -26,16 +26,29 @@ export default function ListElement({
 		>
 			<span className='flex flex-row items-center gap-4'>
 				<span>{leftIcon}</span>
-				<span>{text}</span>
+				<span>
+					{type === 'title' && 'Tytuł'}
+					{type === 'image' && 'Zdjęcie'}
+					{type === 'text' && 'Tekst'}
+				</span>
 			</span>
 			<span className='flex flex-row gap-3  group-[.list-element]:group-hover:opacity-100 opacity-0 transition-all duration-300'>
-				<button className='group-last:hidden' onClick={onDown}>
+				<button
+					className='group-last:hidden hover:text-mainGreenSecond transition-colors duration-300 p-1'
+					onClick={onDown}
+				>
 					<FaArrowDown />
 				</button>
-				<button className='group-first:hidden' onClick={onUp}>
+				<button
+					className='group-first:hidden hover:text-mainGreenSecond transition-colors duration-300 p-1'
+					onClick={onUp}
+				>
 					<FaArrowUp />
 				</button>
-				<button onClick={onDelete}>
+				<button
+					className='hover:text-mainGreenSecond transition-colors duration-300 p-1'
+					onClick={onDelete}
+				>
 					<FaMinus />
 				</button>
 			</span>
