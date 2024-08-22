@@ -1,3 +1,21 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+::-webkit-scrollbar {
+  background-color: white;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #9ef01a;
+  border-radius: 999px;
+}
+
+.underline-before {
+  @apply relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300;
+}
+
+.underlined {
+  @apply relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black;
+}
