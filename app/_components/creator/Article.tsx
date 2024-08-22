@@ -1,6 +1,7 @@
 import React from 'react';
 import TitleElement from './TitleElement';
 import TextElement from './TextElement';
+import ImageElement from './ImageElement';
 
 export default function Article({
 	articleList,
@@ -28,11 +29,7 @@ export default function Article({
 							setArticleList={setArticleList}
 						/>
 					) : element?.type === 'image' ? (
-						<img
-							src={element?.content}
-							alt='article image'
-							className='w-full rounded-sm'
-						/>
+						<ImageElement element={element} />
 					) : null}
 				</div>
 			))}
