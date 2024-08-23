@@ -54,7 +54,7 @@ export default function LoginForm() {
               href="/"
               className="text-sm hover:text-mainGreen transition-colors duration-300 under lined hover:before:bg-mainGreen"
             >
-              Zapomniałem hasło
+              Nie pamiętam hasła
             </Link>
           </p>
         </div>
