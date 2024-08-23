@@ -1,14 +1,13 @@
 "use client";
 
-import React from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import InputBox from "../ui/InputBox";
-import { FaRegUser } from "react-icons/fa";
-import { LuPencilLine } from "react-icons/lu";
+import { useRegister } from "@/app/_hooks/useRegister";
 import Link from "next/link";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { GoLock } from "react-icons/go";
-import { PiGenderIntersex  } from "react-icons/pi";
+import { LuPencilLine } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
+import { PiGenderIntersex } from "react-icons/pi";
+import InputBox from "../ui/InputBox";
 
 export default function RegisterForm() {
   const {
@@ -17,9 +16,18 @@ export default function RegisterForm() {
     getValues,
     formState: { errors },
   } = useForm<FieldValues>();
+  const { isLoading, registerHookFn } = useRegister();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
+
+    registerHookFn({
+      email: data.email,
+      firstname: data.name,
+      lastname: data.surname,
+      password: data.password,
+      sex: data.sex,
+    });
   };
 
   return (
@@ -93,7 +101,7 @@ export default function RegisterForm() {
             label="Płeć"
             error={errors?.sex?.message}
             register={register}
-            icon={<PiGenderIntersex  size={20} />}
+            icon={<PiGenderIntersex size={20} />}
           />
         </div>
         <button className="w-full sm500:max-w-[250px] bg-mainGreen py-2 text-white uppercase tracking-widest font-medium rounded-full transition-all duration-300">
