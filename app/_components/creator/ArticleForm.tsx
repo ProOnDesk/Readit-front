@@ -1,3 +1,5 @@
+import FileUploader from '../FileUploader';
+
 export default function ArticleForm({
 	register,
 	errors,
@@ -34,10 +36,14 @@ export default function ArticleForm({
 			</div>
 			<div className='flex flex-col  gap-1 w-1/3'>
 				<label className='text-xl'>Zdjęcie</label>
-				<input
+				{/* <input
 					type='file'
 					className='flex-1 rounded-md border-2 text-xl p-1'
 					{...register('image', { required: 'Obraz jest wymagany' })}
+				/> */}
+				<FileUploader
+					register={register}
+					types={['JPG', 'PNG', 'GIF', 'JPEG']}
 				/>
 				<ErrorMessage>{errors?.image?.message}</ErrorMessage>
 			</div>

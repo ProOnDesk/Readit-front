@@ -39,7 +39,7 @@ function Creator() {
 	} = useForm<Inputs>();
 
 	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
+	console.log(watch('image'));
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
 			<ArticleForm register={register} errors={errors} />
