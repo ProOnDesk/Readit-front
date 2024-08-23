@@ -46,9 +46,10 @@ export default function ArticleSettings({
 	}
 
 	return (
-		<div className='flex flex-col w-1/4 border-r-2 border-blackSecond/5'>
+		<div className='flex flex-col w-1/4 border-r-2 border-blackSecond/5 bg-white'>
 			<div className='flex flex-row '>
 				<button
+					type='button'
 					className={`flex-1 p-5 border-b-2 hover:border-mainGreenSecond ${
 						choosenOption === 'content' && 'border-mainGreen'
 					} duration-300 transition-colors`}
@@ -57,6 +58,7 @@ export default function ArticleSettings({
 					Elementy
 				</button>
 				<button
+					type='button'
 					className={`flex-1 p-5 border-b-2 hover:border-mainGreenSecond ${
 						choosenOption === 'elements' && 'border-mainGreen'
 					} duration-300 transition-colors`}

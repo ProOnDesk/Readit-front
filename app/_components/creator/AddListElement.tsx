@@ -13,6 +13,7 @@ export default function AddListElement({
 }: ListElementProps) {
 	return (
 		<button
+			type='button'
 			onClick={onClick}
 			className={`flex justify-between items-center p-7 text-lg duration-300 transition-colors w-full hover:bg-whiteSecond`}
 		>

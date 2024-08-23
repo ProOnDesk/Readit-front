@@ -38,18 +38,21 @@ export default function ListElement({
 			</span>
 			<span className='flex flex-row gap-3  group-[.list-element]:group-hover:opacity-100 opacity-0 transition-all duration-300'>
 				<button
+					type='button'
 					className='group-last:hidden hover:text-mainGreenSecond transition-colors duration-300 p-1'
 					onClick={onDown}
 				>
 					<FaArrowDown />
 				</button>
 				<button
+					type='button'
 					className='group-first:hidden hover:text-mainGreenSecond transition-colors duration-300 p-1'
 					onClick={onUp}
 				>
 					<FaArrowUp />
 				</button>
 				<button
+					type='button'
 					className='hover:text-mainGreenSecond transition-colors duration-300 p-1'
 					onClick={onDelete}
 				>

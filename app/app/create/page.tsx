@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Page() {
 	return (
 		<div className='py-16 px-10 max-w-[1800px] w-screen'>
-			<p className='text-3xl mx-auto text-center mb-10'>
+			<p className='text-5xl mx-auto text-center mb-10'>
 				Witaj w kreatorze artykułów
 			</p>
 			<Creator />
