@@ -49,6 +49,14 @@ export default function LoginForm() {
             register={register}
             icon={<GoLock size={20} />}
           />
+          <p className="text-sm text-end text-gray-500">
+            <Link
+              href="/"
+              className="text-sm hover:text-mainGreen transition-colors duration-300 under lined hover:before:bg-mainGreen"
+            >
+              Zapomniałem hasło
+            </Link>
+          </p>
         </div>
         <button className="w-full sm500:max-w-[250px] bg-mainGreen py-2 text-white uppercase tracking-widest font-medium rounded-full transition-all duration-300">
           Zaloguj
