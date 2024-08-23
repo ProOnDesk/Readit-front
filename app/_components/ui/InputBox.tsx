@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import {
-    FieldError,
-    FieldErrorsImpl,
-    FieldValues,
-    Merge,
-    UseFormRegister,
+  FieldError,
+  FieldErrorsImpl,
+  FieldValues,
+  Merge,
+  UseFormRegister,
 } from "react-hook-form";
 
 interface InputBoxProps {
@@ -49,27 +49,31 @@ export default function InputBox({
   );
 
   return (
-    <div className="relative h-[50px] w-full flex justify-center items-center px-2">
-      <div className={`${focus ? "text-mainGreen" : "text-blackSecond"} transition-colors duration-300`}>
-        {icon}
+    <div className=" h-[50px] w-full flex justify-start  flex-col">
+      <div className="relative flex justify-center items-center w-full py-2">
+        <div
+          className={`${
+            focus ? "text-mainGreen" : "text-blackSecond"
+          } transition-colors duration-300`}
+        >
+          {icon}
+        </div>
+        <input
+          id={id}
+          className="border-none focus:outline-none px-3 w-full self-e"
+          type={type}
+          placeholder={label}
+          {...register(id, {
+            required: "Pole wymagane",
+            validate: validateFunction,
+            onChange: (e) => changeValue(e.target.value),
+            onBlur: () => setFocus(false),
+          })}
+          onFocus={() => setFocus(true)}
+        />
+        <div className="absolute bottom-0 left-0 h-[1.5px] w-full bg-mainGreen"></div>
       </div>
-      <input
-        id={id}
-        className="border-none focus:outline-none px-3 py-2 w-full"
-        type={type}
-        placeholder={label}
-        {...register(id, {
-          required: "This field is required",
-          validate: validateFunction,
-          onChange: (e) => changeValue(e.target.value),
-          onBlur: () => setFocus(false),
-        })}
-        onFocus={() => setFocus(true)}
-      />
-      <div className="absolute bottom-0 left-0 h-[1.5px] w-full bg-mainGreen"></div>
-      {error && (
-        <p className="text-[10px] mt-1 text-main2">{error.toString()}</p>
-      )}
+      <p className="text-xs mt-1 text-red-500">{" "}{error && error.toString()}</p>
     </div>
   );
 }
