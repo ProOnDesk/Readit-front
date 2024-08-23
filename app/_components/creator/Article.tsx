@@ -5,16 +5,10 @@ import ImageElement from './ImageElement';
 import Image from 'next/image';
 
 export default function Article({
-	articleSettings,
 	articleList,
 	setArticleList,
 	watch,
 }: {
-	articleSettings: {
-		title: string;
-		summary: string;
-		image: string | null;
-	};
 	articleList: { type: string; content: string }[];
 	setArticleList: React.Dispatch<
 		React.SetStateAction<{ type: string; content: string }[]>
@@ -43,7 +37,7 @@ export default function Article({
 					alt='Zdjęcie tytułowe'
 					width={1920}
 					height={1080}
-					className='object-cover w-full max-h-full h-auto'
+					className='object-cover w-full max-h-full h-auto object-center'
 				/>
 			</div>
 			{articleList.map((element, index) => (

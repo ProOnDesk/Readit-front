@@ -30,11 +30,6 @@ function Creator() {
 				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in lacus nec nunc ultricies gravida. Nulla facilisi. Nullam nec nunc nec sem tincidunt ultricies. Sed in lacus nec nunc ultricies gravida. Nulla facilisi. Nullam nec nunc nec sem tincidunt ultricies.',
 		},
 	]);
-	const [articleSettings, setArticleSettings] = useState({
-		title: '',
-		summary: '',
-		image: null,
-	});
 	const {
 		register,
 		handleSubmit,
@@ -47,15 +42,14 @@ function Creator() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<ArticleForm register={register} />
-			<button type='submit'></button>
-			<div className='flex w-full h-[75vh] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md '>
+			<ArticleForm register={register} errors={errors} />
+			<button type='submit'>dsadsadsa</button>
+			<div className='flex w-full h-[85vh] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md '>
 				<ArticleSettings
 					articleList={articleList}
 					setArticleList={setArticleList}
 				/>
 				<Article
-					articleSettings={articleSettings}
 					articleList={articleList}
 					watch={watch}
 					setArticleList={setArticleList}
