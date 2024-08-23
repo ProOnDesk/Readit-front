@@ -1,4 +1,4 @@
-import FileUploader from './FileUploader';
+import ImageUploader from './ImageUploader';
 
 interface ImageElementProps {
 	element: { type: string; content: string };
@@ -7,8 +7,6 @@ interface ImageElementProps {
 		React.SetStateAction<{ type: string; content: string }[]>
 	>;
 	index: any;
-	imageList: any;
-	setImageList: any;
 }
 
 export default function ImageElement({
@@ -16,17 +14,7 @@ export default function ImageElement({
 	articleList,
 	setArticleList,
 	index,
-	imageList,
-	setImageList,
 }: ImageElementProps) {
-	let imageCount = 0;
-	for (let i = 0; i < index; i++) {
-		if (articleList[i].type === 'image') {
-			imageCount++;
-		}
-	}
-	console.log(imageList);
-	console.log(imageCount);
 	const handleChangeImage = (file: File) => {
 		const newArticleList = [...articleList];
 		newArticleList[index] = {
@@ -34,16 +22,12 @@ export default function ImageElement({
 			content: URL.createObjectURL(file),
 		};
 		setArticleList(newArticleList);
-		const newImageList = [...imageList];
-		newImageList[imageCount] = file;
-		setImageList(newImageList);
 	};
 
-	console.log(imageCount);
 	return (
-		<FileUploader
+		<ImageUploader
 			types={['JPG', 'PNG', 'GIF', 'JPEG']}
-			file={imageList[imageCount]}
+			fileLink={element?.content}
 			handleChange={handleChangeImage}
 		/>
 	);

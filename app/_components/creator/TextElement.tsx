@@ -27,7 +27,7 @@ export default function TextElement({
 		<textarea
 			ref={textAreaRef}
 			value={element?.content}
-			className='w-full focus:outline-none resize-none'
+			className='text-xl w-full focus:outline-none resize-none'
 			onChange={(e) => {
 				setArticleList((prev) => {
 					const newList = [...prev];

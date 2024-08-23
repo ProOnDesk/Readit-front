@@ -3,26 +3,24 @@ import toast from 'react-hot-toast';
 import { IoImagesOutline } from 'react-icons/io5';
 import { ImSpinner2 } from 'react-icons/im';
 
-interface FileUploaderProps {
+interface ImageUploaderProps {
 	handleChange: (file: File) => void;
-	file: File | null;
+	fileLink: string;
 	types: string[];
 }
 
-function FileUploader({ handleChange, file, types }: FileUploaderProps) {
+function ImageUploader({ handleChange, fileLink, types }: ImageUploaderProps) {
 	const [isDragOver, setIsDragOver] = useState(false);
-	const [imageSrc, setImageSrc] = useState('');
 	const [isLoading, setIsLoading] = useState(false);
 
 	function handleFile(fileObj: File) {
 		const fileExtension = fileObj.type.split('/')[1].toUpperCase();
+
 		if (types.includes(fileExtension)) {
 			handleChange(fileObj);
 			setIsLoading(true);
 			const reader = new FileReader();
 			reader.onload = () => {
-				const result = reader.result as string;
-				setImageSrc(result);
 				setIsLoading(false);
 			};
 			reader.readAsDataURL(fileObj);
@@ -57,7 +55,7 @@ function FileUploader({ handleChange, file, types }: FileUploaderProps) {
 				}}
 				onDrop={handleDrop}
 				onDragLeave={() => {
-					!file && setIsDragOver(false);
+					!fileLink && setIsDragOver(false);
 				}}
 				onMouseEnter={() => setIsDragOver(true)}
 				onMouseLeave={() => setIsDragOver(false)}
@@ -80,24 +78,16 @@ function FileUploader({ handleChange, file, types }: FileUploaderProps) {
 					</span>
 				</div>
 
-				{file === null && (
-					<div className='flex flex-col items-center justify-center'>
-						<img
-							src='https://blogcdn.gmass.co/blog/wp-content/uploads/2020/12/Featured-image-what-is-an-email-header-43kb.png'
-							alt='Wgraj zdjęcie'
-						/>
-					</div>
-				)}
 				<input
 					type='file'
 					name='file'
 					className='hidden'
 					onChange={handleInputChange}
 				/>
-				{file &&
+				{fileLink &&
 					(!isLoading ? (
 						<img
-							src={imageSrc}
+							src={fileLink}
 							alt='Your image'
 							className={`pointer-events-none max-h-[800px]`}
 						/>
@@ -109,4 +99,4 @@ function FileUploader({ handleChange, file, types }: FileUploaderProps) {
 	);
 }
 
-export default FileUploader;
+export default ImageUploader;

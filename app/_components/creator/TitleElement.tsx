@@ -27,7 +27,7 @@ export default function TitleElement({
 		<textarea
 			ref={textAreaRef}
 			value={element?.content}
-			className='w-full text-2xl focus:outline-none resize-none'
+			className='w-full text-3xl focus:outline-none resize-none'
 			maxLength={100}
 			onChange={(e) => {
 				setArticleList((prev) => {
