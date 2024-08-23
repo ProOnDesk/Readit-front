@@ -47,11 +47,7 @@ function Creator() {
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<ArticleForm
-				register={register}
-				articleSettings={articleSettings}
-				setArticleSettings={setArticleSettings}
-			/>
+			<ArticleForm register={register} />
 			<button type='submit'></button>
 			<div className='flex w-full h-[75vh] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md '>
 				<ArticleSettings

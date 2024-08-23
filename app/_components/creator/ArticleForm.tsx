@@ -1,8 +1,4 @@
-export default function ArticleForm({
-	register,
-	articleSettings,
-	setArticleSettings,
-}) {
+export default function ArticleForm({ register }: { register: any }) {
 	return (
 		<div className='flex flex-row gap-5 w-full py-10'>
 			<div className='flex flex-col gap-5 w-2/3'>
