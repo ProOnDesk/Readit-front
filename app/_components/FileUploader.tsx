@@ -1,17 +1,26 @@
-import { on } from 'events';
 import { useState, DragEvent, ChangeEvent, useRef } from 'react';
+import { UseFormClearErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { IoImagesOutline } from 'react-icons/io5';
+import { CreatorInputs } from './creator/Creator';
 
 interface FileUploaderProps {
 	types: string[];
-	register?: any;
+	register: UseFormRegister<CreatorInputs>;
+	setValue: UseFormSetValue<CreatorInputs>;
+	clearErrors: UseFormClearErrors<CreatorInputs>;
 }
 
-function FileUploader({ types, register }: FileUploaderProps) {
+function FileUploader({
+	types,
+	register,
+	setValue,
+	clearErrors,
+}: FileUploaderProps) {
 	const [isDragOver, setIsDragOver] = useState(false);
 	const [imageSrc, setImageSrc] = useState('');
 	const [file, setFIle] = useState<File | null>(null);
+	const { ref, onChange, ...rest } = register('image');
 	const inputRef = useRef<HTMLInputElement | null>(null);
 
 	function handleFile(fileObj: File) {
@@ -24,14 +33,12 @@ function FileUploader({ types, register }: FileUploaderProps) {
 				setImageSrc(result);
 			};
 			reader.readAsDataURL(fileObj);
+			clearErrors('image');
+
 			if (inputRef.current) {
 				const dataTransfer = new DataTransfer();
 				dataTransfer.items.add(fileObj);
-				inputRef.current.files = dataTransfer.files;
-
-				// Manually trigger a change event
-				const changeEvent = new Event('change', { bubbles: true });
-				inputRef.current.dispatchEvent(changeEvent);
+				setValue('image', dataTransfer.files);
 			}
 		} else {
 			toast.error('Zły typ pliku.');
@@ -56,7 +63,7 @@ function FileUploader({ types, register }: FileUploaderProps) {
 
 	return (
 		<div
-			className=' flex items-center justify-center w-full h-full mx-auto'
+			className='border-2 rounded-md flex items-center overflow-hidden justify-center w-full h-full mx-auto'
 			onDragOver={(e) => {
 				e.preventDefault();
 				setIsDragOver(true);
@@ -69,7 +76,7 @@ function FileUploader({ types, register }: FileUploaderProps) {
 			onMouseLeave={() => setIsDragOver(false)}
 		>
 			<label
-				className={`relative overflow-hidden flex flex-col items-center justify-center w-full h-full rounded-md cursor-pointer text-center duration-300 transition-colors ${
+				className={`relative overflow-hidden flex flex-col items-center justify-center w-full h-full cursor-pointer text-center duration-300 transition-colors ${
 					isDragOver ? 'bg-blackSecond/20' : 'bg-white'
 				}`}
 			>
@@ -99,12 +106,16 @@ function FileUploader({ types, register }: FileUploaderProps) {
 				)}
 				<input
 					{...register('image', {
-						required: 'Obraz jest wymagany',
 						onChange: handleInputChange,
-						ref: inputRef,
 					})}
+					ref={(e) => {
+						ref(e);
+						inputRef.current = e;
+					}}
+					{...rest}
 					type='file'
 					id='image'
+					name='image'
 					className='hidden'
 				/>
 				{file && (

@@ -22,7 +22,9 @@ export default function Article({
 
 	return (
 		<div className='flex flex-col items-center w-3/4 py-10 overflow-y-scroll'>
-			<p className='text-center text-5xl mb-2 px-5'>{watch('title')}</p>
+			<p className='text-center text-5xl mb-2 px-5'>
+				{watch('title') ?? 'Lorem ipsum dolor sit amet'}
+			</p>
 			<p className='text-gray-600 mb-2 text-lg'>
 				{new Date().toLocaleDateString('pl-PL', {
 					year: 'numeric',
@@ -30,7 +32,10 @@ export default function Article({
 					day: 'numeric',
 				})}
 			</p>
-			<p className='text-center mx-5 mb-5 text-md'>{watch('summary')}</p>
+			<p className='text-center mx-5 mb-5 text-md'>
+				{watch('summary') ??
+					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores esse ut fuga dolorum eveniet explicabo placeat atque deserunt saepe laborum perspiciatis, itaque unde culpa quam, quisquam blanditiis laboriosam earum delectus illum perferendis possimus tempore fugit et! Earum deleniti ullam animi culpa sed consectetur perferendis, nisi ab soluta obcaecati ipsum dolor?'}
+			</p>
 			<div className=' w-full h-auto max-h-[500px] mb-10'>
 				<Image
 					src={imageUrl ?? '/hero-article-placeholder.jpg'}

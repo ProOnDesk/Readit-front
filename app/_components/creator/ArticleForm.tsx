@@ -1,11 +1,22 @@
+import {
+	FieldErrors,
+	UseFormClearErrors,
+	UseFormRegister,
+	UseFormSetValue,
+} from 'react-hook-form';
 import FileUploader from '../FileUploader';
+import { CreatorInputs } from './Creator';
 
 export default function ArticleForm({
 	register,
 	errors,
+	setValue,
+	clearErrors,
 }: {
-	register: any;
-	errors: any;
+	register: UseFormRegister<CreatorInputs>;
+	errors: FieldErrors<CreatorInputs>;
+	setValue: UseFormSetValue<CreatorInputs>;
+	clearErrors: UseFormClearErrors<CreatorInputs>;
 }) {
 	return (
 		<div className='flex flex-row gap-5 w-full py-10'>
@@ -29,20 +40,17 @@ export default function ArticleForm({
 							required: 'Streszczenie jest wymagane',
 						})}
 						maxLength={500}
-						className='min-h-36 rounded-md border-2 text-xl p-1  resize-none'
+						className='min-h-36 rounded-md border-2 text-xl p-1  resize-none '
 					/>
 					<ErrorMessage>{errors?.summary?.message}</ErrorMessage>
 				</div>
 			</div>
 			<div className='flex flex-col  gap-1 w-1/3'>
 				<label className='text-xl'>Zdjęcie</label>
-				{/* <input
-					type='file'
-					className='flex-1 rounded-md border-2 text-xl p-1'
-					{...register('image', { required: 'Obraz jest wymagany' })}
-				/> */}
 				<FileUploader
+					setValue={setValue}
 					register={register}
+					clearErrors={clearErrors}
 					types={['JPG', 'PNG', 'GIF', 'JPEG']}
 				/>
 				<ErrorMessage>{errors?.image?.message}</ErrorMessage>
@@ -51,6 +59,6 @@ export default function ArticleForm({
 	);
 }
 
-function ErrorMessage({ children }: { children: string }) {
+function ErrorMessage({ children }: { children: string | undefined }) {
 	return <span className='text-red-500'>{children}</span>;
 }

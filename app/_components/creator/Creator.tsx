@@ -1,16 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Article from './Article';
 import ArticleSettings from './ArticleSettings';
 import ArticleForm from './ArticleForm';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-type Inputs = {
+export type CreatorInputs = {
 	title: string;
 	summary: string;
-	image: File | null;
+	image: FileList | null;
 };
 
 function Creator() {
@@ -34,16 +34,30 @@ function Creator() {
 		register,
 		handleSubmit,
 		watch,
-		getValues,
+		setValue,
+		setError,
+		clearErrors,
 		formState: { errors },
-	} = useForm<Inputs>();
+	} = useForm<CreatorInputs>();
 
-	const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-	console.log(watch('image'));
+	const onSubmit: SubmitHandler<CreatorInputs> = (data) => {
+		if (data.image?.length === 0) {
+			setError('image', { type: 'required', message: 'Zdjęcie jest wymagane' });
+			return;
+		}
+		console.log(data);
+	};
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
-			<ArticleForm register={register} errors={errors} />
-			<button type='submit'>dsadsadsa</button>
+			<ArticleForm
+				register={register}
+				errors={errors}
+				setValue={setValue}
+				clearErrors={clearErrors}
+			/>
+			<button type='submit'>Potwierdz</button>
+
 			<div className='flex w-full h-[85vh] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md '>
 				<ArticleSettings
 					articleList={articleList}
