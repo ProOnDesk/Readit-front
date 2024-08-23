@@ -26,7 +26,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang='en'>
+		<html lang='pl'>
 			{/* <AppProvider> */}
 			<body className={jost.className}>
 				<MantineProvider>

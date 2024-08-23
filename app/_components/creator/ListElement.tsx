@@ -1,7 +1,8 @@
 import { FaArrowDown, FaArrowUp, FaMinus } from 'react-icons/fa';
+import { LuText } from 'react-icons/lu';
+import { CiImageOn, CiText } from 'react-icons/ci';
 
 interface ListElementProps {
-	leftIcon?: React.ReactNode;
 	type: string;
 	isChoosen?: boolean;
 	index?: number;
@@ -11,7 +12,6 @@ interface ListElementProps {
 }
 
 export default function ListElement({
-	leftIcon,
 	type,
 	isChoosen,
 	onUp,
@@ -25,7 +25,11 @@ export default function ListElement({
 			} list-element group`}
 		>
 			<span className='flex flex-row items-center gap-4'>
-				<span>{leftIcon}</span>
+				<span>
+					{type === 'title' && <CiText />}
+					{type === 'image' && <CiImageOn />}
+					{type === 'text' && <LuText />}
+				</span>
 				<span>
 					{type === 'title' && 'Tytuł'}
 					{type === 'image' && 'Zdjęcie'}

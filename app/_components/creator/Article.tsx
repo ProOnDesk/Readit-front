@@ -6,11 +6,15 @@ import ImageElement from './ImageElement';
 export default function Article({
 	articleList,
 	setArticleList,
+	imageList,
+	setImageList,
 }: {
 	articleList: { type: string; content: string }[];
 	setArticleList: React.Dispatch<
 		React.SetStateAction<{ type: string; content: string }[]>
 	>;
+	imageList: any;
+	setImageList: any;
 }) {
 	return (
 		<div className='flex flex-col items-center w-3/4 py-10 overflow-y-scroll'>
@@ -29,7 +33,14 @@ export default function Article({
 							setArticleList={setArticleList}
 						/>
 					) : element?.type === 'image' ? (
-						<ImageElement element={element} />
+						<ImageElement
+							index={index}
+							element={element}
+							articleList={articleList}
+							setArticleList={setArticleList}
+							imageList={imageList}
+							setImageList={setImageList}
+						/>
 					) : null}
 				</div>
 			))}

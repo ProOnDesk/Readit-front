@@ -9,11 +9,13 @@ interface ArticleSettingsProps {
 	setArticleList: React.Dispatch<
 		React.SetStateAction<{ type: string; content: string }[]>
 	>;
+	setImageList: any;
 }
 
 export default function ArticleSettings({
 	articleList,
 	setArticleList,
+	setImageList,
 }: ArticleSettingsProps) {
 	const [choosenOption, setChoosenOption] = useState<'content' | 'elements'>(
 		'elements'
@@ -38,9 +40,20 @@ export default function ArticleSettings({
 		});
 	}
 	function onDelete(index: number) {
+		let imageCount = 0;
+		for (let i = 0; i < index; i++) {
+			if (articleList[i].type === 'image') {
+				imageCount++;
+			}
+		}
 		setArticleList((prev) => {
 			const newList = [...prev];
 			newList.splice(index, 1);
+			return newList;
+		});
+		setImageList((prev: any) => {
+			const newList = [...prev];
+			newList.splice(imageCount, 1);
 			return newList;
 		});
 	}
@@ -72,7 +85,6 @@ export default function ArticleSettings({
 							{articleList.map((element, index) => (
 								<ListElement
 									key={index}
-									leftIcon={<CiText />}
 									type={element.type}
 									onUp={() => onUp(index)}
 									onDown={() => onDown(index)}
@@ -87,8 +99,8 @@ export default function ArticleSettings({
 								text='Dodaj tytuł'
 								rightIcon={'+'}
 								onClick={() =>
-									setArticleList([
-										...articleList,
+									setArticleList((currList) => [
+										...currList,
 										{ type: 'title', content: 'Lorem ipsum dolor sit amet.' },
 									])
 								}
@@ -98,8 +110,8 @@ export default function ArticleSettings({
 								text='Dodaj tekst'
 								rightIcon={'+'}
 								onClick={() =>
-									setArticleList([
-										...articleList,
+									setArticleList((currList) => [
+										...currList,
 										{
 											type: 'text',
 											content:
@@ -112,16 +124,17 @@ export default function ArticleSettings({
 								leftIcon={<CiImageOn />}
 								text='Dodaj zdjęcie'
 								rightIcon={'+'}
-								onClick={() =>
-									setArticleList([
-										...articleList,
+								onClick={() => {
+									setArticleList((currList) => [
+										...currList,
 										{
 											type: 'image',
 											content:
 												'https://blogcdn.gmass.co/blog/wp-content/uploads/2020/12/Featured-image-what-is-an-email-header-43kb.png',
 										},
-									])
-								}
+									]);
+									setImageList((currList: any) => [...currList, null]);
+								}}
 							/>
 						</>
 					)}

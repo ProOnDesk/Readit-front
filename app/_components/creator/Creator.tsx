@@ -22,14 +22,22 @@ function Creator() {
 				'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in lacus nec nunc ultricies gravida. Nulla facilisi. Nullam nec nunc nec sem tincidunt ultricies. Sed in lacus nec nunc ultricies gravida. Nulla facilisi. Nullam nec nunc nec sem tincidunt ultricies.',
 		},
 	]);
-
+	const [imageList, setImageList] = useState([null]);
+	console.log(imageList);
+	console.log(articleList);
 	return (
 		<div className='flex w-full h-[75vh] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md '>
 			<ArticleSettings
 				articleList={articleList}
 				setArticleList={setArticleList}
+				setImageList={setImageList}
 			/>
-			<Article articleList={articleList} setArticleList={setArticleList} />
+			<Article
+				articleList={articleList}
+				setArticleList={setArticleList}
+				imageList={imageList}
+				setImageList={setImageList}
+			/>
 		</div>
 	);
 }
