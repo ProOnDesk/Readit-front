@@ -7,6 +7,8 @@ import { FaRegUser } from "react-icons/fa";
 import { LuPencilLine } from "react-icons/lu";
 import Link from "next/link";
 import { GoLock } from "react-icons/go";
+import { PiGenderIntersex  } from "react-icons/pi";
+import { MdOutlineEmail } from "react-icons/md";
 
 export default function RegisterForm() {
   const {
@@ -21,9 +23,12 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="w-full">
-      <h4 className="text-2xl ">Zarejestruj</h4>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-full">
+    <div className="w-full max-w-[480px] sm:shadow-lg sm:px-14 sm:py-8 bg-white">
+      <h4 className="text-3xl font-medium mb-5">Zarejestruj</h4>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex flex-col justify-center items-center gap-3"
+      >
         <InputBox
           id="name"
           type="text"
@@ -48,45 +53,54 @@ export default function RegisterForm() {
           register={register}
           validateFunction={() => {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(getValues().email)) return "Incorrect e-mail";
+            if (!emailRegex.test(getValues().email))
+              return "Niepoprawny e-mail";
             else return true;
           }}
-          icon={<FaRegUser size={20} />}
+          icon={<MdOutlineEmail size={20} />}
         />
         <InputBox
           id="password"
           type="password"
-          label="Password"
+          label="Hasło"
           error={errors?.password?.message}
           register={register}
           validateFunction={() => {
             const passwordRegex = /^.{8,}$/;
             if (!passwordRegex.test(getValues().password))
-              return "Incorrect password (min. 8 letters)";
+              return "Niepoprawne hasło (min. 8 znaków)";
             else return true;
           }}
           icon={<GoLock size={20} />}
         />
-        <div className="mb-6">
+        <InputBox
+          id="repeatPassword"
+          type="password"
+          label="Powtórz Hasło"
+          error={errors?.repeatPassword?.message}
+          register={register}
+          validateFunction={() => {
+            if (getValues().password !== getValues().repeatPassword)
+              return "Hasła nie są identyczne";
+            else return true;
+          }}
+          icon={<GoLock size={20} />}
+        />
+        <div className="mb-4 w-full">
           <InputBox
-            id="repeatPassword"
-            type="password"
-            label="Repeat Password"
-            error={errors?.repeatPassword?.message}
+            id="sex"
+            type="text"
+            label="Płeć"
+            error={errors?.sex?.message}
             register={register}
-            validateFunction={() => {
-              if (getValues().password !== getValues().repeatPassword)
-                return "Passwords don't match";
-              else return true;
-            }}
-            icon={<GoLock size={20} />}
+            icon={<PiGenderIntersex  size={20} />}
           />
         </div>
-        <button className="w-full bg-mainGreen py-2 text-white uppercase tracking-widest font-medium rounded-full transition-all duration-300">
+        <button className="w-full sm500:max-w-[250px] bg-mainGreen py-2 text-white uppercase tracking-widest font-medium rounded-full transition-all duration-300">
           Zarejestruj
         </button>
       </form>
-      <p className="text-sm mt-2">
+      <p className="text-sm mt-2 sm500:text-center sm500:mt-5">
         Masz już konto?
         <span className="ml-1">
           <Link
