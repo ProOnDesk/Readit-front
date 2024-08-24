@@ -15,36 +15,6 @@ const authApiSlice = apiSlice.injectEndpoints({
     retrieveUser: builder.query<User, void>({
       query: () => ({ url: "/user/get", method: "GET" }),
     }),
-    // updateUser: builder.mutation({
-    //   query: ({ fieldToUpdate, valueToUpdate }) => ({
-    //     url: "/user/profile/",
-    //     method: "PATCH",
-    //     body: { [fieldToUpdate]: valueToUpdate },
-    //   }),
-    // }),
-    // updateAvatar: builder.mutation({
-    //   query: (file) => {
-    //     const formData = new FormData();
-    //     formData.append("profile_image", file);
-    //     return {
-    //       url: "/user/profile_image/",
-    //       method: "PATCH",
-    //       body: formData,
-    //     };
-    //   },
-    // }),
-    // socialAuthenticate: builder.mutation({
-    //   query: ({ provider, state, code }) => ({
-    //     url: `/o/${provider}/?state=${encodeURIComponent(
-    //       state
-    //     )}&code=${encodeURIComponent(code)}`,
-    //     method: "POST",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //     },
-    //   }),
-    // }),
     login: builder.mutation({
       query: ({ email, password }) => ({
         url: "/oauth2/token",
@@ -66,12 +36,15 @@ const authApiSlice = apiSlice.injectEndpoints({
         body: { email, firstname, lastname, password, sex },
       }),
     }),
-    // verifyToken: builder.mutation({
-    //   query: () => ({
-    //     url: "/token/verify/",
-    //     method: "POST",
-    //   }),
-    // }),
+    logout: builder.mutation({
+      query: () => ({ url: "/oauth2/logout", method: "GET" }),
+    }),
+    verifyToken: builder.mutation({
+      query: () => ({
+        url: "/oauth2/refresh-token",
+        method: "POST",
+      }),
+    }),
     // verifyEmail: builder.mutation({
     //   query: ({ token }) => ({
     //     url: "/user/confirm_user/",
@@ -93,27 +66,23 @@ const authApiSlice = apiSlice.injectEndpoints({
     //     body: { token, password },
     //   }),
     // }),
-    logout: builder.mutation({
-      query: () => ({ url: "/token/logout/", method: "POST" }),
-    }),
-    // deleteAccount: builder.mutation({
-    //   query: () => ({ url: "/user/delete/", method: "DELETE" }),
-    // }),
-    // getNotifications: builder.query<NotificationsRepsonse, any>({
-    //   query: ({ p, page_size }) => ({
-    //     url: `/notification/list/?p=${p}&page_size=${page_size}`,
-    //     method: "GET",
+    // updateUser: builder.mutation({
+    //   query: ({ fieldToUpdate, valueToUpdate }) => ({
+    //     url: "/user/profile/",
+    //     method: "PATCH",
+    //     body: { [fieldToUpdate]: valueToUpdate },
     //   }),
     // }),
-    // reportIssue: builder.mutation({
-    //   query: ({ category, title, description }) => ({
-    //     url: "/reporting/issue/create/",
-    //     method: "POST",
-    //     body: { category, title, description },
-    //   }),
-    // }),
-    // getReports: builder.query<Report[], void>({
-    //   query: () => ({ url: "/reporting/issue/list/", method: "GET" }),
+    // updateAvatar: builder.mutation({
+    //   query: (file) => {
+    //     const formData = new FormData();
+    //     formData.append("profile_image", file);
+    //     return {
+    //       url: "/user/profile_image/",
+    //       method: "PATCH",
+    //       body: formData,
+    //     };
+    //   },
     // }),
   }),
 });
@@ -123,4 +92,5 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
+  useVerifyTokenMutation,
 } = authApiSlice;
