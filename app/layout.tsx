@@ -27,25 +27,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* <AppProvider> */}
       <body className={jost.className}>
-        <MantineProvider>
-          <div
-            id="app"
-            className="relative font-display flex flex-col items-center justify-center w-full h-full overflow-x-hidden"
-          >
-            <Navigation />
-            <div className="pt-16 md:pt-20">
-              <RouterTransition />
-              {children}
+        <AppProvider>
+          <MantineProvider>
+            {/* <RouterTransition /> */}
+            <div
+              id="app"
+              className="relative font-display flex flex-col items-center justify-center w-full h-full overflow-x-hidden"
+            >
+              <Navigation />
+              <div className="pt-16 md:pt-20 w-full">
+                {children}
 
-              {/* do usuniecia */}
-              <div className="h-screen"></div>
+                {/* do usuniecia */}
+                {/* <div className="h-screen"></div> */}
+              </div>
             </div>
-          </div>
-        </MantineProvider>
+          </MantineProvider>
+        </AppProvider>
       </body>
-      {/* </AppProvider> */}
     </html>
   );
 }

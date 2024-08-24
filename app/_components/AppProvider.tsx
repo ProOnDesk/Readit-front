@@ -2,6 +2,8 @@
 
 import React, { useEffect } from "react";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
+import { Provider } from "react-redux";
+import { store } from "../_redux/store";
 
 export default function AppProvider({
   children,
@@ -21,27 +23,29 @@ export default function AppProvider({
 
   return (
     <div>
-      <Toaster
-        position="top-center"
-        gutter={12}
-        containerStyle={{ margin: "8px" }}
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 3000,
-          },
-          style: {
-            zIndex: 1000,
-            fontSize: "16px",
-            maxWidth: "500px",
-            padding: "16px 24px",
-          },
-          className: "text-dark",
-        }}
-      />
-      {children}
+      <Provider store={store}>
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 3000,
+            },
+            style: {
+              zIndex: 1000,
+              fontSize: "16px",
+              maxWidth: "500px",
+              padding: "16px 24px",
+            },
+            className: "text-dark",
+          }}
+        />
+        {children}
+      </Provider>
     </div>
   );
 }
