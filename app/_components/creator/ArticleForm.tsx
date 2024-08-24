@@ -47,14 +47,14 @@ export default function ArticleForm({
 						defaultValue='Chwytliwy tytuł, który zszokuje? Śmiało!...'
 						{...register('title', { required: 'Tytuł jest wymagany' })}
 						type='text'
-						className='rounded-t-md text-xl p-1 px-2 focus:outline-none peer bg-blackSecond/5'
+						className='rounded-t-md text-xl p-1 px-2 min-h-[52px] focus:outline-none peer bg-blackSecond/5'
 					/>
 					<InputAccent />
 					<ErrorMessage>{errors?.title?.message}</ErrorMessage>
 				</div>
 				<div className='relative flex flex-col gap-1'>
 					<label className='text-xl'>Tagi</label>
-					<div className='flex flex-wrap rounded-t-md text-xl p-1 px-2 focus:outline-none peer bg-blackSecond/5'>
+					<div className='flex flex-wrap rounded-t-md gap-1 text-xl p-1 px-2 min-h-[52px] focus:outline-none peer bg-blackSecond/5'>
 						{tags.map((tag, index) => (
 							<button
 								onClick={() => {
@@ -78,7 +78,7 @@ export default function ArticleForm({
 								type='text'
 								placeholder='Nowy tag...'
 								maxLength={25}
-								className='rounded-md text-xl bg-transparent w-full p-1 px-2 focus:outline-none'
+								className='rounded-md text-xl bg-transparent flex-1 focus:outline-none'
 							/>
 						)}
 					</div>
