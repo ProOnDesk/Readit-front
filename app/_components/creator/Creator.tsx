@@ -102,7 +102,7 @@ function Creator() {
 				setValue={setValue}
 				clearErrors={clearErrors}
 			/>
-			<div className='flex w-full h-[85vh] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md '>
+			<div className='relative flex w-full h-[85vh] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md overflow-hidden'>
 				<ArticleSettings
 					articleList={articleList}
 					setArticleList={setArticleList}

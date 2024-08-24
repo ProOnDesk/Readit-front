@@ -15,7 +15,7 @@ export default function AddListElement({
 		<button
 			type='button'
 			onClick={onClick}
-			className={`flex justify-between items-center p-7 text-lg duration-300 transition-colors w-full hover:bg-whiteSecond`}
+			className={`flex justify-between items-center p-7 md:text-lg duration-300 transition-colors w-full hover:bg-whiteSecond`}
 		>
 			<span className='flex flex-row items-center gap-4'>
 				<span>{leftIcon}</span>

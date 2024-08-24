@@ -21,7 +21,7 @@ export default function Article({
 			: null;
 
 	return (
-		<div className='flex flex-col items-center w-3/4 py-10 overflow-y-scroll'>
+		<div className='flex flex-col items-center md:w-3/4 py-10 overflow-y-scroll'>
 			<p className='text-center text-5xl mb-2 px-5'>
 				{watch('title') ?? 'Chwytliwy tytuł, który zszokuje? Śmiało!'}
 			</p>

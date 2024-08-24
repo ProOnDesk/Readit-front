@@ -20,7 +20,7 @@ export default function ListElement({
 }: ListElementProps) {
 	return (
 		<div
-			className={`flex justify-between items-center p-7 text-lg duration-300 transition-colors w-full hover:bg-whiteSecond ${
+			className={`flex justify-between items-center p-7 sm:text-lg duration-300 transition-colors w-full hover:bg-whiteSecond ${
 				isChoosen && ''
 			} list-element group`}
 		>
@@ -36,7 +36,7 @@ export default function ListElement({
 					{type === 'text' && 'Tekst'}
 				</span>
 			</span>
-			<span className='flex flex-row gap-3  group-[.list-element]:group-hover:opacity-100 opacity-0 transition-all duration-300'>
+			<span className='flex flex-row gap-1 sm:gap-3 text-sm sm:text-lg group-[.list-element]:group-hover:opacity-100 opacity-0 transition-all duration-300'>
 				<button
 					type='button'
 					className='group-last:hidden hover:text-mainGreenSecond transition-colors duration-300 p-1'
