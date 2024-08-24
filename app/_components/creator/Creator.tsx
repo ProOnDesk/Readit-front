@@ -6,6 +6,7 @@ import Article from './Article';
 import ArticleSettings from './ArticleSettings';
 import ArticleForm from './ArticleForm';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useSendImagesMutation } from '@/app/_redux/features/articleApiSLice';
 
 export type CreatorInputs = {
 	title: string;
@@ -21,8 +22,7 @@ function Creator() {
 		},
 		{
 			type: 'image',
-			content:
-				'https://blogcdn.gmass.co/blog/wp-content/uploads/2020/12/Featured-image-what-is-an-email-header-43kb.png',
+			content: '',
 		},
 		{
 			type: 'text',
@@ -39,24 +39,32 @@ function Creator() {
 		clearErrors,
 		formState: { errors },
 	} = useForm<CreatorInputs>();
-
+	const [sendImages] = useSendImagesMutation();
 	const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
 		if (data.image?.length === 0) {
 			setError('image', { type: 'required', message: 'Zdjęcie jest wymagane' });
 			return;
 		}
+
 		const imageList = articleList.filter((article) => article.type === 'image');
 		const formData = new FormData();
+
 		await Promise.all(
 			imageList.map(async (element, index) => {
 				const response = await fetch(element.content);
 				const blob = await response.blob();
-
-				formData.append(`images`, blob);
+				const file = new File([blob], `image${index}.png`, { type: blob.type });
+				formData.append('files', file);
 			})
 		);
 
-		console.log(formData.getAll('images'));
+		// Send the FormData
+		sendImages({ formData })
+			.unwrap()
+			.then((res) => console.log(res))
+			.catch((err) => console.log(err));
+
+		console.log(formData.getAll('files'));
 		console.log({ ...data, articleList });
 	};
 
