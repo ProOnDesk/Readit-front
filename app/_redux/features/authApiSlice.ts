@@ -47,9 +47,16 @@ const authApiSlice = apiSlice.injectEndpoints({
     // }),
     login: builder.mutation({
       query: ({ email, password }) => ({
-        url: "/oauth2/token/",
+        url: "/oauth2/token",
         method: "POST",
-        body: { email, password },
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          grant_type: "password",
+          email: email,
+          password: password,
+        }),
       }),
     }),
     register: builder.mutation({

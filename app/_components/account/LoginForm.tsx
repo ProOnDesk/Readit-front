@@ -6,6 +6,7 @@ import InputBox from "../ui/InputBox";
 import { MdOutlineEmail } from "react-icons/md";
 import { GoLock } from "react-icons/go";
 import Link from "next/link";
+import { useLogin } from "@/app/_hooks/useLogin";
 
 export default function LoginForm() {
   const {
@@ -14,9 +15,15 @@ export default function LoginForm() {
     getValues,
     formState: { errors },
   } = useForm<FieldValues>();
+  const { loginHookFn, isLoading } = useLogin();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     console.log(data);
+
+    loginHookFn({
+      email: data.email,
+      password: data.password,
+    });
   };
 
   return (
