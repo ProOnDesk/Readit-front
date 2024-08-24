@@ -7,6 +7,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { GoLock } from "react-icons/go";
 import Link from "next/link";
 import { useLogin } from "@/app/_hooks/useLogin";
+import Spinner from "../ui/Spinner";
 
 export default function LoginForm() {
   const {
@@ -18,8 +19,6 @@ export default function LoginForm() {
   const { loginHookFn, isLoading } = useLogin();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-
     loginHookFn({
       email: data.email,
       password: data.password,
@@ -65,8 +64,11 @@ export default function LoginForm() {
             </Link>
           </p>
         </div>
-        <button className="w-full sm500:max-w-[250px] bg-mainGreen py-2 text-white uppercase tracking-widest font-medium rounded-full transition-all duration-300">
-          Zaloguj
+        <button
+          className="w-full sm500:max-w-[250px] bg-mainGreen py-2 text-white uppercase tracking-widest font-medium rounded-full transition-all duration-300 hover:bg-mainGreenSecond"
+          disabled={isLoading}
+        >
+          {!isLoading ? "Zaloguj" : <Spinner />}
         </button>
       </form>
       <p className="text-sm mt-2 sm500:text-center sm500:mt-5">

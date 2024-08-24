@@ -8,6 +8,7 @@ import { LuPencilLine } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
 import { PiGenderIntersex } from "react-icons/pi";
 import InputBox from "../ui/InputBox";
+import Spinner from "../ui/Spinner";
 
 export default function RegisterForm() {
   const {
@@ -19,8 +20,6 @@ export default function RegisterForm() {
   const { isLoading, registerHookFn } = useRegister();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-
     registerHookFn({
       email: data.email,
       firstname: data.name,
@@ -74,9 +73,11 @@ export default function RegisterForm() {
           error={errors?.password?.message}
           register={register}
           validateFunction={() => {
-            const passwordRegex = /^.{8,}$/;
+            const passwordRegex =
+              /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
             if (!passwordRegex.test(getValues().password))
-              return "Niepoprawne hasło (min. 8 znaków)";
+              return "Hasło wymaga: min. 8 znaków, duża litera, cyfra oraz znak specjalny";
             else return true;
           }}
           icon={<GoLock size={20} />}
@@ -104,8 +105,11 @@ export default function RegisterForm() {
             icon={<PiGenderIntersex size={20} />}
           />
         </div>
-        <button className="w-full sm500:max-w-[250px] bg-mainGreen py-2 text-white uppercase tracking-widest font-medium rounded-full transition-all duration-300">
-          Zarejestruj
+        <button
+          className="w-full sm500:max-w-[250px] bg-mainGreen py-2 text-white uppercase tracking-widest font-medium rounded-full transition-all duration-300 hover:bg-mainGreenSecond"
+          disabled={isLoading}
+        >
+          {!isLoading ? "Zarejestruj" : <Spinner />}
         </button>
       </form>
       <p className="text-sm mt-2 sm500:text-center sm500:mt-5">
