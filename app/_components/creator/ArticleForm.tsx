@@ -6,29 +6,33 @@ import {
 } from 'react-hook-form';
 import FileUploader from '../FileUploader';
 import { CreatorInputs } from './Creator';
-import { useRef, useState } from 'react';
+import { IoIosClose } from 'react-icons/io';
+
+interface ArticleFormProps {
+	register: UseFormRegister<CreatorInputs>;
+	errors: FieldErrors<CreatorInputs>;
+	setValue: UseFormSetValue<CreatorInputs>;
+	clearErrors: UseFormClearErrors<CreatorInputs>;
+	tags: string[];
+	setTags: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
 export default function ArticleForm({
 	register,
 	errors,
 	setValue,
 	clearErrors,
-}: {
-	register: UseFormRegister<CreatorInputs>;
-	errors: FieldErrors<CreatorInputs>;
-	setValue: UseFormSetValue<CreatorInputs>;
-	clearErrors: UseFormClearErrors<CreatorInputs>;
-}) {
-	const [tags, setTags] = useState<string[]>([]);
-	const tagInput = useRef(null);
+	tags,
+	setTags,
+}: ArticleFormProps) {
 	const addTag = (e: any) => {
 		e.preventDefault();
-		tags.map((tag) => {
-			if (tag === e.currentTarget.value) return;
-		});
-
-		if (tags.length > 2) return;
+		if (tags.includes(e.currentTarget.value)) {
+			e.currentTarget.value = '';
+			return null;
+		}
 		setTags([...tags, e.currentTarget.value]);
+		e.currentTarget.value = '';
 	};
 	const deleteTag = (tag: string) => {
 		setTags(tags.filter((t) => t !== tag));
@@ -50,16 +54,17 @@ export default function ArticleForm({
 				</div>
 				<div className='relative flex flex-col gap-1'>
 					<label className='text-xl'>Tagi</label>
-					<div className='flex rounded-t-md text-xl p-1 px-2 focus:outline-none peer bg-blackSecond/5'>
+					<div className='flex flex-wrap rounded-t-md text-xl p-1 px-2 focus:outline-none peer bg-blackSecond/5'>
 						{tags.map((tag, index) => (
 							<button
 								onClick={() => {
 									deleteTag(tag);
 								}}
 								key={index}
-								className='p-1 bg-white rounded-md mx-1 my-1'
+								className=' flex items-center gap-2 p-1 px-2 bg-white hover:bg-blackSecond/5 rounded-md mx-1 my-1 group tag-element transition-colors duration-300'
 							>
 								{tag}
+								<IoIosClose className='group-[.tag-element]:group-hover:text-red-500 text-2xl' />
 							</button>
 						))}
 						{tags.length < 3 && (
@@ -68,12 +73,10 @@ export default function ArticleForm({
 								onKeyDown={(e) => {
 									if (e.key === 'Enter') {
 										addTag(e);
-										e.currentTarget.value = '';
 									}
 								}}
-								ref={tagInput}
 								type='text'
-								placeholder='Dodaj tagi'
+								placeholder='Nowy tag...'
 								maxLength={25}
 								className='rounded-md text-xl bg-transparent w-full p-1 px-2 focus:outline-none'
 							/>

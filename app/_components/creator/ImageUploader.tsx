@@ -84,10 +84,10 @@ function ImageUploader({ handleChange, fileLink, types }: ImageUploaderProps) {
 					className='hidden'
 					onChange={handleInputChange}
 				/>
-				{fileLink &&
+				{(fileLink || fileLink === '') &&
 					(!isLoading ? (
 						<img
-							src={fileLink}
+							src={fileLink === '' ? '/placeholder-image.jpg' : fileLink}
 							alt='Your image'
 							className={`pointer-events-none max-h-[800px]`}
 						/>

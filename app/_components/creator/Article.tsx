@@ -38,7 +38,7 @@ export default function Article({
 			</p>
 			<div className=' w-full h-auto max-h-[500px] mb-10'>
 				<Image
-					src={imageUrl ?? '/hero-article-placeholder.jpg'}
+					src={imageUrl ?? '/placeholder-image.jpg'}
 					alt='Zdjęcie tytułowe'
 					width={1920}
 					height={1080}

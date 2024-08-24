@@ -121,8 +121,7 @@ export default function ArticleSettings({
 										...currList,
 										{
 											content_type: 'image',
-											content:
-												'https://blogcdn.gmass.co/blog/wp-content/uploads/2020/12/Featured-image-what-is-an-email-header-43kb.png',
+											content: '',
 										},
 									]);
 								}}

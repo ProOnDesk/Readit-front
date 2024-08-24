@@ -7,11 +7,13 @@ import ArticleSettings from './ArticleSettings';
 import ArticleForm from './ArticleForm';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { usePostArticleMutation } from '@/app/_redux/features/articleApiSLice';
+import toast from 'react-hot-toast';
 
 export type CreatorInputs = {
 	title: string;
 	summary: string;
 	image: FileList | null;
+	tags: string[];
 };
 
 function Creator() {
@@ -30,6 +32,7 @@ function Creator() {
 				'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni neque cupiditate harum iure, ducimus autem! Eaque vel est totam reiciendis nulla vero, excepturi blanditiis ullam officiis distinctio aut nobis repellendus soluta sed corporis quod iusto quibusdam minima sunt voluptatum itaque! Corrupti earum mollitia ullam fugiat harum, reiciendis voluptatibus omnis sequi?',
 		},
 	]);
+	const [tags, setTags] = useState<string[]>([]);
 	const {
 		register,
 		handleSubmit,
@@ -45,8 +48,12 @@ function Creator() {
 			setError('image', { type: 'required', message: 'Zdjęcie jest wymagane' });
 			return;
 		}
-
-		const imageList = articleList.filter(
+		console.log(articleList);
+		const filteredArticleList = articleList.filter(
+			(article) => article.content !== ''
+		);
+		console.log(filteredArticleList);
+		const imageList = filteredArticleList.filter(
 			(article) => article.content_type === 'image'
 		);
 		const formData = new FormData();
@@ -58,9 +65,10 @@ function Creator() {
 		const article = {
 			title: data.title,
 			summary: data.summary,
-			tags: [{ value: 'tag1' }, { value: 'tag2' }],
-			content_elements: [...articleList],
+			tags: tags.map((tag) => ({ value: tag })),
+			content_elements: [...filteredArticleList],
 		};
+		console.log(article);
 		formData.append('article', JSON.stringify(article));
 
 		await Promise.all(
@@ -74,13 +82,21 @@ function Creator() {
 
 		postArticle({ formData })
 			.unwrap()
-			.then((res) => console.log(res))
-			.catch((err) => console.log(err));
+			.then((res) => {
+				console.log(res);
+				toast.success('Materiał został opublikowany!');
+			})
+			.catch((err) => {
+				console.log(err);
+				toast.error('Coś poszło nie tak...');
+			});
 	};
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>
 			<ArticleForm
+				tags={tags}
+				setTags={setTags}
 				register={register}
 				errors={errors}
 				setValue={setValue}
