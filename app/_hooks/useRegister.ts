@@ -16,23 +16,16 @@ export function useRegister() {
 
   function registerHookFn(data: RegisterHookArgs) {
     register(data)
+      .unwrap()
       .then(() => {
         toast.success(
-          "Konto utworzone. Sprawdź swojego maila w celu aktywacji konta."
+          "Konto utworzone. Nie wchodź w maila którego otrzymałeś, po prostu sie zaloguj xd"
         );
         router.push("/login");
       })
       .catch((error) => {
-        if (
-          error &&
-          typeof error.data === "object" &&
-          !Array.isArray(error.data)
-        ) {
-          const values = Object.values(error.data);
-          if (values.length > 0 && Array.isArray(values[0])) {
-            const firstErrorMessage = values[0][0];
-            toast.error(firstErrorMessage);
-          }
+        if (error.data.detail) {
+          toast.error(error.data.detail);
         } else {
           toast.error("Wystąpił błąd podczas rejestracji.");
         }

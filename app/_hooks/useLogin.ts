@@ -1,8 +1,11 @@
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import {
-    useLoginMutation
+  useLoginMutation,
+  useRetrieveUserQuery,
 } from "../_redux/features/authApiSlice";
+import { useAppDispatch } from "../_redux/hooks";
+import { setAuth } from "../_redux/features/authSlice";
 
 interface LoginHookArgs {
   email: string;
@@ -11,25 +14,22 @@ interface LoginHookArgs {
 
 export function useLogin() {
   const [login, { isLoading }] = useLoginMutation();
+  const { refetch } = useRetrieveUserQuery();
+  const dispatch = useAppDispatch();
   const router = useRouter();
 
   function loginHookFn(data: LoginHookArgs) {
     login(data)
+      .unwrap()
       .then(() => {
         toast.success("Zalogowano pomyślnie");
+        dispatch(setAuth());
+        refetch();
         router.push("/browse");
       })
       .catch((error) => {
-        if (
-          error &&
-          typeof error.data === "object" &&
-          !Array.isArray(error.data)
-        ) {
-          const values = Object.values(error.data);
-          if (values.length > 0 && Array.isArray(values[0])) {
-            const firstErrorMessage = values[0][0];
-            toast.error(firstErrorMessage);
-          }
+        if (error.data.detail) {
+          toast.error(error.data.detail);
         } else {
           toast.error("Wystąpił błąd podczas logowania.");
         }
