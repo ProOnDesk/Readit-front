@@ -1,5 +1,9 @@
 import { useState, DragEvent, ChangeEvent, useRef } from 'react';
-import { UseFormClearErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import {
+	UseFormClearErrors,
+	UseFormRegister,
+	UseFormSetValue,
+} from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { IoImagesOutline } from 'react-icons/io5';
 import { CreatorInputs } from './creator/Creator';
@@ -77,7 +81,7 @@ function FileUploader({
 		>
 			<label
 				className={`relative overflow-hidden flex flex-col items-center justify-center w-full h-full cursor-pointer text-center duration-300 transition-colors ${
-					isDragOver ? 'bg-blackSecond/20' : 'bg-white'
+					isDragOver ? 'bg-blackSecond/5' : 'bg-white'
 				}`}
 			>
 				{!file && (

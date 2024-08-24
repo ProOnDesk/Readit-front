@@ -19,30 +19,32 @@ export default function ArticleForm({
 	clearErrors: UseFormClearErrors<CreatorInputs>;
 }) {
 	return (
-		<div className='flex flex-row gap-5 w-full py-10'>
-			<div className='flex flex-col gap-5 w-2/3'>
-				<div className='flex flex-1 flex-col gap-1'>
+		<div className='flex flex-row gap-5 w-full py-10 mb-5'>
+			<div className='flex flex-col gap-10 w-2/3'>
+				<div className='relative flex flex-1 flex-col gap-1'>
 					<label className='text-xl'>Tytuł</label>
 					<input
-						defaultValue='Lorem ipsum dolor sit amet'
+						defaultValue='Chwytliwy tytuł, który zszokuje? Śmiało!...'
 						{...register('title', { required: 'Tytuł jest wymagany' })}
 						type='text'
-						className='rounded-md border-2 text-xl p-1'
+						className='rounded-t-md text-xl p-1 px-2 focus:outline-none peer bg-blackSecond/5'
 					/>
+					<InputAccent />
 					<ErrorMessage>{errors?.title?.message}</ErrorMessage>
 				</div>
-				<div className='flex flex-col justify-center gap-1'>
+				<div className='relative flex flex-col justify-center gap-1'>
 					<label className='text-xl'>Streszczenie</label>
 					<textarea
-						defaultValue='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolores esse ut fuga dolorum eveniet explicabo placeat atque deserunt saepe laborum perspiciatis, itaque unde culpa quam, quisquam blanditiis laboriosam earum delectus illum perferendis possimus tempore fugit et! Earum deleniti ullam animi culpa sed consectetur perferendis, nisi ab soluta obcaecati ipsum dolor?'
+						defaultValue='Podsumuj w dwóch zdaniach, zanim skończy się kawa...'
 						{...register('summary', {
 							maxLength: 500,
 							required: 'Streszczenie jest wymagane',
 						})}
 						maxLength={500}
-						className='min-h-36 rounded-md border-2 text-xl p-1  resize-none '
+						className='min-h-36 rounded-t-md text-xl p-1 resize-none peer px-2 focus:outline-none bg-blackSecond/5'
 					/>
 					<ErrorMessage>{errors?.summary?.message}</ErrorMessage>
+					<InputAccent />
 				</div>
 			</div>
 			<div className='flex flex-col  gap-1 w-1/3'>
@@ -60,5 +62,11 @@ export default function ArticleForm({
 }
 
 function ErrorMessage({ children }: { children: string | undefined }) {
-	return <span className='text-red-500'>{children}</span>;
+	return <span className='text-red-500 absolute -bottom-7'>{children}</span>;
+}
+
+function InputAccent() {
+	return (
+		<div className='w-full h-[2px] bg-blackSecond/10 peer-focus:bg-mainGreen absolute bottom-0 duration-300 transition-colors'></div>
+	);
 }
