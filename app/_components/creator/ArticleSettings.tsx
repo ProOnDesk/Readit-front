@@ -55,7 +55,7 @@ export default function ArticleSettings({
 		>
 			<div className='relative flex flex-col h-full'>
 				<button
-					className='absolute flex justify-center items-center bg-white border-r-2 border-b-2  border-blackSecond/5 left-full p-3'
+					className='absolute md:hidden flex justify-center items-center rounded-md bg-white border-r-2 border-b-2  border-blackSecond/5 left-full p-3'
 					onClick={() => setIsOpened((isOpened) => !isOpened)}
 					type='button'
 				>
