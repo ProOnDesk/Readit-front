@@ -66,7 +66,7 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
         {!isAuth ? (
           <div className="w-full justify-between items-center mt-5 gap-4 font-medium flex md:hidden">
             <Link
-              href="login"
+              href="/login"
               className="group w-1/2 text-center"
               onClick={closeNav}
             >
@@ -75,7 +75,7 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
               </span>
             </Link>
             <Link
-              href="register"
+              href="/register"
               className="w-1/2 text-center rounded-full bg-mainGreen hover:bg-mainGreenSecond text-white transition-colors duration-300 py-2"
               onClick={closeNav}
             >

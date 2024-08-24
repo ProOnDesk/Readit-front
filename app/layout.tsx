@@ -25,24 +25,27 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return (
-		<html lang='pl'>
-			{/* <AppProvider> */}
-			<body className={jost.className}>
-				<MantineProvider>
-					<div
-						id='app'
-						className='relative font-display flex flex-col items-center justify-center w-full h-full overflow-x-hidden'
-					>
-						<Navigation />
-						<div className='pt-16 md:pt-20'>
-							<RouterTransition />
-							{children}
-						</div>
-					</div>
-				</MantineProvider>
-			</body>
-			{/* </AppProvider> */}
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body className={jost.className}>
+        <AppProvider>
+          <MantineProvider>
+            {/* <RouterTransition /> */}
+            <div
+              id="app"
+              className="relative font-display flex flex-col items-center justify-center w-full h-full overflow-x-hidden"
+            >
+              <Navigation />
+              <div className="pt-16 md:pt-20 w-full">
+                {children}
+
+                {/* do usuniecia */}
+                {/* <div className="h-screen"></div> */}
+              </div>
+            </div>
+          </MantineProvider>
+        </AppProvider>
+      </body>
+    </html>
+  );
 }
