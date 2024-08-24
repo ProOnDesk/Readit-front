@@ -5,9 +5,9 @@ import ListElement from './ListElement';
 import AddListElement from './AddListElement';
 
 interface ArticleSettingsProps {
-	articleList: { type: string; content: string }[];
+	articleList: { content_type: string; content: string }[];
 	setArticleList: React.Dispatch<
-		React.SetStateAction<{ type: string; content: string }[]>
+		React.SetStateAction<{ content_type: string; content: string }[]>
 	>;
 }
 
@@ -74,7 +74,7 @@ export default function ArticleSettings({
 							{articleList.map((element, index) => (
 								<ListElement
 									key={index}
-									type={element.type}
+									type={element.content_type}
 									onUp={() => onUp(index)}
 									onDown={() => onDown(index)}
 									onDelete={() => onDelete(index)}
@@ -90,7 +90,10 @@ export default function ArticleSettings({
 								onClick={() =>
 									setArticleList((currList) => [
 										...currList,
-										{ type: 'title', content: 'Lorem ipsum dolor sit amet.' },
+										{
+											content_type: 'title',
+											content: 'Lorem ipsum dolor sit amet.',
+										},
 									])
 								}
 							/>
@@ -102,7 +105,7 @@ export default function ArticleSettings({
 									setArticleList((currList) => [
 										...currList,
 										{
-											type: 'text',
+											content_type: 'text',
 											content:
 												'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est eveniet voluptatum expedita, non natus perspiciatis minus? Incidunt, dolor. Iure, fuga.',
 										},
@@ -117,7 +120,7 @@ export default function ArticleSettings({
 									setArticleList((currList) => [
 										...currList,
 										{
-											type: 'image',
+											content_type: 'image',
 											content:
 												'https://blogcdn.gmass.co/blog/wp-content/uploads/2020/12/Featured-image-what-is-an-email-header-43kb.png',
 										},

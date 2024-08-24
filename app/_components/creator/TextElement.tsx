@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react';
 
 interface TextElementProps {
-	element: { type: string; content: string };
+	element: { content_type: string; content: string };
 	index: number;
 	setArticleList: React.Dispatch<
-		React.SetStateAction<{ type: string; content: string }[]>
+		React.SetStateAction<{ content_type: string; content: string }[]>
 	>;
 }
 

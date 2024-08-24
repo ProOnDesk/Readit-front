@@ -9,9 +9,9 @@ export default function Article({
 	setArticleList,
 	watch,
 }: {
-	articleList: { type: string; content: string }[];
+	articleList: { content_type: string; content: string }[];
 	setArticleList: React.Dispatch<
-		React.SetStateAction<{ type: string; content: string }[]>
+		React.SetStateAction<{ content_type: string; content: string }[]>
 	>;
 	watch: any;
 }) {
@@ -47,19 +47,19 @@ export default function Article({
 			</div>
 			{articleList.map((element, index) => (
 				<div key={index} className='px-5 pb-5 w-full'>
-					{element?.type === 'title' ? (
+					{element?.content_type === 'title' ? (
 						<TitleElement
 							element={element}
 							index={index}
 							setArticleList={setArticleList}
 						/>
-					) : element?.type === 'text' ? (
+					) : element?.content_type === 'text' ? (
 						<TextElement
 							element={element}
 							index={index}
 							setArticleList={setArticleList}
 						/>
-					) : element?.type === 'image' ? (
+					) : element?.content_type === 'image' ? (
 						<ImageElement
 							index={index}
 							element={element}

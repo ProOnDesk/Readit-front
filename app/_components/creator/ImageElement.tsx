@@ -1,10 +1,10 @@
 import ImageUploader from './ImageUploader';
 
 interface ImageElementProps {
-	element: { type: string; content: string };
-	articleList: { type: string; content: string }[];
+	element: { content_type: string; content: string };
+	articleList: { content_type: string; content: string }[];
 	setArticleList: React.Dispatch<
-		React.SetStateAction<{ type: string; content: string }[]>
+		React.SetStateAction<{ content_type: string; content: string }[]>
 	>;
 	index: any;
 }
@@ -18,7 +18,7 @@ export default function ImageElement({
 	const handleChangeImage = (file: File) => {
 		const newArticleList = [...articleList];
 		newArticleList[index] = {
-			type: 'image',
+			content_type: 'image',
 			content: URL.createObjectURL(file),
 		};
 		setArticleList(newArticleList);

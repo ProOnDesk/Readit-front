@@ -2,15 +2,14 @@ import { apiSlice } from '../services/apiSlice';
 
 const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
-		sendImages: builder.mutation({
+		postArticle: builder.mutation({
 			query: ({ formData }) => ({
-				url: `/articles/files`,
+				url: `/articles/`,
 				method: 'POST',
-				
 				body: formData,
 			}),
 		}),
 	}),
 });
 
-export const { useSendImagesMutation } = authApiSlice;
+export const { usePostArticleMutation } = authApiSlice;

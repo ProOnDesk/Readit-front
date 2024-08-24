@@ -7,7 +7,6 @@ import {
 import FileUploader from '../FileUploader';
 import { CreatorInputs } from './Creator';
 import { useRef, useState } from 'react';
-import { useSendImagesMutation } from '@/app/_redux/features/articleApiSLice';
 
 export default function ArticleForm({
 	register,

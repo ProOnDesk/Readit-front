@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Article from './Article';
 import ArticleSettings from './ArticleSettings';
 import ArticleForm from './ArticleForm';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useSendImagesMutation } from '@/app/_redux/features/articleApiSLice';
+import { usePostArticleMutation } from '@/app/_redux/features/articleApiSLice';
 
 export type CreatorInputs = {
 	title: string;
@@ -17,15 +17,15 @@ export type CreatorInputs = {
 function Creator() {
 	const [articleList, setArticleList] = useState([
 		{
-			type: 'title',
+			content_type: 'title',
 			content: 'Lorem ipsum dolor sit amet.',
 		},
 		{
-			type: 'image',
+			content_type: 'image',
 			content: '',
 		},
 		{
-			type: 'text',
+			content_type: 'text',
 			content:
 				'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni neque cupiditate harum iure, ducimus autem! Eaque vel est totam reiciendis nulla vero, excepturi blanditiis ullam officiis distinctio aut nobis repellendus soluta sed corporis quod iusto quibusdam minima sunt voluptatum itaque! Corrupti earum mollitia ullam fugiat harum, reiciendis voluptatibus omnis sequi?',
 		},
@@ -39,33 +39,43 @@ function Creator() {
 		clearErrors,
 		formState: { errors },
 	} = useForm<CreatorInputs>();
-	const [sendImages] = useSendImagesMutation();
+	const [postArticle] = usePostArticleMutation();
 	const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
 		if (data.image?.length === 0) {
 			setError('image', { type: 'required', message: 'Zdjęcie jest wymagane' });
 			return;
 		}
 
-		const imageList = articleList.filter((article) => article.type === 'image');
+		const imageList = articleList.filter(
+			(article) => article.content_type === 'image'
+		);
 		const formData = new FormData();
+
+		if (data.image) {
+			formData.append('title_image', data.image[0]);
+		}
+
+		const article = {
+			title: data.title,
+			summary: data.summary,
+			tags: [{ value: 'tag1' }, { value: 'tag2' }],
+			content_elements: [...articleList],
+		};
+		formData.append('article', JSON.stringify(article));
 
 		await Promise.all(
 			imageList.map(async (element, index) => {
 				const response = await fetch(element.content);
 				const blob = await response.blob();
 				const file = new File([blob], `image${index}.png`, { type: blob.type });
-				formData.append('files', file);
+				formData.append('images_for_content_type_image', file);
 			})
 		);
 
-		// Send the FormData
-		sendImages({ formData })
+		postArticle({ formData })
 			.unwrap()
 			.then((res) => console.log(res))
 			.catch((err) => console.log(err));
-
-		console.log(formData.getAll('files'));
-		console.log({ ...data, articleList });
 	};
 
 	return (
