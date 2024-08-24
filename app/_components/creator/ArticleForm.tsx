@@ -6,6 +6,7 @@ import {
 } from 'react-hook-form';
 import FileUploader from '../FileUploader';
 import { CreatorInputs } from './Creator';
+import { useRef, useState } from 'react';
 
 export default function ArticleForm({
 	register,
@@ -18,10 +19,25 @@ export default function ArticleForm({
 	setValue: UseFormSetValue<CreatorInputs>;
 	clearErrors: UseFormClearErrors<CreatorInputs>;
 }) {
+	const [tags, setTags] = useState<string[]>([]);
+	const tagInput = useRef(null);
+	const addTag = (e: any) => {
+		e.preventDefault();
+		tags.map((tag) => {
+			if (tag === e.currentTarget.value) return;
+		});
+
+		if (tags.length > 2) return;
+		setTags([...tags, e.currentTarget.value]);
+	};
+	const deleteTag = (tag: string) => {
+		setTags(tags.filter((t) => t !== tag));
+	};
+
 	return (
-		<div className='flex flex-row gap-5 w-full py-10 mb-5'>
-			<div className='flex flex-col gap-10 w-2/3'>
-				<div className='relative flex flex-1 flex-col gap-1'>
+		<div className='flex md:flex-row flex-col gap-5 w-full py-10 md:mb-5'>
+			<div className='flex flex-col gap-8 md:w-2/3 w-full '>
+				<div className='relative flex flex-col gap-1'>
 					<label className='text-xl'>Tytuł</label>
 					<input
 						defaultValue='Chwytliwy tytuł, który zszokuje? Śmiało!...'
@@ -32,7 +48,40 @@ export default function ArticleForm({
 					<InputAccent />
 					<ErrorMessage>{errors?.title?.message}</ErrorMessage>
 				</div>
-				<div className='relative flex flex-col justify-center gap-1'>
+				<div className='relative flex flex-col gap-1'>
+					<label className='text-xl'>Tagi</label>
+					<div className='flex rounded-t-md text-xl p-1 px-2 focus:outline-none peer bg-blackSecond/5'>
+						{tags.map((tag, index) => (
+							<button
+								onClick={() => {
+									deleteTag(tag);
+								}}
+								key={index}
+								className='p-1 bg-white rounded-md mx-1 my-1'
+							>
+								{tag}
+							</button>
+						))}
+						{tags.length < 3 && (
+							<input
+								// {...register('title', { required: 'Tytuł jest wymagany' })}
+								onKeyDown={(e) => {
+									if (e.key === 'Enter') {
+										addTag(e);
+										e.currentTarget.value = '';
+									}
+								}}
+								ref={tagInput}
+								type='text'
+								placeholder='Dodaj tagi'
+								maxLength={25}
+								className='rounded-md text-xl bg-transparent w-full p-1 px-2 focus:outline-none'
+							/>
+						)}
+					</div>
+					<InputAccent />
+				</div>
+				<div className='relative flex flex-1 flex-col justify-center gap-1'>
 					<label className='text-xl'>Streszczenie</label>
 					<textarea
 						defaultValue='Podsumuj w dwóch zdaniach, zanim skończy się kawa...'
@@ -41,13 +90,13 @@ export default function ArticleForm({
 							required: 'Streszczenie jest wymagane',
 						})}
 						maxLength={500}
-						className='min-h-36 rounded-t-md text-xl p-1 resize-none peer px-2 focus:outline-none bg-blackSecond/5'
+						className='flex-1 min-h-36 rounded-t-md text-xl p-1 resize-none peer px-2 focus:outline-none bg-blackSecond/5'
 					/>
 					<ErrorMessage>{errors?.summary?.message}</ErrorMessage>
 					<InputAccent />
 				</div>
 			</div>
-			<div className='flex flex-col  gap-1 w-1/3'>
+			<div className='relative flex flex-col h-auto gap-1 md:w-1/3 max-h-[500px]'>
 				<label className='text-xl'>Zdjęcie</label>
 				<FileUploader
 					setValue={setValue}
