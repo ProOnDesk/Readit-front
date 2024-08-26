@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "framer-motion"; //animacje, no oczywiscie judi pomieszany na animacjach
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import MobileNav from "./MobileNav";
