@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface Params {
 	params: { materialTitle: string };
 }
@@ -12,7 +14,7 @@ export default function Page({ params }: Params) {
 	const image = 'https://images.unsplash.com/photo-1626756786570-7c5d1e3d8b1a';
 	const price = 24.99;
 	const rate = 4.5;
-    const rateCount = 123;
+	const rateCount = 123;
 	const article = [
 		{
 			content_type: 'title',
@@ -57,6 +59,10 @@ export default function Page({ params }: Params) {
 			<p className='text-5xl mx-auto text-center mb-10'>
 				{params?.materialTitle}
 			</p>
+			<div>
+				<Image src={image} alt={title} width={1920} height={1080} />
+			</div>
+			<div></div>
 		</div>
 	);
 }

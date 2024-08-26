@@ -48,11 +48,11 @@ function Creator() {
 			setError('image', { type: 'required', message: 'Zdjęcie jest wymagane' });
 			return;
 		}
-		console.log(articleList);
+
 		const filteredArticleList = articleList.filter(
 			(article) => article.content !== ''
 		);
-		console.log(filteredArticleList);
+
 		const imageList = filteredArticleList.filter(
 			(article) => article.content_type === 'image'
 		);
@@ -68,7 +68,7 @@ function Creator() {
 			tags: tags.map((tag) => ({ value: tag })),
 			content_elements: [...filteredArticleList],
 		};
-		console.log(article);
+
 		formData.append('article', JSON.stringify(article));
 
 		await Promise.all(
@@ -83,11 +83,9 @@ function Creator() {
 		postArticle({ formData })
 			.unwrap()
 			.then((res) => {
-				console.log(res);
 				toast.success('Materiał został opublikowany!');
 			})
 			.catch((err) => {
-				console.log(err);
 				toast.error('Coś poszło nie tak...');
 			});
 	};
