@@ -1,5 +1,7 @@
+import { Action, PayloadAction } from "@reduxjs/toolkit";
 import { apiSlice } from "../services/apiSlice";
-
+import { HYDRATE } from "next-redux-wrapper";
+import { RootState } from "@reduxjs/toolkit/query";
 export interface User {
   id: number;
   email: string;
@@ -43,6 +45,12 @@ const authApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: "/oauth2/refresh-token",
         method: "POST",
+      }),
+    }),
+    getUserById: builder.query<User, { id: string }>({
+      query: ({ id }) => ({
+        url: `/user/get/${id}`,
+        method: "GET",
       }),
     }),
     // verifyEmail: builder.mutation({
@@ -92,5 +100,6 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
+  useGetUserByIdQuery,
   useVerifyTokenMutation,
 } = authApiSlice;

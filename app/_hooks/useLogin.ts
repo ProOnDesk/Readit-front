@@ -28,7 +28,7 @@ export function useLogin() {
         router.push("/browse");
       })
       .catch((error) => {
-        if (error.data.detail) {
+        if (error?.data?.detail) {
           toast.error(error.data.detail);
         } else {
           toast.error("Wystąpił błąd podczas logowania.");
