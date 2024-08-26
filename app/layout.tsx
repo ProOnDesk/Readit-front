@@ -1,29 +1,29 @@
-import type { Metadata } from "next";
-import { Jost } from "next/font/google";
-import "./globals.css";
-import "@mantine/nprogress/styles.css";
-import "@mantine/core/styles.css";
-import AppProvider from "./_components/AppProvider";
-import Navigation from "./_components/nav/Navigation";
-import { ColorSchemeScript, createTheme, MantineProvider } from "@mantine/core";
-import { RouterTransition } from "./_components/nav/RouterTransition";
+import type { Metadata } from 'next';
+import { Jost } from 'next/font/google';
+import './globals.css';
+import '@mantine/nprogress/styles.css';
+import '@mantine/core/styles.css';
+import AppProvider from './_components/AppProvider';
+import Navigation from './_components/nav/Navigation';
+import { ColorSchemeScript, createTheme, MantineProvider } from '@mantine/core';
+import { RouterTransition } from './_components/nav/RouterTransition';
 
 const jost = Jost({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+	subsets: ['latin'],
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
 });
 
 export const metadata: Metadata = {
-  title: "ReadIt | Just Read",
-  description: "Place where u can read",
+	title: 'ReadIt | Just Read',
+	description: 'Place where u can read',
 };
 
 // const theme = createTheme({});
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
   return (
     <html lang="en">
