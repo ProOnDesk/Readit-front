@@ -95,7 +95,7 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
           <>
             <div className="w-full h-[1px] bg-slate-200 my-2" />
             <Link
-              href="/app/profile/26969696969"
+              href="/app/profile"
               className="block w-full group focus:outline-none py-4 font-medium"
               onClick={closeNav}
             >
@@ -104,7 +104,7 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
               </span>
             </Link>
             <Link
-              href="/app/226262662/content"
+              href="/app/content"
               className="block w-full group focus:outline-none py-4 font-medium"
               onClick={closeNav}
             >
@@ -113,7 +113,7 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
               </span>
             </Link>
             <Link
-              href="/app/226262662/follows"
+              href="/app/follows"
               className="block w-full group focus:outline-none py-4 font-medium"
               onClick={closeNav}
             >
@@ -122,7 +122,7 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
               </span>
             </Link>
             <Link
-              href="/app/26262662/account"
+              href="/app/account"
               className="block w-full group focus:outline-none py-4 font-medium"
               onClick={closeNav}
             >
