@@ -1,8 +1,5 @@
 import MaterialDetails from '@/app/_components/materials/MaterialDetails';
 import MaterialHeader from '@/app/_components/materials/MaterialHeader';
-import { Rating } from '@mui/material';
-import { StarIcon } from 'lucide-react';
-import Image from 'next/image';
 
 interface Params {
 	params: { materialTitle: string };
@@ -34,11 +31,11 @@ export default function Page({ params }: Params) {
 				tags={tags}
 				title={title}
 			/>
-			<div className='flex flex-row'>
+			<div className='flex flex-col-reverse md:flex-row'>
 				<div className='flex-1 text-center '>komentarze gere</div>
-				<div className='px-8 py-10 border-l-2 border-mainGreen'>
-					<div className='mb-16 flex-1 flex flex-col gap-5 min-w-60 px-4 rounded-md'>
-						<p className='text-3xl font-semibold '>{price} zł</p>
+				<div className='px-8 py-10 md:border-l-2 border-mainGreen'>
+					<div className='mb-16 flex flex-col gap-5 min-w-60 px-4 rounded-md'>
+						<p className='text-3xl font-semibold text-center'>{price} zł</p>
 						<button className='text-center rounded-full bg-mainGreen text-white text-xl font-medium hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2'>
 							Kup teraz
 						</button>

@@ -18,7 +18,7 @@ export default function MaterialDetails({
 	authorAvatarLink,
 }: MaterialDetailsProps) {
 	return (
-		<div className='flex flex-col gap-8 text-2xl'>
+		<div className='flex flex-col gap-8 text-2xl items-center md:items-start'>
 			<div>
 				<p className='font-semibold mb-2 items-start'>Data publikacji</p>
 				<div className='flex flex-col gap-2 text-2xl'>
