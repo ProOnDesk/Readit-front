@@ -8,6 +8,7 @@ interface MaterialDetailsProps {
 	rateCount: number;
 	author: string;
 	authorAvatarLink: string;
+	viewCount: number;
 }
 
 export default function MaterialDetails({
@@ -16,6 +17,7 @@ export default function MaterialDetails({
 	rateCount,
 	author,
 	authorAvatarLink,
+	viewCount,
 }: MaterialDetailsProps) {
 	return (
 		<div className='flex flex-col gap-8 text-2xl items-center md:items-start'>
@@ -34,9 +36,15 @@ export default function MaterialDetails({
 				</div>
 			</div>
 			<div>
+				<p className='font-semibold mb-2'>Wyświetlenia</p>
+				<div className='flex flex-row gap-1 text-2xl'>
+					<p className='text-xl font-medium'>{viewCount}</p>
+				</div>
+			</div>
+			<div>
 				<p className='font-semibold mb-2'>Ocena</p>
 				<div className='flex flex-row gap-1 text-2xl'>
-					<p className='text-xl font-medium'>{rating}</p>
+					<p className='text-xl font-medium'>{rating.toFixed(2)}</p>
 					<Rating
 						name='text-feedback'
 						value={rating}
