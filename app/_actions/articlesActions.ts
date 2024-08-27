@@ -35,8 +35,6 @@ export async function getArticleComments({
 	size: number;
 	sort_order?: string;
 }) {
-	const s = 'chwytliwy-tytuł,-który-zszokuje?-śmiało!...';
-
 	try {
 		const response = await fetch(
 			`${process.env.NEXT_PUBLIC_HOST}/articles/comment/all/${article_id}?page=${page}&size=${size}&sort_order=${sort_order}`,
@@ -50,7 +48,6 @@ export async function getArticleComments({
 		if (!response.ok) {
 			throw new Error(`Błąd serwera: ${response.status}`);
 		}
-
 		const data = await response.json();
 		return data;
 	} catch (error) {

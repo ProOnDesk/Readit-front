@@ -14,13 +14,13 @@ function Pagination({
 	const searchParams = useSearchParams();
 	const pathname = usePathname();
 	const router = useRouter();
-	const pagesCount = Math.ceil(data.total / SIZE_OF_PAGE);
+	const pagesCount = Math.ceil(data?.total / SIZE_OF_PAGE);
 	const currentPage = searchParams.get('page') ?? 1;
 
 	function handleChangePage(pageNumber: number) {
 		const params = new URLSearchParams(searchParams);
 		params.set('page', String(pageNumber));
-		router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+		router.replace(`${pathname}?${params.toString()}`, { scroll: true });
 	}
 
 	if (pagesCount < 1) return null;

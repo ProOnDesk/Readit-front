@@ -1,6 +1,7 @@
 import { getArticleComments } from '@/app/_actions/articlesActions';
 import Opinion from './Opinion';
 import Pagination from './Pagination';
+import { unstable_noStore as noStore } from 'next/cache';
 
 export const revalidate = 0;
 
@@ -29,9 +30,10 @@ export default async function OpinionSection({
 	articleId,
 	searchParams,
 }: OpinionsProps) {
+	noStore();
 	const data = await getArticleComments({
 		article_id: articleId,
-		page: searchParams.page,
+		page: searchParams?.page ?? 1,
 		size: SIZE_OF_PAGE,
 		sort_order: 'desc',
 	});

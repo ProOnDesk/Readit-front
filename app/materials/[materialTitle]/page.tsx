@@ -1,9 +1,7 @@
 import { getArticleInfoBySlug } from '@/app/_actions/articlesActions';
 import MaterialDetails from '@/app/_components/materials/MaterialDetails';
 import MaterialHeader from '@/app/_components/materials/MaterialHeader';
-import Opinion from '@/app/_components/materials/Opinion';
 import OpinionSection from '@/app/_components/materials/OpinionSection';
-import { Metadata } from 'next';
 import { Suspense } from 'react';
 
 export const revalidate = 0;
@@ -70,7 +68,10 @@ export default async function Page({ params, searchParams }: Params) {
 				</div>
 				<div className='flex-1 px-8 flex flex-col gap-6'>
 					<p className='text-3xl font-medium mb-5'>Opinie</p>
-					<Suspense fallback={<div>Ładowanie opinii...</div>} key={id}>
+					<Suspense
+						fallback={<div className='mx-auto'>Ładowanie opinii...</div>}
+						key={id}
+					>
 						<OpinionSection articleId={id} searchParams={searchParams} />
 					</Suspense>
 				</div>
