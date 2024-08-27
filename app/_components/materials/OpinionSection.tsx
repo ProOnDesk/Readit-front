@@ -23,7 +23,7 @@ interface Opinion {
 	created_at: string;
 }
 
-export const SIZE_OF_PAGE = 15;
+const SIZE_OF_PAGE = 10;
 
 export default async function OpinionSection({
 	articleId,
@@ -33,6 +33,7 @@ export default async function OpinionSection({
 		article_id: articleId,
 		page: searchParams.page,
 		size: SIZE_OF_PAGE,
+		sort_order: 'desc',
 	});
 
 	return (
