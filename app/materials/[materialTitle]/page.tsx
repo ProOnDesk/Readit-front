@@ -60,8 +60,7 @@ export default async function Page({ params, searchParams }: Params) {
 						viewCount={view_count}
 					/>
 				</div>
-				<div className='flex-1 px-8 flex flex-col gap-6'>
-					<p className='text-3xl font-medium mb-5'>Opinie</p>
+				<div className='flex-1 px-8'>
 					<Suspense
 						fallback={<div className='mx-auto'>Ładowanie opinii...</div>}
 						key={id}

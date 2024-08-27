@@ -15,7 +15,17 @@ const authApiSlice = apiSlice.injectEndpoints({
 				method: 'POST',
 			}),
 		}),
+		addArticleToFavourites: builder.mutation({
+			query: ({ article_id }) => ({
+				url: `/articles/wish-list/add/${article_id}`,
+				method: 'POST',
+			}),
+		}),
 	}),
 });
 
-export const { usePostArticleMutation, useBuyArticleMutation } = authApiSlice;
+export const {
+	usePostArticleMutation,
+	useBuyArticleMutation,
+	useAddArticleToFavouritesMutation,
+} = authApiSlice;
