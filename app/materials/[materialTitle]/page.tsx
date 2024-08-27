@@ -1,4 +1,5 @@
 import { getArticleInfoBySlug } from '@/app/_actions/articlesActions';
+import ManageArticle from '@/app/_components/materials/ManageArticle';
 import MaterialDetails from '@/app/_components/materials/MaterialDetails';
 import MaterialHeader from '@/app/_components/materials/MaterialHeader';
 import OpinionSection from '@/app/_components/materials/OpinionSection';
@@ -49,14 +50,7 @@ export default async function Page({ params, searchParams }: Params) {
 			/>
 			<div className='flex flex-col md:flex-row-reverse'>
 				<div className='px-8 py-10 md:border-l-2 border-mainGreen'>
-					<div className='mb-16 flex flex-col gap-5 min-w-60 px-4 rounded-md'>
-						<p className='text-3xl font-semibold text-center'>
-							{is_free ? 'Bezpłatny' : `${price} zł`}
-						</p>
-						<button className='text-center rounded-full bg-mainGreen text-white text-xl font-medium hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2'>
-							{is_free ? 'Zapisz się' : 'Kup teraz'}
-						</button>
-					</div>
+					<ManageArticle is_free={is_free} price={price} articleId={id} />
 					<MaterialDetails
 						author={author}
 						authorAvatarLink={avatar_url}

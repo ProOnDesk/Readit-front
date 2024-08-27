@@ -50,6 +50,9 @@ export default async function OpinionSection({
 						review={item.content}
 					/>
 				))}
+			{data?.items.length === 0 && (
+				<p className='text-center text-lg'>Brak opinii</p>
+			)}
 			<div>
 				<Pagination data={data} SIZE_OF_PAGE={SIZE_OF_PAGE} />
 			</div>

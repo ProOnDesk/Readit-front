@@ -9,7 +9,13 @@ const authApiSlice = apiSlice.injectEndpoints({
 				body: formData,
 			}),
 		}),
+		buyArticle: builder.mutation({
+			query: ({ article_id }) => ({
+				url: `/articles/buy/${article_id}`,
+				method: 'POST',
+			}),
+		}),
 	}),
 });
 
-export const { usePostArticleMutation } = authApiSlice;
+export const { usePostArticleMutation, useBuyArticleMutation } = authApiSlice;

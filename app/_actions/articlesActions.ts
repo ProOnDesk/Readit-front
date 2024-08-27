@@ -11,7 +11,7 @@ export async function getArticleInfoBySlug({ slug }: { slug: string }) {
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ slug: s }),
+				body: JSON.stringify({ slug: decodeURIComponent(slug) }),
 			}
 		);
 		if (!response.ok) {
