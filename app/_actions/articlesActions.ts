@@ -1,5 +1,7 @@
 'use server';
 
+import { cookies } from 'next/headers';
+
 export async function getArticleInfoBySlug({ slug }: { slug: string }) {
 	const s = 'chwytliwy-tytuł,-który-zszokuje?-śmiało!...';
 
@@ -23,7 +25,6 @@ export async function getArticleInfoBySlug({ slug }: { slug: string }) {
 		console.log('Nie udało się pobrać artykułu', error);
 	}
 }
-
 
 export async function getArticleComments({
 	article_id,

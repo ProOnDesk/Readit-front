@@ -21,6 +21,12 @@ const authApiSlice = apiSlice.injectEndpoints({
 				method: 'POST',
 			}),
 		}),
+		getArticleDetailsById: builder.query({
+			query: ({ article_id }) => ({
+				url: `/articles/detail/id/${article_id}`,
+				method: 'GET',
+			}),
+		}),
 	}),
 });
 
@@ -28,4 +34,5 @@ export const {
 	usePostArticleMutation,
 	useBuyArticleMutation,
 	useAddArticleToFavouritesMutation,
+	useGetArticleDetailsByIdQuery,
 } = authApiSlice;

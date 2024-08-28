@@ -1,7 +1,5 @@
-import { getArticleDetailsById } from '@/app/_actions/articlesActions';
-import ImageElement from '@/app/_components/creator/ImageElement';
-import TextElement from '@/app/_components/creator/TextElement';
-import TitleElement from '@/app/_components/creator/TitleElement';
+import { getArticleInfoBySlug } from '@/app/_actions/articlesActions';
+import Article from '@/app/_components/materials/Article';
 import MaterialDetails from '@/app/_components/materials/MaterialDetails';
 import MaterialHeader from '@/app/_components/materials/MaterialHeader';
 import OpinionSection from '@/app/_components/materials/OpinionSection';
@@ -10,16 +8,16 @@ import { Suspense } from 'react';
 export const revalidate = 0;
 
 interface Params {
-	params: { materialId: string };
+	params: { materialTitle: string };
 	searchParams: any;
 }
 
 export async function generateMetadata({ params }: Params) {
-	const data = await getArticleDetailsById({
-		article_id: params?.materialId,
+	const data = await getArticleInfoBySlug({
+		slug: params?.materialTitle,
 	});
 
-	return { title: `${data?.title ?? 'Materiał'}` };
+	return { title: `${`${data?.title} | ReadIt` ?? 'Materiał'}` };
 }
 
 export default async function Page({ params, searchParams }: Params) {
@@ -27,8 +25,6 @@ export default async function Page({ params, searchParams }: Params) {
 		title,
 		summary,
 		tags,
-		is_free,
-		price,
 		id,
 		author: { first_name, last_name, avatar_url },
 		created_at,
@@ -36,8 +32,8 @@ export default async function Page({ params, searchParams }: Params) {
 		title_image_url,
 		rating,
 		rating_count,
-	} = await getArticleDetailsById({
-		article_id: Number(params?.materialId),
+	} = await getArticleInfoBySlug({
+		slug: params?.materialTitle,
 	});
 	const author = first_name + ' ' + last_name;
 	const convertedTags = tags.map((tag: { value: string }) => tag.value);
@@ -61,31 +57,8 @@ export default async function Page({ params, searchParams }: Params) {
 						viewCount={view_count}
 					/>
 				</div>
-				<div className='flex-1 px-8'>
-					{/* {articleList.map((element, index) => (
-						<div key={index} className='px-5 pb-5 w-full'>
-							{element?.content_type === 'title' ? (
-								<TitleElement
-									element={element}
-									index={index}
-									setArticleList={setArticleList}
-								/>
-							) : element?.content_type === 'text' ? (
-								<TextElement
-									element={element}
-									index={index}
-									setArticleList={setArticleList}
-								/>
-							) : element?.content_type === 'image' ? (
-								<ImageElement
-									index={index}
-									element={element}
-									articleList={articleList}
-									setArticleList={setArticleList}
-								/>
-							) : null}
-						</div>
-					))} */}
+				<div className='flex-1 px-8 py-5'>
+					<Article articleId={id} />
 					<Suspense
 						fallback={<div className='mx-auto'>Ładowanie opinii...</div>}
 						key={id}
