@@ -1,8 +1,10 @@
 'use client';
 
+import { useMakeOpinionMutation } from '@/app/_redux/features/articleApiSLice';
 import { Rating } from '@mui/material';
 import { StarIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface MakeOpinionProps {
 	articleId: number;
@@ -13,6 +15,7 @@ export default function MakeOpinion({ articleId }: MakeOpinionProps) {
 	const [rating, setRating] = useState<number | null>(null);
 	const [review, setReview] = useState('');
 	const isCompleted = rating !== null && review !== '';
+	const [makeOpinion] = useMakeOpinionMutation();
 
 	useEffect(() => {
 		if (textAreaRef.current) {
@@ -22,8 +25,22 @@ export default function MakeOpinion({ articleId }: MakeOpinionProps) {
 		}
 	}, [textAreaRef, review]);
 
+	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+		
+		makeOpinion({ article_id: articleId, rating, content: review })
+			.unwrap()
+			.then(() => {
+				setRating(null);
+				setReview('');
+				toast.success('Komentarz dodany pomyślnie');
+			})
+			.catch(() => {
+				toast.error('Nie udało się dodać kometarza');
+			});
+	}
+
 	return (
-		<form className=' flex flex-col gap-3'>
+		<form onSubmit={handleSubmit} className=' flex flex-col gap-3'>
 			<div className='flex flex-row justify-between items-center'>
 				<label className='text-2xl font-medium'>Twoja opinia</label>
 				<Rating
