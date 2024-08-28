@@ -9,7 +9,7 @@ interface ProfileArticlesProps {
 
 export default function ProfileArticles({ user }: ProfileArticlesProps) {
   return (
-    <div className="px-8 mt-10">
+    <div className="px-8 mt-10 sm:px-12 max-w-[1200px] mx-auto bg-white md900:mt-0 md900:py-8 lg1200:py-10 lg1200:mt-4 lg1200:rounded-2xl lg1200:shadow-lg ">
       <div className="flex w-full justify-between items-center">
         <div className="flex justify-center items-center gap-2">
           <h4 className="text-2xl font-medium">

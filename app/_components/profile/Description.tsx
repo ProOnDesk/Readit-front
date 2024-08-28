@@ -9,7 +9,7 @@ interface DescriptionProps {
 
 export default function Description({ user }: DescriptionProps) {
   return (
-    <div className="px-8 mt-10">
+    <div className="px-8 mt-10 sm:px-12  max-w-[1200px] mx-auto bg-white md900:mt-0 md900:py-8 lg1200:py-10 lg1200:mt-4 lg1200:rounded-2xl lg1200:shadow-lg">
       <h4 className="text-2xl font-medium">O mnie</h4>
       <Modal>
         <Modal.Open opens="editdesc">

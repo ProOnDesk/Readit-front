@@ -27,12 +27,14 @@ export default function Page() {
     );
 
   return (
-    <div className="max-w-[1600px] mx-auto w-full h-full min-h-screen">
-      <ProfileImage user={user} />
-      <NameTag user={user} />
-      <Skills user={user} />
-      <Description user={user} />
-      <ProfileArticles user={user} />
+    <div className="md900:bg-whiteSecond lg1200:pb-20">
+      <div className="max-w-[1600px] mx-auto w-full h-full min-h-screen ">
+        <ProfileImage user={user} />
+        <NameTag user={user} />
+        <Skills user={user} />
+        <Description user={user} />
+        <ProfileArticles user={user} />
+      </div>
     </div>
   );
 }
