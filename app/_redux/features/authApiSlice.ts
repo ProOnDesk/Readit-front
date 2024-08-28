@@ -33,6 +33,7 @@ export interface Article {
   view_count: number;
   title_image_url: string;
   rating: number;
+  rating_count: number;
 }
 
 const authApiSlice = apiSlice.injectEndpoints({

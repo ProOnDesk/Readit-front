@@ -21,7 +21,7 @@ export default function Page() {
 
   if (isLoading)
     return (
-      <div className="w-full h-screen flex justify-center items-center">
+      <div className="w-full h-[calc(100vh-64px)] flex justify-center items-center">
         <Spinner color="green" size="big" />;
       </div>
     );
