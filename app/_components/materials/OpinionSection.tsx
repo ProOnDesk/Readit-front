@@ -2,6 +2,7 @@ import { getArticleComments } from '@/app/_actions/articlesActions';
 import Opinion from './Opinion';
 import Pagination from './Pagination';
 import { unstable_noStore as noStore } from 'next/cache';
+import MakeOpinion from './MakeOpinion';
 
 export const revalidate = 0;
 
@@ -30,7 +31,6 @@ export default async function OpinionSection({
 	articleId,
 	searchParams,
 }: OpinionsProps) {
-	noStore();
 	const data = await getArticleComments({
 		article_id: articleId,
 		page: searchParams?.page ?? 1,
@@ -40,6 +40,7 @@ export default async function OpinionSection({
 
 	return (
 		<div className='flex flex-col gap-6'>
+			<MakeOpinion articleId={articleId} />
 			<p className='text-3xl font-medium mb-5'>Opinie</p>
 			{data?.items &&
 				data.items.map((item: any) => (
