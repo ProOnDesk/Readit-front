@@ -63,7 +63,7 @@ export default async function Page({ params, searchParams }: Params) {
 						fallback={<div className='mx-auto'>Ładowanie opinii...</div>}
 						key={id}
 					>
-						<OpinionSection articleId={id} searchParams={searchParams} />
+						<OpinionSection articleId={id} searchParams={searchParams} isPossibleToMakeOpinion={true}/>
 					</Suspense>
 				</div>
 			</div>

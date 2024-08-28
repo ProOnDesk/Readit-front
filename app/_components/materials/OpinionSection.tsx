@@ -9,6 +9,7 @@ export const revalidate = 0;
 interface OpinionsProps {
 	articleId: number;
 	searchParams: any;
+	isPossibleToMakeOpinion?: boolean;
 }
 
 interface Opinion {
@@ -30,6 +31,7 @@ const SIZE_OF_PAGE = 10;
 export default async function OpinionSection({
 	articleId,
 	searchParams,
+	isPossibleToMakeOpinion = false,
 }: OpinionsProps) {
 	const data = await getArticleComments({
 		article_id: articleId,
@@ -40,7 +42,7 @@ export default async function OpinionSection({
 
 	return (
 		<div className='flex flex-col gap-6'>
-			<MakeOpinion articleId={articleId} />
+			{isPossibleToMakeOpinion && <MakeOpinion articleId={articleId} />}
 			<p className='text-3xl font-medium mb-5'>Opinie</p>
 			{data?.items &&
 				data.items.map((item: any) => (

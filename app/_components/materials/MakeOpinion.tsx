@@ -26,7 +26,6 @@ export default function MakeOpinion({ articleId }: MakeOpinionProps) {
 	}, [textAreaRef, review]);
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-		
 		makeOpinion({ article_id: articleId, rating, content: review })
 			.unwrap()
 			.then(() => {
