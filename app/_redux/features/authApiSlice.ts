@@ -71,12 +71,6 @@ const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
-    getUserById: builder.query<User, { id: string }>({
-      query: ({ id }) => ({
-        url: `/user/get/${id}`,
-        method: "GET",
-      }),
-    }),
     addSkillToUser: builder.mutation({
       query: ({ skill_name }) => ({
         url: "/user/skill",
@@ -88,6 +82,33 @@ const authApiSlice = apiSlice.injectEndpoints({
       query: ({ skill_id }) => ({
         url: `/user/skill/${skill_id}`,
         method: "DELETE",
+      }),
+    }),
+    getUserFollowers: builder.query<
+      { follows_amount: number },
+      { userId: number }
+    >({
+      query: ({ userId }) => ({
+        url: `/user/followers/${userId}`,
+        method: "GET",
+      }),
+    }),
+    followUser: builder.mutation({
+      query: ({ userId }) => ({
+        url: `/user/follow/${userId}`,
+        method: "POST",
+      }),
+    }),
+    unfollowUser: builder.mutation({
+      query: ({ userId }) => ({
+        url: `/user/follow/${userId}`,
+        method: "DELETE",
+      }),
+    }),
+    checkIfFollow: builder.query({
+      query: ({ userId }) => ({
+        url: `/user/follow/${userId}`,
+        method: "GET",
       }),
     }),
     // verifyEmail: builder.mutation({
@@ -144,11 +165,14 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
-  useGetUserByIdQuery,
   useVerifyTokenMutation,
   useAddSkillToUserMutation,
   useRemoveSkillItemMutation,
   useUpdateUserMutation,
   useUpdateUserAvatarMutation,
   useUpdateUserBgImageMutation,
+  useGetUserFollowersQuery,
+  useFollowUserMutation,
+  useCheckIfFollowQuery,
+  useUnfollowUserMutation,
 } = authApiSlice;

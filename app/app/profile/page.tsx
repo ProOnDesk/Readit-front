@@ -7,17 +7,10 @@ import ProfileArticles from "@/app/_components/profile/ProfileArticles";
 import ProfileImage from "@/app/_components/profile/ProfileImage";
 import Skills from "@/app/_components/profile/Skills";
 import Spinner from "@/app/_components/ui/Spinner";
-import {
-  useGetUserByIdQuery,
-  useRetrieveUserQuery,
-} from "@/app/_redux/features/authApiSlice";
-import Image from "next/image";
-import React, { useEffect } from "react";
+import { useRetrieveUserQuery } from "@/app/_redux/features/authApiSlice";
 
 export default function Page() {
   const { data: user, isLoading } = useRetrieveUserQuery();
-  // const { data: user } = useGetUserByIdQuery({ id: profileId });
-  console.log(user);
 
   if (isLoading)
     return (
