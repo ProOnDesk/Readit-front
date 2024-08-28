@@ -21,6 +21,22 @@ const authApiSlice = apiSlice.injectEndpoints({
 				method: 'POST',
 			}),
 		}),
+		getArticleDetailsById: builder.query({
+			query: ({ article_id }) => ({
+				url: `/articles/detail/id/${article_id}`,
+				method: 'GET',
+			}),
+		}),
+		makeOpinion: builder.mutation({
+			query: ({ article_id, rating, content }) => ({
+				url: `/articles/comment/${article_id}`,
+				method: 'POST',
+				body: {
+					rating,
+					content,
+				},
+			}),
+		}),
 	}),
 });
 
@@ -28,4 +44,6 @@ export const {
 	usePostArticleMutation,
 	useBuyArticleMutation,
 	useAddArticleToFavouritesMutation,
+	useGetArticleDetailsByIdQuery,
+	useMakeOpinionMutation,
 } = authApiSlice;

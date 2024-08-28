@@ -1,5 +1,7 @@
 'use server';
 
+import { cookies } from 'next/headers';
+
 export async function getArticleInfoBySlug({ slug }: { slug: string }) {
 	const s = 'chwytliwy-tytuł,-który-zszokuje?-śmiało!...';
 

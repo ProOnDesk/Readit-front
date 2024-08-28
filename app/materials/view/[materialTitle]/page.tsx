@@ -1,5 +1,5 @@
 import { getArticleInfoBySlug } from '@/app/_actions/articlesActions';
-import ManageArticle from '@/app/_components/materials/ManageArticle';
+import Article from '@/app/_components/materials/Article';
 import MaterialDetails from '@/app/_components/materials/MaterialDetails';
 import MaterialHeader from '@/app/_components/materials/MaterialHeader';
 import OpinionSection from '@/app/_components/materials/OpinionSection';
@@ -13,11 +13,11 @@ interface Params {
 }
 
 export async function generateMetadata({ params }: Params) {
-	const { title } = await getArticleInfoBySlug({
+	const data = await getArticleInfoBySlug({
 		slug: params?.materialTitle,
 	});
 
-	return { title: `${title}` };
+	return { title: `${`${data?.title} | ReadIt` ?? 'Materiał'}` };
 }
 
 export default async function Page({ params, searchParams }: Params) {
@@ -25,8 +25,6 @@ export default async function Page({ params, searchParams }: Params) {
 		title,
 		summary,
 		tags,
-		is_free,
-		price,
 		id,
 		author: { first_name, last_name, avatar_url },
 		created_at,
@@ -50,7 +48,6 @@ export default async function Page({ params, searchParams }: Params) {
 			/>
 			<div className='flex flex-col md:flex-row-reverse'>
 				<div className='px-8 py-10 md:border-l-2 border-mainGreen h-fit'>
-					<ManageArticle is_free={is_free} price={price} articleId={id} />
 					<MaterialDetails
 						author={author}
 						authorAvatarLink={avatar_url}
@@ -60,12 +57,13 @@ export default async function Page({ params, searchParams }: Params) {
 						viewCount={view_count}
 					/>
 				</div>
-				<div className='flex-1 px-8'>
+				<div className='flex-1 px-8 py-5'>
+					<Article articleId={id} />
 					<Suspense
 						fallback={<div className='mx-auto'>Ładowanie opinii...</div>}
 						key={id}
 					>
-						<OpinionSection articleId={id} searchParams={searchParams} />
+						<OpinionSection articleId={id} searchParams={searchParams} isPossibleToMakeOpinion={true}/>
 					</Suspense>
 				</div>
 			</div>
