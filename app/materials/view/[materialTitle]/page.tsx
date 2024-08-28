@@ -47,7 +47,7 @@ export default async function Page({ params, searchParams }: Params) {
 				title={title}
 			/>
 			<div className='flex flex-col md:flex-row-reverse'>
-				<div className='px-8 py-10 md:border-l-2 border-mainGreen'>
+				<div className='px-8 py-10 md:border-l-2 border-mainGreen h-fit'>
 					<MaterialDetails
 						author={author}
 						authorAvatarLink={avatar_url}
