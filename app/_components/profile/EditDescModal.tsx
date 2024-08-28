@@ -41,8 +41,8 @@ export default function EditDescModal({
   }, [isSuccess]);
 
   return (
-    <div className="flex flex-col">
-      <div className="flex w-[250px] justify-between items-center">
+    <div className="flex flex-col w-full" >
+      <div className="flex w-full justify-between items-center ">
         <p className="font-medium text-2xl">
           Edytuj {type === "short" ? "biogram" : "opis"}
         </p>
@@ -62,7 +62,7 @@ export default function EditDescModal({
         Możesz wpisać maksymalnie {type === "short" ? "250" : "1000"} znaków
       </p>
       <textarea
-        className="w-full max-w-full outline-none border-none p-1 min-h-[20vh] max-h-[50vh]"
+        className="w-full max-w-full outline-none border-none p-1 min-h-[20vh] max-h-[50vh] h-[clamp(20vh,35vh,50vh)]"
         value={desc}
         onChange={(e) => setDesc(e.target.value)}
       />
@@ -71,16 +71,16 @@ export default function EditDescModal({
         onClick={() => {
           if (type === "short") {
             if (desc.length > 250) {
-                toast.error("Biogram nie może przekraczać 250 znaków");
-                return;
-              }
-  
-              if (user?.short_description === desc) return;
-  
-              updateUserHookFn({
-                fieldToUpdate: "short_description",
-                valueToUpdate: desc,
-              });
+              toast.error("Biogram nie może przekraczać 250 znaków");
+              return;
+            }
+
+            if (user?.short_description === desc) return;
+
+            updateUserHookFn({
+              fieldToUpdate: "short_description",
+              valueToUpdate: desc,
+            });
           } else {
             if (desc.length > 1000) {
               toast.error("Opis nie może przekraczać 1000 znaków");
