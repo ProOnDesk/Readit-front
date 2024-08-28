@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 
 export async function getArticleInfoBySlug({ slug }: { slug: string }) {
 	const s = 'chwytliwy-tytuł,-który-zszokuje?-śmiało!...';
-
+	
 	try {
 		const response = await fetch(
 			`${process.env.NEXT_PUBLIC_HOST}/articles/slug/`,

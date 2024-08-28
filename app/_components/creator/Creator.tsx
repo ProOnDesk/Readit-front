@@ -8,6 +8,7 @@ import ArticleForm from './ArticleForm';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { usePostArticleMutation } from '@/app/_redux/features/articleApiSLice';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 
 export type CreatorInputs = {
 	title: string;
@@ -32,6 +33,7 @@ function Creator() {
 				'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni neque cupiditate harum iure, ducimus autem! Eaque vel est totam reiciendis nulla vero, excepturi blanditiis ullam officiis distinctio aut nobis repellendus soluta sed corporis quod iusto quibusdam minima sunt voluptatum itaque! Corrupti earum mollitia ullam fugiat harum, reiciendis voluptatibus omnis sequi?',
 		},
 	]);
+	const router = useRouter();
 	const [tags, setTags] = useState<string[]>([]);
 	const {
 		register,
@@ -83,6 +85,7 @@ function Creator() {
 		postArticle({ formData })
 			.unwrap()
 			.then((res) => {
+				router.push(`/materials/view/${encodeURIComponent(res.slug)}`);
 				toast.success('Materiał został opublikowany!');
 			})
 			.catch((err) => {
