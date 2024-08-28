@@ -24,7 +24,7 @@ export function useRegister() {
         router.push("/login");
       })
       .catch((error) => {
-        if (error.data.detail) {
+        if (error?.data?.detail) {
           toast.error(error.data.detail);
         } else {
           toast.error("Wystąpił błąd podczas rejestracji.");

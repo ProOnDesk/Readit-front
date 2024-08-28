@@ -32,7 +32,7 @@ export default function LoginBtns() {
           >
             {" "}
             <Link
-              href="/app/profile/26969696969"
+              href="/app/profile"
               className="block w-full group focus:outline-none py-4 font-medium "
             >
               <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300 text-nowrap">
@@ -40,7 +40,7 @@ export default function LoginBtns() {
               </span>
             </Link>
             <Link
-              href="/app/226262662/content"
+              href="/app/content"
               className="block w-full group focus:outline-none py-4 font-medium"
             >
               <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300 text-nowrap">
@@ -48,7 +48,7 @@ export default function LoginBtns() {
               </span>
             </Link>
             <Link
-              href="/app/226262662/follows"
+              href="/app/follows"
               className="block w-full group focus:outline-none py-4 font-medium"
             >
               <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300 text-nowrap">
@@ -56,7 +56,7 @@ export default function LoginBtns() {
               </span>
             </Link>
             <Link
-              href="/app/26262662/account"
+              href="/app/account"
               className="block w-full group focus:outline-none py-4 font-medium"
             >
               <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300 text-nowrap">

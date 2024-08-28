@@ -12,9 +12,16 @@
   border-radius: 999px;
 }
 
+html {
+  background-color: white;
+}
+
 body {
   background-color: white;
   color: #0b0b0b;
+}
+input {
+  background-color: transparent;
 }
 
 .underline-before {

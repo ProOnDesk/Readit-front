@@ -1,5 +1,4 @@
 import { apiSlice } from "../services/apiSlice";
-
 export interface User {
   id: number;
   email: string;
@@ -8,6 +7,32 @@ export interface User {
   avatar: string;
   short_description: string;
   follower_count: number;
+  description: string;
+  sex: string;
+  skill_list: { id: number; skill_name: string }[];
+  background_image: string;
+  article_count: number;
+  articles: Article[];
+}
+
+export interface Article {
+  title: string;
+  summary: string;
+  tags: { value: string }[];
+  is_free: boolean;
+  price: number;
+  id: number;
+  author: {
+    id: number;
+    first_name: string;
+    last_name: string;
+    avatar_url: string;
+  };
+  slug: string;
+  created_at: Date;
+  view_count: number;
+  title_image_url: string;
+  rating: number;
 }
 
 const authApiSlice = apiSlice.injectEndpoints({
@@ -45,6 +70,25 @@ const authApiSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    getUserById: builder.query<User, { id: string }>({
+      query: ({ id }) => ({
+        url: `/user/get/${id}`,
+        method: "GET",
+      }),
+    }),
+    addSkillToUser: builder.mutation({
+      query: ({ skill_name }) => ({
+        url: "/user/skill",
+        method: "POST",
+        body: { skill_name },
+      }),
+    }),
+    removeSkillItem: builder.mutation({
+      query: ({ skill_id }) => ({
+        url: `/user/skill/${skill_id}`,
+        method: "DELETE",
+      }),
+    }),
     // verifyEmail: builder.mutation({
     //   query: ({ token }) => ({
     //     url: "/user/confirm_user/",
@@ -66,24 +110,31 @@ const authApiSlice = apiSlice.injectEndpoints({
     //     body: { token, password },
     //   }),
     // }),
-    // updateUser: builder.mutation({
-    //   query: ({ fieldToUpdate, valueToUpdate }) => ({
-    //     url: "/user/profile/",
-    //     method: "PATCH",
-    //     body: { [fieldToUpdate]: valueToUpdate },
-    //   }),
-    // }),
-    // updateAvatar: builder.mutation({
-    //   query: (file) => {
-    //     const formData = new FormData();
-    //     formData.append("profile_image", file);
-    //     return {
-    //       url: "/user/profile_image/",
-    //       method: "PATCH",
-    //       body: formData,
-    //     };
-    //   },
-    // }),
+    updateUser: builder.mutation({
+      query: ({ fieldToUpdate, valueToUpdate }) => ({
+        url: "/user/modify",
+        method: "PATCH",
+        body: { [fieldToUpdate]: valueToUpdate },
+      }),
+    }),
+    updateUserAvatar: builder.mutation({
+      query: ({ avatar }) => {
+        const formData = new FormData();
+        formData.append("file", avatar);
+        return { url: "/user/modify/avatar", method: "PATCH", body: formData };
+      },
+    }),
+    updateUserBgImage: builder.mutation({
+      query: ({ img }) => {
+        const formData = new FormData();
+        formData.append("file", img);
+        return {
+          url: "/user/modify/background-image",
+          method: "PATCH",
+          body: formData,
+        };
+      },
+    }),
   }),
 });
 
@@ -92,5 +143,11 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
+  useGetUserByIdQuery,
   useVerifyTokenMutation,
+  useAddSkillToUserMutation,
+  useRemoveSkillItemMutation,
+  useUpdateUserMutation,
+  useUpdateUserAvatarMutation,
+  useUpdateUserBgImageMutation,
 } = authApiSlice;
