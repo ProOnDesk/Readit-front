@@ -2,12 +2,14 @@
 
 import { useState } from "react";
 
-import Article from "./Article";
-import ArticleSettings from "./ArticleSettings";
-import ArticleForm from "./ArticleForm";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { usePostArticleMutation } from "@/app/_redux/features/articleApiSLice";
-import toast from "react-hot-toast";
+
+import Article from './Article';
+import ArticleSettings from './ArticleSettings';
+import ArticleForm from './ArticleForm';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { usePostArticleMutation } from '@/app/_redux/features/articleApiSLice';
+import toast from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
 import { useRetrieveUserQuery } from "@/app/_redux/features/authApiSlice";
 
 export type CreatorInputs = {
@@ -18,38 +20,39 @@ export type CreatorInputs = {
 };
 
 function Creator() {
-  const [articleList, setArticleList] = useState([
-    {
-      content_type: "title",
-      content: "Lorem ipsum dolor sit amet.",
-    },
-    {
-      content_type: "image",
-      content: "",
-    },
-    {
-      content_type: "text",
-      content:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni neque cupiditate harum iure, ducimus autem! Eaque vel est totam reiciendis nulla vero, excepturi blanditiis ullam officiis distinctio aut nobis repellendus soluta sed corporis quod iusto quibusdam minima sunt voluptatum itaque! Corrupti earum mollitia ullam fugiat harum, reiciendis voluptatibus omnis sequi?",
-    },
-  ]);
-  const [tags, setTags] = useState<string[]>([]);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    setError,
-    clearErrors,
-    formState: { errors },
-  } = useForm<CreatorInputs>();
-  const [postArticle] = usePostArticleMutation();
+	const [articleList, setArticleList] = useState([
+		{
+			content_type: 'title',
+			content: 'Lorem ipsum dolor sit amet.',
+		},
+		{
+			content_type: 'image',
+			content: '',
+		},
+		{
+			content_type: 'text',
+			content:
+				'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni neque cupiditate harum iure, ducimus autem! Eaque vel est totam reiciendis nulla vero, excepturi blanditiis ullam officiis distinctio aut nobis repellendus soluta sed corporis quod iusto quibusdam minima sunt voluptatum itaque! Corrupti earum mollitia ullam fugiat harum, reiciendis voluptatibus omnis sequi?',
+		},
+	]);
+	const router = useRouter();
+	const [tags, setTags] = useState<string[]>([]);
+	const {
+		register,
+		handleSubmit,
+		watch,
+		setValue,
+		setError,
+		clearErrors,
+		formState: { errors },
+	} = useForm<CreatorInputs>();
+	const [postArticle] = usePostArticleMutation();
   const { refetch } = useRetrieveUserQuery();
-  const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
-    if (data.image?.length === 0) {
-      setError("image", { type: "required", message: "Zdjęcie jest wymagane" });
-      return;
-    }
+	const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
+		if (data.image?.length === 0) {
+			setError('image', { type: 'required', message: 'Zdjęcie jest wymagane' });
+			return;
+		}
 
     const filteredArticleList = articleList.filter(
       (article) => article.content !== ""
@@ -82,16 +85,17 @@ function Creator() {
       })
     );
 
-    postArticle({ formData })
-      .unwrap()
-      .then((res) => {
-        toast.success("Materiał został opublikowany!");
+		postArticle({ formData })
+			.unwrap()
+			.then((res) => {
+				router.push(`/materials/view/${encodeURIComponent(res.slug)}`);
+				toast.success('Materiał został opublikowany!');
         refetch();
-      })
-      .catch((err) => {
-        toast.error("Coś poszło nie tak...");
-      });
-  };
+			})
+			.catch((err) => {
+				toast.error('Coś poszło nie tak...');
+			});
+	};
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">

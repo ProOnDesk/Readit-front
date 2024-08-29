@@ -1,25 +1,29 @@
 "use server";
 
+import { cookies } from 'next/headers';
+
 export async function getArticleInfoBySlug({ slug }: { slug: string }) {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST}/articles/slug/`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ slug: decodeURIComponent(slug) }),
-      }
-    );
-    if (!response.ok) {
-      throw new Error(`Błąd serwera: ${response.status}`);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log("Nie udało się pobrać artykułu", error);
-  }
+	const s = 'chwytliwy-tytuł,-który-zszokuje?-śmiało!...';
+	
+	try {
+		const response = await fetch(
+			`${process.env.NEXT_PUBLIC_HOST}/articles/slug/`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({ slug: decodeURIComponent(slug) }),
+			}
+		);
+		if (!response.ok) {
+			throw new Error(`Błąd serwera: ${response.status}`);
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.log('Nie udało się pobrać artykułu', error);
+	}
 }
 
 export async function getArticleComments({
