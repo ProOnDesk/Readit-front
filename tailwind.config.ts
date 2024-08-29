@@ -30,6 +30,7 @@ const config = {
       screens: {
         sm400: "400px",
         sm500: "500px",
+        sm550: "550px",
         sm600: "600px",
         md800: "800px",
         md900: "900px",

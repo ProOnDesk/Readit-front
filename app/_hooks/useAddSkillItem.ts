@@ -9,7 +9,7 @@ interface AddSkillItemHookArgs {
 }
 
 export function useAddSkillItem() {
-  const { refetch } = useRetrieveUserQuery();
+  const { refetch, data } = useRetrieveUserQuery();
   const [addSkillToUser, { isLoading }] = useAddSkillToUserMutation();
 
   function addSkillItemHookFn({ skill_name }: AddSkillItemHookArgs) {

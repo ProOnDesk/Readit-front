@@ -11,7 +11,7 @@ interface NameTagProps {
 
 export default function NameTag({ user }: NameTagProps) {
   return (
-    <div className="pt-28 md900:px-10 bg-white max-w-[1200px] mx-auto pb-10 lg1200:rounded-bl-2xl lg1200:rounded-br-2xl lg1200:shadow-lg">
+    <div className="pt-28 md900:px-10 lg:px-20 lg1200:px-12 bg-white max-w-[1200px] mx-auto pb-10 lg1200:rounded-bl-2xl lg1200:rounded-br-2xl lg1200:shadow-lg">
       <h2 className=" font-semibold text-3xl text-center md900:text-4xl md900:text-left">
         {user?.first_name} {user?.last_name}
       </h2>
