@@ -20,6 +20,7 @@ const config = {
 		extend: {
 			boxShadow: {
 				shadowNew: "inset 0px 1px 60px 4px rgba(66, 68, 90, 1);",
+				shadowHomepage: "30px 6px 66px 26px rgba(22, 24, 22, 1);",
 			},
 			colors: {
 				black: "#0b0b0b",
