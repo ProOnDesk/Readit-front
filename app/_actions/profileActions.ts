@@ -2,7 +2,7 @@
 
 import { User } from "../_redux/features/authApiSlice";
 
-export async function useGetUserByIdQuery({ id }: { id: string }) {
+export async function fetchUserByIdQuery({ id }: { id: string }) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST}/user/get/${id}`,
