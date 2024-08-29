@@ -1,12 +1,30 @@
-import { useGetUserByIdQuery } from "@/app/_actions/profileActions";
+import { fetchUserByIdQuery } from "@/app/_actions/profileActions";
 import DescriptionCreator from "@/app/_components/creatorsPage/DescriptionCreator";
 import NameTagCreator from "@/app/_components/creatorsPage/NameTagCreator";
 import ProfileArticlesCreator from "@/app/_components/creatorsPage/ProfileArticlesCreator";
 import ProfileImageCreator from "@/app/_components/creatorsPage/ProfileImageCreator";
 import SkillsCreator from "@/app/_components/creatorsPage/SkillsCreator";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 export const revalidate = 0;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { creatorId: string };
+}): Promise<Metadata> {
+  const profileId = params.creatorId;
+  const user = await fetchUserByIdQuery({ id: profileId });
+
+  return {
+    title: `${user?.first_name} ${user?.last_name} | ReadIt`,
+    description: `${
+      user?.description ||
+      `Strona profilowa użytkownika ${user?.first_name} ${user?.last_name}`
+    }`,
+  };
+}
 
 export default async function Page({
   params,
@@ -14,7 +32,7 @@ export default async function Page({
   params: { creatorId: string };
 }) {
   const profileId = params.creatorId;
-  const user = await useGetUserByIdQuery({ id: profileId });
+  const user = await fetchUserByIdQuery({ id: profileId });
 
   if (!user) return notFound();
 

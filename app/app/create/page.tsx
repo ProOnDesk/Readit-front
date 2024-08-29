@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
-	title: 'Stwórz artykuł | Just Read',
+	title: 'Stwórz artykuł | ReadIt',
 	description:
 		'Miejsce gdzie stworzysz swój artykuł i podzielisz się nim ze światem',
 };
