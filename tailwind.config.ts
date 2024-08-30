@@ -18,15 +18,20 @@ const config = {
       },
     },
     extend: {
+      boxShadow: {
+				shadowNew: "inset 0px 1px 60px 4px rgba(66, 68, 90, 1);",
+				shadowHomepage: "30px 6px 66px 26px rgba(22, 24, 22, 1);",
+			},
       colors: {
-        black: "#0b0b0b",
-        blackSecond: "#202121",
-        // white: "#ebebeb",
-        // whiteSecond: "#e3e3e3",
-        whiteSecond: "#ebebeb",
-        mainGreen: "#9ef01a",
-        mainGreenSecond: "#70e000",
-      },
+				black: "#0b0b0b",
+				blackSecond: "#202121",
+				blackThird: "#151515",
+				// white: "#ebebeb",
+				// whiteSecond: "#e3e3e3",
+				whiteSecond: "#ebebeb",
+				mainGreen: "#9ef01a",
+				mainGreenSecond: "#70e000",
+			},
       screens: {
         sm400: "400px",
         sm500: "500px",
