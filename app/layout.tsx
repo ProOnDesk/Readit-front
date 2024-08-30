@@ -35,7 +35,7 @@ export default function RootLayout({
             className="relative font-display flex flex-col items-center justify-center w-full h-full overflow-x-hidden"
           >
             <Navigation />
-            <div className="pt-16 md:pt-20">
+            <div className="pt-16 md:pt-20 w-full">
               <RouterTransition />
               {children}
 

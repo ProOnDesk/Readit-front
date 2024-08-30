@@ -7,7 +7,7 @@ import WelcomeText from "./_components/homepage/WelcomeText";
 
 export default function Home() {
 	return (
-		<div className="max-w-5xl mx-auto ">
+		<div className="mx-auto ">
 			<HeaderHomepage />
 			<AboutReadit />
 			<ExplanationAboutReadit />
