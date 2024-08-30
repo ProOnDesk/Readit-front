@@ -7,13 +7,19 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 interface ArticleItemProps {
   article: Article;
+  isCreator?: boolean;
 }
 
-export default function ArticleItem({ article }: ArticleItemProps) {
-  console.log(article);
+export default function ArticleItem({ article, isCreator }: ArticleItemProps) {
+  const link = isCreator
+    ? `/materials/view/${encodeURIComponent(article.slug)}`
+    : `/materials/${encodeURIComponent(article.slug)}`;
+
+  console.log(link, isCreator);
+
   return (
     <Link
-      href={`/materials/${encodeURIComponent(article.slug)}`}
+      href={link}
       className="w-full  flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group"
     >
       <div className="relative w-full aspect-video overflow-hidden object-contain object-center">
