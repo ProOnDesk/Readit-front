@@ -1,7 +1,11 @@
-import React from 'react'
+import { Metadata } from "next";
+import React from "react";
+
+export const metadata: Metadata = {
+  title: "Przeglądaj twórców | ReadIt",
+  description: "Setki najlepszych twórców w jednym miejscu",
+};
 
 export default function Page() {
-  return (
-    <div>Przegladaj twórców</div>
-  )
+  return <div>Przegladaj twórców</div>;
 }

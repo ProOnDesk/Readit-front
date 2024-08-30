@@ -12,10 +12,22 @@
   border-radius: 999px;
 }
 
+html {
+  background-color: white;
+}
+
+body {
+  background-color: white;
+  color: #0b0b0b;
+}
+input {
+  background-color: transparent;
+}
+
 .underline-before {
   @apply relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300;
 }
 
 .underlined {
-  @apply relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black;
+  @apply relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:transition-all before:duration-300;
 }
