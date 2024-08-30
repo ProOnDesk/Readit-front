@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import React from "react";
 
 export const metadata: Metadata = {
-  title: "Przeglądaj twórców",
+  title: "Przeglądaj twórców | ReadIt",
   description: "Setki najlepszych twórców w jednym miejscu",
 };
 
