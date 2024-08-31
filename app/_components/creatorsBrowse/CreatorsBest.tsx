@@ -8,7 +8,7 @@ export default function CreatorsBest() {
           Setki <span className="text-mainGreenSecond">najlepszych</span> i
           najbardziej zaangażowanych w swoje dzieła użytkowników. Znajdziesz
           tutaj zarówno twórców z długim stażem i{" "}
-          <span className="text-mainGreenSecond">setkami prac</span>, jak i
+          <span className="text-mainGreenSecond">mnóstwem prac</span>, jak i
           tych, którzy dopiero zaczynają swoją{" "}
           <span className="text-mainGreenSecond">przygodę z nami</span>.
           Przeglądaj profile, czytaj fascynujące treści i śledź najnowsze

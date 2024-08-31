@@ -7,9 +7,9 @@ export default function CreatorsAd() {
       <div className="absolute top-0 left-0 bg-[url('/creatorBrowseAd.jpg')] w-full h-full bg-cover" />
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80" />
       <div className="relative z-10 text-white w-full text-center px-6 flex justify-center items-center flex-col gap-5 max-w-[890px]">
-        <h3 className="font-bold text-2xl sm500:text-3xl sm:text-4xl">
+        <h2 className="font-bold text-2xl sm500:text-3xl sm:text-4xl">
           Zostań twórcą na Read<span className="text-mainGreen">it</span>
-        </h3>
+        </h2>
         <p className="sm500:text-lg md:text-xl">
           Zyskujesz nie tylko możliwość zarabiania na swojej{" "}
           <span className="text-mainGreenSecond">wiedzy</span>, ale także szansę
