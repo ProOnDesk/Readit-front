@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { store } from "../_redux/store";
+import ScrollToTop from "./ScrollToTop";
 
 export default function AppProvider({
   children,
@@ -44,7 +45,7 @@ export default function AppProvider({
             className: "text-dark",
           }}
         />
-        {children}
+        <ScrollToTop>{children}</ScrollToTop>
       </Provider>
     </div>
   );
