@@ -1,9 +1,8 @@
 import AboutReadit from "./_components/homepage/AboutReadit";
 import ExplanationAboutReadit from "./_components/homepage/ExplanationAboutReadit";
+import FooterHomepage from "./_components/homepage/FooterHomepage";
 import HeaderHomepage from "./_components/homepage/HeaderHomepage";
-import JoinButton from "./_components/homepage/JoinBtn";
-import WelcomeImg from "./_components/homepage/WelcomeImg";
-import WelcomeText from "./_components/homepage/WelcomeText";
+import PopularArticlesHomepage from "./_components/homepage/PopularArticlesHomepage";
 
 export default function Home() {
 	return (
@@ -11,10 +10,9 @@ export default function Home() {
 			<HeaderHomepage />
 			<AboutReadit />
 			<ExplanationAboutReadit />
-			{/* <
+
 			<PopularArticlesHomepage />
 			<FooterHomepage />
-			<Footer /> */}
 		</div>
 	);
 }
