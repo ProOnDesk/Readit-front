@@ -76,7 +76,6 @@ export default function ManageArticle({
 				toast.success('Zakupiono materiał');
 			})
 			.catch((error) => {
-				// console.log('Error buying article', error);
 				toast.error('Nie udało się zakupić materiału');
 			});
 	}
@@ -97,7 +96,6 @@ export default function ManageArticle({
 				toast.success(res?.detail);
 			})
 			.catch((error) => {
-				// console.log('Error buying article', error);
 				toast.error('Nie udało się edytować listy ulubionych');
 			});
 	}
@@ -107,7 +105,7 @@ export default function ManageArticle({
 	}, []);
 
 	if (!isClient) {
-		return null; // Render nothing until the client side is loaded
+		return null; 
 	}
 
 	if (isLoading)
@@ -118,12 +116,12 @@ export default function ManageArticle({
 		);
 
 	return (
-		<div className='mb-16 flex flex-col gap-5 min-w-60 px-4 rounded-md'>
+		<div className='mb-16 flex flex-col gap-5 sm:min-w-60 px-4 rounded-md'>
 			<p className='text-3xl font-semibold text-center'>
 				{is_free ? 'Bezpłatny' : `${price} zł`}
 			</p>
 
-			<div className='flex flex-row gap-2'>
+			<div className='flex flex-row gap-2 max-h-[65px]'>
 				{isArticleAuthor || isBought ? (
 					<button
 						type='button'
@@ -146,7 +144,7 @@ export default function ManageArticle({
 					<button
 						type='button'
 						onClick={handleAddArticleToFavourites}
-						className={`flex-1 flex justify-center items-center rounded-full border-mainGreen border-2  text-2xl  font-medium  transition-colors duration-300 aspect-square ${
+						className={`flex-1 flex justify-center items-center rounded-full border-mainGreen border-2  text-2xl  font-medium  transition-colors duration-300 aspect-square max-w-[65px] ${
 							isWished
 								? 'bg-mainGreen text-white hover:bg-white hover:text-mainGreen'
 								: 'text-mainGreen hover:bg-mainGreen hover:text-white'
