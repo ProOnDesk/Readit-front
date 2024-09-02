@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Accordion,
@@ -5,8 +7,26 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import PriceFilter from "./PriceFilter";
+import RatingFilter from "./RatingFilter";
+import TagsFilter from "./TagsFilter";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function Filters() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const path = usePathname();
+
+  function handleFilter({ param, filter }: { param: string; filter: string }) {
+    const params = new URLSearchParams(searchParams);
+    if (filter === "") {
+      params.delete(param);
+    } else {
+      params.set(param, filter);
+    }
+    router.replace(`${path}?${params.toString()}`, { scroll: false });
+  }
+
   return (
     <div className="px-4 max-w-[400px] mx-auto w-full md:px-14">
       <Accordion type="single" collapsible>
@@ -15,12 +35,7 @@ export default function Filters() {
             <p>Cena</p>
           </AccordionTrigger>
           <AccordionContent>
-            <div>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-            </div>
+            <PriceFilter handleFilter={handleFilter} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
@@ -30,12 +45,7 @@ export default function Filters() {
             <p>Oceny</p>
           </AccordionTrigger>
           <AccordionContent>
-            <div>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-            </div>
+            <RatingFilter handleFilter={handleFilter} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
@@ -45,12 +55,7 @@ export default function Filters() {
             <p>Zawiera Tagi</p>
           </AccordionTrigger>
           <AccordionContent>
-            <div>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-              <p>3.0 i więcej</p>
-            </div>
+            <TagsFilter handleFilter={handleFilter} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
