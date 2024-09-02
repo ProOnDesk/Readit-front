@@ -28,7 +28,8 @@ export default async function Page({ params, searchParams }: Params) {
 		is_free,
 		price,
 		id,
-		author: { first_name, last_name, avatar_url },
+		slug,
+		author: { id: userId, first_name, last_name, avatar_url },
 		created_at,
 		view_count,
 		title_image_url,
@@ -49,8 +50,14 @@ export default async function Page({ params, searchParams }: Params) {
 				title={title}
 			/>
 			<div className='flex flex-col md:flex-row-reverse'>
-				<div className='px-8 py-10 md:border-l-2 border-mainGreen h-fit'>
-					<ManageArticle is_free={is_free} price={price} articleId={id} />
+				<div className='px-8 py-10 md:border-l-2 border-mainGreen h-fit '>
+					<ManageArticle
+						is_free={is_free}
+						price={price}
+						articleId={id}
+						userId={userId}
+						slug={slug}
+					/>
 					<MaterialDetails
 						author={author}
 						authorAvatarLink={avatar_url}

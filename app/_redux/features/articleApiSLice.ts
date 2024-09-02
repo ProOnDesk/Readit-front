@@ -15,9 +15,9 @@ const authApiSlice = apiSlice.injectEndpoints({
 				method: 'POST',
 			}),
 		}),
-		addArticleToFavourites: builder.mutation({
+		changeArticleFavorites: builder.mutation({
 			query: ({ article_id }) => ({
-				url: `/articles/wish-list/add/${article_id}`,
+				url: `/articles/wish-list/change/${article_id}`,
 				method: 'POST',
 			}),
 		}),
@@ -37,13 +37,27 @@ const authApiSlice = apiSlice.injectEndpoints({
 				},
 			}),
 		}),
+		checkIsBought: builder.query({
+			query: ({ article_id }) => ({
+				url: `/articles/is-bought/${article_id}`,
+				method: 'GET',
+			}),
+		}),
+		checkIsWished: builder.query({
+			query: ({ article_id }) => ({
+				url: `/articles/wish-list/is/${article_id}`,
+				method: 'GET',
+			}),
+		}),
 	}),
 });
 
 export const {
 	usePostArticleMutation,
 	useBuyArticleMutation,
-	useAddArticleToFavouritesMutation,
+	useChangeArticleFavoritesMutation,
 	useGetArticleDetailsByIdQuery,
 	useMakeOpinionMutation,
+	useCheckIsBoughtQuery,
+	useCheckIsWishedQuery,
 } = authApiSlice;
