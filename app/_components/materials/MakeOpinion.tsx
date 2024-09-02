@@ -11,9 +11,14 @@ import Spinner from '../ui/Spinner';
 interface MakeOpinionProps {
 	articleId: number;
 	authorId: number;
+	refetchOpinions: () => void;
 }
 
-export default function MakeOpinion({ articleId, authorId }: MakeOpinionProps) {
+export default function MakeOpinion({
+	articleId,
+	authorId,
+	refetchOpinions,
+}: MakeOpinionProps) {
 	const [isClient, setIsClient] = useState(false);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const { data: user } = useRetrieveUserQuery();
@@ -32,12 +37,14 @@ export default function MakeOpinion({ articleId, authorId }: MakeOpinionProps) {
 	}, [textAreaRef, review]);
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
 		makeOpinion({ article_id: articleId, rating, content: review })
 			.unwrap()
 			.then(() => {
 				setRating(null);
 				setReview('');
 				toast.success('Komentarz dodany pomyślnie');
+				refetchOpinions();
 			})
 			.catch(() => {
 				toast.error('Nie udało się dodać kometarza');

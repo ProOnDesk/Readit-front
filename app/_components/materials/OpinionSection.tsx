@@ -1,8 +1,10 @@
-import { getArticleComments } from '@/app/_actions/articlesActions';
+'use client';
+
 import Opinion from './Opinion';
 import Pagination from './Pagination';
-import { unstable_noStore as noStore } from 'next/cache';
 import MakeOpinion from './MakeOpinion';
+import { useGetArticleOpinionsQuery } from '@/app/_redux/features/articleApiSLice';
+import Spinner from '../ui/Spinner';
 
 export const revalidate = 0;
 
@@ -29,23 +31,34 @@ interface Opinion {
 
 const SIZE_OF_PAGE = 10;
 
-export default async function OpinionSection({
+export default function OpinionSection({
 	articleId,
 	authorId,
 	searchParams,
 	isPossibleToMakeOpinion = false,
 }: OpinionsProps) {
-	const data = await getArticleComments({
+	const { data, isLoading, refetch } = useGetArticleOpinionsQuery({
 		article_id: articleId,
 		page: searchParams?.page ?? 1,
 		size: SIZE_OF_PAGE,
 		sort_order: 'desc',
 	});
 
+	if (isLoading)
+		return (
+			<div className='py-10'>
+				<Spinner color='green' size='small' />
+			</div>
+		);
+
 	return (
 		<div className='flex flex-col gap-6'>
 			{isPossibleToMakeOpinion && (
-				<MakeOpinion articleId={articleId} authorId={authorId} />
+				<MakeOpinion
+					articleId={articleId}
+					authorId={authorId}
+					refetchOpinions={refetch}
+				/>
 			)}
 			<p className='text-3xl font-medium mb-5'>Opinie</p>
 			{data?.items &&

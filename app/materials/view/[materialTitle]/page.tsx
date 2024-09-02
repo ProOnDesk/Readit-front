@@ -61,21 +61,13 @@ export default async function Page({ params, searchParams }: Params) {
 				</div>
 				<div className='flex-1 px-8 py-5'>
 					<Article articleId={id} slug={slug} />
-					<Suspense
-						fallback={
-							<div className='py-10'>
-								<Spinner color='green' size='small' />
-							</div>
-						}
-						key={id}
-					>
-						<OpinionSection
-							articleId={id}
-							authorId={userId}
-							searchParams={searchParams}
-							isPossibleToMakeOpinion={true}
-						/>
-					</Suspense>
+
+					<OpinionSection
+						articleId={id}
+						authorId={userId}
+						searchParams={searchParams}
+						isPossibleToMakeOpinion={true}
+					/>
 				</div>
 			</div>
 		</div>
