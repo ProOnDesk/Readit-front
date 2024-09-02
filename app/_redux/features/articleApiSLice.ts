@@ -37,6 +37,12 @@ const authApiSlice = apiSlice.injectEndpoints({
 				},
 			}),
 		}),
+		getArticleOpinions: builder.query({
+			query: ({ article_id, page, size, sort_order }) => ({
+				url: `/articles/comment/all/${article_id}?page=${page}&size=${size}&sort_order=${sort_order}`,
+				method: 'GET',
+			}),
+		}),
 		checkIsBought: builder.query({
 			query: ({ article_id }) => ({
 				url: `/articles/is-bought/${article_id}`,
@@ -58,6 +64,7 @@ export const {
 	useChangeArticleFavoritesMutation,
 	useGetArticleDetailsByIdQuery,
 	useMakeOpinionMutation,
+	useGetArticleOpinionsQuery,
 	useCheckIsBoughtQuery,
 	useCheckIsWishedQuery,
 } = authApiSlice;
