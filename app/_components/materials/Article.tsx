@@ -4,6 +4,7 @@ import ImageElement from '@/app/_components/creator/ImageElement';
 import TextElement from '@/app/_components/creator/TextElement';
 import TitleElement from '@/app/_components/creator/TitleElement';
 import { useGetArticleDetailsByIdQuery } from '@/app/_redux/features/articleApiSLice';
+import Spinner from '../ui/Spinner';
 
 interface ArticleProps {
 	articleId: number;
@@ -19,9 +20,14 @@ function Article({ articleId }: ArticleProps) {
 		useGetArticleDetailsByIdQuery({
 			article_id: articleId,
 		});
-	console.log();
+
 	if (isArticleLoading)
-		return <div className='py-10 text-center'>Loading...</div>;
+		return (
+			<div className='py-10'>
+				<Spinner color='green' size='small' />
+			</div>
+		);
+
 	return (
 		<div className='pb-10'>
 			{article?.content_elements.map(

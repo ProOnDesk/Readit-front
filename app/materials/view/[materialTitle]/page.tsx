@@ -26,7 +26,7 @@ export default async function Page({ params, searchParams }: Params) {
 		summary,
 		tags,
 		id,
-		author: { first_name, last_name, avatar_url },
+		author: { id: userId, first_name, last_name, avatar_url },
 		created_at,
 		view_count,
 		title_image_url,
@@ -63,7 +63,12 @@ export default async function Page({ params, searchParams }: Params) {
 						fallback={<div className='mx-auto'>Ładowanie opinii...</div>}
 						key={id}
 					>
-						<OpinionSection articleId={id} searchParams={searchParams} isPossibleToMakeOpinion={true}/>
+						<OpinionSection
+							articleId={id}
+							authorId={userId}
+							searchParams={searchParams}
+							isPossibleToMakeOpinion={true}
+						/>
 					</Suspense>
 				</div>
 			</div>
