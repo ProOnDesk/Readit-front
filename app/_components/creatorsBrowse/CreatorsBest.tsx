@@ -15,8 +15,7 @@ export default function CreatorsBest() {
           publikacje swoich ulubionych twórców. Wspieraj ich pracę, komentuj, i
           stań się częścią tej{" "}
           <span className="text-mainGreenSecond">wyjątkowej społeczności</span>.
-          To wszystko w jednym miejscu - na Read
-          <span className="text-mainGreenSecond">It</span>.
+          To wszystko w jednym miejscu - na ReadIt.
         </p>
         <div className="w-1 h-[180px] bg-mainGreen hidden md:block" />
       </div>
