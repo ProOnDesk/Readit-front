@@ -15,8 +15,6 @@ export default function ArticleItem({ article, isCreator }: ArticleItemProps) {
     ? `/materials/view/${encodeURIComponent(article.slug)}`
     : `/materials/${encodeURIComponent(article.slug)}`;
 
-  console.log(link, isCreator);
-
   return (
     <Link
       href={link}
