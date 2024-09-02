@@ -6,27 +6,34 @@ import { request } from "http";
 import React, { useEffect, useState } from "react";
 import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
 import Spinner from "../ui/Spinner";
+import { useSearchParams } from "next/navigation";
 
 interface SearchArticleProps {
-  debouncedValue: string;
-  inputValue: string;
-  setInputValue: React.Dispatch<React.SetStateAction<string>>;
+  handleFilter: ({ param, filter }: { param: string; filter: string }) => void;
 }
 
-export default function SearchArticle({
-  debouncedValue,
-  inputValue,
-  setInputValue,
-}: SearchArticleProps) {
+export default function SearchArticle({ handleFilter }: SearchArticleProps) {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
   const [error, setError] = useState("");
+  const [inputValue, setInputValue] = useState(
+    decodeURIComponent(params.get("value") || "")
+  );
+  const debouncedValue = useDebounce(inputValue, 1000);
 
   useEffect(
     function () {
-      if (debouncedValue !== "" && debouncedValue.length < 3) {
+      if (debouncedValue !== "" && debouncedValue.trim().length < 3) {
         setError("Wpisz co najmniej 3 znaki");
       } else {
         setError("");
+        if (debouncedValue.trim().length >= 3)
+          handleFilter({
+            param: "value",
+            filter: encodeURIComponent(debouncedValue),
+          });
       }
+      if (debouncedValue === "") handleFilter({ param: "value", filter: "" });
     },
     [debouncedValue]
   );
