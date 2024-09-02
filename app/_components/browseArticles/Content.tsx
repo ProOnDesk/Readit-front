@@ -1,41 +1,32 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import SelectFilter from "./SelectFilter";
 import { useDebounce } from "@/app/_hooks/useDebounce";
 import Filters from "./Filters";
+import {
+  PaginationTypeArticles,
+  useGetArticlesSearchQuery,
+} from "@/app/_redux/features/articlesApiSlice";
+import ArticleItem from "../profile/ArticleItem";
+import Spinner from "../ui/Spinner";
+import ArticlesContainer from "./ArticlesContainer";
+import { SearchParams } from "@/app/browse/page";
+import { getArticlesSearch } from "@/app/_actions/articlesActions";
 
-export default function Content() {
-  const [filter, setFilter] = useState<"popular" | "new" | "rating" | "price">(
-    "popular"
-  );
-  const [order, setOrder] = useState<"asc" | "desc">("desc");
-  const [inputValue, setInputValue] = useState("");
-  const debouncedValue = useDebounce(inputValue, 1000);
+interface ContentProps {
+  params: SearchParams;
+}
 
-  useEffect(
-    function () {
-      if (debouncedValue !== "" && debouncedValue.length > 2) {
-        console.log("searching for user");
-      }
-    },
-    [debouncedValue]
-  );
+export default async function Content({ params }: ContentProps) {
+  const data: PaginationTypeArticles = await getArticlesSearch(params);
 
-  console.log(filter);
   return (
     <div className="w-full max-w-[1800px] mx-auto">
-      <SelectFilter
-        filter={filter}
-        setFilter={setFilter}
-        setOrder={setOrder}
-        setInputValue={setInputValue}
-        debouncedValue={debouncedValue}
-        inputValue={inputValue}
-      />
+      <SelectFilter materialsCount={data.total} />
       <div className="grid md:grid-cols-[320px_1fr]">
         <Filters />
-        <div>dasdsa</div>
+        <Suspense fallback={<Spinner color="green" size="big" />}>
+          <ArticlesContainer data={data.items} />
+        </Suspense>
       </div>
     </div>
   );
