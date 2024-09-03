@@ -1,20 +1,14 @@
-import React from "react";
-import { useAppSelector } from "../_redux/hooks";
+"use client";
+
 import { redirect } from "next/navigation";
-import Spinner from "./ui/Spinner";
+import { useAppSelector } from "../_redux/hooks";
 
-export default function AuthProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const { isLoading, isAuthenticated } = useAppSelector((state) => state.auth);
-
-  if (isLoading) return <Spinner />;
+export default function AuthProvider() {
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
 
   if (!isAuthenticated) {
-    redirect("/auth/login");
+    redirect("/login");
   }
 
-  return <>{children}</>;
+  return null;
 }
