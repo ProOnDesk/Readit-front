@@ -48,7 +48,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 							{slides.map((data, i) => (
 								<div
 									key={i}
-									className="flex-shrink-0 w-full sm600:w-1/2 md:w-1/3">
+									className="flex-shrink-0 w-full sm600:w-1/2 md:w-1/3 ">
 									<ArticleItem article={data} key={i} />
 								</div>
 							))}

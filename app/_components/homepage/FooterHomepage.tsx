@@ -78,26 +78,24 @@ export default function FooterHomepage() {
 			<hr className="flex flex-col items-center w-10/12 h-1 mt-2 mx-10 border-whiteSecond opacity-35 sm600:mt-6" />
 
 			<div className="flex flex-row justify-center items-center  gap-x-8 py-10 sm600:gap-x-12">
-				<div className="text-lg border group border-whiteSecond/50 p-2 rounded-full  sm600:text-xl group">
-					<Link
-						href="/"
-						className="hover:border-mainGreenSecond transition-colors duration-300">
-						<LiaFacebookF />
+				<div className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl group ">
+					<Link href="/">
+						<LiaFacebookF className="transition-colors duration-300 text-current group-hover:text-mainGreenSecond" />
 					</Link>
 				</div>
-				<div className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl">
+				<div className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl group">
 					<Link href="/">
-						<SlSocialInstagram />
+						<SlSocialInstagram className="transition-colors duration-300 text-current group-hover:text-mainGreenSecond" />
 					</Link>
 				</div>
-				<div className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl">
+				<div className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl group">
 					<Link href="/">
-						<RiTwitterXFill />
+						<RiTwitterXFill className="transition-colors duration-300 text-current group-hover:text-mainGreenSecond" />
 					</Link>
 				</div>
-				<div className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl">
+				<div className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl group">
 					<Link href="/">
-						<RiLinkedinLine />
+						<RiLinkedinLine className="transition-colors duration-300 text-current group-hover:text-mainGreenSecond" />
 					</Link>
 				</div>
 			</div>
