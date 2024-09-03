@@ -13,7 +13,9 @@ export default function PriceFilter({ handleFilter }: PriceFilterProps) {
   const router = useRouter();
   const path = usePathname();
 
-  const [priceFrom, setPriceFrom] = useState(searchParams.get("min_price") || "");
+  const [priceFrom, setPriceFrom] = useState(
+    searchParams.get("min_price") || ""
+  );
   const debouncedValueFrom = useDebounce(priceFrom, 1000);
 
   const [priceTo, setPriceTo] = useState(searchParams.get("max_price") || "");
@@ -25,22 +27,35 @@ export default function PriceFilter({ handleFilter }: PriceFilterProps) {
     if (free) {
       setPriceFrom("");
       setPriceTo("");
+      handleFilter({ param: "min_price", filter: "" });
+      handleFilter({ param: "max_price", filter: "" });
     }
-  }, [free, setPriceFrom, setPriceTo]);
+  }, [free, setPriceFrom, setPriceTo, handleFilter]);
 
   useEffect(() => {
     const change = setTimeout(() => {
       if (priceFrom !== "" && priceTo !== "") {
         if (parseInt(priceFrom) > parseInt(priceTo)) {
-          const temp = priceFrom;
+          const params = new URLSearchParams(searchParams);
+          params.set("min_price", priceTo);
+          params.set("max_price", priceFrom);
+          router.replace(`${path}?${params.toString()}`, { scroll: false });
           setPriceFrom(priceTo);
-          setPriceTo(temp);
+          setPriceTo(priceFrom);
         }
       }
     }, 800);
 
     return () => clearTimeout(change);
-  }, [priceFrom, priceTo, setPriceFrom, setPriceTo]);
+  }, [
+    priceFrom,
+    priceTo,
+    setPriceFrom,
+    setPriceTo,
+    searchParams,
+    router,
+    path,
+  ]);
 
   useEffect(
     function () {
@@ -50,10 +65,17 @@ export default function PriceFilter({ handleFilter }: PriceFilterProps) {
           filter: debouncedValueFrom,
         });
       }
-      if (debouncedValueFrom === "")
-        handleFilter({ param: "value", filter: "" });
     },
-    [debouncedValueFrom]
+    [debouncedValueFrom, handleFilter]
+  );
+
+  useEffect(
+    function () {
+      if (priceFrom === "") {
+        handleFilter({ param: "min_price", filter: "" });
+      }
+    },
+    [priceFrom, handleFilter]
   );
 
   useEffect(
@@ -64,9 +86,17 @@ export default function PriceFilter({ handleFilter }: PriceFilterProps) {
           filter: debouncedValueTo,
         });
       }
-      if (debouncedValueTo === "") handleFilter({ param: "value", filter: "" });
     },
-    [debouncedValueTo]
+    [debouncedValueTo, handleFilter]
+  );
+
+  useEffect(
+    function () {
+      if (priceTo === "") {
+        handleFilter({ param: "max_price", filter: "" });
+      }
+    },
+    [priceTo, handleFilter]
   );
 
   useEffect(() => {
@@ -74,7 +104,7 @@ export default function PriceFilter({ handleFilter }: PriceFilterProps) {
       param: "is_free",
       filter: free ? "true" : "",
     });
-  }, [free]);
+  }, [free, handleFilter]);
 
   return (
     <div>

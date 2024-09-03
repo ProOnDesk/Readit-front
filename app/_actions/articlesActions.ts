@@ -70,6 +70,7 @@ export async function getArticlesSearch(params: SearchParams) {
     link += `&max_price=${params.max_price}`;
   }
   if (params.is_free === "true") {
+    console.log("is free");
     link += `&is_free=true`;
   }
   if (params.min_rating) {
@@ -87,10 +88,13 @@ export async function getArticlesSearch(params: SearchParams) {
     link += `&value=${decodeURIComponent(params.value)}`;
   }
 
+  link += `&page=${params.page || 1}`;
+
+
   console.log(link);
 
   try {
-    const response = await fetch(`${link}&page=1&size=12`, {
+    const response = await fetch(`${link}&size=12`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

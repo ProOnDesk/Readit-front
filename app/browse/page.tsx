@@ -2,7 +2,6 @@ import React from "react";
 import BrowseHeader from "../_components/browseArticles/BrowseHeader";
 import Content from "../_components/browseArticles/Content";
 
-export const revalidate = 3600;
 
 export interface SearchParams {
   sort_by: string;
@@ -13,6 +12,7 @@ export interface SearchParams {
   min_rating: string;
   tags: string;
   value: string;
+  page: string;
 }
 
 interface PageProps {
