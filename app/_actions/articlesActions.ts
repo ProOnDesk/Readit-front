@@ -99,6 +99,7 @@ export async function getArticlesSearch(params: SearchParams) {
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-cache",
     });
     if (!response.ok) {
       throw new Error(`Błąd serwera: ${response.status}`);

@@ -18,7 +18,7 @@ export default function ArticleItem({ article, isCreator }: ArticleItemProps) {
   return (
     <Link
       href={link}
-      className="w-full  flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group"
+      className="w-full max-h-[355px] flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group"
     >
       <div className="relative w-full aspect-video overflow-hidden object-contain object-center">
         <img

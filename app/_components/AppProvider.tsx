@@ -5,6 +5,21 @@ import toast, { Toaster, useToasterStore } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { store } from "../_redux/store";
 import ScrollToTop from "./ScrollToTop";
+import {
+  createTheme,
+  ThemeProvider as MuiThemeProvider,
+} from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    secondary: {
+      main: "#70e000",
+    },
+    primary: {
+      main: "#9ef01a",
+    },
+  },
+});
 
 export default function AppProvider({
   children,
@@ -45,7 +60,9 @@ export default function AppProvider({
             className: "text-dark",
           }}
         />
-        <ScrollToTop>{children}</ScrollToTop>
+        <MuiThemeProvider theme={theme}>
+          <ScrollToTop>{children}</ScrollToTop>
+        </MuiThemeProvider>
       </Provider>
     </div>
   );

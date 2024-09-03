@@ -35,7 +35,14 @@ export default function SearchArticle({ handleFilter }: SearchArticleProps) {
       }
       if (debouncedValue === "") handleFilter({ param: "value", filter: "" });
     },
-    [debouncedValue]
+    [debouncedValue, handleFilter]
+  );
+
+  useEffect(
+    function () {
+      setInputValue(decodeURIComponent(searchParams.get("value") || ""));
+    },
+    [searchParams, setInputValue]
   );
 
   return (

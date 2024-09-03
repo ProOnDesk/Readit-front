@@ -24,6 +24,7 @@ export default function Filters() {
     } else {
       params.set(param, filter);
     }
+    // params.set("page", "1");
     router.replace(`${path}?${params.toString()}`, { scroll: false });
   }
 
@@ -59,6 +60,27 @@ export default function Filters() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+      <div className="h-10 mt-5">
+        <button
+          className="w-full h-full bg-mainGreen hover:bg-mainGreenSecond transition-colors duration-300 text-white rounded-full"
+          onClick={() => {
+            const params = new URLSearchParams(searchParams);
+            params.delete("min_price");
+            params.delete("max_price");
+            params.delete("min_rating");
+            params.delete("tags");
+            params.delete("is_free");
+            params.delete("value");
+            params.set("page", "1");
+            router.replace(`${path}?${params.toString()}`, { scroll: false });
+          }}
+        >
+          <span>
+            {searchParams.size - 3 <= 0 ? "" : searchParams.size - 3}
+          </span>{" "}
+          Wyczyść filtry
+        </button>
+      </div>
     </div>
   );
 }

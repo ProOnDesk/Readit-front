@@ -20,6 +20,7 @@ export default function SelectFilter({
     } else {
       params.set(param, filter);
     }
+    // params.set("page", "1");
     router.replace(`${path}?${params.toString()}`, { scroll: false });
   }
 
@@ -32,7 +33,7 @@ export default function SelectFilter({
       params.set("sort_by", "views");
     }
     router.replace(`${path}?${params.toString()}`, { scroll: false });
-  }, []);
+  }, [searchParams, router, path]);
 
   return (
     <div className="max-w-[1800px] mx-auto w-full flex justify-between items-start flex-col lg:flex-row pt-10 lg:pt-14 pb-4 px-4 md:px-14">

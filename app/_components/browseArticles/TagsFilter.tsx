@@ -1,5 +1,5 @@
 import { useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
@@ -23,7 +23,18 @@ export default function TagsFilter({ handleFilter }: TagsFilterProps) {
       param: "tags",
       filter: encodeURIComponent(tags.join(",")),
     });
-  }, [tags]);
+  }, [tags, handleFilter]);
+
+  useEffect(
+    function () {
+      setTags(
+        searchParams.get("tags")
+          ? decodeURIComponent(searchParams.get("tags") || "").split(",")
+          : []
+      );
+    },
+    [searchParams]
+  );
 
   return (
     <div className="py-4 flex flex-wrap justify-center items-center gap-x-4 gap-y-3">

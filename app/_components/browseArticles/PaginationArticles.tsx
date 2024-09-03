@@ -19,9 +19,24 @@ export default function PaginationArticles({ data }: PaginationArticlesProps) {
     params.set("page", value.toString());
     router.replace(`${path}?${params.toString()}`, { scroll: false });
   }
+
   return (
     <div className="w-full flex justify-center items-center py-10 col-start-1 col-end-3">
-      <Pagination count={data.pages} onChange={setPage} color="primary" />
+      <Pagination
+        sx={{
+          "& .Mui-selected": {
+            backgroundColor: "#9ef01a !important",
+            color: "#ffffff !important",
+            "&:hover": {
+              backgroundColor: "#70e000 !important",
+            },
+          },
+        }}
+        count={data.pages}
+        defaultPage={+(new URLSearchParams(searchParams).get("page") || 1)}
+        onChange={setPage}
+        color="primary"
+      />
     </div>
   );
 }

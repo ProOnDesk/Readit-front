@@ -42,6 +42,7 @@ export default function PriceFilter({ handleFilter }: PriceFilterProps) {
           router.replace(`${path}?${params.toString()}`, { scroll: false });
           setPriceFrom(priceTo);
           setPriceTo(priceFrom);
+          params.set("page", "1");
         }
       }
     }, 800);
@@ -105,6 +106,15 @@ export default function PriceFilter({ handleFilter }: PriceFilterProps) {
       filter: free ? "true" : "",
     });
   }, [free, handleFilter]);
+
+  useEffect(
+    function () {
+      setPriceFrom(searchParams.get("min_price") || "");
+      setPriceTo(searchParams.get("max_price") || "");
+      setFree(searchParams.get("is_free") === "true" ? true : false);
+    },
+    [searchParams]
+  );
 
   return (
     <div>

@@ -22,7 +22,14 @@ export default function RatingFilter({ handleFilter }: RatingFilterProps) {
         filter: minRating,
       });
     },
-    [minRating]
+    [minRating, handleFilter]
+  );
+
+  useEffect(
+    function () {
+      setMinRating(searchParams.get("min_rating") || "");
+    },
+    [searchParams]
   );
 
   return (
