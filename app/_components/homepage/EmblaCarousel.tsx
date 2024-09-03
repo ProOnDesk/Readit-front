@@ -34,9 +34,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 	} = usePrevNextButtons(emblaApi);
 
 	return (
-		<section className="max-w-5xl mx-auto text-white dark:text-webYellow w-full px-3 py-24">
+		<section className="max-w-5xl mx-auto text-blackSecond w-full px-6 py-8">
 			<div className="flex flex-col items-center">
-				<div className="flex justify-center items-center gap-1 w-full">
+				<div className="flex justify-center items-center gap-1 w-full ">
 					<PrevButton
 						onClick={onPrevButtonClick}
 						disabled={prevBtnDisabled}
@@ -44,9 +44,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 						className="w-9 h-9 hidden sm500:flex items-center justify-center rounded-full text-webPrimary "
 					/>
 					<div className="overflow-hidden flex-grow" ref={emblaRef}>
-						<div className="flex touch-pan-y touch-pinch-zoom w-full md:w-full">
+						<div className="flex touch-pan-y touch-pinch-zoom w-full gap-x-1 md:gap-x-3">
 							{slides.map((data, i) => (
-								<ArticleItem article={data} key={i} />
+								<div
+									key={i}
+									className="flex-shrink-0 w-full sm600:w-1/2 md:w-1/3">
+									<ArticleItem article={data} key={i} />
+								</div>
 							))}
 						</div>
 					</div>
@@ -59,14 +63,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 				</div>
 			</div>
 
-			<div className="flex flex-wrap justify-center w-full items-center gap-5 mt-3">
+			<div className="flex flex-wrap justify-center w-full items-center gap-x-5 mt-4 md:mt-12">
 				{scrollSnaps.map((_, index) => (
 					<DotButton
 						key={index}
 						onClick={() => onDotButtonClick(index)}
 						className={clsx(
 							"w-4 h-4 flex items-center justify-center rounded-full ",
-							selectedIndex === index ? "bg-webPrimary" : "bg-white"
+							selectedIndex === index ? "bg-mainGreen" : "bg-whiteSecond"
 						)}
 					/>
 				))}
