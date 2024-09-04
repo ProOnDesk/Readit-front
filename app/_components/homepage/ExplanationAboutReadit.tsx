@@ -5,75 +5,77 @@ import { PiCheckCircleThin } from "react-icons/pi";
 
 export default function ExplanationAboutReadit() {
 	return (
-		<div className="flex flex-col  bg-blackSecond">
-			<div className="flex flex-col mt-20 sm400:mt-24 ">
+		<div className="flex flex-col  justify-center items-center bg-blackSecond">
+			<div className="flex flex-col max-w-[1800px] mt-20 sm400:mt-24 ">
 				<h3 className="flex flex-col items-end justify-center rounded-l-full font-medium py-2 ml-auto mb-10 pr-4 pl-20 text-xl  text-white uppercase bg-mainGreen shadow-lg sm400:text-2xl sm500:pl-28">
 					Jak to działa?
 				</h3>
-				<ul className="flex flex-col mt-12 gap-y-9 pb-20 mx-2 sm400:mx-4 sm400:mt-14 sm500:mx-8 ">
-					<li className="flex flex-row  items-center mx-5">
-						<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
-							<PiCheckCircleThin />
-						</span>
-						<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
-							<span className="text-mainGreen font-medium">
-								Zarejestruj się
-							</span>{" "}
-							i dołącz do społeczności.
-						</p>
-					</li>
-					<li className="flex flex-row  items-center mx-5">
-						<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
-							<PiCheckCircleThin />
-						</span>
-						<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
-							<span className="text-mainGreen font-medium">
-								Pisz i publikuj
-							</span>{" "}
-							artykuły na wybrane temate.
-						</p>
-					</li>
-					<li className="flex flex-row  items-center mx-5">
-						<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
-							<PiCheckCircleThin />
-						</span>
-						<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
-							<span className="text-mainGreen font-medium">Udostępniaj</span>{" "}
-							artykuły na wybrane temate.
-						</p>
-					</li>
-					<li className="flex flex-row  items-center mx-5">
-						<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
-							<PiCheckCircleThin />
-						</span>
-						<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
-							Czytaj, komentuj i
-							<span className="text-mainGreen font-medium"> oceniaj </span>
-							artykuły innych.
-						</p>
-					</li>
-					<li className="flex flex-row  items-center mx-5">
-						<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
-							<PiCheckCircleThin />
-						</span>
-						<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
-							<span className="text-mainGreen font-medium"> Przeglądaj </span>
-							różnorodne kategorie i wątki.
-						</p>
-					</li>
-					<li className="flex flex-row  items-center mx-5 mb-10">
-						<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
-							<PiCheckCircleThin />
-						</span>
-						<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
-							<span className="text-mainGreen font-medium">
-								{" "}
-								Zyskuj uznanie{" "}
+				<div className="flex md:flex-col md:justify-center md:items-center">
+					<ul className="flex flex-col mt-12 gap-y-9 pb-20 mx-2 sm400:mx-4 sm400:mt-14 sm500:mx-8">
+						<li className="flex flex-row  items-center mx-5">
+							<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
+								<PiCheckCircleThin />
 							</span>
-							i śledź swoją popularność na platformie.
-						</p>
-					</li>
-				</ul>
+							<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
+								<span className="text-mainGreen font-medium">
+									Zarejestruj się
+								</span>{" "}
+								i dołącz do społeczności.
+							</p>
+						</li>
+						<li className="flex flex-row  items-center mx-5">
+							<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
+								<PiCheckCircleThin />
+							</span>
+							<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
+								<span className="text-mainGreen font-medium">
+									Pisz i publikuj
+								</span>{" "}
+								artykuły na wybrane temate.
+							</p>
+						</li>
+						<li className="flex flex-row  items-center mx-5">
+							<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
+								<PiCheckCircleThin />
+							</span>
+							<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
+								<span className="text-mainGreen font-medium">Udostępniaj</span>{" "}
+								artykuły na wybrane temate.
+							</p>
+						</li>
+						<li className="flex flex-row  items-center mx-5">
+							<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
+								<PiCheckCircleThin />
+							</span>
+							<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
+								Czytaj, komentuj i
+								<span className="text-mainGreen font-medium"> oceniaj </span>
+								artykuły innych.
+							</p>
+						</li>
+						<li className="flex flex-row  items-center mx-5">
+							<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
+								<PiCheckCircleThin />
+							</span>
+							<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
+								<span className="text-mainGreen font-medium"> Przeglądaj </span>
+								różnorodne kategorie i wątki.
+							</p>
+						</li>
+						<li className="flex flex-row  items-center mx-5 mb-10">
+							<span className="text-mainGreen font-medium text-3xl hover:text-mainGreenSecond transition-colors duration-300 sm600:text-4xl md:text-3xl">
+								<PiCheckCircleThin />
+							</span>
+							<p className="mx-3 tracking-wide leading-tight text-lg font-light text-white sm600:text-2xl md:text-xl">
+								<span className="text-mainGreen font-medium">
+									{" "}
+									Zyskuj uznanie{" "}
+								</span>
+								i śledź swoją popularność na platformie.
+							</p>
+						</li>
+					</ul>
+				</div>
 				<div className="flex flex-col">
 					<h3 className="flex flex-col items-start justify-center rounded-r-full font-medium pl-auto mr-auto py-2 pr-20 mb-20 pl-4 text-xl  text-white uppercase bg-mainGreen shadow-lg sm400:text-2xl sm400:pl-5 sm400:mb-24 sm500:pr-32 sm600:pr-36">
 						Nasz cel
