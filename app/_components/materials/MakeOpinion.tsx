@@ -1,21 +1,32 @@
 'use client';
 
 import { useMakeOpinionMutation } from '@/app/_redux/features/articleApiSLice';
+import { useRetrieveUserQuery } from '@/app/_redux/features/authApiSlice';
 import { Rating } from '@mui/material';
 import { StarIcon } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
+import Spinner from '../ui/Spinner';
 
 interface MakeOpinionProps {
 	articleId: number;
+	authorId: number;
+	refetchOpinions: () => void;
 }
 
-export default function MakeOpinion({ articleId }: MakeOpinionProps) {
+export default function MakeOpinion({
+	articleId,
+	authorId,
+	refetchOpinions,
+}: MakeOpinionProps) {
+	const [isClient, setIsClient] = useState(false);
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
+	const { data: user } = useRetrieveUserQuery();
 	const [rating, setRating] = useState<number | null>(null);
 	const [review, setReview] = useState('');
 	const isCompleted = rating !== null && review !== '';
-	const [makeOpinion] = useMakeOpinionMutation();
+	const [makeOpinion, { isLoading: isMakeOpinionLoading }] =
+		useMakeOpinionMutation();
 
 	useEffect(() => {
 		if (textAreaRef.current) {
@@ -26,17 +37,26 @@ export default function MakeOpinion({ articleId }: MakeOpinionProps) {
 	}, [textAreaRef, review]);
 
 	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
 		makeOpinion({ article_id: articleId, rating, content: review })
 			.unwrap()
 			.then(() => {
 				setRating(null);
 				setReview('');
 				toast.success('Komentarz dodany pomyślnie');
+				refetchOpinions();
 			})
 			.catch(() => {
 				toast.error('Nie udało się dodać kometarza');
 			});
 	}
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
+
+	if (!isClient) return null;
+
+	if (user?.id === authorId) return null;
 
 	return (
 		<form onSubmit={handleSubmit} className=' flex flex-col gap-3'>
@@ -69,9 +89,13 @@ export default function MakeOpinion({ articleId }: MakeOpinionProps) {
 						? 'bg-blackSecond/15'
 						: 'bg-mainGreen hover:bg-mainGreenSecond'
 				}`}
-				disabled={!isCompleted}
+				disabled={!isCompleted || isMakeOpinionLoading}
 			>
-				Skomentuj
+				{isMakeOpinionLoading ? (
+					<Spinner color='white' size='small'></Spinner>
+				) : (
+					'Skomentuj'
+				)}
 			</button>
 		</form>
 	);

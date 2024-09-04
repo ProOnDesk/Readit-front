@@ -49,6 +49,7 @@ export default function FollowersAndButton({ user }: FollowersAndButtonProps) {
     },
     [isSuccessFollow, isSuccessUnfollow, refetch]
   );
+  console.log(isFollowing?.is_followed);
 
   return (
     <>

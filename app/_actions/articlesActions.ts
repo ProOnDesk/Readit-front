@@ -1,29 +1,30 @@
 "use server";
 
-import { cookies } from 'next/headers';
+import { cookies } from "next/headers";
+import { SearchParams } from "../browse/page";
 
 export async function getArticleInfoBySlug({ slug }: { slug: string }) {
-	const s = 'chwytliwy-tytuł,-który-zszokuje?-śmiało!...';
-	
-	try {
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_HOST}/articles/slug/`,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ slug: decodeURIComponent(slug) }),
-			}
-		);
-		if (!response.ok) {
-			throw new Error(`Błąd serwera: ${response.status}`);
-		}
-		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.log('Nie udało się pobrać artykułu', error);
-	}
+  const s = "chwytliwy-tytuł,-który-zszokuje?-śmiało!...";
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST}/articles/slug/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ slug: decodeURIComponent(slug) }),
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`Błąd serwera: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log("Nie udało się pobrać artykułu", error);
+  }
 }
 
 export async function getArticleComments({
@@ -54,5 +55,58 @@ export async function getArticleComments({
     return data;
   } catch (error) {
     console.log("Nie udało się pobrać komentarzy", error);
+  }
+}
+
+export async function getArticlesSearch(params: SearchParams) {
+  let link = `${process.env.NEXT_PUBLIC_HOST}/articles/search?sort_by=${
+    params.sort_by || "views"
+  }&sort_order=${params.sort_order || "desc"}`;
+
+  if (params.min_price) {
+    link += `&min_price=${params.min_price}`;
+  }
+  if (params.max_price) {
+    link += `&max_price=${params.max_price}`;
+  }
+  if (params.is_free === "true") {
+    console.log("is free");
+    link += `&is_free=true`;
+  }
+  if (params.min_rating) {
+    link += `&min_rating=${params.min_rating}`;
+  }
+  if (params.tags) {
+    params.tags as any;
+    const tagsArr = decodeURIComponent(params.tags).split(",");
+
+    tagsArr.forEach((tag: string) => {
+      link += `&tags=${tag}`;
+    });
+  }
+  if (params.value) {
+    link += `&value=${decodeURIComponent(params.value)}`;
+  }
+
+  link += `&page=${params.page || 1}`;
+
+
+  console.log(link);
+
+  try {
+    const response = await fetch(`${link}&size=12`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      cache: "no-cache",
+    });
+    if (!response.ok) {
+      throw new Error(`Błąd serwera: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.log("Nie udało się pobrać artykułów", error);
   }
 }

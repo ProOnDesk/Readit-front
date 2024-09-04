@@ -31,3 +31,13 @@ input {
 .underlined {
   @apply relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:transition-all before:duration-300;
 }
+
+.custom-number-input::-webkit-outer-spin-button,
+.custom-number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.custom-number-input[type="number"] {
+  -moz-appearance: textfield;
+}

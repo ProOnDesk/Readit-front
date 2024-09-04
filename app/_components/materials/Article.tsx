@@ -4,9 +4,14 @@ import ImageElement from '@/app/_components/creator/ImageElement';
 import TextElement from '@/app/_components/creator/TextElement';
 import TitleElement from '@/app/_components/creator/TitleElement';
 import { useGetArticleDetailsByIdQuery } from '@/app/_redux/features/articleApiSLice';
+import Spinner from '../ui/Spinner';
+import { useRouter } from 'next/navigation';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
+import { useEffect } from 'react';
 
 interface ArticleProps {
 	articleId: number;
+	slug: string;
 }
 
 interface ArticleElement {
@@ -14,14 +19,32 @@ interface ArticleElement {
 	content: string;
 }
 
-function Article({ articleId }: ArticleProps) {
-	const { data: article, isLoading: isArticleLoading } =
-		useGetArticleDetailsByIdQuery({
-			article_id: articleId,
-		});
-	console.log();
+function Article({ articleId, slug }: ArticleProps) {
+	const router = useRouter();
+	const {
+		data: article,
+		isLoading: isArticleLoading,
+		error,
+		isError,
+	} = useGetArticleDetailsByIdQuery({
+		article_id: articleId,
+	});
+
+	useEffect(() => {
+		if (isError) {
+			if ((error as FetchBaseQueryError).status === 401) {
+				router.push(`/materials/${encodeURIComponent(slug)}`);
+			}
+		}
+	}, [isError, error, slug, router]);
+
 	if (isArticleLoading)
-		return <div className='py-10 text-center'>Loading...</div>;
+		return (
+			<div className='py-10'>
+				<Spinner color='green' size='small' />
+			</div>
+		);
+
 	return (
 		<div className='pb-10'>
 			{article?.content_elements.map(

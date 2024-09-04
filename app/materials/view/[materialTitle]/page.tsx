@@ -3,6 +3,7 @@ import Article from '@/app/_components/materials/Article';
 import MaterialDetails from '@/app/_components/materials/MaterialDetails';
 import MaterialHeader from '@/app/_components/materials/MaterialHeader';
 import OpinionSection from '@/app/_components/materials/OpinionSection';
+import Spinner from '@/app/_components/ui/Spinner';
 import { Suspense } from 'react';
 
 export const revalidate = 0;
@@ -26,7 +27,8 @@ export default async function Page({ params, searchParams }: Params) {
 		summary,
 		tags,
 		id,
-		author: { first_name, last_name, avatar_url },
+		author: { id: userId, first_name, last_name, avatar_url },
+		slug,
 		created_at,
 		view_count,
 		title_image_url,
@@ -58,13 +60,14 @@ export default async function Page({ params, searchParams }: Params) {
 					/>
 				</div>
 				<div className='flex-1 px-8 py-5'>
-					<Article articleId={id} />
-					<Suspense
-						fallback={<div className='mx-auto'>Ładowanie opinii...</div>}
-						key={id}
-					>
-						<OpinionSection articleId={id} searchParams={searchParams} isPossibleToMakeOpinion={true}/>
-					</Suspense>
+					<Article articleId={id} slug={slug} />
+
+					<OpinionSection
+						articleId={id}
+						authorId={userId}
+						searchParams={searchParams}
+						isPossibleToMakeOpinion={true}
+					/>
 				</div>
 			</div>
 		</div>

@@ -54,7 +54,7 @@ export default function ProfileArticles({ user }: ProfileArticlesProps) {
         )}
         <div className="grid grid-cols-1 sm550:grid-cols-2 md800:grid-cols-3 lg1100:grid-cols-4 gap-x-3 gap-y-6 pb-10">
           {user?.articles.map((article, i) => (
-            <ArticleItem article={article} key={i} />
+            <ArticleItem article={article} key={i} isCreator/>
           ))}
         </div>
       </div>

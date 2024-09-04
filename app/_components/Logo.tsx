@@ -1,12 +1,10 @@
-import Link from "next/link";
-import React from "react";
+import Link from 'next/link';
+import React from 'react';
 
 export default function Logo() {
-  return (
-    <Link href="/" className="mr-5">
-      <p className="relative font-semibold text-4xl">
-        ReadIt<span className="text-5xl">.</span>
-      </p>
-    </Link>
-  );
+	return (
+		<Link href='/' className='mr-5 h-full py-[1.4rem]'>
+			<img src='/ReadIt-logo.png' alt='logo' className='h-full' />
+		</Link>
+	);
 }
