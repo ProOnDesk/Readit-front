@@ -50,6 +50,8 @@ const authApiSlice = apiSlice.injectEndpoints({
 			query: () => ({
 				url: `/articles/search?sort_order=desc&sort_by=views&page=1&size=10`,
 				method: "GET",
+			}),
+		}),
 		getArticleOpinions: builder.query({
 			query: ({ article_id, page, size, sort_order }) => ({
 				url: `/articles/comment/all/${article_id}?page=${page}&size=${size}&sort_order=${sort_order}`,
@@ -69,7 +71,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 			}),
 		}),
 	}),
-});
+})
 
 export const {
 	usePostArticleMutation,
