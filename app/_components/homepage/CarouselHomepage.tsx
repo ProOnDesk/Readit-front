@@ -26,7 +26,7 @@ export default function CarouselHomepage() {
 			{isLoading && !data ? (
 				<Spinner color="green" size="big" />
 			) : (
-				<EmblaCarousel slides={data?.items} options={OPTIONS} />
+				<EmblaCarousel slides={data?.items || []} options={OPTIONS} />
 			)}
 		</div>
 	);
