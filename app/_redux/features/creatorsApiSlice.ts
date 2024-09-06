@@ -31,7 +31,7 @@ const creatorsApiSlice = apiSlice.injectEndpoints({
     }),
     searchForUser: builder.mutation<PaginatonType, { value: string }>({
       query: ({ value }) => ({
-        url: `/user/search?value=${value}&sort_order=desc&sort_by=match_count&page=1&size=12`,
+        url: `/user/search?value=${value}&sort_order=desc&sort_by=follower_count&page=1&size=12`,
         method: "GET",
       }),
     }),
