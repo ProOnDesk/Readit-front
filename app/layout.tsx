@@ -1,29 +1,41 @@
-import type { Metadata } from 'next';
-import { Jost } from 'next/font/google';
-import './globals.css';
-import '@mantine/nprogress/styles.css';
-import '@mantine/core/styles.css';
-import AppProvider from './_components/AppProvider';
-import Navigation from './_components/nav/Navigation';
-import { ColorSchemeScript, createTheme, MantineProvider } from '@mantine/core';
-import { RouterTransition } from './_components/nav/RouterTransition';
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+import "@mantine/nprogress/styles.css";
+import type { Metadata } from "next";
+import { Jost } from "next/font/google";
+import AppProvider from "./_components/AppProvider";
+import Navigation from "./_components/nav/Navigation";
+import "./globals.css";
 
 const jost = Jost({
-	subsets: ['latin'],
-	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-	title: 'ReadIt | Just Read',
-	description: 'Place where u can read',
+  title: "ReadIt | Po prostu czytaj",
+  description:
+    "ReadIt jest platformą do publikowania i czytania artykułów. Dołącz do naszej społeczności i dziel się swoją wiedzą z innymi. Czytaj, komentuj i oceniaj artykuły innych użytkowników. Zyskuj uznanie i śledź swoją popularność na platformie. Zarejestruj się już dziś! ",
+  openGraph: {
+    images: [
+      {
+        url: String("/ReadIt-logo.png"),
+        width: 800,
+        height: 600,
+        alt: "ReadIt logo",
+      },
+    ],
+    type: "website",
+  },
+  robots: "index, follow",
 };
 
 // const theme = createTheme({});
 
 export default function RootLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
   return (
     <html lang="en">

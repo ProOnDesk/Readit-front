@@ -20,9 +20,21 @@ export async function generateMetadata({
   return {
     title: `${user?.first_name} ${user?.last_name} | ReadIt`,
     description: `${
-      user?.description ||
+      user?.short_description ||
       `Strona profilowa użytkownika ${user?.first_name} ${user?.last_name}`
     }`,
+    openGraph: {
+      images: [
+        {
+          url: String(user?.avatar),
+          width: 800,
+          height: 600,
+          alt: String(user?.first_name),
+        },
+      ],
+      type: "website",
+    },
+    robots: "index, follow",
   };
 }
 

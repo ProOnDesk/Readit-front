@@ -7,7 +7,8 @@ import TopArticlesSection from "../_components/creatorsBrowse/TopArticlesSection
 
 export const metadata: Metadata = {
   title: "Przeglądaj twórców | ReadIt",
-  description: "Setki najlepszych twórców w jednym miejscu",
+  description: "Setki najlepszych twórców w jednym miejscu - przeglądaj, czytaj i śledź ich popularność na platformie ReadIt. Dołącz do naszej społeczności już dziś!",
+  robots: "index, follow",
 };
 
 export default function Page() {
