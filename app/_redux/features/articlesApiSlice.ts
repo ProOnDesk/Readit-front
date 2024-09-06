@@ -17,7 +17,17 @@ const articleApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    searchForArticle: builder.mutation<
+      PaginationTypeArticles,
+      { value: string }
+    >({
+      query: ({ value }) => ({
+        url: `/articles/search?value=${value}&sort_order=desc&sort_by=views&page=1&size=12`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetArticlesSearchQuery } = articleApiSlice;
+export const { useGetArticlesSearchQuery, useSearchForArticleMutation } =
+  articleApiSlice;
