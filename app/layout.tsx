@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import { Jost } from "next/font/google";
 import AppProvider from "./_components/AppProvider";
 import Navigation from "./_components/nav/Navigation";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const jost = Jost({
@@ -56,6 +58,8 @@ export default function RootLayout({
               </div>
             </div>
           </MantineProvider>
+          <Analytics />
+          <SpeedInsights />
         </AppProvider>
       </body>
     </html>
