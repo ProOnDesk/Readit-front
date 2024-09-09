@@ -11,7 +11,7 @@ export default function AboutReadit() {
       </h2>
       <p className="px-6 tracking-wide leading-tight font-light  text-blackSecond text-xl max-w-[1050px]  mx-auto text-center">
         <span className="text-mainGreen font-medium">Readit</span> to
-        rewolucyjny projekt stworzony z myślą o ludzicach, którzy pragną dzielić
+        rewolucyjny projekt stworzony z myślą o ludziach, którzy pragną dzielić
         się swoją wiedzą i pasją z innymi. To platforma, która{" "}
         <span className="text-mainGreen font-medium">
           umożliwia tworzenie i publikowanie artykułów
