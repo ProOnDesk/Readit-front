@@ -30,7 +30,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="w-full max-w-[480px] sm:shadow-lg sm:px-14 sm:py-8 bg-white">
+    <div className="w-full max-w-[480px] sm:shadow-lg sm:px-14 sm:py-8 bg-white rounded-md">
       <h4 className="text-3xl font-medium mb-5">Zarejestruj</h4>
       <form
         onSubmit={handleSubmit(onSubmit)}
