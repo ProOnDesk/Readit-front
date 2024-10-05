@@ -1,6 +1,9 @@
 'use client';
 
+import { useCreateNewIssueMutation } from '@/app/_redux/features/supportSlice';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import Spinner from '../ui/Spinner';
 
 export default function MakeIssueForm() {
 	const {
@@ -9,15 +12,29 @@ export default function MakeIssueForm() {
 		formState: { errors },
 		reset,
 	} = useForm();
+	const [createNewIssue, { isLoading: isIssueCreating }] =
+		useCreateNewIssueMutation();
 
 	const onSubmit = (data: any) => {
-		console.log(data);
+		createNewIssue({
+			category: data.category,
+			title: data.title,
+			description: data.description,
+		})
+			.unwrap()
+			.then(() => {
+				toast.success('Zgłoszenie zostało wysłane pomyślnie');
+				reset();
+			})
+			.catch((err) => {
+				toast.error(err.data.detail);
+			});
 	};
 
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className='flex flex-col gap-5 w-full sm:w-4/5 mx-auto'
+			className='flex flex-col gap-6 w-full sm:w-4/5 mx-auto'
 		>
 			<div className='relative flex flex-col gap-1'>
 				<label className='text-lg'>Kategoria</label>
@@ -27,11 +44,11 @@ export default function MakeIssueForm() {
 					name='category'
 					className={`rounded-t-md text-xl p-1 px-2 min-h-[52px] focus:outline-none peer bg-blackSecond/5`}
 				>
-					<option value='violation' className='rounded-none'>
+					<option value='Naruszenie regulaminu' className='rounded-none'>
 						Naruszenie regulaminu
 					</option>
-					<option value='technical_issue'>Problem techniczny</option>
-					<option value='help_request'>Prośba o pomoc</option>
+					<option value='Problem techniczny'>Problem techniczny</option>
+					<option value='Prośba o pomoc'>Prośba o pomoc</option>
 				</select>
 				<InputAccent />
 			</div>
@@ -63,9 +80,10 @@ export default function MakeIssueForm() {
 
 			<button
 				type={'submit'}
+				disabled={isIssueCreating}
 				className='bg-mainGreen text-white font-semibold w-fit mx-auto px-14 py-2 rounded-full text-xl my-4 hover:bg-mainGreenSecond duration-300 transition-colors shadow-sm'
 			>
-				Wyślij
+				{isIssueCreating ? <Spinner color='white' size='small' /> : 'Wyślij'}
 			</button>
 		</form>
 	);
