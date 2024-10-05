@@ -32,7 +32,7 @@ export default function PaginationArticles({ data }: PaginationArticlesProps) {
             },
           },
         }}
-        count={data.pages}
+        count={data?.pages}
         defaultPage={+(new URLSearchParams(searchParams).get("page") || 1)}
         onChange={setPage}
         color="primary"
