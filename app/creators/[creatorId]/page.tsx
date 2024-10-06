@@ -1,4 +1,8 @@
-import { fetchUserByIdQuery } from "@/app/_actions/profileActions";
+import {
+  fetchUserArticles,
+  fetchUserByIdQuery,
+  fetchUsersNumber,
+} from "@/app/_actions/profileActions";
 import DescriptionCreator from "@/app/_components/creatorsPage/DescriptionCreator";
 import NameTagCreator from "@/app/_components/creatorsPage/NameTagCreator";
 import ProfileArticlesCreator from "@/app/_components/creatorsPage/ProfileArticlesCreator";
@@ -12,7 +16,7 @@ export const revalidate = 0;
 export async function generateMetadata({
   params,
 }: {
-  params: { creatorId: string };
+  params: { creatorId: string; page: string };
 }): Promise<Metadata> {
   const profileId = params.creatorId;
   const user = await fetchUserByIdQuery({ id: profileId });
@@ -40,8 +44,10 @@ export async function generateMetadata({
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: { creatorId: string };
+  searchParams: { page: string };
 }) {
   const profileId = params.creatorId;
   const user = await fetchUserByIdQuery({ id: profileId });
@@ -55,22 +61,36 @@ export default async function Page({
         <NameTagCreator user={user} />
         <SkillsCreator user={user} />
         <DescriptionCreator user={user} />
-        <ProfileArticlesCreator user={user} />
+        <ProfileArticlesCreator user={user} page={searchParams.page} />
       </div>
     </div>
   );
 }
 
 export async function generateStaticParams() {
-  // Zakładam, że masz funkcję lub sposób na pobranie listy creatorId.
-  // Na przykład, jeśli masz ograniczoną liczbę creatorId, możesz je podać ręcznie:
+  const data = await fetchUsersNumber();
+  const total = data?.total || 0;
 
-  const creatorIds = ["1", "2", "3"]; // Dodaj wszystkie możliwe ID tutaj
+  // Generujemy identyfikatory użytkowników
+  const creatorIds = Array.from({ length: total }, (_, i) =>
+    (i + 1).toString()
+  );
 
-  // Tworzenie tablicy parametrów na podstawie id
-  const params = creatorIds.map((id) => ({
-    creatorId: id,
-  }));
+  let allParams: { creatorId: string; page: string }[] = [];
 
-  return params;
+  // Używamy pętli for...of, aby poprawnie obsłużyć asynchroniczne fetchowanie
+  for (const id of creatorIds) {
+    const userPages = await fetchUserArticles({ userId: +id, page: "1" });
+    const pages = userPages?.pages || 1;
+
+    // Generujemy parametry dla każdej strony użytkownika
+    const params = Array.from({ length: pages }, (_, i) => ({
+      creatorId: id,
+      page: (i + 1).toString(),
+    }));
+
+    allParams = [...allParams, ...params]; // Dodajemy parametry do zbiorczej tablicy
+  }
+
+  return allParams;
 }
