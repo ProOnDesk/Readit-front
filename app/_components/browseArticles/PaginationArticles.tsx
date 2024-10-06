@@ -14,11 +14,13 @@ export default function PaginationArticles({ data }: PaginationArticlesProps) {
   const router = useRouter();
   const path = usePathname();
 
-  function setPage(event: React.ChangeEvent<unknown>, value: number) {
+  const createPageURL = (event: React.ChangeEvent<unknown>, value: number) => {
     const params = new URLSearchParams(searchParams);
     params.set("page", value.toString());
-    router.replace(`${path}?${params.toString()}`, { scroll: false });
-  }
+    router.replace(`${path}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
 
   return (
     <div className="w-full flex justify-center items-center py-10 col-start-1 col-end-3">
@@ -34,7 +36,7 @@ export default function PaginationArticles({ data }: PaginationArticlesProps) {
         }}
         count={data?.pages}
         defaultPage={+(new URLSearchParams(searchParams).get("page") || 1)}
-        onChange={setPage}
+        onChange={createPageURL}
         color="primary"
       />
     </div>
