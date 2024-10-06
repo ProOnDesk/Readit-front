@@ -10,7 +10,7 @@ interface ArticleItemProps {
   isCreator?: boolean;
 }
 
-export default function ArticleItem({ article, isCreator }: ArticleItemProps) {
+export default function ArticleItem({ article, isCreator = false }: ArticleItemProps) {
   const link = isCreator
     ? `/materials/view/${encodeURIComponent(article.slug)}`
     : `/materials/${encodeURIComponent(article.slug)}`;

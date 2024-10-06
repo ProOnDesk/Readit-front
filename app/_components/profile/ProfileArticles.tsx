@@ -1,4 +1,3 @@
-import { useGetUserArticlesQuery } from "@/app/_redux/features/articlesApiSlice";
 import { User } from "@/app/_redux/features/authApiSlice";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -6,6 +5,7 @@ import { useEffect } from "react";
 import PaginationArticles from "../browseArticles/PaginationArticles";
 import Spinner from "../ui/Spinner";
 import ArticleItem from "./ArticleItem";
+import { useGetUserArticlesQuery } from "@/app/_redux/features/articlesApiSlice";
 
 interface ProfileArticlesProps {
   user: User | undefined;
@@ -13,6 +13,7 @@ interface ProfileArticlesProps {
 
 export default function ProfileArticles({ user }: ProfileArticlesProps) {
   const searchParams = useSearchParams();
+
   const { data, refetch, isLoading, isFetching } = useGetUserArticlesQuery({
     userId: user?.id || 0,
     page: Number(searchParams.get("page") || 1),
