@@ -26,8 +26,20 @@ const articleApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getUserArticles: builder.query<
+      PaginationTypeArticles,
+      { userId: number; page?: number }
+    >({
+      query: ({ userId, page = 1 }) => ({
+        url: `/user/get/articles/${userId}?page=${page}&size=12`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetArticlesSearchQuery, useSearchForArticleMutation } =
-  articleApiSlice;
+export const {
+  useGetArticlesSearchQuery,
+  useSearchForArticleMutation,
+  useGetUserArticlesQuery,
+} = articleApiSlice;

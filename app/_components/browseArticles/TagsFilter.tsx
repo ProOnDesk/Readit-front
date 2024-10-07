@@ -77,7 +77,7 @@ export default function TagsFilter({ handleFilter }: TagsFilterProps) {
           setTags((prev) => [...prev, tag]);
           setTag("");
         }}
-        className="flex justify-center items-center gap-2 border border-stone-300 rounded-md px-3 py-2"
+        className="flex justify-center items-center gap-2 border border-stone-300 rounded-md px-3 py-2 w-full"
       >
         <input
           type="text"

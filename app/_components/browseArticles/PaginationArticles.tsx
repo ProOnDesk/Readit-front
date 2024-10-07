@@ -3,22 +3,42 @@
 import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
 import { Pagination } from "@mui/material";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface PaginationArticlesProps {
   data: PaginationTypeArticles;
+  isBrowse?: boolean;
 }
 
-export default function PaginationArticles({ data }: PaginationArticlesProps) {
+export default function PaginationArticles({
+  data,
+  isBrowse,
+}: PaginationArticlesProps) {
+  const [header, setHeader] = React.useState<Element | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
   const path = usePathname();
 
-  function setPage(event: React.ChangeEvent<unknown>, value: number) {
+  useEffect(() => {
+    setHeader(document.querySelector("#browseHeader"));
+  }, []);
+
+  const createPageURL = (event: React.ChangeEvent<unknown>, value: number) => {
+    if (isBrowse) {
+      const elementBottom = header
+        ? header.getBoundingClientRect().bottom + window.scrollY - 64
+        : 0;
+      window.scrollTo({
+        top: elementBottom, // Scroll to the bottom of the element
+        behavior: "smooth",
+      });
+    }
     const params = new URLSearchParams(searchParams);
     params.set("page", value.toString());
-    router.replace(`${path}?${params.toString()}`, { scroll: false });
-  }
+    router.replace(`${path}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
 
   return (
     <div className="w-full flex justify-center items-center py-10 col-start-1 col-end-3">
@@ -32,9 +52,9 @@ export default function PaginationArticles({ data }: PaginationArticlesProps) {
             },
           },
         }}
-        count={data.pages}
+        count={data?.pages}
         defaultPage={+(new URLSearchParams(searchParams).get("page") || 1)}
-        onChange={setPage}
+        onChange={createPageURL}
         color="primary"
       />
     </div>

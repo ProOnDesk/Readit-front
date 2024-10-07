@@ -90,11 +90,8 @@ export async function getArticlesSearch(params: SearchParams) {
 
   link += `&page=${params.page || 1}`;
 
-
-  console.log(link);
-
   try {
-    const response = await fetch(`${link}&size=12`, {
+    const response = await fetch(`${link}&size=24`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

@@ -23,8 +23,8 @@ export default function Filters() {
       params.delete(param);
     } else {
       params.set(param, filter);
+      params.set("page", "1");
     }
-    // params.set("page", "1");
     router.replace(`${path}?${params.toString()}`, { scroll: false });
   }
 
@@ -75,9 +75,7 @@ export default function Filters() {
             router.replace(`${path}?${params.toString()}`, { scroll: false });
           }}
         >
-          <span>
-            {searchParams.size - 3 <= 0 ? "" : searchParams.size - 3}
-          </span>{" "}
+          <span>{searchParams.size - 3 <= 0 ? "" : searchParams.size - 3}</span>{" "}
           Wyczyść filtry
         </button>
       </div>
