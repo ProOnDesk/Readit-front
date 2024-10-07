@@ -1,10 +1,8 @@
+import { fetchUserArticles } from "@/app/_actions/profileActions";
 import { User } from "@/app/_redux/features/authApiSlice";
-import ArticleItem from "../profile/ArticleItem";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import PaginationArticles from "../browseArticles/PaginationArticles";
 import Spinner from "../ui/Spinner";
-import { fetchUserArticles } from "@/app/_actions/profileActions";
 import ArticlesContainerCreator from "./ArticlesContainerCreator";
 
 interface ProfileArticlesProps {

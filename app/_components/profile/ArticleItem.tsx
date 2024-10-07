@@ -1,10 +1,7 @@
-// "use client";
-
 import { Article } from "@/app/_redux/features/authApiSlice";
 import { Rating } from "@mui/material";
-import { StarIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 interface ArticleItemProps {
@@ -16,17 +13,9 @@ export default function ArticleItem({
   article,
   isCreator = false,
 }: ArticleItemProps) {
-  // const [isClient, setIsClient] = useState(false);
-
-  // useEffect(() => {
-  //   setIsClient(true);
-  // }, []);
-
   const link = isCreator
     ? `/materials/view/${encodeURIComponent(article.slug)}`
     : `/materials/${encodeURIComponent(article.slug)}`;
-
-  // if (!isClient) return null;
 
   return (
     <Link
@@ -34,7 +23,8 @@ export default function ArticleItem({
       className="w-full max-h-[355px] flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group"
     >
       <div className="relative w-full aspect-video overflow-hidden object-contain object-center">
-        <img
+        <Image
+          fill
           src={article.title_image_url}
           className="object-cover object-center w-full h-full"
           alt={`${article.title}`}
@@ -55,7 +45,6 @@ export default function ArticleItem({
               value={article.rating}
               readOnly
               precision={0.1}
-              // precision={0.01}
               size="small"
             />
             <p className="text-slate-400">({article.rating_count})</p>
