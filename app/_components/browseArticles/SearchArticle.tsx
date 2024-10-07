@@ -27,11 +27,12 @@ export default function SearchArticle({ handleFilter }: SearchArticleProps) {
         setError("Wpisz co najmniej 3 znaki");
       } else {
         setError("");
-        if (debouncedValue.trim().length >= 3)
+        if (debouncedValue.trim().length >= 3) {
           handleFilter({
             param: "value",
             filter: encodeURIComponent(debouncedValue),
           });
+        }
       }
       if (debouncedValue === "") handleFilter({ param: "value", filter: "" });
     },
