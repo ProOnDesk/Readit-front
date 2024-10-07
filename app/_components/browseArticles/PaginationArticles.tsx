@@ -3,18 +3,36 @@
 import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
 import { Pagination } from "@mui/material";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface PaginationArticlesProps {
   data: PaginationTypeArticles;
+  isBrowse?: boolean;
 }
 
-export default function PaginationArticles({ data }: PaginationArticlesProps) {
+export default function PaginationArticles({
+  data,
+  isBrowse,
+}: PaginationArticlesProps) {
+  const [header, setHeader] = React.useState<Element | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
   const path = usePathname();
 
+  useEffect(() => {
+    setHeader(document.querySelector("#browseHeader"));
+  }, []);
+
   const createPageURL = (event: React.ChangeEvent<unknown>, value: number) => {
+    if (isBrowse) {
+      const elementBottom = header
+        ? header.getBoundingClientRect().bottom + window.scrollY - 64
+        : 0;
+      window.scrollTo({
+        top: elementBottom, // Scroll to the bottom of the element
+        behavior: "smooth",
+      });
+    }
     const params = new URLSearchParams(searchParams);
     params.set("page", value.toString());
     router.replace(`${path}?${params.toString()}`, {
