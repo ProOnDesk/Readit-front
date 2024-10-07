@@ -26,7 +26,7 @@ export async function fetchUserByIdQuery({ id }: { id: string }) {
 
 export async function fetchUserArticles({
   userId,
-  page,
+  page = "1",
 }: {
   userId: number;
   page: string;

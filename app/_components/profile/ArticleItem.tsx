@@ -1,8 +1,10 @@
+// "use client";
+
 import { Article } from "@/app/_redux/features/authApiSlice";
 import { Rating } from "@mui/material";
 import { StarIcon } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 interface ArticleItemProps {
@@ -10,10 +12,21 @@ interface ArticleItemProps {
   isCreator?: boolean;
 }
 
-export default function ArticleItem({ article, isCreator = false }: ArticleItemProps) {
+export default function ArticleItem({
+  article,
+  isCreator = false,
+}: ArticleItemProps) {
+  // const [isClient, setIsClient] = useState(false);
+
+  // useEffect(() => {
+  //   setIsClient(true);
+  // }, []);
+
   const link = isCreator
     ? `/materials/view/${encodeURIComponent(article.slug)}`
     : `/materials/${encodeURIComponent(article.slug)}`;
+
+  // if (!isClient) return null;
 
   return (
     <Link
@@ -41,7 +54,8 @@ export default function ArticleItem({ article, isCreator = false }: ArticleItemP
             <Rating
               value={article.rating}
               readOnly
-              precision={0.01}
+              precision={0.1}
+              // precision={0.01}
               size="small"
             />
             <p className="text-slate-400">({article.rating_count})</p>
