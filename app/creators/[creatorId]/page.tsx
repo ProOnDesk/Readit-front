@@ -71,25 +71,22 @@ export async function generateStaticParams() {
   const data = await fetchUsersNumber();
   const total = data?.total || 0;
 
-  // Generujemy identyfikatory użytkowników
   const creatorIds = Array.from({ length: total }, (_, i) =>
     (i + 1).toString()
   );
 
   let allParams: { creatorId: string; page: string }[] = [];
 
-  // Używamy pętli for...of, aby poprawnie obsłużyć asynchroniczne fetchowanie
   for (const id of creatorIds) {
     const userPages = await fetchUserArticles({ userId: +id, page: "1" });
     const pages = userPages?.pages || 1;
 
-    // Generujemy parametry dla każdej strony użytkownika
     const params = Array.from({ length: pages }, (_, i) => ({
       creatorId: id,
       page: (i + 1).toString(),
     }));
 
-    allParams = [...allParams, ...params]; // Dodajemy parametry do zbiorczej tablicy
+    allParams = [...allParams, ...params];
   }
 
   return allParams;
