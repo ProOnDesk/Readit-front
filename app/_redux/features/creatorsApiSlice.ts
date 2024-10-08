@@ -1,8 +1,8 @@
 import { apiSlice } from '../services/apiSlice';
-import { User } from './authApiSlice';
+import { GetUserType, User } from './authApiSlice';
 
 export interface PaginatonType {
-	items: User[];
+	items: GetUserType[];
 	page: number;
 	pages: number;
 	size: number;

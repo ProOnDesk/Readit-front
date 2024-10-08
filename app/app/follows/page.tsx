@@ -1,10 +1,16 @@
-"use client";
-
-import { useRetrieveUserQuery } from "@/app/_redux/features/authApiSlice";
+import PaginationArticles from "@/app/_components/browseArticles/PaginationArticles";
+import FollowedByMe from "@/app/_components/follows/FollowedByMe";
+import UsersContainer from "@/app/_components/follows/UsersContainer";
 import React from "react";
 
-export default function Page() {
-  const { data: user, isLoading } = useRetrieveUserQuery();
-
-  return <div>Obserwacje uzytkownika o id: {user?.id}</div>;
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { page: string };
+}) {
+  return (
+    <div>
+      <FollowedByMe page={searchParams.page} />
+    </div>
+  );
 }
