@@ -1,6 +1,6 @@
 "use client";
 
-import { User } from "@/app/_redux/features/authApiSlice";
+import { GetUserType, User } from "@/app/_redux/features/authApiSlice";
 import {
   PaginatonType,
   useGetUsersTopArticlesMutation,
@@ -8,10 +8,10 @@ import {
 import { useEffect, useState } from "react";
 import { FiChevronsDown } from "react-icons/fi";
 import Spinner from "../ui/Spinner";
-import UserItem from "./UserItem";
+import UserItem from "../follows/UserItem";
 
 export default function TopArticlesSection() {
-  const [topUsersFollows, setTopUsersFollows] = useState<User[]>([]);
+  const [topUsersFollows, setTopUsersFollows] = useState<GetUserType[]>([]);
   const [page, setPage] = useState(2);
   const [getUsersTopFollows, { isLoading, data }] =
     useGetUsersTopArticlesMutation();

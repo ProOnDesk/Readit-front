@@ -1,22 +1,24 @@
 "use client";
 
-import { User } from "@/app/_redux/features/authApiSlice";
+import { GetUserType } from "@/app/_redux/features/authApiSlice";
 import {
-  useGetUsersTopFollowsMutation,
   PaginatonType,
+  useGetUsersTopFollowsMutation,
 } from "@/app/_redux/features/creatorsApiSlice";
-import React, { useEffect, useState } from "react";
-import UserItem from "./UserItem";
+import { useEffect, useState } from "react";
 import { FiChevronsDown } from "react-icons/fi";
+import UserItem from "../follows/UserItem";
 import Spinner from "../ui/Spinner";
 
 export default function CreatorsSecion() {
-  const [topUsersFollows, setTopUsersFollows] = useState<User[]>([]);
+  const [topUsersFollows, setTopUsersFollows] = useState<GetUserType[]>([]);
   const [page, setPage] = useState(2);
   const [getUsersTopFollows, { isLoading, data }] =
     useGetUsersTopFollowsMutation();
   // const [userWidth, setUserWidth] = useState(null);
   const [itemsPerPage, setItemsPerPage] = useState(2);
+
+  console.log(data);
 
   useEffect(function () {
     setItemsPerPage(
