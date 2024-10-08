@@ -1,6 +1,7 @@
 import { FaArrowDown, FaArrowUp, FaMinus } from 'react-icons/fa';
 import { LuText } from 'react-icons/lu';
 import { CiImageOn, CiText } from 'react-icons/ci';
+import { IoCodeSlashOutline } from 'react-icons/io5';
 
 interface ListElementProps {
 	type: string;
@@ -29,11 +30,13 @@ export default function ListElement({
 					{type === 'title' && <CiText />}
 					{type === 'image' && <CiImageOn />}
 					{type === 'text' && <LuText />}
+					{type === 'listing' && <IoCodeSlashOutline />}
 				</span>
 				<span>
 					{type === 'title' && 'Tytuł'}
 					{type === 'image' && 'Zdjęcie'}
 					{type === 'text' && 'Tekst'}
+					{type === 'listing' && 'Listing'}
 				</span>
 			</span>
 			<span className='flex flex-row gap-1 sm:gap-3 text-sm sm:text-lg group-[.list-element]:group-hover:opacity-100 opacity-0 transition-all duration-300'>
