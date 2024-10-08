@@ -4,6 +4,7 @@ import { CiImageOn, CiText } from 'react-icons/ci';
 import ListElement from './ListElement';
 import AddListElement from './AddListElement';
 import { IoIosArrowForward } from 'react-icons/io';
+import { IoCodeSlashOutline } from 'react-icons/io5';
 
 interface ArticleSettingsProps {
 	articleList: { content_type: string; content: string }[];
@@ -140,6 +141,23 @@ export default function ArticleSettings({
 											{
 												content_type: 'image',
 												content: '',
+											},
+										]);
+									}}
+								/>
+								<AddListElement
+									leftIcon={<IoCodeSlashOutline />}
+									text='Dodaj listing'
+									rightIcon={'+'}
+									onClick={() => {
+										setArticleList((currList) => [
+											...currList,
+											{
+												content_type: 'listing',
+												content: `int main() {
+    std::cout << "Hello, World!" << std::endl;
+    return 0;
+}`,
 											},
 										]);
 									}}

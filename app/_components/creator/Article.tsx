@@ -3,6 +3,7 @@ import TitleElement from './TitleElement';
 import TextElement from './TextElement';
 import ImageElement from './ImageElement';
 import Image from 'next/image';
+import ListingElement from './ListingElement';
 
 export default function Article({
 	articleList,
@@ -64,6 +65,12 @@ export default function Article({
 							index={index}
 							element={element}
 							articleList={articleList}
+							setArticleList={setArticleList}
+						/>
+					) : element?.content_type === 'listing' ? (
+						<ListingElement
+							index={index}
+							element={element}
 							setArticleList={setArticleList}
 						/>
 					) : null}
