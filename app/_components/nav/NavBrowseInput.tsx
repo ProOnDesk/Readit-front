@@ -8,6 +8,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { IoCloseOutline } from "react-icons/io5";
 import Spinner from "../ui/Spinner";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NavBrowseInput() {
   const [inputValue, setInputValue] = useState("");
@@ -121,7 +122,7 @@ export default function NavBrowseInput() {
                       >
                         <div className="w-10 h-10 rounded-full overflow-hidden">
                           <img
-                            src={user.avatar}
+                            src={user.avatar_url}
                             alt={user.first_name}
                             className="w-full h-full object-cover"
                           />
