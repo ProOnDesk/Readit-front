@@ -1,7 +1,7 @@
 "use client";
 
 import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
-import { useGetUserFollwedByMeMutation } from "@/app/_redux/features/authApiSlice";
+import { useGetUserFollowMeMutation } from "@/app/_redux/features/authApiSlice";
 import { useEffect } from "react";
 import PaginationArticles from "../browseArticles/PaginationArticles";
 import UserItemLoader from "./UserItemLoader";
@@ -11,8 +11,10 @@ interface FollowedByMeProps {
   page: string;
 }
 
-export default function FollowedByMe({ page = "1" }: FollowedByMeProps) {
-  const [fetchFollows, { isLoading, data }] = useGetUserFollwedByMeMutation();
+export default function FollowMe({ page = "1" }: FollowedByMeProps) {
+  const [fetchFollows, { isLoading, data }] = useGetUserFollowMeMutation();
+
+  console.log(data);
 
   useEffect(() => {
     if (!isLoading) {
@@ -31,9 +33,9 @@ export default function FollowedByMe({ page = "1" }: FollowedByMeProps) {
     <div className="max-w-[1800px] mx-auto">
       <div className="py-12 md:py-16 px-4 sm500:px-8 sm:px-12 lg:px-16 lg:py-20">
         <h3 className="font-semibold text-2xl sm500:text-3xl sm:text-4xl text-left">
-          Moje obserwacje
+          Moi obserwujący
         </h3>
-        <p>Obserwowani: {data?.total}</p>
+        <p>Obserwujący: {data?.total}</p>
       </div>
       <div>
         {isLoading ? (

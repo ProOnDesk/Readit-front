@@ -113,12 +113,21 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
               </span>
             </Link>
             <Link
-              href="/app/follows"
+              href="/app/followed"
               className="block w-full group focus:outline-none py-4 font-medium"
               onClick={closeNav}
             >
               <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300">
-                Moje obserwacje
+                Obserwowani
+              </span>
+            </Link>
+            <Link
+              href="/app/followers"
+              className="block w-full group focus:outline-none py-4 font-medium"
+              onClick={closeNav}
+            >
+              <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300">
+                Obserwujący
               </span>
             </Link>
             <Link
