@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 
 export default function page() {
 	return (
-		<div className='w-full md:h-[calc(100vh-80px)] h-[calc(100vh-64px)] bg-blackSecond/10 flex justify-center items-center'>
-			<div className='mx-auto px-10 py-5 bg-white rounded-md max-w-2xl shadow-md'>
+		<div className='w-full md:min-h-[calc(100vh-80px)] min-h-[calc(100vh-64px)] bg-whiteSecond flex justify-center items-center'>
+			<div className='mx-auto my-8 px-10 py-5 bg-white rounded-md max-w-2xl shadow-md'>
 				<div className='flex flex-col items-center text-center'>
 					<p className='mb-4 aspect-square border rounded-full p-4 border-black'>
 						<i className='bi bi-envelope-arrow-up  text-3xl'></i>

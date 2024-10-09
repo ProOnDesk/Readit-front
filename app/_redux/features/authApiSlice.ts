@@ -12,7 +12,7 @@ export interface User {
   skill_list: { id: number; skill_name: string }[];
   background_image: string;
   article_count: number;
-  articles: Article[];
+  avg_rating_from_articles: number
 }
 
 export interface Article {
@@ -34,6 +34,25 @@ export interface Article {
   title_image_url: string;
   rating: number;
   rating_count: number;
+}
+
+export interface GetUserType {
+  id: number;
+  first_name: string;
+  last_name: string;
+  avatar_url: string;
+  background_image_url: string;
+  follower_count: number;
+  article_count: number;
+  avg_rating_from_articles: number;
+}
+
+export interface GetUserTypePaginated {
+  items: GetUserType[];
+  page: number;
+  pages: number;
+  size: number;
+  total: number;
 }
 
 const authApiSlice = apiSlice.injectEndpoints({
@@ -157,6 +176,18 @@ const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
+    getUserFollwedByMe: builder.mutation<GetUserTypePaginated, { page: string }>({
+      query: ({ page }) => ({
+        url: `/user/followers/followed_by/me?page=${page}&size=12`,
+        method: "GET",
+      }),
+    }),
+    getUserFollowMe: builder.mutation<GetUserTypePaginated, { page: string }>({
+      query: ({ page }) => ({
+        url: `/user/followers/following/me?page=${page}&size=12`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -175,4 +206,6 @@ export const {
   useFollowUserMutation,
   useCheckIfFollowQuery,
   useUnfollowUserMutation,
+  useGetUserFollwedByMeMutation,
+  useGetUserFollowMeMutation
 } = authApiSlice;

@@ -3,6 +3,7 @@
 import { useFollowUSer } from "@/app/_hooks/useFollowUser";
 import { useUnfollowUSer } from "@/app/_hooks/useUnfollowUser";
 import {
+  GetUserType,
   useCheckIfFollowQuery,
   useGetUserFollowersQuery,
   User,
@@ -14,7 +15,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 
 interface FollowersAndButtonProps {
-  user: User | undefined;
+  user: GetUserType | undefined;
 }
 
 export default function FollowersAndButton({ user }: FollowersAndButtonProps) {
@@ -49,7 +50,6 @@ export default function FollowersAndButton({ user }: FollowersAndButtonProps) {
     },
     [isSuccessFollow, isSuccessUnfollow, refetch]
   );
-  console.log(isFollowing?.is_followed);
 
   return (
     <>

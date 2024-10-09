@@ -1,6 +1,6 @@
 "use client";
 
-import { User } from "@/app/_redux/features/authApiSlice";
+import { GetUserType, User } from "@/app/_redux/features/authApiSlice";
 import {
   PaginatonType,
   useGetUsersTopArticlesMutation,
@@ -8,10 +8,10 @@ import {
 import { useEffect, useState } from "react";
 import { FiChevronsDown } from "react-icons/fi";
 import Spinner from "../ui/Spinner";
-import UserItem from "./UserItem";
+import UserItem from "../follows/UserItem";
 
 export default function TopArticlesSection() {
-  const [topUsersFollows, setTopUsersFollows] = useState<User[]>([]);
+  const [topUsersFollows, setTopUsersFollows] = useState<GetUserType[]>([]);
   const [page, setPage] = useState(2);
   const [getUsersTopFollows, { isLoading, data }] =
     useGetUsersTopArticlesMutation();
@@ -50,7 +50,7 @@ export default function TopArticlesSection() {
   return (
     <div className="w-full px-4 pb-32">
       <h3 className="font-semibold text-2xl sm500:text-3xl sm:text-4xl text-center">
-       Najbardziej zaangażowani
+        Najbardziej zaangażowani
       </h3>
       <div className="w-full mx-auto pt-16 flex flex-col justify-center items-center gap-10">
         <div className="w-full h-fit grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 place-items-center mx-auto justify-center max-w-[680px] lg:max-w-[1020px] xl:max-w-[1360px] transition-all duration-300">
