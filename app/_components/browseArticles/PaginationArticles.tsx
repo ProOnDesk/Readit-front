@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 
 interface PaginationArticlesProps {
-  data: PaginationTypeArticles;
+  data?: PaginationTypeArticles;
   isBrowse?: boolean;
 }
 
@@ -52,7 +52,8 @@ export default function PaginationArticles({
             },
           },
         }}
-        count={data?.pages}
+        count={data?.pages || 1}
+        disabled={data?.pages === 1 || !data}
         defaultPage={+(new URLSearchParams(searchParams).get("page") || 1)}
         onChange={createPageURL}
         color="primary"
