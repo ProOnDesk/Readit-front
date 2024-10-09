@@ -176,9 +176,9 @@ const authApiSlice = apiSlice.injectEndpoints({
         };
       },
     }),
-    getUserFollwedByMe: builder.query<GetUserTypePaginated, { page: string }>({
+    getUserFollwedByMe: builder.mutation<GetUserTypePaginated, { page: string }>({
       query: ({ page }) => ({
-        url: `/user/followers/followed_by/me?page=${page}&size=4`,
+        url: `/user/followers/followed_by/me?page=${page}&size=12`,
         method: "GET",
       }),
     }),
@@ -200,5 +200,5 @@ export const {
   useFollowUserMutation,
   useCheckIfFollowQuery,
   useUnfollowUserMutation,
-  useGetUserFollwedByMeQuery,
+  useGetUserFollwedByMeMutation,
 } = authApiSlice;

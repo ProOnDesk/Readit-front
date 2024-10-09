@@ -1,27 +1,33 @@
 "use client";
 
-import { useGetUserFollwedByMeQuery } from "@/app/_redux/features/authApiSlice";
+import { useGetUserFollwedByMeMutation } from "@/app/_redux/features/authApiSlice";
 import React, { useEffect } from "react";
 import UsersContainer from "./UsersContainer";
 import PaginationArticles from "../browseArticles/PaginationArticles";
 import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
 import Spinner from "../ui/Spinner";
+import { useSearchParams } from "next/navigation";
+import UserItemLoader from "./UserItemLoader";
 
 interface FollowedByMeProps {
   page: string;
 }
 
 export default function FollowedByMe({ page = "1" }: FollowedByMeProps) {
-  const { data, isLoading, isFetching } = useGetUserFollwedByMeQuery({ page });
+  const [fetchFollows, { isLoading, data }] = useGetUserFollwedByMeMutation();
 
   useEffect(() => {
-    if (!isLoading && !isFetching) {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+    if (!isLoading) {
     }
-  }, [isLoading, isFetching]);
+  }, [isLoading]);
+
+  useEffect(() => {
+    fetchFollows({ page });
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [fetchFollows, page]);
 
   return (
     <div className="max-w-[1800px] mx-auto">
@@ -32,10 +38,15 @@ export default function FollowedByMe({ page = "1" }: FollowedByMeProps) {
         <p>Obserwowani: {data?.total}</p>
       </div>
       <div>
-        {isLoading || isFetching ? (
-          <div className="w-full h-full flex justify-center items-center">
-            <Spinner color="green" size="big" />
-          </div>
+        {isLoading ? (
+          <>
+            <div className="w-full h-fit grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 place-items-center mx-auto justify-center max-w-[680px] lg:max-w-[1020px] xl:max-w-[1360px] transition-all duration-300 px-4">
+              {Array.from({ length: 12 }).map((_, index) => (
+                <UserItemLoader key={index} />
+              ))}
+            </div>
+            <PaginationArticles />
+          </>
         ) : (
           <>
             <UsersContainer data={data} />
