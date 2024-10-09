@@ -15,7 +15,7 @@ export default function UserItem({ user }: UserItemProps) {
           <Image
             fill
             src={user?.background_image_url || ""}
-            className="bg-blue-500 object-cover object-center  h-full w-full"
+            className=" object-cover object-center  h-full w-full"
             alt={`${user?.first_name} ${user?.last_name}`}
           />
         </div>
@@ -53,7 +53,7 @@ export default function UserItem({ user }: UserItemProps) {
           </p>
         </div>
       </div>
-      <div className="flex w-full justify-between items-center px-4 mt-5">
+      <div className="flex w-full justify-between items-center px-6 mt-5">
         <FollowBtn user={user} />
 
         <Link
