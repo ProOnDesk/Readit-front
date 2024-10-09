@@ -22,6 +22,7 @@ export default function NavBrowseInput() {
   ] = useSearchForArticleMutation();
 
   const [request, setRequest] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(
     function () {
@@ -29,8 +30,10 @@ export default function NavBrowseInput() {
         searchForUser({ value: debouncedValue });
         searchForArticle({ value: debouncedValue });
         setRequest(true);
+        setNotFound(false);
       } else {
         setRequest(false);
+        setNotFound(false);
       }
     },
     [debouncedValue, searchForUser, searchForArticle]
@@ -39,12 +42,27 @@ export default function NavBrowseInput() {
   useEffect(
     function () {
       setRequest(false);
+      setNotFound(false);
     },
     [inputValue]
   );
 
+  useEffect(
+    function () {
+      if (
+        searchUsers &&
+        searchUsers.items.length === 0 &&
+        searchArticles &&
+        searchArticles.items.length === 0
+      ) {
+        setNotFound(true);
+      }
+    },
+    [searchUsers, searchArticles]
+  );
+
   return (
-    <div className="relative h-10 w-[280px] border-2 rounded-md grid grid-cols-[30px_1fr_30px] items-center px-1">
+    <div className="relative h-10 w-[280px] border-2 hover:border-mainGreen transition-colors duration-300 rounded-md grid grid-cols-[30px_1fr_30px] items-center px-1">
       <div className="flex justify-center items-center">
         <IoSearchOutline size={20} />
       </div>
@@ -72,8 +90,9 @@ export default function NavBrowseInput() {
                 <div className="flex justify-center items-center">
                   <IoSearchOutline size={20} />
                 </div>
-                <p className="flex justify-center items-center gap-1">
-                  Wyszukiwanie <span>&quot;{inputValue}&quot;</span>
+                <p className="flex justify-center items-center gap-1 text-nowrap">
+                  {notFound ? "Nie znaleziono" : "Wyszukiwanie"}{" "}
+                  <span>&quot;{inputValue}&quot;</span>
                 </p>
               </div>
             )}
