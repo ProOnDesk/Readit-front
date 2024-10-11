@@ -63,7 +63,8 @@ export default function ArticlesBought({ page = "1" }: ArticlesBoughtProps) {
               ))}
               {data?.items.length === 0 && (
                 <div className="col-span-5 place-self-center flex justify-center items-center gap-2">
-                  <ImFileEmpty /> Brak materiałów, zakup lub dodaj coś co cię interesuje, a twoje materiały pojawią się on tutaj.
+                  <ImFileEmpty /> Brak materiałów w bibliotece, zakup lub dodaj
+                  coś co cię interesuje, a twoje materiały pojawią się tutaj.
                 </div>
               )}
             </div>
