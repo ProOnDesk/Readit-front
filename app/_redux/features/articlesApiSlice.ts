@@ -35,6 +35,15 @@ const articleApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getBoughtArticles: builder.mutation<
+      PaginationTypeArticles,
+      { page: string }
+    >({
+      query: ({ page }) => ({
+        url: `/articles/bought-list?page=${page}&size=24`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -42,4 +51,5 @@ export const {
   useGetArticlesSearchQuery,
   useSearchForArticleMutation,
   useGetUserArticlesQuery,
+  useGetBoughtArticlesMutation,
 } = articleApiSlice;

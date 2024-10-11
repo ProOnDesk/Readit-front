@@ -1,10 +1,15 @@
-"use client";
 
-import { useRetrieveUserQuery } from "@/app/_redux/features/authApiSlice";
-import React from "react";
+import ArticlesBought from "@/app/_components/bought/ArticlesBought";
 
-export default function Page() {
-  const { data: user, isLoading } = useRetrieveUserQuery();
+export default function Page({
+  searchParams,
+}: {
+  searchParams: { page: string };
+}) {
 
-  return <div>Materiały uzytkownika o id: {user?.id}</div>;
+  return (
+    <div>
+      <ArticlesBought page={searchParams.page} />
+    </div>
+  );
 }
