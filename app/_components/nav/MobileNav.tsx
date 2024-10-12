@@ -95,6 +95,15 @@ export default function MobileNav({ closeNav }: MobileNavProps) {
           <>
             <div className="w-full h-[1px] bg-slate-200 my-2" />
             <Link
+              href="/app/lib"
+              className="block w-full group focus:outline-none py-4 font-medium"
+              onClick={closeNav}
+            >
+              <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300">
+                Biblioteka
+              </span>
+            </Link>
+            <Link
               href="/app/profile"
               className="block w-full group focus:outline-none py-4 font-medium"
               onClick={closeNav}
