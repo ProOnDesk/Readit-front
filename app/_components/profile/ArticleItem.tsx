@@ -1,5 +1,6 @@
 import { Article } from "@/app/_redux/features/authApiSlice";
 import { Rating } from "@mui/material";
+import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
@@ -7,11 +8,13 @@ import { MdOutlineRemoveRedEye } from "react-icons/md";
 interface ArticleItemProps {
   article: Article;
   isCreator?: boolean;
+  className?: string;
 }
 
 export default function ArticleItem({
   article,
   isCreator = false,
+  className,
 }: ArticleItemProps) {
   const link = isCreator
     ? `/materials/view/${encodeURIComponent(article.slug)}`
@@ -20,7 +23,10 @@ export default function ArticleItem({
   return (
     <Link
       href={link}
-      className="w-full max-h-[355px] flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group"
+      className={clsx(
+        "w-full max-h-[355px] flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group",
+        className
+      )}
     >
       <div className="relative w-full aspect-video overflow-hidden object-contain object-center">
         <Image

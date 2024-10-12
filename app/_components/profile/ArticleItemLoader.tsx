@@ -1,9 +1,21 @@
 import { Rating } from "@mui/material";
+import clsx from "clsx";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
-export default function ArticleItemLoader() {
+interface ArticleItemLoaderProps {
+  className?: string;
+}
+
+export default function ArticleItemLoader({
+  className,
+}: ArticleItemLoaderProps) {
   return (
-    <div className="w-full max-h-[355px] flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group">
+    <div
+      className={clsx(
+        "w-full max-h-[355px] flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group",
+        className
+      )}
+    >
       <div className="relative w-full aspect-video overflow-hidden object-contain object-center">
         <div className="object-cover object-center w-full h-full bg-gray-300" />
         <div className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 group-hover:opacity-25 transition-opacity duration-300" />

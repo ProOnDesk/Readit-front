@@ -9,6 +9,14 @@ export interface PaginationTypeArticles {
   total: number;
 }
 
+export interface PaginationTypeArticlesUpo {
+  items: { article: Article }[];
+  page: number;
+  pages: number;
+  size: number;
+  total: number;
+}
+
 const articleApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getArticlesSearch: builder.query<PaginationTypeArticles, { link: string }>({
@@ -36,11 +44,11 @@ const articleApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     getBoughtArticles: builder.mutation<
-      PaginationTypeArticles,
+      PaginationTypeArticlesUpo,
       { page: string }
     >({
       query: ({ page }) => ({
-        url: `/articles/bought-list?page=${page}&size=24`,
+        url: `/articles/bought-list?page=${page}&size=20`,
         method: "GET",
       }),
     }),
