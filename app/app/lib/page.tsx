@@ -1,5 +1,5 @@
 
-import ArticlesBought from "@/app/_components/bought/ArticlesBought";
+import ArticlesBought from "@/app/_components/boughtAndFav/ArticlesBought";
 
 export default function Page({
   searchParams,

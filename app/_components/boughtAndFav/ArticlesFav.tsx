@@ -3,21 +3,20 @@
 import {
   PaginationTypeArticles,
   useGetBoughtArticlesMutation,
+  useGetFavArticlesMutation,
 } from "@/app/_redux/features/articlesApiSlice";
 import { useEffect } from "react";
 import { ImFileEmpty } from "react-icons/im";
 import PaginationArticles from "../browseArticles/PaginationArticles";
-import ArticleItemLoader from "../profile/ArticleItemLoader";
 import ArticleItemSec from "./ArticleItemSec";
 import ArticleItemSecLoader from "./ArticleItemSecLoader";
 
-interface ArticlesBoughtProps {
+interface ArticlesFavProps {
   page: string;
 }
 
-export default function ArticlesBought({ page = "1" }: ArticlesBoughtProps) {
-  const [fetchBoughtArticles, { isLoading, data }] =
-    useGetBoughtArticlesMutation();
+export default function ArticlesFav({ page = "1" }: ArticlesFavProps) {
+  const [fetchFavArticles, { isLoading, data }] = useGetFavArticlesMutation();
 
   useEffect(() => {
     if (!isLoading) {
@@ -25,22 +24,20 @@ export default function ArticlesBought({ page = "1" }: ArticlesBoughtProps) {
   }, [isLoading]);
 
   useEffect(() => {
-    fetchBoughtArticles({ page });
+    fetchFavArticles({ page });
     window.scrollTo({
       top: 0,
       behavior: "smooth",
     });
-  }, [fetchBoughtArticles, page]);
-
-  console.log(data?.items);
+  }, [fetchFavArticles, page]);
 
   return (
     <div className="max-w-[1800px] mx-auto">
       <div className="py-12 md:py-16 px-4 sm500:px-8 sm:px-12 lg:px-16 lg:py-20">
         <h3 className="font-semibold text-2xl sm500:text-3xl sm:text-4xl text-left">
-          Biblioteka
+          Polubione materiały
         </h3>
-        <p>Posiadane materiały: {data?.total}</p>
+        <p>Polubione: {data?.total}</p>
       </div>
       <div>
         {isLoading ? (
@@ -58,19 +55,21 @@ export default function ArticlesBought({ page = "1" }: ArticlesBoughtProps) {
               {data?.items.map((article) => (
                 <ArticleItemSec
                   article={article.article}
+                  isInLib={false}
                   key={article.article.id}
                 />
               ))}
               {data?.items.length === 0 && (
-                <div className="col-span-5 place-self-center flex justify-center items-center gap-2">
-                  <ImFileEmpty /> Brak materiałów w bibliotece, zakup lub dodaj
-                  coś co cię interesuje, a twoje materiały pojawią się tutaj.
+                <div className="col-span-5 place-self-center flex justify-center items-center gap-2 justify-self-center">
+                  <ImFileEmpty /> Brak polubionych materiałów, dodaj je!
                 </div>
               )}
             </div>
-            <PaginationArticles
-              data={data as unknown as PaginationTypeArticles}
-            />
+            {data?.items && data?.items?.length > 0 && (
+              <PaginationArticles
+                data={data as unknown as PaginationTypeArticles}
+              />
+            )}
           </>
         )}
       </div>
