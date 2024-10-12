@@ -52,6 +52,15 @@ const articleApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getFavArticles: builder.mutation<
+      PaginationTypeArticlesUpo,
+      { page: string }
+    >({
+      query: ({ page }) => ({
+        url: `/articles/wish-list/all/me?page=${page}&size=20`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -60,4 +69,5 @@ export const {
   useSearchForArticleMutation,
   useGetUserArticlesQuery,
   useGetBoughtArticlesMutation,
+  useGetFavArticlesMutation,
 } = articleApiSlice;
