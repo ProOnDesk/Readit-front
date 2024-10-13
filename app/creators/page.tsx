@@ -14,11 +14,11 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <div className="">
-      <CreatorsAd />
+      {/* <CreatorsAd />
       <CreatorsBest />
       <SearchCreator />
       <CreatorsSecion />
-      <TopArticlesSection />
+      <TopArticlesSection /> */}
     </div>
   );
 }
