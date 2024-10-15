@@ -15,6 +15,7 @@ interface ArticleFormProps {
 	clearErrors: UseFormClearErrors<CreatorInputs>;
 	tags: string[];
 	setTags: React.Dispatch<React.SetStateAction<string[]>>;
+	actualImage?: string;
 }
 
 export default function ArticleForm({
@@ -24,6 +25,7 @@ export default function ArticleForm({
 	clearErrors,
 	tags,
 	setTags,
+	actualImage,
 }: ArticleFormProps) {
 	const addTag = (e: any) => {
 		e.preventDefault();
@@ -106,6 +108,7 @@ export default function ArticleForm({
 					register={register}
 					clearErrors={clearErrors}
 					types={['JPG', 'PNG', 'GIF', 'JPEG']}
+					placeholderImage={actualImage}
 				/>
 				<ErrorMessage>{errors?.image?.message}</ErrorMessage>
 			</div>

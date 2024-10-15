@@ -10,10 +10,16 @@ interface MaterialEditPageParams {
 
 export const metadata: Metadata = {
 	title: 'Edytuj artykuł | ReadIt',
-	description:
-		'Miejsce gdzie edytujesz swój artykuł.',
+	description: 'Miejsce gdzie edytujesz swój artykuł.',
 };
 
 export default function Page({ params }: MaterialEditPageParams) {
-	return <Editor materialSlug={params.materialSlug} />;
+	return (
+		<div className='py-16 md:px-10 px-4 max-w-[1800px] w-screen mx-auto'>
+			<p className='text-5xl mx-auto text-center mb-10'>
+				Witaj w kreatorze artykułów
+			</p>
+			<Editor materialSlug={params.materialSlug} />;
+		</div>
+	);
 }

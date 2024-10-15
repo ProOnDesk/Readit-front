@@ -18,11 +18,6 @@ type CreatorInputs = {
 	tags: string[];
 };
 
-type ArticleElement = {
-	content_type: string;
-	content: string;
-};
-
 export default function Editor({ materialSlug }: EditorProps) {
 	const [getArticleInfoToEdit, { data: articleInfo }] =
 		useGetArticleInfoToEditMutation();
@@ -37,6 +32,9 @@ export default function Editor({ materialSlug }: EditorProps) {
 		clearErrors,
 		formState: { errors },
 	} = useForm<CreatorInputs>();
+
+	const image = articleInfo?.title_image_url;
+	console.log(image);
 
 	useEffect(() => {
 		getArticleInfoToEdit({ article_slug: materialSlug });
@@ -62,6 +60,7 @@ export default function Editor({ materialSlug }: EditorProps) {
 				errors={errors}
 				setValue={setValue}
 				clearErrors={clearErrors}
+				actualImage={image}
 			/>
 			<div className='relative flex w-full h-[85vh] shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md overflow-hidden'>
 				<ArticleSettings
@@ -72,6 +71,7 @@ export default function Editor({ materialSlug }: EditorProps) {
 					articleList={articleList}
 					watch={watch}
 					setArticleList={setArticleList}
+					actualImage={image}
 				/>
 			</div>
 			<button

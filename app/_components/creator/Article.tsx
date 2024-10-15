@@ -9,19 +9,19 @@ export default function Article({
 	articleList,
 	setArticleList,
 	watch,
+	actualImage,
 }: {
 	articleList: { content_type: string; content: string }[];
 	setArticleList: React.Dispatch<
 		React.SetStateAction<{ content_type: string; content: string }[]>
 	>;
 	watch: any;
+	actualImage?: string;
 }) {
 	const imageUrl =
 		watch('image') && watch('image').length > 0
 			? URL.createObjectURL(watch('image')[0])
 			: null;
-
-	console.log(articleList);
 
 	return (
 		<div className='flex flex-col items-center md:w-3/4 py-10 overflow-y-scroll'>
@@ -41,7 +41,7 @@ export default function Article({
 			</p>
 			<div className=' w-full h-auto max-h-[500px] mb-10'>
 				<Image
-					src={imageUrl ?? '/placeholder-image.jpg'}
+					src={(imageUrl || actualImage) ?? '/placeholder-image.jpg'}
 					alt='Zdjęcie tytułowe'
 					width={1920}
 					height={1080}
