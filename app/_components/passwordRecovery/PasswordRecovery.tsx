@@ -6,30 +6,43 @@ import Link from "next/link";
 import InputBox from "../ui/InputBox";
 import { MdOutlineEmail } from "react-icons/md";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { useRegister } from "@/app/_hooks/useRegister";
+import { useResetPasswordMutation } from "@/app/_redux/features/authApiSlice";
+import toast from "react-hot-toast";
 
 export default function PasswordRecovery() {
+	const [passwordRecovery, { isLoading }] = useResetPasswordMutation();
+
 	const {
 		register,
 		handleSubmit,
 		getValues,
 		formState: { errors },
 	} = useForm<FieldValues>();
-	const { isLoading, registerHookFn } = useRegister();
 
 	const onSubmit: SubmitHandler<FieldValues> = (data) => {
-		registerHookFn({
-			email: data.email,
-			firstname: data.name,
-			lastname: data.surname,
-			password: data.password,
-			sex: data.sex,
-		});
+		console.log(data.email);
+		passwordRecovery({ email: data.email })
+			.unwrap()
+			.then(() => {
+				toast.success(
+					"Postępuj zgodnie z instrukcjami wysłanymi na podany adres email"
+				);
+			})
+			.catch((error) => {
+				console.log(error);
+				if (error?.detail?.msg) {
+					toast.error(error.detail.msg);
+				} else {
+					toast.error("Wystąpił nieoczekiwany błąd");
+				}
+			});
 	};
 
 	return (
 		<div className=" w-full max-w-[480px] flex flex-col justify-center items-cente  py-6 sm:shadow-shadowNewBox sm:py-8 bg-white rounded-md">
-			<div className="flex flex-col items-center px-5 sm:px-16">
+			<form
+				className="flex flex-col items-center px-5 sm:px-16"
+				onSubmit={handleSubmit(onSubmit)}>
 				<img src="/recovery.svg" alt="" width={50} height={50} />
 				<h2 className="text-lg sm:text-2xl font-semibold  py-2">
 					Resetowanie hasła
@@ -52,7 +65,9 @@ export default function PasswordRecovery() {
 					}}
 					icon={<MdOutlineEmail size={20} />}
 				/>
-				<button className="w-full mb-2 mt-6 shadow-shadowNewBox text-lg sm500:max-w-[250px] bg-mainGreen py-1 text-white sm:text-2xl tracking-tight rounded-full transition-all duration-300 hover:bg-mainGreenSecond">
+				<button
+					disabled={isLoading}
+					className="w-full mb-2 mt-6 shadow-shadowNewBox text-lg sm500:max-w-[250px] bg-mainGreen py-1 text-white sm:text-2xl tracking-tight rounded-full transition-all duration-300 hover:bg-mainGreenSecond">
 					Wyślij
 				</button>
 				<Link
@@ -60,7 +75,7 @@ export default function PasswordRecovery() {
 					className="text-xs sm:text-sm text-center mb-16 mt-3 hover:text-mainGreenSecond transition-all duration-300">
 					Nie możesz zresetować hasła?
 				</Link>
-			</div>
+			</form>
 			<Link
 				href="/"
 				className="pt-6 border-whiteSecond border-t-2  text-base sm:text-lg text-center px-5 w-full hover:text-blackSecond transition-all duration-300">
