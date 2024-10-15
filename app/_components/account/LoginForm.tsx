@@ -57,7 +57,7 @@ export default function LoginForm() {
           />
           <p className="text-sm text-end text-gray-500">
             <Link
-              href="/"
+              href="/password-recovery"
               className="text-sm hover:text-mainGreen transition-colors duration-300 under lined hover:before:bg-mainGreen"
             >
               Nie pamiętam hasła
