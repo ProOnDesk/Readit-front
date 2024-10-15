@@ -55,7 +55,7 @@ export default function ArticleForm({
 				<div className='relative flex flex-col gap-1'>
 					<label className='text-xl'>Tagi</label>
 					<div className='flex flex-wrap rounded-t-md gap-1 text-xl p-1 px-2 min-h-[52px] focus:outline-none peer bg-blackSecond/5'>
-						{tags.map((tag, index) => (
+						{tags?.map((tag, index) => (
 							<button
 								onClick={() => {
 									deleteTag(tag);
@@ -67,7 +67,7 @@ export default function ArticleForm({
 								<IoIosClose className='group-[.tag-element]:group-hover:text-red-500 text-2xl' />
 							</button>
 						))}
-						{tags.length < 3 && (
+						{tags?.length < 3 && (
 							<input
 								// {...register('title', { required: 'Tytuł jest wymagany' })}
 								onKeyDown={(e) => {

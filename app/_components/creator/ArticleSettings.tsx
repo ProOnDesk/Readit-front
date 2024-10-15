@@ -7,7 +7,7 @@ import { IoIosArrowForward } from 'react-icons/io';
 import { IoCodeSlashOutline } from 'react-icons/io5';
 
 interface ArticleSettingsProps {
-	articleList: { content_type: string; content: string }[];
+	articleList?: { content_type: string; content: string }[];
 	setArticleList: React.Dispatch<
 		React.SetStateAction<{ content_type: string; content: string }[]>
 	>;
@@ -90,7 +90,7 @@ export default function ArticleSettings({
 					<div className='flex flex-col'>
 						{choosenOption === 'content' ? (
 							<>
-								{articleList.map((element, index) => (
+								{articleList?.map((element, index) => (
 									<ListElement
 										key={index}
 										type={element.content_type}

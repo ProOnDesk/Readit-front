@@ -21,6 +21,8 @@ export default function Article({
 			? URL.createObjectURL(watch('image')[0])
 			: null;
 
+	console.log(articleList);
+
 	return (
 		<div className='flex flex-col items-center md:w-3/4 py-10 overflow-y-scroll'>
 			<p className='text-center text-5xl mb-2 px-5'>
@@ -46,7 +48,7 @@ export default function Article({
 					className='object-cover w-full max-h-full h-auto object-center'
 				/>
 			</div>
-			{articleList.map((element, index) => (
+			{articleList?.map((element, index) => (
 				<div key={index} className='px-5 pb-5 w-full'>
 					{element?.content_type === 'title' ? (
 						<TitleElement
