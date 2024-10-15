@@ -26,7 +26,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="w-full max-w-[480px] sm:shadow-lg sm:px-14 sm:py-12 bg-white">
+    <div className="w-full max-w-[480px] sm:shadow-lg sm:px-14 sm:py-12 bg-white rounded-md">
       <h4 className="text-3xl font-medium mb-5">Zaloguj</h4>
       <form
         onSubmit={handleSubmit(onSubmit)}

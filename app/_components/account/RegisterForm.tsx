@@ -29,51 +29,52 @@ export default function RegisterForm() {
 		});
 	};
 
-	return (
-		<div className="w-full max-w-[480px] sm:shadow-lg sm:px-14 sm:py-8 bg-white">
-			<h4 className="text-3xl font-medium mb-5">Zarejestruj</h4>
-			<form
-				onSubmit={handleSubmit(onSubmit)}
-				className="w-full flex flex-col justify-center items-center gap-3">
-				<InputBox
-					id="name"
-					type="text"
-					label="Imię"
-					error={errors?.name?.message}
-					register={register}
-					icon={<LuPencilLine size={20} />}
-				/>
-				<InputBox
-					id="surname"
-					type="text"
-					label="Nazwisko"
-					error={errors?.surname?.message}
-					register={register}
-					icon={<LuPencilLine size={20} />}
-				/>
-				<InputBox
-					id="email"
-					type="email"
-					label="Email"
-					error={errors?.email?.message}
-					register={register}
-					validateFunction={() => {
-						const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-						if (!emailRegex.test(getValues().email))
-							return "Niepoprawny e-mail";
-						else return true;
-					}}
-					icon={<MdOutlineEmail size={20} />}
-				/>
-				<InputBox
-					id="password"
-					type="password"
-					label="Hasło"
-					error={errors?.password?.message}
-					register={register}
-					validateFunction={() => {
-						const passwordRegex =
-							/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+  return (
+    <div className="w-full max-w-[480px] sm:shadow-lg sm:px-14 sm:py-8 bg-white rounded-md">
+      <h4 className="text-3xl font-medium mb-5">Zarejestruj</h4>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full flex flex-col justify-center items-center gap-3"
+      >
+        <InputBox
+          id="name"
+          type="text"
+          label="Imię"
+          error={errors?.name?.message}
+          register={register}
+          icon={<LuPencilLine size={20} />}
+        />
+        <InputBox
+          id="surname"
+          type="text"
+          label="Nazwisko"
+          error={errors?.surname?.message}
+          register={register}
+          icon={<LuPencilLine size={20} />}
+        />
+        <InputBox
+          id="email"
+          type="email"
+          label="Email"
+          error={errors?.email?.message}
+          register={register}
+          validateFunction={() => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(getValues().email))
+              return "Niepoprawny e-mail";
+            else return true;
+          }}
+          icon={<MdOutlineEmail size={20} />}
+        />
+        <InputBox
+          id="password"
+          type="password"
+          label="Hasło"
+          error={errors?.password?.message}
+          register={register}
+          validateFunction={() => {
+            const passwordRegex =
+              /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 
 						if (!passwordRegex.test(getValues().password))
 							return "Hasło wymaga: min. 8 znaków, duża litera, cyfra oraz znak specjalny";

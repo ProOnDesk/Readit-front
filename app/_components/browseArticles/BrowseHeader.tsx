@@ -2,7 +2,7 @@ import React from "react";
 
 export default function BrowseHeader() {
   return (
-    <div className="w-full bg-blackThird">
+    <div className="w-full bg-blackThird" id="browseHeader">
       <div className="w-full flex justify-center items-center text-center py-20 md:py-32 md:justify-start px-6 md:px-14 sm500:text-lg md:text-xl max-w-[1800px] mx-auto text-whiteSecond">
         <div className=" flex justify-center items-center gap-10 h-full">
           <div className="w-1 h-[270px] bg-mainGreen hidden md:block" />

@@ -1,11 +1,15 @@
+
+import ArticlesBought from "@/app/_components/boughtAndFav/ArticlesBought";
+
 export default function Page({
   searchParams,
 }: {
   searchParams: { page: string };
 }) {
+
   return (
     <div>
-      tutaj edycja i zarzadzanie materialami utwozonymi przez uzytkownika es
+      <ArticlesBought page={searchParams.page} />
     </div>
   );
 }

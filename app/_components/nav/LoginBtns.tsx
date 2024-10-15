@@ -30,7 +30,22 @@ export default function LoginBtns() {
               </div>
             }
           >
-            {" "}
+            <Link
+              href="/app/lib"
+              className="block w-full group focus:outline-none py-4 font-medium "
+            >
+              <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300 text-nowrap">
+                Biblioteka
+              </span>
+            </Link>
+            <Link
+              href="/app/favorites"
+              className="block w-full group focus:outline-none py-4 font-medium "
+            >
+              <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300 text-nowrap">
+                Polubione
+              </span>
+            </Link>
             <Link
               href="/app/profile"
               className="block w-full group focus:outline-none py-4 font-medium "
@@ -48,11 +63,19 @@ export default function LoginBtns() {
               </span>
             </Link>
             <Link
-              href="/app/follows"
+              href="/app/followed"
               className="block w-full group focus:outline-none py-4 font-medium"
             >
               <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300 text-nowrap">
-                Moje obserwacje
+                Obserwowani
+              </span>
+            </Link>
+            <Link
+              href="/app/followers"
+              className="block w-full group focus:outline-none py-4 font-medium"
+            >
+              <span className="relative before:absolute before:w-full before:bottom-0 before:left-0 before:h-[1px] before:bg-black before:scale-x-0 group-hover:before:scale-x-100 before:origin-left before:transition-all before:duration-300 text-nowrap">
+                Obserwujący
               </span>
             </Link>
             <Link

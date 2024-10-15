@@ -1,14 +1,17 @@
-"use client";
+'use client';
 
-import { redirect } from "next/navigation";
-import { useAppSelector } from "../_redux/hooks";
+import { redirect } from 'next/navigation';
+import { useAppSelector } from '../_redux/hooks';
+import Spinner from './ui/Spinner';
 
 export default function AuthProvider() {
-  const { isAuthenticated } = useAppSelector((state) => state.auth);
+	const { isLoading, isAuthenticated } = useAppSelector((state) => state.auth);
 
-  if (!isAuthenticated) {
-    redirect("/login");
-  }
+	if (isLoading) return;
 
-  return null;
+	if (!isAuthenticated) {
+		redirect('/login');
+	}
+
+	return null;
 }

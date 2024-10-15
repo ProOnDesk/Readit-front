@@ -1,16 +1,21 @@
 import { Article } from "@/app/_redux/features/authApiSlice";
 import { Rating } from "@mui/material";
-import { StarIcon } from "lucide-react";
+import clsx from "clsx";
+import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 
 interface ArticleItemProps {
   article: Article;
   isCreator?: boolean;
+  className?: string;
 }
 
-export default function ArticleItem({ article, isCreator }: ArticleItemProps) {
+export default function ArticleItem({
+  article,
+  isCreator = false,
+  className,
+}: ArticleItemProps) {
   const link = isCreator
     ? `/materials/view/${encodeURIComponent(article.slug)}`
     : `/materials/${encodeURIComponent(article.slug)}`;
@@ -18,10 +23,14 @@ export default function ArticleItem({ article, isCreator }: ArticleItemProps) {
   return (
     <Link
       href={link}
-      className="w-full max-h-[355px] flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group"
+      className={clsx(
+        "w-full max-h-[355px] flex flex-col justify-start items-start shadow-xl rounded-lg overflow-hidden group",
+        className
+      )}
     >
       <div className="relative w-full aspect-video overflow-hidden object-contain object-center">
-        <img
+        <Image
+          fill
           src={article.title_image_url}
           className="object-cover object-center w-full h-full"
           alt={`${article.title}`}
@@ -41,7 +50,7 @@ export default function ArticleItem({ article, isCreator }: ArticleItemProps) {
             <Rating
               value={article.rating}
               readOnly
-              precision={0.01}
+              precision={0.1}
               size="small"
             />
             <p className="text-slate-400">({article.rating_count})</p>

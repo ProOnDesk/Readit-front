@@ -9,6 +9,14 @@ export interface PaginationTypeArticles {
   total: number;
 }
 
+export interface PaginationTypeArticlesUpo {
+  items: { article: Article }[];
+  page: number;
+  pages: number;
+  size: number;
+  total: number;
+}
+
 const articleApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getArticlesSearch: builder.query<PaginationTypeArticles, { link: string }>({
@@ -26,8 +34,40 @@ const articleApiSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    getUserArticles: builder.query<
+      PaginationTypeArticles,
+      { userId: number; page?: number }
+    >({
+      query: ({ userId, page = 1 }) => ({
+        url: `/user/get/articles/${userId}?page=${page}&size=12`,
+        method: "GET",
+      }),
+    }),
+    getBoughtArticles: builder.mutation<
+      PaginationTypeArticlesUpo,
+      { page: string }
+    >({
+      query: ({ page }) => ({
+        url: `/articles/bought-list?page=${page}&size=20`,
+        method: "GET",
+      }),
+    }),
+    getFavArticles: builder.mutation<
+      PaginationTypeArticlesUpo,
+      { page: string }
+    >({
+      query: ({ page }) => ({
+        url: `/articles/wish-list/all/me?page=${page}&size=20`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetArticlesSearchQuery, useSearchForArticleMutation } =
-  articleApiSlice;
+export const {
+  useGetArticlesSearchQuery,
+  useSearchForArticleMutation,
+  useGetUserArticlesQuery,
+  useGetBoughtArticlesMutation,
+  useGetFavArticlesMutation,
+} = articleApiSlice;

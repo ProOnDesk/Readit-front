@@ -2,11 +2,10 @@
 
 import { useDebounce } from "@/app/_hooks/useDebounce";
 import { useSearchForUserMutation } from "@/app/_redux/features/creatorsApiSlice";
-import { request } from "http";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoCloseOutline, IoSearchOutline } from "react-icons/io5";
+import UserItem from "../follows/UserItem";
 import Spinner from "../ui/Spinner";
-import UserItem from "./UserItem";
 
 export default function SearchCreator() {
   const [inputValue, setInputValue] = useState("");

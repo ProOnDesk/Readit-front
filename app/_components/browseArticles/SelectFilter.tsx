@@ -19,8 +19,8 @@ export default function SelectFilter({
       params.delete(param);
     } else {
       params.set(param, filter);
+      params.set("page", "1");
     }
-    // params.set("page", "1");
     router.replace(`${path}?${params.toString()}`, { scroll: false });
   }
 

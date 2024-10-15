@@ -20,8 +20,6 @@ interface PageProps {
 }
 
 export default function Page({ searchParams }: PageProps) {
-  console.log(searchParams);
-
   return (
     <div>
       <BrowseHeader />
