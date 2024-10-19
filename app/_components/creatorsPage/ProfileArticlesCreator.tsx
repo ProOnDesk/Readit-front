@@ -46,8 +46,7 @@ export default async function ProfileArticlesCreator({
           >
             <ArticlesContainerCreator page={page} userId={user.id} />
           </Suspense>
-
-          {data?.pages && data.pages > 1 && (
+          {(data?.pages ?? 0) > 1 && (
             <div className="col-span-1 sm550:col-span-2 md800:col-span-3 lg1100:col-span-4">
               <PaginationArticles data={data!} />
             </div>
