@@ -9,6 +9,7 @@ export default function CreatorsAd() {
     loop: true,
     duration: 500,
     slidesToScroll: 1,
+    dragFree: true,
   };
 
   return (
