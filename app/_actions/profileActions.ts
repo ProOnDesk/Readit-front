@@ -1,7 +1,7 @@
 "use server";
 
 import { PaginationTypeArticles } from "../_redux/features/articlesApiSlice";
-import { User } from "../_redux/features/authApiSlice";
+import { GetUserTypePaginated, User } from "../_redux/features/authApiSlice";
 
 export async function fetchUserByIdQuery({ id }: { id: string }) {
   try {
@@ -69,5 +69,39 @@ export async function fetchUsersNumber() {
     return data;
   } catch (error) {
     console.log("Nie udało się pobrać liczby uzytkownikow", error);
+  }
+}
+
+export async function getCreatorsSearch(params: {
+  page: string;
+  sort_by: string;
+  value: string;
+}) {
+  let link = `${process.env.NEXT_PUBLIC_HOST}/user/search?sort_order=desc`;
+
+  if (params.value) {
+    link += `&value=${decodeURIComponent(params.value)}`;
+  }
+
+  if (params.sort_by) {
+    link += `&sort_by=${params.sort_by}`;
+  }
+
+  link += `&page=${params.page || 1}`;
+
+  try {
+    const response = await fetch(`${link}&size=12`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error(`Błąd serwera: ${response.status}`);
+    }
+    const data: GetUserTypePaginated = await response.json();
+    return data;
+  } catch (error) {
+    console.log("Nie udało się pobrać twórców", error);
   }
 }

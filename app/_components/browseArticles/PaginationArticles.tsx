@@ -1,12 +1,13 @@
 "use client";
 
 import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
+import { GetUserTypePaginated } from "@/app/_redux/features/authApiSlice";
 import { Pagination } from "@mui/material";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
 
 interface PaginationArticlesProps {
-  data?: PaginationTypeArticles;
+  data?: PaginationTypeArticles | GetUserTypePaginated;
   isBrowse?: boolean;
 }
 

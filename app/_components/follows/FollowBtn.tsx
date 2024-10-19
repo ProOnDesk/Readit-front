@@ -6,7 +6,7 @@ import {
   GetUserType,
   useCheckIfFollowQuery,
   useGetUserFollowersQuery,
-  useRetrieveUserQuery
+  useRetrieveUserQuery,
 } from "@/app/_redux/features/authApiSlice";
 import { notFound, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -17,12 +17,11 @@ interface FollowersAndButtonProps {
 }
 
 export default function FollowBtn({ user }: FollowersAndButtonProps) {
-  const { data: me, isLoading: isLoadingMe } = useRetrieveUserQuery();
-  const { isLoading, data, refetch } = useGetUserFollowersQuery({
+  const { isLoading: isLoadingMe } = useRetrieveUserQuery();
+  const { refetch } = useGetUserFollowersQuery({
     userId: user?.id || notFound(),
   });
   const searchParams = useSearchParams();
-  const page = searchParams.get("page") || "1";
 
   const {
     followUserHookFn,
@@ -54,12 +53,11 @@ export default function FollowBtn({ user }: FollowersAndButtonProps) {
 
   return (
     <>
-      {(isLoadingCheck || isLoadingMe) && (
-        <div className="bg-mainGreen text-white hover:bg-mainGreenSecond border-2 border-transparent transition-colors duration-300 rounded-full px-6 py-3 text-sm font-semibold">
+      {isLoadingCheck || isLoadingMe ? (
+        <div className="bg-mainGreen text-white hover:bg-mainGreenSecond border-2 border-transparent transition-colors duration-300 rounded-full w-[112px] h-[47px] text-sm font-semibold flex justify-center items-center">
           <Spinner />
         </div>
-      )}
-      {!isLoadingCheck && !isLoadingMe && isFollowing?.is_followed ? (
+      ) : !isLoadingCheck && !isLoadingMe && isFollowing?.is_followed ? (
         <button
           onClick={unfollowUserHookFn}
           className="bg-white text-mainGreen border-2 border-mainGreen hover:border-mainGreenSecond transition-colors duration-300 rounded-full px-6 py-3 text-sm font-semibold"
