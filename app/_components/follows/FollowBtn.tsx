@@ -17,12 +17,11 @@ interface FollowersAndButtonProps {
 }
 
 export default function FollowBtn({ user }: FollowersAndButtonProps) {
-  const { data: me, isLoading: isLoadingMe } = useRetrieveUserQuery();
-  const { isLoading, data, refetch } = useGetUserFollowersQuery({
+  const { isLoading: isLoadingMe } = useRetrieveUserQuery();
+  const { refetch } = useGetUserFollowersQuery({
     userId: user?.id || notFound(),
   });
   const searchParams = useSearchParams();
-  const page = searchParams.get("page") || "1";
 
   const {
     followUserHookFn,
