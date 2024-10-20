@@ -1,6 +1,7 @@
 import React from "react";
 import BrowseHeader from "../_components/browseArticles/BrowseHeader";
 import Content from "../_components/browseArticles/Content";
+import FooterHomepage from "../_components/homepage/FooterHomepage";
 
 
 export interface SearchParams {
@@ -24,6 +25,8 @@ export default function Page({ searchParams }: PageProps) {
     <div>
       <BrowseHeader />
       <Content params={searchParams} />
+      <div className="py-5"></div>
+			<FooterHomepage  colorVariant="dark" />
     </div>
   );
 }
