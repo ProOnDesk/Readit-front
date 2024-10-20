@@ -60,7 +60,7 @@ export default function InputBox({
         </div>
         <input
           id={id}
-          className="border-none focus:outline-none px-3 w-full self-e"
+          className="border-none focus:outline-none px-3 w-full"
           type={type}
           placeholder={label}
           {...register(id, {
