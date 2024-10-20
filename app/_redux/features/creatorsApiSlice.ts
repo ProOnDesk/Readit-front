@@ -31,7 +31,7 @@ const creatorsApiSlice = apiSlice.injectEndpoints({
     }),
     searchForUser: builder.mutation<
       PaginatonType,
-      { value: string; sortBy: string; page: string }
+      { value?: string; sortBy?: string; page?: string }
     >({
       query: ({ value, sortBy, page }) => ({
         url: `/user/search?value=${value}&sort_order=desc&sort_by=${sortBy}&page=${page}&size=12`,
