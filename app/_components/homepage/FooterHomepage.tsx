@@ -1,111 +1,126 @@
+import clsx from "clsx";
+import Image from "next/image";
 import Link from "next/link";
-import { LiaFacebookF } from "react-icons/lia";
+import { FaDiscord, FaFacebook } from "react-icons/fa";
+import { RiLinkedinLine, RiTwitterXFill } from "react-icons/ri";
 import { SlSocialInstagram } from "react-icons/sl";
-import { RiTwitterXFill } from "react-icons/ri";
-import { RiLinkedinLine } from "react-icons/ri";
 
-export default function FooterHomepage() {
-  const currentYear = new Date().getFullYear();
+interface FooterHomepageProps {
+  colorVariant?: "light" | "dark";
+}
 
+export default function FooterHomepage({
+  colorVariant = "light",
+}: FooterHomepageProps) {
   return (
-    <footer className="flex flex-col justify-center items-center py-4 text-whiteSecond bg-blackSecond">
-      <h3 className="flex items-start max-w-[1800px]  text-2xl py-2 sm500:text-3xl ">
-        ReadIt
-      </h3>
-      <div className="grid grid-cols-2 gap-x-12 gap-y-4 py-6 sm500:py-8 sm500:gap-x-20  sm500:gap-y-6 sm600:grid-cols-3 sm600:gap-x-14 lg:grid-cols-4">
-        <Link
-          href="/browse"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Przeglądaj materiały
-        </Link>
-        <Link
-          href="/creators"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Zobacz twórców
-        </Link>
-        <Link
-          href="/"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Najpopularniejsze
-        </Link>
-        <Link
-          href="/"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Dla autorów
-        </Link>
-        <Link
-          href="/"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Regulamin
-        </Link>
-        <Link
-          href="/register"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Zarejestruj się
-        </Link>
-        <Link
-          href="/register"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Logowanie
-        </Link>
-        <Link
-          href="/register"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Zasady
-        </Link>
-
-        <Link
-          href="/register"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          O nas
-        </Link>
-        <Link
-          href="/register"
-          className="text-whiteSecond hover:text-mainGreen tracking-wide leading-tight font-light transition-all duration-300 sm500:text-xl"
-        >
-          Kontakt
-        </Link>
-      </div>
-
-      <hr className="flex flex-col items-center w-10/12 h-1 mt-2 mx-10 border-whiteSecond opacity-35 sm600:mt-6" />
-
-      <div className="flex flex-row justify-center items-center  gap-x-8 py-10 sm600:gap-x-12">
-        <Link
-          href="/"
-          className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl group "
-        >
-          <LiaFacebookF className="transition-colors duration-300 text-current group-hover:text-mainGreenSecond" />
-        </Link>
-        <Link
-          href="/"
-          className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl group"
-        >
-          <SlSocialInstagram className="transition-colors duration-300 text-current group-hover:text-mainGreenSecond" />
-        </Link>
-        <Link
-          href="/"
-          className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl group"
-        >
-          <RiTwitterXFill className="transition-colors duration-300 text-current group-hover:text-mainGreenSecond" />
-        </Link>
-        <Link
-          href="/"
-          className="text-lg border border-whiteSecond/50 p-2 rounded-full hover:border-mainGreenSecond transition-colors duration-300 sm600:text-xl group"
-        >
-          <RiLinkedinLine className="transition-colors duration-300 text-current group-hover:text-mainGreenSecond" />
-        </Link>
-      </div>
-
-      <p className="py-4">{currentYear} &copy; ReadIt.</p>
-    </footer>
+    <div
+      //border bedzie do usuniecia jak homepage bedzie gotowy (border-t border-t-slate-200) !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+      className={clsx(
+        "w-full text-black border-t border-t-slate-200",
+        colorVariant === "dark"
+          ? "text-whiteSecond bg-blackSecond"
+          : "text-black bg-white"
+      )}
+    >
+      <footer className="flex flex-col lg:flex-row justify-center items-center lg:gap-5 py-10 px-4 sm500:px-8  max-w-[1800px] mx-auto">
+        <div className="w-full lg:w-1/2 flex flex-col justify-start items-center lg:items-start">
+          <div className="relative h-10 w-[140px]">
+            <Image
+              src={
+                colorVariant === "dark"
+                  ? "/readit-logo-white.png"
+                  : "/Readit-logo.png"
+              }
+              fill
+              alt="logo Readit"
+              className="object-contain h-full"
+            />
+          </div>
+          <p className="mt-8 sm500:mt-6 text-center lg:text-left max-w-[550px]">
+            ReadIt to platforma, na której twórcy dzielą się wiedzą, a
+            użytkownicy odkrywają wartościowe treści. Twórz, publikuj i
+            zarabiaj, lub czerp inspirację z unikalnych materiałów dostępnych na
+            wyciągnięcie ręki.
+          </p>
+        </div>
+        <div className="w-full lg:w-1/2 grid grid-cols-1 sm500:grid-cols-2 lg:grid-cols-3 lg:place-items-end pt-8 px-2 gap-1 ">
+          <div className="flex flex-col justify-start items-center sm500:items-start gap-1">
+            <Link
+              href="/creators"
+              className="font-bold hover:text-mainGreen transition-colors duration-300 py-1"
+            >
+              Twórcy
+            </Link>
+            <Link
+              href="/app/create"
+              className="font-bold hover:text-mainGreen transition-colors duration-300 py-1"
+            >
+              Twórz w ReadIt
+            </Link>
+            <Link
+              href="/browse"
+              className="font-bold hover:text-mainGreen transition-colors duration-300 py-1"
+            >
+              Materiały
+            </Link>
+          </div>
+          <div className="flex flex-col justify-start items-center sm500:items-start gap-1">
+            <Link
+              href="/help"
+              className="font-bold hover:text-mainGreen transition-colors duration-300 py-1"
+            >
+              Centrum pomocy
+            </Link>
+            <Link
+              href="/terms"
+              className="font-bold hover:text-mainGreen transition-colors duration-300 py-1"
+            >
+              Regulamin
+            </Link>
+            <Link
+              href="/about"
+              className="font-bold hover:text-mainGreen transition-colors duration-300 py-1"
+            >
+              O nas
+            </Link>
+          </div>
+          <div className="flex flex-col justify-center items-center mt-5 lg:mt-1 place-self-start lg:justify-self-end">
+            <p className="text-center">Znajdziesz nas na:</p>
+            <div className="flex justify-center items-center gap-1 mt-1">
+              <Link
+                href="https://www.facebook.com/"
+                className="p-1 hover:text-mainGreen transition-colors duration-300"
+              >
+                <FaFacebook />
+              </Link>
+              <Link
+                href="https://www.instagram.com/"
+                className="p-1 hover:text-mainGreen transition-colors duration-300"
+              >
+                <SlSocialInstagram />
+              </Link>
+              <Link
+                href="https://twitter.com/"
+                className="p-1 hover:text-mainGreen transition-colors duration-300"
+              >
+                <RiTwitterXFill />
+              </Link>
+              <Link
+                href="https://www.linkedin.com/"
+                className="p-1 hover:text-mainGreen transition-colors duration-300"
+              >
+                <RiLinkedinLine />
+              </Link>
+              <Link
+                href="https://discord.com/"
+                className="p-1 hover:text-mainGreen transition-colors duration-300"
+              >
+                <FaDiscord />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
