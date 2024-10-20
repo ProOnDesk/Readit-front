@@ -12,7 +12,7 @@ export default function Home() {
 			<ExplanationAboutReadit />
 
 			<PopularArticlesHomepage />
-			<FooterHomepage />
+			<FooterHomepage  />
 		</div>
 	);
 }

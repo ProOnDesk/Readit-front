@@ -8,6 +8,7 @@ import NameTagCreator from "@/app/_components/creatorsPage/NameTagCreator";
 import ProfileArticlesCreator from "@/app/_components/creatorsPage/ProfileArticlesCreator";
 import ProfileImageCreator from "@/app/_components/creatorsPage/ProfileImageCreator";
 import SkillsCreator from "@/app/_components/creatorsPage/SkillsCreator";
+import FooterHomepage from "@/app/_components/homepage/FooterHomepage";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -55,7 +56,7 @@ export default async function Page({
   if (!user) return notFound();
 
   return (
-    <div className="md900:bg-whiteSecond lg1200:pb-20">
+    <div className="md900:bg-whiteSecond ">
       <div className="max-w-[1600px] mx-auto w-full h-full min-h-screen ">
         <ProfileImageCreator user={user} />
         <NameTagCreator user={user} />
@@ -63,6 +64,8 @@ export default async function Page({
         <DescriptionCreator user={user} />
         <ProfileArticlesCreator user={user} page={searchParams.page} />
       </div>
+      <div className="py-5"></div>
+      <FooterHomepage colorVariant="dark"/>
     </div>
   );
 }
