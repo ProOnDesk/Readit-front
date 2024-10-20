@@ -1,8 +1,13 @@
 "use client";
 
 import { useRegister } from "@/app/_hooks/useRegister";
+import { useAppSelector } from "@/app/_redux/hooks";
+import clsx from "clsx";
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import { FaCheck } from "react-icons/fa";
 import { GoLock } from "react-icons/go";
 import { LuPencilLine } from "react-icons/lu";
 import { MdOutlineEmail } from "react-icons/md";
@@ -18,6 +23,16 @@ export default function RegisterForm() {
     formState: { errors },
   } = useForm<FieldValues>();
   const { isLoading, registerHookFn } = useRegister();
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const { isLoading: isLoadingAuth, isAuthenticated } = useAppSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isAuthenticated && !isLoadingAuth) {
+      redirect("/browse");
+    }
+  }, [isAuthenticated, isLoadingAuth]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     registerHookFn({
@@ -106,22 +121,40 @@ export default function RegisterForm() {
           />
           <div className="h-[36px] w-full flex justify-start  flex-col mt-4">
             <div className="relative flex justify-start items-center w-full">
-              <input
-                id="terms"
-                className="w-[14px] h-[14px] cursor-pointer bg-mainGreen accent-mainGreen text-white"
-                type="checkbox"
-                {...register("terms", {
-                  required: "Musisz zaakceptować regulamin",
-                })}
-              />
-              <label htmlFor="terms" className="text-xs ml-2 cursor-pointer">
-                Akceptuję{" "}
-                <Link
-                  href="terms"
-                  className=" hover:text-mainGreen transition-colors duration-300 underlined hover:before:bg-mainGreen"
+              <label
+                htmlFor="terms"
+                className="text-xs cursor-pointer flex justify-center items-center"
+              >
+                <input
+                  type="checkbox"
+                  className="hidden"
+                  id="terms"
+                  {...register("terms", {
+                    required: "Musisz zaakceptować regulamin",
+                    onChange: () => setTermsAccepted(!termsAccepted),
+                  })}
+                />
+                <span
+                  className={clsx(
+                    "h-4 w-4  border-2 rounded-md cursor-pointer transition-colors duration-300 hover:border-mainGreen flex items-center justify-center",
+                    termsAccepted && "border-mainGreen"
+                  )}
                 >
-                  regulamin serwisu
-                </Link>
+                  {termsAccepted && (
+                    <span className="bg-mainGreen w-full h-full flex justify-center items-center text-white">
+                      <FaCheck size={10} className="ml-[1px]" />
+                    </span>
+                  )}{" "}
+                </span>
+                <p className="cursor-pointer text-xs flex justify-center items-center ml-2 gap-1">
+                  Akceptuję{" "}
+                  <Link
+                    href="terms"
+                    className=" hover:text-mainGreen transition-colors duration-300 underlined hover:before:bg-mainGreen"
+                  >
+                    regulamin serwisu
+                  </Link>
+                </p>
               </label>
             </div>
             <p className="text-xs mt-1 text-red-500">
