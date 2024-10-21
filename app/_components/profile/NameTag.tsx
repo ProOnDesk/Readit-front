@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { LuPencilLine } from "react-icons/lu";
 import Modal from "../ui/Modal";
 import EditDescModal from "./EditDescModal";
+import { Rating } from "@mui/material";
 
 interface NameTagProps {
   user: User | undefined;
@@ -42,6 +43,15 @@ export default function NameTag({ user }: NameTagProps) {
         {user?.sex} <span className="h-1 w-1 bg-stone-300 rounded-full" />{" "}
         {user?.email}
       </p>
+      <div className="flex justify-center md900:justify-start items-center gap-3 text-stone -400 mt-1">
+        <p className="">{user?.avg_rating_from_articles}</p>
+        <Rating
+          value={user?.avg_rating_from_articles}
+          readOnly
+          precision={0.1}
+          size="small"
+        />
+      </div>
       <p className="text-center mt-5 md900:text-left">
         <span className="font-semibold">{user?.follower_count}</span> obserwacji
       </p>

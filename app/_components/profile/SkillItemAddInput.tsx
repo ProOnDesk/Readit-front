@@ -1,9 +1,5 @@
 import { useAddSkillItem } from "@/app/_hooks/useAddSkillItem";
-import {
-  useAddSkillToUserMutation,
-  useRetrieveUserQuery,
-} from "@/app/_redux/features/authApiSlice";
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 import { FaCheck } from "react-icons/fa";
 
@@ -23,6 +19,7 @@ export default function SkillItemAddInput() {
         }
 
         addSkillItemHookFn({ skill_name: skill });
+        toast.success("Dodano umiejętność: " + skill);
         setSkill("");
       }}
       className="flex justify-center items-center gap-2 border border-stone-300 rounded-md px-3 py-2"

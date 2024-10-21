@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import InputBox from "../ui/InputBox";
 import { MdOutlineEmail } from "react-icons/md";
@@ -8,6 +8,9 @@ import { GoLock } from "react-icons/go";
 import Link from "next/link";
 import { useLogin } from "@/app/_hooks/useLogin";
 import Spinner from "../ui/Spinner";
+import { useAppSelector } from "@/app/_redux/hooks";
+import { redirect, useRouter } from "next/navigation";
+import { useRetrieveUserQuery } from "@/app/_redux/features/authApiSlice";
 
 export default function LoginForm() {
   const {
@@ -17,6 +20,15 @@ export default function LoginForm() {
     formState: { errors },
   } = useForm<FieldValues>();
   const { loginHookFn, isLoading } = useLogin();
+  const { isLoading: isLoadingAuth, isAuthenticated } = useAppSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isAuthenticated && !isLoadingAuth) {
+      redirect("/browse");
+    }
+  }, [isAuthenticated, isLoadingAuth]);
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     loginHookFn({
