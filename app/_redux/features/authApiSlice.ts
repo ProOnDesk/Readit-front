@@ -45,6 +45,7 @@ export interface GetUserType {
   follower_count: number;
   article_count: number;
   avg_rating_from_articles: number;
+  skill_list: { id: number; skill_name: string }[];
 }
 
 export interface GetUserTypePaginated {
