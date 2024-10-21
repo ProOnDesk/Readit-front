@@ -26,7 +26,7 @@ export default function NameTagCreator({ user }: NameTagProps) {
         {user?.email}
       </p>
       <div className="flex justify-center md900:justify-start items-center gap-3 text-stone -400 mt-1">
-        <p className="">{user?.avg_rating_from_articles}</p>
+        <p className="">{user?.avg_rating_from_articles.toPrecision(3)}</p>
         <Rating
           value={user?.avg_rating_from_articles}
           readOnly
