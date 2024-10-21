@@ -31,6 +31,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     [getUsersTopFollows]
   );
 
+  console.log(data);
+
   return (
     <section className=" relative max-w-[1800px] mx-auto text-white dark:text-webYellow w-full">
       <div className="flex flex-col items-center w-full h-full">
@@ -58,21 +60,23 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     className="object-cover object-center  w-full h-full"
                   />
                   <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-                  <div className="absolute bottom-2 left-0 w-full h-1/3 px-6 pt-8">
+                  <div className="absolute bottom-2 left-0 w-full h-1/3 px-6 pt-8 flex flex-col justify-end items-start pb-3">
                     <p className="flex flex-col font-semibold">
                       <span className="text-2xl">{user.first_name}</span>
                     </p>
-                    <div className="flex justify-start items-center gap-2 mt-2">
-                      <p className="text-[10px] border border-whiteSecond rounded-full px-2">
-                        Skill
-                      </p>
-                      <p className="text-[10px] border border-whiteSecond rounded-full px-2">
-                        SkillSkill
-                      </p>
-                      <p className="text-[10px] border border-whiteSecond rounded-full px-2">
-                        Skill
-                      </p>
-                    </div>
+                    {user.skill_list.length !== 0 && (
+                      <div className="flex justify-start items-center gap-2 mt-2">
+                        {user?.skill_list?.slice(0, 3).map((skill, i) => (
+                          <p
+                            key={i}
+                            className="text-[10px] border border-whiteSecond rounded-full px-2"
+                          >
+                            {skill.skill_name}
+                          </p>
+                        ))}
+                        <p className="text-xs">+{user.skill_list.length - 3}</p>
+                      </div>
+                    )}
                   </div>
                 </Link>
               </div>
