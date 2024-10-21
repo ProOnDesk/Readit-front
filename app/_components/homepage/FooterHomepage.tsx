@@ -90,30 +90,35 @@ export default function FooterHomepage({
               <Link
                 href="https://www.facebook.com/"
                 className="p-1 hover:text-mainGreen transition-colors duration-300"
+                target="_blank"
               >
                 <FaFacebook />
               </Link>
               <Link
                 href="https://www.instagram.com/"
                 className="p-1 hover:text-mainGreen transition-colors duration-300"
+                target="_blank"
               >
                 <SlSocialInstagram />
               </Link>
               <Link
                 href="https://twitter.com/"
                 className="p-1 hover:text-mainGreen transition-colors duration-300"
+                target="_blank"
               >
                 <RiTwitterXFill />
               </Link>
               <Link
                 href="https://www.linkedin.com/"
                 className="p-1 hover:text-mainGreen transition-colors duration-300"
+                target="_blank"
               >
                 <RiLinkedinLine />
               </Link>
               <Link
                 href="https://discord.com/"
                 className="p-1 hover:text-mainGreen transition-colors duration-300"
+                target="_blank"
               >
                 <FaDiscord />
               </Link>
