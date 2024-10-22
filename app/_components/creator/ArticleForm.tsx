@@ -48,6 +48,7 @@ export default function ArticleForm({
 					<input
 						defaultValue='Chwytliwy tytuł, który zszokuje? Śmiało!...'
 						{...register('title', { required: 'Tytuł jest wymagany' })}
+						maxLength={80}
 						type='text'
 						className='rounded-t-md text-xl p-1 px-2 min-h-[52px] focus:outline-none peer bg-blackSecond/5'
 					/>
@@ -92,10 +93,10 @@ export default function ArticleForm({
 					<textarea
 						defaultValue='Podsumuj w dwóch zdaniach, zanim skończy się kawa...'
 						{...register('summary', {
-							maxLength: 500,
+							maxLength: 250,
 							required: 'Streszczenie jest wymagane',
 						})}
-						maxLength={500}
+						maxLength={250}
 						className='flex-1 min-h-36 rounded-t-md text-xl p-1 resize-none peer px-2 focus:outline-none bg-blackSecond/5'
 					/>
 					<ErrorMessage>{errors?.summary?.message}</ErrorMessage>
