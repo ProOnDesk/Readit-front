@@ -1,11 +1,15 @@
 'use client';
 
-import { useGetArticleInfoToEditMutation } from '@/app/_redux/features/articleApiSLice';
+import {
+	useGetArticleInfoToEditMutation,
+	useUpdateArticleMutation,
+} from '@/app/_redux/features/articleApiSLice';
 import { useEffect, useState } from 'react';
 import ArticleForm from './ArticleForm';
 import ArticleSettings from './ArticleSettings';
 import Article from './Article';
 import { set, SubmitHandler, useForm } from 'react-hook-form';
+import Spinner from '../ui/Spinner';
 
 interface EditorProps {
 	materialSlug: string;
@@ -19,8 +23,12 @@ type CreatorInputs = {
 };
 
 export default function Editor({ materialSlug }: EditorProps) {
-	const [getArticleInfoToEdit, { data: articleInfo }] =
-		useGetArticleInfoToEditMutation();
+	const [
+		getArticleInfoToEdit,
+		{ data: articleInfo, isLoading: isArticleInfoLoading },
+	] = useGetArticleInfoToEditMutation();
+	const [updateArticle, { isLoading: isArticleUpdating }] =
+		useUpdateArticleMutation();
 	const [tags, setTags] = useState(articleInfo?.tags);
 	const [articleList, setArticleList] = useState(articleInfo?.content_elements);
 	const {
@@ -49,7 +57,36 @@ export default function Editor({ materialSlug }: EditorProps) {
 
 	const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
 		console.log(data);
+		console.log(articleList);
+
+		const filteredArticleList = articleList.filter(
+			(article) => article.content !== ''
+		);
+
+		const imageList = filteredArticleList.filter(
+			(article) => article.content_type === 'image'
+		);
+
+		const formData = new FormData();
+
+		if (data?.image && data.image?.length > 0) {
+			formData.append('title_image', data.image[0]);
+		}
+
+		const article = {
+			title: data.title,
+			summary: data.summary,
+			tags: tags.map((tag: { value: string }) => ({ value: tag })),
+			content_elements: [...filteredArticleList],
+		};
+		formData.append('article', JSON.stringify(article));
+		console.log(formData.getAll('article'));
+		// updateArticle({ formData, article_id: articleInfo?.id })
+		updateArticle({ formData, article_id: 142 });
 	};
+
+	if (isArticleInfoLoading || isArticleUpdating)
+		return <Spinner color='green' size='big' />;
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className='flex flex-col'>

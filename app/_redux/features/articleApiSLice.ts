@@ -77,6 +77,13 @@ const authApiSlice = apiSlice.injectEndpoints({
 				body: { slug: decodeURIComponent(article_slug) },
 			}),
 		}),
+		updateArticle: builder.mutation({
+			query: ({ formData, article_id }) => ({
+				url: `/articles/id/${article_id}`,
+				method: 'PATCH',
+				body: formData,
+			}),
+		}),
 	}),
 });
 
@@ -91,4 +98,5 @@ export const {
 	useCheckIsBoughtQuery,
 	useCheckIsWishedQuery,
 	useGetArticleInfoToEditMutation,
+	useUpdateArticleMutation,
 } = authApiSlice;
