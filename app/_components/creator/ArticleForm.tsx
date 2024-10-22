@@ -62,6 +62,7 @@ export default function ArticleForm({
 								onClick={() => {
 									deleteTag(tag);
 								}}
+								type='button'
 								key={index}
 								className=' flex items-center gap-2 p-1 px-2 bg-white hover:bg-blackSecond/5 rounded-md mx-1 my-1 group tag-element transition-colors duration-300'
 							>
