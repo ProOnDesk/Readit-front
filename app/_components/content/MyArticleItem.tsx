@@ -4,6 +4,8 @@ import Link from 'next/link';
 import ArticleItem from '../profile/ArticleItem';
 import { CiEdit, CiTrash, CiViewBoard } from 'react-icons/ci';
 import { Article } from '@/app/_redux/features/authApiSlice';
+import Modal from '../ui/Modal';
+import DeleteArticleModal from './DeleteArticleModal';
 
 interface MyArticleItemProps {
 	article: Article;
@@ -30,13 +32,21 @@ export default function MyArticleItem({ article }: MyArticleItemProps) {
 					<CiEdit className='text-2xl' />
 					Edytuj
 				</Link>
-				<button
-					onClick={() => console.log('delete')}
-					className='flex flex-col items-center font-medium rounded-tr-md py-2 hover:bg-red-400 hover:text-white transition-colors duration-300 outline-none focus:bg-red-400 focus:text-white '
-				>
-					<CiTrash className='text-2xl' />
-					Usuń
-				</button>
+
+				<Modal>
+					<Modal.Open opens='editdesc'>
+						<button className='flex flex-col items-center font-medium rounded-tr-md py-2 hover:bg-red-400 hover:text-white transition-colors duration-300 outline-none focus:bg-red-400 focus:text-white '>
+							<CiTrash className='text-2xl' />
+							Usuń
+						</button>
+					</Modal.Open>
+					<Modal.Window name='editdesc'>
+						<DeleteArticleModal
+							onCloseModal={undefined as never}
+							article={article}
+						/>
+					</Modal.Window>
+				</Modal>
 			</div>
 			<ArticleItem article={article} className='pointer-events-none' />
 		</div>
