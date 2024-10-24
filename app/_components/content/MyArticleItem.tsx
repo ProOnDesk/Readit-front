@@ -9,9 +9,13 @@ import DeleteArticleModal from './DeleteArticleModal';
 
 interface MyArticleItemProps {
 	article: Article;
+	refetchArticleList: () => void;
 }
 
-export default function MyArticleItem({ article }: MyArticleItemProps) {
+export default function MyArticleItem({
+	article,
+	refetchArticleList,
+}: MyArticleItemProps) {
 	return (
 		<div className='relative overflow-hidden shadow-xl group myArticleItem'>
 			<span className='absolute w-full h-full z-10 duration-300 transition-colors'></span>
@@ -44,6 +48,7 @@ export default function MyArticleItem({ article }: MyArticleItemProps) {
 						<DeleteArticleModal
 							onCloseModal={undefined as never}
 							article={article}
+							refetchArticleList={refetchArticleList}
 						/>
 					</Modal.Window>
 				</Modal>

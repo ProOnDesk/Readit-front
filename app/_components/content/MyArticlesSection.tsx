@@ -15,6 +15,7 @@ function MyArticlesSection({
 		data: articleList,
 		isLoading: isArticleListLoading,
 		isFetching: isArticleListFetching,
+		refetch: refetchArticleList,
 	} = useGetMyArticlesQuery({
 		page: searchParams?.page ?? '1',
 	});
@@ -32,7 +33,11 @@ function MyArticlesSection({
 			) : (
 				<div className='grid grid-cols-1 sm550:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-6 pb-10 place-content-start'>
 					{articleList?.items?.map((article: Article) => (
-						<MyArticleItem key={article?.id} article={article} />
+						<MyArticleItem
+							key={article?.id}
+							article={article}
+							refetchArticleList={refetchArticleList}
+						/>
 					))}
 				</div>
 			)}

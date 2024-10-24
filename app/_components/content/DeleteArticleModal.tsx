@@ -1,18 +1,33 @@
+import { useDeleteArticleMutation } from '@/app/_redux/features/articleApiSLice';
 import { Article } from '@/app/_redux/features/authApiSlice';
 import { CiCircleRemove } from 'react-icons/ci';
+import Spinner from '../ui/Spinner';
+import toast from 'react-hot-toast';
 
 interface DeleteArticleModalProps {
 	onCloseModal: () => void;
 	article: Article;
+	refetchArticleList: () => void;
 }
 
 function DeleteArticleModal({
 	onCloseModal,
 	article,
+	refetchArticleList,
 }: DeleteArticleModalProps) {
-    
+	const [deleteArticle, { isLoading: isArticleDeleting }] =
+		useDeleteArticleMutation();
 	function handleDeleteArticle() {
-		// handle delete article
+		deleteArticle({ article_id: article.id })
+			.unwrap()
+			.then(() => {
+				onCloseModal();
+				refetchArticleList();
+				toast.success('Artykuł został usunięty');
+			})
+			.catch(() => {
+				toast.error('Nie udało się usunąć artykułu');
+			});
 	}
 
 	return (
@@ -36,7 +51,7 @@ function DeleteArticleModal({
 					onClick={handleDeleteArticle}
 					className='py-2 px-5 bg-red-400 hover:bg-red-500 text-white transition-colors duration-300 rounded-md'
 				>
-					Usuń
+					{isArticleDeleting ? <Spinner color='white' size='small' /> : 'Usuń'}
 				</button>
 			</div>
 		</div>
