@@ -29,7 +29,9 @@ function MyArticlesSection({
 				<p>Stworzone materiały: {articleList?.total}</p>
 			</div>
 			{isArticleListLoading || isArticleListFetching ? (
-				<Spinner color='green' size='big' />
+				<div className='py-20'>
+					<Spinner color='green' size='big' />
+				</div>
 			) : (
 				<div className='grid grid-cols-1 sm550:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-6 pb-10 place-content-start'>
 					{articleList?.items?.map((article: Article) => (
