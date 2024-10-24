@@ -13,6 +13,7 @@ interface FileUploaderProps {
 	register: UseFormRegister<CreatorInputs>;
 	setValue: UseFormSetValue<CreatorInputs>;
 	clearErrors: UseFormClearErrors<CreatorInputs>;
+	placeholderImage?: string;
 }
 
 function FileUploader({
@@ -20,6 +21,7 @@ function FileUploader({
 	register,
 	setValue,
 	clearErrors,
+	placeholderImage,
 }: FileUploaderProps) {
 	const [isDragOver, setIsDragOver] = useState(false);
 	const [imageSrc, setImageSrc] = useState('');
@@ -84,7 +86,7 @@ function FileUploader({
 					isDragOver ? 'bg-blackSecond/5' : 'bg-white'
 				}`}
 			>
-				{!file && (
+				{!file && !placeholderImage && (
 					<div className='pointer-events-none flex flex-col h-full items-center justify-center pt-5 pb-6'>
 						<svg
 							className='w-8 h-8 mb-4 text-gray-500 dark:text-gray-400'
@@ -102,7 +104,8 @@ function FileUploader({
 							/>
 						</svg>
 						<p className='mb-2 mx-2 text-sm'>
-							<span className='font-semibold'>Kliknij aby dodać</span> lub złap i upuść
+							<span className='font-semibold'>Kliknij aby dodać</span> lub złap
+							i upuść
 						</p>
 						<p className='text-xs'>SVG, PNG, JPG lub GIF</p>
 					</div>
@@ -121,16 +124,16 @@ function FileUploader({
 					name='image'
 					className='hidden'
 				/>
-				{file && (
+				{(file || placeholderImage) && (
 					<img
-						src={imageSrc}
+						src={imageSrc || placeholderImage}
 						alt='Your image'
 						className={`w-full h-full object-cover object-center`}
 					/>
 				)}
 				<div
 					className={`pointer-events-none absolute h-full w-full z-30 flex justify-center items-center transition-all duration-300 ${
-						isDragOver && file
+						isDragOver && (file || placeholderImage)
 							? 'opacity-100 bg-blackSecond/50'
 							: 'opacity-0 bg-transparent'
 					}`}

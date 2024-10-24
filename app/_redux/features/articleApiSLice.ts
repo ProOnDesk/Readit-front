@@ -1,5 +1,5 @@
-import { apiSlice } from "../services/apiSlice";
-import { Article } from "./authApiSlice";
+import { apiSlice } from '../services/apiSlice';
+import { Article } from './authApiSlice';
 
 interface PaginatonType {
 	items: Article[];
@@ -14,14 +14,14 @@ const authApiSlice = apiSlice.injectEndpoints({
 		postArticle: builder.mutation({
 			query: ({ formData }) => ({
 				url: `/articles/`,
-				method: "POST",
+				method: 'POST',
 				body: formData,
 			}),
 		}),
 		buyArticle: builder.mutation({
 			query: ({ article_id }) => ({
 				url: `/articles/buy/${article_id}`,
-				method: "POST",
+				method: 'POST',
 			}),
 		}),
 		changeArticleFavorites: builder.mutation({
@@ -33,13 +33,13 @@ const authApiSlice = apiSlice.injectEndpoints({
 		getArticleDetailsById: builder.query({
 			query: ({ article_id }) => ({
 				url: `/articles/detail/id/${article_id}`,
-				method: "GET",
+				method: 'GET',
 			}),
 		}),
 		makeOpinion: builder.mutation({
 			query: ({ article_id, rating, content }) => ({
 				url: `/articles/comment/${article_id}`,
-				method: "POST",
+				method: 'POST',
 				body: {
 					rating,
 					content,
@@ -49,7 +49,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 		getArticlesHomepage: builder.query<PaginatonType, void>({
 			query: () => ({
 				url: `/articles/search?sort_order=desc&sort_by=views&page=1&size=10`,
-				method: "GET",
+				method: 'GET',
 			}),
 		}),
 		getArticleOpinions: builder.query({
@@ -70,8 +70,22 @@ const authApiSlice = apiSlice.injectEndpoints({
 				method: 'GET',
 			}),
 		}),
+		getArticleInfoToEdit: builder.mutation({
+			query: ({ article_slug }) => ({
+				url: `/articles/for-edit/slug`,
+				method: 'POST',
+				body: { slug: decodeURIComponent(article_slug) },
+			}),
+		}),
+		updateArticle: builder.mutation({
+			query: ({ formData, article_id }) => ({
+				url: `/articles/id/${article_id}`,
+				method: 'PATCH',
+				body: formData,
+			}),
+		}),
 	}),
-})
+});
 
 export const {
 	usePostArticleMutation,
@@ -83,4 +97,6 @@ export const {
 	useGetArticleOpinionsQuery,
 	useCheckIsBoughtQuery,
 	useCheckIsWishedQuery,
+	useGetArticleInfoToEditMutation,
+	useUpdateArticleMutation,
 } = authApiSlice;
