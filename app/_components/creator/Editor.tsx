@@ -117,7 +117,7 @@ export default function Editor({ materialSlug }: EditorProps) {
 			.unwrap()
 			.then((res) => {
 				toast.success('Materiał został zaktualizowany!');
-				router.push(`/app/content`);
+				router.replace(`/app/content`);
 			})
 			.catch((err) => {
 				toast.error('Wystąpił błąd podczas aktualizacji materiału');
