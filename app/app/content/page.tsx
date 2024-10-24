@@ -14,7 +14,7 @@ export default function Page({
 }) {
 	return (
 		<div className='max-w-[1800px] mx-auto py-10 px-10'>
-			<MyArticlesSection />
+			<MyArticlesSection searchParams={searchParams} />
 		</div>
 	);
 }

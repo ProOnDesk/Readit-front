@@ -61,9 +61,9 @@ const articleApiSlice = apiSlice.injectEndpoints({
 				method: 'GET',
 			}),
 		}),
-		getMyArticles: builder.query<PaginationTypeArticles, void>({
-			query: () => ({
-				url: `/articles/me`,
+		getMyArticles: builder.query<PaginationTypeArticles, { page: string }>({
+			query: ({ page }) => ({
+				url: `/articles/me?page=${page}&size=12`,
 				method: 'GET',
 			}),
 		}),
