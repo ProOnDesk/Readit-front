@@ -15,6 +15,7 @@ interface ArticleFormProps {
 	clearErrors: UseFormClearErrors<CreatorInputs>;
 	tags: string[];
 	setTags: React.Dispatch<React.SetStateAction<string[]>>;
+	actualImage?: string;
 }
 
 export default function ArticleForm({
@@ -24,6 +25,7 @@ export default function ArticleForm({
 	clearErrors,
 	tags,
 	setTags,
+	actualImage,
 }: ArticleFormProps) {
 	const addTag = (e: any) => {
 		e.preventDefault();
@@ -46,6 +48,7 @@ export default function ArticleForm({
 					<input
 						defaultValue='Chwytliwy tytuł, który zszokuje? Śmiało!...'
 						{...register('title', { required: 'Tytuł jest wymagany' })}
+						maxLength={80}
 						type='text'
 						className='rounded-t-md text-xl p-1 px-2 min-h-[52px] focus:outline-none peer bg-blackSecond/5'
 					/>
@@ -55,11 +58,12 @@ export default function ArticleForm({
 				<div className='relative flex flex-col gap-1'>
 					<label className='text-xl'>Tagi</label>
 					<div className='flex flex-wrap rounded-t-md gap-1 text-xl p-1 px-2 min-h-[52px] focus:outline-none peer bg-blackSecond/5'>
-						{tags.map((tag, index) => (
+						{tags?.map((tag, index) => (
 							<button
 								onClick={() => {
 									deleteTag(tag);
 								}}
+								type='button'
 								key={index}
 								className=' flex items-center gap-2 p-1 px-2 bg-white hover:bg-blackSecond/5 rounded-md mx-1 my-1 group tag-element transition-colors duration-300'
 							>
@@ -67,7 +71,7 @@ export default function ArticleForm({
 								<IoIosClose className='group-[.tag-element]:group-hover:text-red-500 text-2xl' />
 							</button>
 						))}
-						{tags.length < 3 && (
+						{tags?.length < 3 && (
 							<input
 								// {...register('title', { required: 'Tytuł jest wymagany' })}
 								onKeyDown={(e) => {
@@ -89,10 +93,10 @@ export default function ArticleForm({
 					<textarea
 						defaultValue='Podsumuj w dwóch zdaniach, zanim skończy się kawa...'
 						{...register('summary', {
-							maxLength: 500,
+							maxLength: 250,
 							required: 'Streszczenie jest wymagane',
 						})}
-						maxLength={500}
+						maxLength={250}
 						className='flex-1 min-h-36 rounded-t-md text-xl p-1 resize-none peer px-2 focus:outline-none bg-blackSecond/5'
 					/>
 					<ErrorMessage>{errors?.summary?.message}</ErrorMessage>
@@ -106,6 +110,7 @@ export default function ArticleForm({
 					register={register}
 					clearErrors={clearErrors}
 					types={['JPG', 'PNG', 'GIF', 'JPEG']}
+					placeholderImage={actualImage}
 				/>
 				<ErrorMessage>{errors?.image?.message}</ErrorMessage>
 			</div>

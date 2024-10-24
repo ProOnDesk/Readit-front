@@ -74,6 +74,19 @@ const authApiSlice = apiSlice.injectEndpoints({
 			query: ({ article_id }) => ({
 				url: `/articles/${article_id}`,
 				method: 'DELETE',
+		getArticleInfoToEdit: builder.mutation({
+			query: ({ article_slug }) => ({
+				url: `/articles/for-edit/slug`,
+				method: 'POST',
+				body: { slug: decodeURIComponent(article_slug) },
+			}),
+		}),
+		updateArticle: builder.mutation({
+			query: ({ formData, article_id }) => ({
+				url: `/articles/id/${article_id}`,
+				method: 'PATCH',
+				body: formData,
+
 			}),
 		}),
 	}),
@@ -90,4 +103,6 @@ export const {
 	useCheckIsBoughtQuery,
 	useCheckIsWishedQuery,
 	useDeleteArticleMutation,
+	useGetArticleInfoToEditMutation,
+	useUpdateArticleMutation,
 } = authApiSlice;

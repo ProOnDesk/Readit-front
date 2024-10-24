@@ -9,12 +9,14 @@ export default function Article({
 	articleList,
 	setArticleList,
 	watch,
+	actualImage,
 }: {
 	articleList: { content_type: string; content: string }[];
 	setArticleList: React.Dispatch<
 		React.SetStateAction<{ content_type: string; content: string }[]>
 	>;
 	watch: any;
+	actualImage?: string;
 }) {
 	const imageUrl =
 		watch('image') && watch('image').length > 0
@@ -39,14 +41,14 @@ export default function Article({
 			</p>
 			<div className=' w-full h-auto max-h-[500px] mb-10'>
 				<Image
-					src={imageUrl ?? '/placeholder-image.jpg'}
+					src={(imageUrl || actualImage) ?? '/placeholder-image.jpg'}
 					alt='Zdjęcie tytułowe'
 					width={1920}
 					height={1080}
 					className='object-cover w-full max-h-full h-auto object-center'
 				/>
 			</div>
-			{articleList.map((element, index) => (
+			{articleList?.map((element, index) => (
 				<div key={index} className='px-5 pb-5 w-full'>
 					{element?.content_type === 'title' ? (
 						<TitleElement
