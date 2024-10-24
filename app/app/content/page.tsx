@@ -1,4 +1,11 @@
 import MyArticleItem from '@/app/_components/content/MyArticleItem';
+import MyArticlesSection from '@/app/_components/content/MyArticlesSection';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Moje materiały | ReadIt',
+	description: 'Miejsce gdzie znajdziesz wszystkie swoje materiały',
+};
 
 export default function Page({
 	searchParams,
@@ -7,9 +14,7 @@ export default function Page({
 }) {
 	return (
 		<div className='max-w-[1800px] mx-auto py-10 px-10'>
-			<div className='grid grid-cols-1 sm550:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-6 pb-10 place-content-start'>
-				<MyArticleItem />
-			</div>
+			<MyArticlesSection />
 		</div>
 	);
 }
