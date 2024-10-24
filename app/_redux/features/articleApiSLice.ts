@@ -74,6 +74,8 @@ const authApiSlice = apiSlice.injectEndpoints({
 			query: ({ article_id }) => ({
 				url: `/articles/${article_id}`,
 				method: 'DELETE',
+			}),
+		}),
 		getArticleInfoToEdit: builder.mutation({
 			query: ({ article_slug }) => ({
 				url: `/articles/for-edit/slug`,
@@ -86,7 +88,6 @@ const authApiSlice = apiSlice.injectEndpoints({
 				url: `/articles/id/${article_id}`,
 				method: 'PATCH',
 				body: formData,
-
 			}),
 		}),
 	}),
