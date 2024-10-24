@@ -4,7 +4,7 @@ import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
 import { GetUserTypePaginated } from "@/app/_redux/features/authApiSlice";
 import { Pagination } from "@mui/material";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 interface PaginationArticlesProps {
   data?: PaginationTypeArticles | GetUserTypePaginated;
@@ -15,14 +15,18 @@ export default function PaginationArticles({
   data,
   isBrowse,
 }: PaginationArticlesProps) {
-  const [header, setHeader] = React.useState<Element | null>(null);
+  const [header, setHeader] = useState<Element | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
   const path = usePathname();
+  const [page, setPage] = useState<number>(
+    +(new URLSearchParams(searchParams).get("page") || 1)
+  );
 
   useEffect(() => {
     setHeader(document.querySelector("#browseHeader"));
   }, []);
+
 
   const createPageURL = (event: React.ChangeEvent<unknown>, value: number) => {
     if (isBrowse) {
@@ -34,6 +38,9 @@ export default function PaginationArticles({
         behavior: "smooth",
       });
     }
+
+    setPage(value);
+
     const params = new URLSearchParams(searchParams);
     params.set("page", value.toString());
     router.replace(`${path}?${params.toString()}`, {
@@ -54,8 +61,8 @@ export default function PaginationArticles({
           },
         }}
         count={data?.pages || 1}
+        page={page}  
         disabled={data?.pages === 1 || !data}
-        defaultPage={+(new URLSearchParams(searchParams).get("page") || 1)}
         onChange={createPageURL}
         color="primary"
       />
