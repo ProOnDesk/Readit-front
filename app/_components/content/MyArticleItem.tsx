@@ -32,7 +32,7 @@ export default function MyArticleItem() {
 		<div className='relative overflow-hidden shadow-xl group myArticleItem'>
 			<span className='absolute w-full h-full z-10 duration-300 transition-colors'></span>
 			<div
-				className={`w-full absolute z-20 top-0 -translate-y-full bg-white grid grid-cols-3 gap-2 border-[1px] border-b-0 rounded-t-md transition-transform duration-300 group-[.myArticleItem]:group-hover:translate-y-0 text-xs `}
+				className={`w-full absolute z-20 top-0 -translate-y-full bg-white grid grid-cols-3 border-[1px] border-b-0 rounded-t-md transition-transform duration-300 group-[.myArticleItem]:group-hover:translate-y-0 text-xs `}
 			>
 				<Link
 					href={'pawel'}
@@ -48,13 +48,13 @@ export default function MyArticleItem() {
 					<CiEdit className='text-2xl' />
 					Edytuj
 				</Link>
-				<Link
-					href={'pawel'}
+				<button
+					onClick={() => console.log('delete')}
 					className='flex flex-col items-center font-medium rounded-tr-md py-2 hover:bg-red-400 hover:text-white transition-colors duration-300 outline-none focus:bg-red-400 focus:text-white '
 				>
 					<CiTrash className='text-2xl' />
 					Usuń
-				</Link>
+				</button>
 			</div>
 			<ArticleItem article={article} className='pointer-events-none' />
 		</div>
