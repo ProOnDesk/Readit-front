@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
+import Link from 'next/link';
 import ArticleItem from '../profile/ArticleItem';
+import { CiEdit, CiTrash, CiViewBoard } from 'react-icons/ci';
 
 const article = {
 	title: 'How to Start with React in 2024',
@@ -20,34 +21,40 @@ const article = {
 	},
 	slug: 'how-to-start-with-react-2024',
 	created_at: new Date(),
-	view_count: 1250,
+	view_count: 1000000,
 	title_image_url: 'https://petmex.pl/modules/blog/dataimages/Zdjecie-psa.jpg',
 	rating: 4.5,
-	rating_count: 100,
+	rating_count: 1000000,
 };
 
 export default function MyArticleItem() {
-	const [isOpen, setIsOpen] = useState(false);
-
-	function handleClick() {
-		setIsOpen((isOpen) => !isOpen);
-	}
-	console.log(isOpen);
-
 	return (
-		<div className='relative overflow-hidden shadow-xl '>
-			<button
-				onClick={handleClick}
-				className='absolute w-full h-full hover:bg-gray-100/30 z-10 duration-300 transition-colors hover:cursor-pointer'
-			></button>
+		<div className='relative overflow-hidden shadow-xl group myArticleItem'>
+			<span className='absolute w-full h-full z-10 duration-300 transition-colors'></span>
 			<div
-				className={`w-full absolute z-20 bottom-0 bg-white flex flex-row justify-around py-10 border-t-2 transition-transform duration-300 ${
-					isOpen && 'translate-y-full'
-				}`}
+				className={`w-full absolute z-20 top-0 -translate-y-full bg-white grid grid-cols-3 gap-2 border-[1px] border-b-0 rounded-t-md transition-transform duration-300 group-[.myArticleItem]:group-hover:translate-y-0 text-xs `}
 			>
-				<p>test </p>
-				<p>test </p>
-				<p>test </p>
+				<Link
+					href={'pawel'}
+					className='flex flex-col items-center font-medium rounded-tl-md py-2 hover:bg-mainGreenSecond hover:text-white transition-colors duration-300 outline-none focus:bg-mainGreenSecond focus:text-white'
+				>
+					<CiViewBoard className='text-2xl' />
+					Wyświetl
+				</Link>
+				<Link
+					href={'pawel'}
+					className='flex flex-col items-center font-medium py-2 hover:bg-mainGreenSecond hover:text-white transition-colors duration-300 outline-none focus:bg-mainGreenSecond focus:text-white'
+				>
+					<CiEdit className='text-2xl' />
+					Edytuj
+				</Link>
+				<Link
+					href={'pawel'}
+					className='flex flex-col items-center font-medium rounded-tr-md py-2 hover:bg-red-400 hover:text-white transition-colors duration-300 outline-none focus:bg-red-400 focus:text-white '
+				>
+					<CiTrash className='text-2xl' />
+					Usuń
+				</Link>
 			</div>
 			<ArticleItem article={article} className='pointer-events-none' />
 		</div>
