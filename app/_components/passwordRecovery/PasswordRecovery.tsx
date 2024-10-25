@@ -48,7 +48,7 @@ export default function PasswordRecovery() {
 					Resetowanie hasła
 				</h2>
 				<p className="text-sm sm:text-base text-center mb-10">
-					Wprowadź swój adre e-mail, a my wyślemy Ci link, który umożliwi
+					Wprowadź swój adres e-mail, a my wyślemy Ci link, który umożliwi
 					odyskanie dostępu do konta
 				</p>
 				<InputBox

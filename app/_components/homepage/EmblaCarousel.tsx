@@ -34,7 +34,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 	} = usePrevNextButtons(emblaApi);
 
 	return (
-		<section className="max-w-5xl mx-auto text-blackSecond w-full px-6 py-8">
+		<section className="bg-red-500 max-w-5xl mx-auto text-blackSecond w-full px-6 py-8">
 			<div className="flex flex-col items-center">
 				<div className="flex justify-center items-center gap-1 w-full ">
 					<PrevButton
