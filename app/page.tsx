@@ -1,9 +1,9 @@
+import BecomeCreators from "./_components/homepage/BecomeCreators";
+import CarouselHomepage from "./_components/homepage/CarouselHomepage";
 import FooterHomepage from "./_components/homepage/FooterHomepage";
 import HeaderHomepage from "./_components/homepage/HeaderHomepage";
-import BecomeCreators from "./_components/homepage/BecomeCreators";
-import TopCreators from "./_components/homepage/TopCreators";
-import CarouselHomepage from "./_components/homepage/CarouselHomepage";
 import LastPartOfHomepage from "./_components/homepage/LastPartOfHomepage";
+import TopCreators from "./_components/homepage/TopCreators";
 
 export default function Home() {
 	return (
