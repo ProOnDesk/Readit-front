@@ -7,7 +7,7 @@ export default function BecomeCreators() {
 				<div className="flex justify-center sm500:w-1/2 p-6 ">
 					<img
 						src="/facet-mysli.png"
-						className="hidden sm500:block object-contain w-[100%] h-auto sm500:w-[90%] sm900:w-[80%] lg:w-[70%] xl:w-[60%]"
+						className="hidden sm500:block object-contain w-[100%] sm500:w-[90%] sm900:w-[80%] lg:w-[70%] xl:w-[60%]"
 						alt=""
 					/>
 				</div>
