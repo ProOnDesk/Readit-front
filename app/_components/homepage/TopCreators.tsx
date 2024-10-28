@@ -2,9 +2,9 @@
 
 export default function TopCreators() {
 	return (
-		<div className="flex flex-col justify-center items-center  w-full py-14 sm600:px-8 bg-blackSecond">
+		<div className="flex flex-col justify-center items-center  w-full py-14 sm600:px-8 bg-blackSecond ">
 			<div className="max-w-[1800px] w-full mx-auto flex flex-col justify-between h-full items-center ">
-				<div className="grid grid-cols-1 md:grid-cols-2">
+				<div className="grid grid-cols-1 md:grid-cols-2 md:px-10">
 					<div>
 						<h3 className="text-2xl md:text-xl px-8 md:px-4 py-5 md:py-3  text-whiteSecond font-semibold text-center tracking-tig md900:px-10 md900:text-2xl">
 							Top Twórcy Readit: Odkryj Mistrzów, Którzy Inspirują Tysiące

@@ -1,7 +1,7 @@
 export default function LastPartOfHomepage() {
 	return (
-		<div className="max-w-[1800px] w-full mx-auto  bg-blackSecond">
-			<div className=" flex flex-col justify-center items-center  ">
+		<div className=" flex flex-col justify-center items-center bg-blackSecond">
+			<div className=" max-w-[1800px] w-full mx-auto ">
 				<div className="mt-16 px-10 sm:px-20 md:px-24 md900:px-32 ">
 					<h3 className="text-xl sm500:text-2xl md:text-3xl lg:px-28 xl:px-52 text-center text-whiteSecond font-medium tracking-wide ">
 						Dołącz do ReadIt i przekonaj się, co możesz zyskać!

@@ -37,7 +37,7 @@ export default function HeaderHomepage() {
 							</div>
 							<Link
 								href="/register"
-								className="text-center hidden md:block sm500:text-xl md:mt-8 xl1396:mt-28 md:text-lg lg:text-xl xl1396:text-2xl rounded-full bg-mainGreen text-white font-medium hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2">
+								className="text-center z-30 hidden md:block sm500:text-xl md:mt-8 xl1396:mt-28 md:text-lg lg:text-xl xl1396:text-2xl rounded-full bg-mainGreen text-white font-medium hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2">
 								Dołącz teraz
 							</Link>
 						</div>
