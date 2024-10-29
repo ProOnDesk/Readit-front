@@ -8,6 +8,7 @@ import NameTag from "./NameTag";
 import Skills from "./Skills";
 import Description from "./Description";
 import ProfileArticles from "./ProfileArticles";
+import Packages from "./Packages";
 
 export default function ProfileContent() {
   const { data: user, isLoading } = useRetrieveUserQuery();
@@ -25,6 +26,7 @@ export default function ProfileContent() {
       <Skills user={user} />
       <Description user={user} />
       <ProfileArticles user={user} />
+      <Packages />
     </div>
   );
 }
