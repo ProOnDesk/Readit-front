@@ -1,8 +1,11 @@
+'use client';
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 export default function Packages() {
-  //   const searchParams = useSearchParams();
+    const searchParams = useSearchParams();
 
   //   const { data, refetch, isLoading, isFetching } = useGetUserArticlesQuery({
   //     userId: user?.id || 0,
