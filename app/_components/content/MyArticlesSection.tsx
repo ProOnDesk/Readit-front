@@ -5,6 +5,7 @@ import MyArticleItem from './MyArticleItem';
 import { Article } from '@/app/_redux/features/authApiSlice';
 import PaginationArticles from '../browseArticles/PaginationArticles';
 import Spinner from '../ui/Spinner';
+import { useEffect } from 'react';
 
 function MyArticlesSection({
 	searchParams,
@@ -19,6 +20,10 @@ function MyArticlesSection({
 	} = useGetMyArticlesQuery({
 		page: searchParams?.page ?? '1',
 	});
+
+	useEffect(() => {
+		refetchArticleList();
+	}, [refetchArticleList]);
 
 	return (
 		<>
