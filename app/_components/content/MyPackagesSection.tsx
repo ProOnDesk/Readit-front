@@ -23,7 +23,7 @@ export default function MyPackagesSection() {
               </button>
             </Modal.Open>
             <Modal.Window name="package">
-              <EditPackageModal />
+              <EditPackageModal onCloseModal={undefined as never} />
             </Modal.Window>
           </Modal>
         </div>
