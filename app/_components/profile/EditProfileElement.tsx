@@ -6,12 +6,10 @@ export default function EditProfileElement({
 	content,
 	contentTitle,
 	icon,
-	user,
 }: {
 	content?: string | undefined;
 	contentTitle: string | undefined;
 	icon: React.ReactNode;
-	user: User | undefined;
 }) {
 	const contentTitleDisplay =
 		contentTitle === 'first_name'
@@ -44,7 +42,6 @@ export default function EditProfileElement({
 				<EditProfileModal
 					onCloseModal={undefined as never}
 					contentTitle={contentTitle}
-					user={user}
 				></EditProfileModal>
 			</Modal.Window>
 		</Modal>

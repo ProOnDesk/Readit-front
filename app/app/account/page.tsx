@@ -10,7 +10,6 @@ import { IoIosArrowForward } from 'react-icons/io';
 
 export default function Page() {
 	const { data: user, isLoading } = useRetrieveUserQuery();
-	console.log(user);
 
 	if (isLoading)
 		return (
@@ -27,26 +26,22 @@ export default function Page() {
 				</h3>
 				<div className='flex flex-col gap-5'>
 					<EditProfileElement
-						user={user}
 						contentTitle='first_name'
 						content={user?.first_name}
 						icon={<CiEdit />}
 					/>
 					<EditProfileElement
-						user={user}
 						contentTitle='last_name'
 						content={user?.last_name}
 						icon={<CiEdit />}
 					/>
 
 					<EditProfileElement
-						user={user}
 						contentTitle='sex'
 						content={user?.sex}
 						icon={<CiEdit />}
 					/>
 					<EditProfileElement
-						user={user}
 						contentTitle='password'
 						content={'********'}
 						icon={<CiEdit />}

@@ -2,35 +2,27 @@ import { RxCross1 } from 'react-icons/rx';
 import Spinner from '../ui/Spinner';
 import {
 	User,
+	useRetrieveUserQuery,
 	useUpdateUserMutation,
 } from '@/app/_redux/features/authApiSlice';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import InputBox from '../ui/InputBox';
 import { LuPencilLine } from 'react-icons/lu';
 import { PiGenderIntersex } from 'react-icons/pi';
 import { GoLock } from 'react-icons/go';
+import toast from 'react-hot-toast';
 
 interface EditProfileModalProps {
 	onCloseModal: () => void;
 	contentTitle: string | undefined;
-	user: User | undefined;
 }
-
-type FormValues = {
-	first_name: string;
-	last_name: string;
-	sex: string;
-	password: string;
-	repeat_password: string;
-};
 
 export default function EditProfileModal({
 	onCloseModal,
 	contentTitle,
-	user,
 }: EditProfileModalProps) {
 	const [updateUser, { isLoading: isUserUpdating }] = useUpdateUserMutation();
-
+	const { data: user, refetch: refetchUserData } = useRetrieveUserQuery();
 	const {
 		register,
 		handleSubmit,
@@ -48,11 +40,36 @@ export default function EditProfileModal({
 			? 'Płeć'
 			: '';
 
-	const onSubmit = handleSubmit((data) => {
-		console.log(data);
-	});
+	const onSubmit: SubmitHandler<FieldValues> = (data) => {
+		if (
+			contentTitle === 'first_name' ||
+			contentTitle === 'last_name' ||
+			contentTitle === 'sex'
+		) {
+			updateUser({
+				fieldToUpdate: contentTitle,
+				valueToUpdate: data[contentTitle],
+			})
+				.unwrap()
+				.then(() => {
+					toast.success(
+						`${contentTitleDisplay} ${
+							contentTitle === 'sex' ? 'została zmieniona' : 'zostało zmienione'
+						}`
+					);
+					refetchUserData();
+					onCloseModal();
+				})
+				.catch(() => {
+					toast.error('Nie udało się zmienić imienia');
+				});
+		}
+	};
 	return (
-		<form onSubmit={onSubmit} className='flex flex-col w-full gap-10'>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className='flex flex-col w-full gap-10'
+		>
 			<div className='flex w-full justify-between items-center '>
 				<p className='font-medium text-2xl'>
 					Edytuj {contentTitleDisplay?.toLowerCase()}
