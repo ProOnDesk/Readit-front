@@ -1,21 +1,26 @@
+"use client";
+
 import {
-    Collection,
-    CollectionsPagination,
+  Collection,
+  CollectionsPagination,
 } from "@/app/_redux/features/collectionsApiSlice";
 import {
-    BaseQueryFn,
-    FetchArgs,
-    FetchBaseQueryError,
-    QueryActionCreatorResult,
-    QueryDefinition,
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  QueryActionCreatorResult,
+  QueryDefinition,
 } from "@reduxjs/toolkit/query";
 import Image from "next/image";
 import { TiStar } from "react-icons/ti";
 import Modal from "../ui/Modal";
 import EditPackageModal from "./EditPackageModal";
+import DetailsPackageModal from "./DetailsPackageModal";
+import { useEffect, useState } from "react";
 
 interface ArticleItemProps {
   collection: Collection;
+  showDetails?: boolean;
   isCreator?: boolean;
   refetch: () => QueryActionCreatorResult<
     QueryDefinition<
@@ -34,7 +39,14 @@ export default function CollectionItem({
   collection,
   isCreator = false,
   refetch,
+  showDetails,
 }: ArticleItemProps) {
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
   return (
     <>
       <Modal.Open opens={String(collection.id)}>
@@ -78,11 +90,23 @@ export default function CollectionItem({
         </button>
       </Modal.Open>
       <Modal.Window name={String(collection.id)}>
-        <EditPackageModal
-          onCloseModal={undefined as never}
-          packageId={collection.id}
-          refetch={refetch}
-        />
+        <div>
+          {isClient && showDetails ? (
+            <DetailsPackageModal
+              packageId={collection.id}
+              isCreator={isCreator}
+              onCloseModal={undefined as never}
+            />
+          ) : (
+            isCreator && (
+              <EditPackageModal
+                onCloseModal={undefined as never}
+                packageId={collection.id}
+                refetch={refetch}
+              />
+            )
+          )}
+        </div>
       </Modal.Window>
     </>
   );
