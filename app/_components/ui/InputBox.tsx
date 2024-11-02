@@ -21,6 +21,7 @@ interface InputBoxProps {
 		| Merge<FieldError, FieldErrorsImpl<any>>
 		| undefined;
 	icon: React.ReactNode;
+	defaultValue?: string | number;
 }
 
 export default function InputBox({
@@ -31,6 +32,7 @@ export default function InputBox({
 	validateFunction,
 	register,
 	icon,
+	defaultValue,
 }: InputBoxProps) {
 	const [inputValue, setInputValue] = useState<string | number>('');
 	const [focus, setFocus] = useState(false);
@@ -63,6 +65,7 @@ export default function InputBox({
 					{icon}
 				</div>
 				<input
+					defaultValue={defaultValue}
 					id={id}
 					className='border-none focus:outline-none px-3 w-full'
 					type={type}

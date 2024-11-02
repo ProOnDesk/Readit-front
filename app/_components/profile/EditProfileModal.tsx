@@ -7,6 +7,8 @@ import {
 import { FieldValues, useForm } from 'react-hook-form';
 import InputBox from '../ui/InputBox';
 import { LuPencilLine } from 'react-icons/lu';
+import { PiGenderIntersex } from 'react-icons/pi';
+import { GoLock } from 'react-icons/go';
 
 interface EditProfileModalProps {
 	onCloseModal: () => void;
@@ -44,7 +46,7 @@ export default function EditProfileModal({
 			? 'Hasło'
 			: contentTitle === 'sex'
 			? 'Płeć'
-			: undefined;
+			: '';
 
 	const onSubmit = handleSubmit((data) => {
 		console.log(data);
@@ -63,25 +65,62 @@ export default function EditProfileModal({
 				</button>
 			</div>
 			{contentTitle === 'first_name' && (
-				<InputBox
-					id='name'
-					type='text'
-					label='Imię'
-					error={errors?.first_name?.message}
-					register={register}
-					icon={<LuPencilLine size={20} />}
-				/>
+				<div className='w-full sm500:w-1/2 mx-auto'>
+					<InputBox
+						id='first_name'
+						type='text'
+						label={contentTitleDisplay}
+						defaultValue={user?.first_name}
+						error={errors?.first_name?.message}
+						register={register}
+						icon={<LuPencilLine size={20} />}
+					/>
+				</div>
 			)}
 			{contentTitle === 'last_name' && (
-				<input {...register('last_name')} defaultValue={user?.last_name} />
+				<div className='w-full sm500:w-1/2 mx-auto'>
+					<InputBox
+						id='last_name'
+						type='text'
+						label={contentTitleDisplay}
+						defaultValue={user?.last_name}
+						error={errors?.last_name?.message}
+						register={register}
+						icon={<LuPencilLine size={20} />}
+					/>
+				</div>
 			)}
 			{contentTitle === 'sex' && (
-				<input {...register('sex')} defaultValue={user?.sex} />
+				<div className='w-full sm500:w-1/2 mx-auto'>
+					<InputBox
+						id='sex'
+						type='text'
+						label={contentTitleDisplay}
+						defaultValue={user?.sex}
+						error={errors?.sex?.message}
+						register={register}
+						icon={<PiGenderIntersex size={20} />}
+					/>
+				</div>
 			)}
 			{contentTitle === 'password' && (
-				<div>
-					<input {...register('password')} />
-					<input {...register('repeat_password')} />
+				<div className='w-full sm500:w-1/2 mx-auto flex flex-col gap-3'>
+					<InputBox
+						id='password'
+						type='password'
+						label={contentTitleDisplay}
+						error={errors?.password?.message}
+						register={register}
+						icon={<GoLock size={20} />}
+					/>
+					<InputBox
+						id='repeat_password'
+						type='password'
+						label={'Powtórz hasło'}
+						error={errors?.repeat_password?.message}
+						register={register}
+						icon={<GoLock size={20} />}
+					/>
 				</div>
 			)}
 			<div className='grid grid-cols-2 gap-5 w-full sm500:w-1/2 mx-auto'>
