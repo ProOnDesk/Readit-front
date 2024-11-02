@@ -4,7 +4,7 @@ import {
 	User,
 	useUpdateUserMutation,
 } from '@/app/_redux/features/authApiSlice';
-import { useForm } from 'react-hook-form';
+import { FieldValues, useForm } from 'react-hook-form';
 import InputBox from '../ui/InputBox';
 import { LuPencilLine } from 'react-icons/lu';
 
@@ -33,7 +33,7 @@ export default function EditProfileModal({
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<FormValues>();
+	} = useForm<FieldValues>();
 
 	const contentTitleDisplay =
 		contentTitle === 'first_name'
