@@ -1,16 +1,11 @@
+import { useDebounce } from "@/app/_hooks/useDebounce";
 import { useGetMyArticlesQuery } from "@/app/_redux/features/articlesApiSlice";
-import React, { useEffect, useState } from "react";
-import Spinner from "../ui/Spinner";
-import InputBox from "../ui/InputBox";
-import { LuPencilLine } from "react-icons/lu";
+import { Article } from "@/app/_redux/features/authApiSlice";
+import { Pagination } from "@mui/material";
 import { SearchIcon } from "lucide-react";
 import Image from "next/image";
-import { Article } from "@/app/_redux/features/authApiSlice";
-import { useDebounce } from "@/app/_hooks/useDebounce";
-import { FaChevronRight } from "react-icons/fa";
-import { FaChevronLeft } from "react-icons/fa";
-import PaginationArticles from "../browseArticles/PaginationArticles";
-import { Pagination } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import Spinner from "../ui/Spinner";
 
 interface AddArticlesToPackageProps {
   articlesInPackage: Article[];
