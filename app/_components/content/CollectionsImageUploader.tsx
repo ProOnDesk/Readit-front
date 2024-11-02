@@ -19,6 +19,12 @@ function CollectionsImageUploader({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const types = ["PNG", "JPG", "JPEG"];
 
+  // useEffect(() => {
+  //   if (file) {
+  //     setImageSrc(URL.createObjectURL(file));
+  //   }
+  // }, [file]);
+
   async function handleFile(e: ChangeEvent<HTMLInputElement>) {
     const fileObjInput = e.target.files?.[0];
     const fileExtension = fileObjInput?.type.split("/")[1].toUpperCase();

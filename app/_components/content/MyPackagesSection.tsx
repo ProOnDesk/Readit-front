@@ -28,7 +28,7 @@ export default function MyPackagesSection() {
           <h3 className="font-semibold text-2xl sm500:text-3xl sm:text-4xl text-left">
             Zestawy
           </h3>
-          <p>Utworzone zestawy: 1</p>
+          <p>Utworzone zestawy: {userCollections?.total}</p>
         </div>
         <div className="flex justify-center items-center gap-3">
           <Modal>
@@ -47,6 +47,13 @@ export default function MyPackagesSection() {
         </div>
       </div>
       <Modal>
+        {userCollections?.items.length === 0 && (
+          <div className="flex justify-center items-center w-full h-[300px]">
+            <p className="text-lg font-semibold text-center">
+              Nie masz jeszcze żadnych zestawów
+            </p>
+          </div>
+        )}
         <div className="grid grid-cols-1 sm550:grid-cols-2 md800:grid-cols-3 lg1100:grid-cols-4 gap-x-3 gap-y-6">
           {isLoading || isFetching ? (
             <>
@@ -56,7 +63,12 @@ export default function MyPackagesSection() {
             </>
           ) : (
             userCollections?.items.map((collection, i) => (
-              <CollectionItem collection={collection} key={i} refetch={refetch} isCreator />
+              <CollectionItem
+                collection={collection}
+                key={i}
+                refetch={refetch}
+                isCreator
+              />
             ))
           )}
         </div>
