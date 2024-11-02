@@ -43,15 +43,15 @@ export default async function Page({ params, searchParams }: Params) {
 
 	return (
 		<>
-			<div className='py-8 md:py-16 md:px-10 px-4 max-w-[1800px] w-screen mx-auto flex flex-col gap-5 md:gap-10 '>
+			<div className='py-8 md:py-16 md:px-10 px-2 sm500:px-4 max-w-[1800px] w-screen mx-auto flex flex-col gap-5 md:gap-10 '>
 				<MaterialHeader
 					imageLink={title_image_url}
 					summary={summary}
 					tags={convertedTags}
 					title={title}
 				/>
-				<div className='flex flex-col md:flex-row-reverse'>
-					<div className='px-8 py-10 md:border-l-2 border-mainGreen h-fit'>
+				<div className='flex flex-col lg:flex-row-reverse'>
+					<div className='py-10 lg:border-l-2 border-mainGreen h-fit'>
 						<MaterialDetails
 							author={author}
 							authorAvatarLink={avatar_url}
@@ -61,9 +61,8 @@ export default async function Page({ params, searchParams }: Params) {
 							viewCount={view_count}
 						/>
 					</div>
-					<div className='flex-1 px-8 py-5'>
+					<div className='flex-1 py-5'>
 						<Article articleId={id} slug={slug} />
-
 						<OpinionSection
 							articleId={id}
 							authorId={userId}

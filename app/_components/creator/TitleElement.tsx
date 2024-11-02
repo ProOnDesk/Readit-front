@@ -27,7 +27,7 @@ export default function TitleElement({
 		<textarea
 			ref={textAreaRef}
 			value={element?.content}
-			className='w-full text-3xl focus:outline-none resize-none bg-transparent'
+			className='w-full text-3xl font-semibold focus:outline-none resize-none bg-transparent'
 			maxLength={100}
 			disabled={setArticleList ? false : true}
 			onChange={(e) => {

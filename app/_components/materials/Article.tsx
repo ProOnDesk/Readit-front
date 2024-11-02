@@ -50,7 +50,7 @@ function Article({ articleId, slug }: ArticleProps) {
 		<div className='pb-10'>
 			{article?.content_elements.map(
 				(element: ArticleElement, index: number) => (
-					<div key={index} className='px-5 pb-5 w-full'>
+					<div key={index} className='lg:px-5 pb-5 w-full'>
 						{element?.content_type === 'title' ? (
 							<TitleElement element={element} index={index} />
 						) : element?.content_type === 'text' ? (
