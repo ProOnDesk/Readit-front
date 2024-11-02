@@ -1,14 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import Modal from "../ui/Modal";
 import EditPackageModal from "./EditPackageModal";
+import Spinner from "../ui/Spinner";
+import CollectionItem from "./CollectionItem";
+import { useGetMyCollectionsQuery } from "@/app/_redux/features/collectionsApiSlice";
+import { Pagination } from "@mui/material";
+import CollectionItemLoader from "./CollectionItemLoader";
 
 export default function MyPackagesSection() {
+  const [page, setPage] = useState("1");
+  const {
+    data: userCollections,
+    isLoading,
+    isFetching,
+    refetch,
+  } = useGetMyCollectionsQuery({
+    page: page || "1",
+  });
+
   return (
-    <div className="max-w-[1800px] mx-auto">
-      <div className="flex flex-col sm400:flex-row w-full justify-between items-start sm400:items-center gap-5 pb-12 pt-4 md:pb-16 mb:pt-8 px-4 sm500:px-8 sm:px-12 lg:px-16 lg:pb-20 lg:pt-12">
+    <div className="max-w-[1800px] mx-auto px-4 sm500:px-8 sm:px-12 lg:px-16">
+      <div className="flex flex-col sm400:flex-row w-full justify-between items-start sm400:items-center gap-5 pb-12 pt-4 md:pb-16 mb:pt-8  lg:pb-20 lg:pt-12">
         <div className="">
           <h3 className="font-semibold text-2xl sm500:text-3xl sm:text-4xl text-left">
             Zestawy
@@ -23,10 +38,48 @@ export default function MyPackagesSection() {
               </button>
             </Modal.Open>
             <Modal.Window name="package">
-              <EditPackageModal onCloseModal={undefined as never} />
+              <EditPackageModal
+                onCloseModal={undefined as never}
+                refetch={refetch}
+              />
             </Modal.Window>
           </Modal>
         </div>
+      </div>
+      <Modal>
+        <div className="grid grid-cols-1 sm550:grid-cols-2 md800:grid-cols-3 lg1100:grid-cols-4 gap-x-3 gap-y-6">
+          {isLoading || isFetching ? (
+            <>
+              {Array.from({ length: 12 }).map((_, i) => (
+                <CollectionItemLoader key={i} />
+              ))}
+            </>
+          ) : (
+            userCollections?.items.map((collection, i) => (
+              <CollectionItem collection={collection} key={i} refetch={refetch} isCreator />
+            ))
+          )}
+        </div>
+      </Modal>
+      <div className="w-full flex justify-center items-center py-12 sm:py-16">
+        {userCollections?.pages && userCollections.pages > 1 && (
+          <Pagination
+            sx={{
+              "& .Mui-selected": {
+                backgroundColor: "#9ef01a !important",
+                color: "#ffffff !important",
+                "&:hover": {
+                  backgroundColor: "#70e000 !important",
+                },
+              },
+            }}
+            count={userCollections?.pages || 1}
+            page={+page}
+            disabled={userCollections?.pages === 1 || !userCollections}
+            onChange={(_event, value) => setPage(value.toString())}
+            color="primary"
+          />
+        )}
       </div>
     </div>
   );
