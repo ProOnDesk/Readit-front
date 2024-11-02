@@ -136,7 +136,7 @@ export default function ManageArticle({
 						className={`flex-1 flex justify-center items-center rounded-full border-mainGreen border-2  text-2xl  font-medium  transition-colors duration-300 aspect-square max-w-[65px] bg-white text-mainGreen hover:text-mainGreenSecond hover:border-mainGreenSecond`}
 					>
 						{isArticleFavoritesChanging ? (
-							<Spinner color={`${isWished ? 'white' : 'green'}`} size='small' />
+							<Spinner color={'green'} size='small' />
 						) : (
 							<>{!isWished ? <FaHeart /> : <FaHeartBroken />}</>
 						)}
