@@ -4,8 +4,6 @@ import Article from '@/app/_components/materials/Article';
 import MaterialDetails from '@/app/_components/materials/MaterialDetails';
 import MaterialHeader from '@/app/_components/materials/MaterialHeader';
 import OpinionSection from '@/app/_components/materials/OpinionSection';
-import Spinner from '@/app/_components/ui/Spinner';
-import { Suspense } from 'react';
 
 export const revalidate = 0;
 
