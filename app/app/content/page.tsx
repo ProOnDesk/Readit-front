@@ -15,7 +15,7 @@ export default function Page({
 }) {
   return (
     <>
-      <div className="max-w-[1800px] mx-auto py-10 px-10">
+      <div className="max-w-[1800px] mx-auto py-10 px-4 sm500:px-8 sm:px-12 lg:px-16 ">
         <MyArticlesSection searchParams={searchParams} />
       </div>
       <MyPackagesSection />
