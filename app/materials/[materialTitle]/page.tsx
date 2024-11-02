@@ -51,8 +51,8 @@ export default async function Page({ params, searchParams }: Params) {
           tags={convertedTags}
           title={title}
         />
-        <div className="flex flex-col md:flex-row-reverse">
-          <div className="px-8 py-10 md:border-l-2 border-mainGreen h-fit ">
+        <div className="flex flex-col lg:flex-row-reverse">
+          <div className="px-8 py-10 lg:border-l-2 border-mainGreen h-fit ">
             <ManageArticle
               is_free={is_free}
               price={price}
@@ -69,7 +69,7 @@ export default async function Page({ params, searchParams }: Params) {
               viewCount={view_count}
             />
           </div>
-          <div className="flex-1 px-8">
+          <div className="flex-1 px-2">
             <Suspense
               fallback={<div className="mx-auto">Ładowanie opinii...</div>}
               key={id}

@@ -8,7 +8,7 @@ import Spinner from '../ui/Spinner';
 import { useRouter } from 'next/navigation';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { useEffect } from 'react';
-import HighlightedListing from '../creator/HighlightedListing';
+import DisplayListing from './DisplayListing';
 
 interface ArticleProps {
 	articleId: number;
@@ -50,7 +50,7 @@ function Article({ articleId, slug }: ArticleProps) {
 		<div className='pb-10'>
 			{article?.content_elements.map(
 				(element: ArticleElement, index: number) => (
-					<div key={index} className='px-5 pb-5 w-full'>
+					<div key={index} className='lg:px-5 pb-5 w-full'>
 						{element?.content_type === 'title' ? (
 							<TitleElement element={element} index={index} />
 						) : element?.content_type === 'text' ? (
@@ -58,9 +58,7 @@ function Article({ articleId, slug }: ArticleProps) {
 						) : element?.content_type === 'image' ? (
 							<ImageElement index={index} element={element} />
 						) : element?.content_type === 'listing' ? (
-							<div className='border-2 border-blackSecond/10 rounded-md'>
-								<HighlightedListing codeString={element?.content} />
-							</div>
+							<DisplayListing element={element} key={index} />
 						) : null}
 					</div>
 				)
