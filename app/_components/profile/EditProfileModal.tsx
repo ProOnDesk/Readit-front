@@ -1,15 +1,15 @@
 import { RxCross1 } from 'react-icons/rx';
 import Spinner from '../ui/Spinner';
 import {
-	User,
 	useRetrieveUserQuery,
+	useUpdatePasswordMutation,
 	useUpdateUserMutation,
 } from '@/app/_redux/features/authApiSlice';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import InputBox from '../ui/InputBox';
 import { LuPencilLine } from 'react-icons/lu';
 import { PiGenderIntersex } from 'react-icons/pi';
-import { GoLock } from 'react-icons/go';
+import { GoLock, GoSync } from 'react-icons/go';
 import toast from 'react-hot-toast';
 
 interface EditProfileModalProps {
@@ -22,10 +22,14 @@ export default function EditProfileModal({
 	contentTitle,
 }: EditProfileModalProps) {
 	const [updateUser, { isLoading: isUserUpdating }] = useUpdateUserMutation();
+	const [updatePassword, { isLoading: isPasswordUpdating }] =
+		useUpdatePasswordMutation();
 	const { data: user, refetch: refetchUserData } = useRetrieveUserQuery();
+
 	const {
 		register,
 		handleSubmit,
+		getValues,
 		formState: { errors },
 	} = useForm<FieldValues>();
 
@@ -64,6 +68,21 @@ export default function EditProfileModal({
 					toast.error('Nie udało się zmienić imienia');
 				});
 		}
+		if (contentTitle === 'password') {
+			updatePassword({
+				old_password: data.old_password,
+				new_password: data.repeat_password,
+			})
+				.unwrap()
+				.then(() => {
+					toast.success('Hasło zostało zmienione');
+					onCloseModal();
+				})
+				.catch((err) => {
+					console.log(err);
+					toast.error(err?.data?.detail ?? 'Nie udało się zmienić hasła');
+				});
+		}
 	};
 	return (
 		<form
@@ -82,7 +101,7 @@ export default function EditProfileModal({
 				</button>
 			</div>
 			{contentTitle === 'first_name' && (
-				<div className='w-full sm500:w-1/2 mx-auto'>
+				<div className='w-full sm500:w-2/3 mx-auto'>
 					<InputBox
 						id='first_name'
 						type='text'
@@ -95,7 +114,7 @@ export default function EditProfileModal({
 				</div>
 			)}
 			{contentTitle === 'last_name' && (
-				<div className='w-full sm500:w-1/2 mx-auto'>
+				<div className='w-full sm500:w-2/3 mx-auto'>
 					<InputBox
 						id='last_name'
 						type='text'
@@ -108,7 +127,7 @@ export default function EditProfileModal({
 				</div>
 			)}
 			{contentTitle === 'sex' && (
-				<div className='w-full sm500:w-1/2 mx-auto'>
+				<div className='w-full sm500:w-2/3 mx-auto'>
 					<InputBox
 						id='sex'
 						type='text'
@@ -121,14 +140,31 @@ export default function EditProfileModal({
 				</div>
 			)}
 			{contentTitle === 'password' && (
-				<div className='w-full sm500:w-1/2 mx-auto flex flex-col gap-3'>
+				<div className='w-full sm500:w-2/3 mx-auto flex flex-col gap-3'>
 					<InputBox
-						id='password'
+						id='old_password'
 						type='password'
-						label={contentTitleDisplay}
-						error={errors?.password?.message}
+						label={'Aktualne hasło'}
+						error={errors?.old_password?.message}
 						register={register}
 						icon={<GoLock size={20} />}
+					/>
+
+					<InputBox
+						id='new_password'
+						type='password'
+						label={'Nowe hasło'}
+						error={errors?.new_password?.message}
+						register={register}
+						icon={<GoLock size={20} />}
+						validateFunction={() => {
+							const passwordRegex =
+								/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+
+							if (!passwordRegex.test(getValues().new_password))
+								return 'Hasło wymaga: min. 8 znaków, duża litera, cyfra oraz znak specjalny';
+							else return true;
+						}}
 					/>
 					<InputBox
 						id='repeat_password'
@@ -136,7 +172,12 @@ export default function EditProfileModal({
 						label={'Powtórz hasło'}
 						error={errors?.repeat_password?.message}
 						register={register}
-						icon={<GoLock size={20} />}
+						icon={<GoSync size={20} />}
+						validateFunction={() => {
+							if (getValues().new_password !== getValues().repeat_password)
+								return 'Hasła nie są identyczne';
+							else return true;
+						}}
 					/>
 				</div>
 			)}
@@ -150,10 +191,14 @@ export default function EditProfileModal({
 				</button>
 				<button
 					type='submit'
-					disabled={isUserUpdating}
+					disabled={isUserUpdating || isPasswordUpdating}
 					className='py-2 px-5 bg-mainGreen hover:bg-mainGreenSecond font-semibold text-white transition-colors duration-300 rounded-md'
 				>
-					{isUserUpdating ? <Spinner color='white' size='small' /> : 'Zmień'}
+					{isUserUpdating || isPasswordUpdating ? (
+						<Spinner color='white' size='small' />
+					) : (
+						'Zmień'
+					)}
 				</button>
 			</div>
 		</form>
