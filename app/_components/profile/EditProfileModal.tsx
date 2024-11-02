@@ -43,6 +43,7 @@ export default function EditProfileModal({
 					Edytuj {contentTitleDisplay?.toLowerCase()}
 				</p>
 				<button
+					type='button'
 					onClick={onCloseModal}
 					className='p-1 hover:bg-whiteSecond transition-colors duration-300 rounded-md'
 				>
