@@ -15,6 +15,8 @@ interface InputBoxProps {
   type?: "text" | "email" | "number" | "password";
   validateFunction?: () => boolean | string;
   id: string;
+  max?: number;
+  min?: number;
   error:
     | string
     | FieldError
@@ -31,6 +33,8 @@ export default function InputBox({
   validateFunction,
   register,
   icon,
+  max,
+  min,
 }: InputBoxProps) {
   const [inputValue, setInputValue] = useState<string | number>("");
   const [focus, setFocus] = useState(false);
@@ -62,6 +66,8 @@ export default function InputBox({
           id={id}
           className="border-none focus:outline-none px-3 w-full"
           type={type}
+          max={max}
+          min={min}
           placeholder={label}
           {...register(id, {
             required: "Pole wymagane",
@@ -73,7 +79,7 @@ export default function InputBox({
         />
         <div className="absolute bottom-0 left-0 h-[1.5px] w-full bg-mainGreen"></div>
       </div>
-      <p className="text-xs mt-1 text-red-500">{" "}{error && error.toString()}</p>
+      <p className="text-xs mt-1 text-red-500"> {error && error.toString()}</p>
     </div>
   );
 }
