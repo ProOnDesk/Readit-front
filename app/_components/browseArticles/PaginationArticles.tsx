@@ -29,7 +29,7 @@ export default function PaginationArticles({
 		setHeader(document.querySelector('#browseHeader'));
 	}, []);
 
-	useEffect(() => {
+	function handleScroll() {
 		if (scroll) {
 			window.scrollTo({
 				top: 0,
@@ -43,11 +43,11 @@ export default function PaginationArticles({
 				behavior: 'smooth',
 			});
 		}
-	}, [page, scroll, isBrowse, header]);
+	}
 
 	const createPageURL = (event: React.ChangeEvent<unknown>, value: number) => {
 		setPage(value);
-
+		handleScroll();
 		const params = new URLSearchParams(searchParams);
 		params.set('page', value.toString());
 		router.replace(`${path}?${params.toString()}`, {
