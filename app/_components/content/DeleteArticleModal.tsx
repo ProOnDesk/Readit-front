@@ -49,6 +49,7 @@ function DeleteArticleModal({
 				</button>
 				<button
 					onClick={handleDeleteArticle}
+					disabled={isArticleDeleting}
 					className='py-2 px-5 bg-red-400 hover:bg-red-500 text-white transition-colors duration-300 rounded-md'
 				>
 					{isArticleDeleting ? <Spinner color='white' size='small' /> : 'Usuń'}
