@@ -11,6 +11,7 @@ import { LuPencilLine } from 'react-icons/lu';
 import { PiGenderIntersex } from 'react-icons/pi';
 import { GoLock, GoSync } from 'react-icons/go';
 import toast from 'react-hot-toast';
+import { useUpdateUserSettings } from '@/app/_hooks/useUpdateUserSettings';
 
 interface EditProfileModalProps {
 	onCloseModal: () => void;
@@ -21,69 +22,17 @@ export default function EditProfileModal({
 	onCloseModal,
 	contentTitle,
 }: EditProfileModalProps) {
-	const [updateUser, { isLoading: isUserUpdating }] = useUpdateUserMutation();
-	const [updatePassword, { isLoading: isPasswordUpdating }] =
-		useUpdatePasswordMutation();
-	const { data: user, refetch: refetchUserData } = useRetrieveUserQuery();
-
 	const {
+		errors,
+		isPasswordUpdating,
+		isUserUpdating,
+		onSubmit,
 		register,
 		handleSubmit,
 		getValues,
-		formState: { errors },
-	} = useForm<FieldValues>();
-
-	const contentTitleDisplay =
-		contentTitle === 'first_name'
-			? 'Imię'
-			: contentTitle === 'last_name'
-			? 'Nazwisko'
-			: contentTitle === 'password'
-			? 'Hasło'
-			: contentTitle === 'sex'
-			? 'Płeć'
-			: '';
-
-	const onSubmit: SubmitHandler<FieldValues> = (data) => {
-		if (
-			contentTitle === 'first_name' ||
-			contentTitle === 'last_name' ||
-			contentTitle === 'sex'
-		) {
-			updateUser({
-				fieldToUpdate: contentTitle,
-				valueToUpdate: data[contentTitle],
-			})
-				.unwrap()
-				.then(() => {
-					toast.success(
-						`${contentTitleDisplay} ${
-							contentTitle === 'sex' ? 'została zmieniona' : 'zostało zmienione'
-						}`
-					);
-					refetchUserData();
-					onCloseModal();
-				})
-				.catch(() => {
-					toast.error('Nie udało się zmienić imienia');
-				});
-		}
-		if (contentTitle === 'password') {
-			updatePassword({
-				old_password: data.old_password,
-				new_password: data.repeat_password,
-			})
-				.unwrap()
-				.then(() => {
-					toast.success('Hasło zostało zmienione');
-					onCloseModal();
-				})
-				.catch((err) => {
-					console.log(err);
-					toast.error(err?.data?.detail ?? 'Nie udało się zmienić hasła');
-				});
-		}
-	};
+		contentTitleDisplay,
+		user,
+	} = useUpdateUserSettings(contentTitle, onCloseModal);
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
