@@ -1,14 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import React, { useState } from "react";
-import Modal from "../ui/Modal";
-import EditPackageModal from "./EditPackageModal";
-import Spinner from "../ui/Spinner";
-import CollectionItem from "./CollectionItem";
 import { useGetMyCollectionsQuery } from "@/app/_redux/features/collectionsApiSlice";
 import { Pagination } from "@mui/material";
+import { useState } from "react";
+import Modal from "../ui/Modal";
+import CollectionItem from "./CollectionItem";
 import CollectionItemLoader from "./CollectionItemLoader";
+import EditPackageModal from "./EditPackageModal";
 
 export default function MyPackagesSection() {
   const [page, setPage] = useState("1");

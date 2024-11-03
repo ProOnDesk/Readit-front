@@ -62,7 +62,7 @@ export default function CollectionItem({
           </div>
           <div className="w-full h-[148px] px-3 py-2 flex justify-between items-start flex-col pb-2">
             <div className="flex justify-between w-full items-center text-xs gap-1">
-              <p className="text-sm text-slate-400 py-1">
+              <p className="text-sm text-slate-400 py-1 text-left">
                 Zestaw{" "}
                 <span className="font-semibold">
                   {collection.articles_count}
@@ -90,23 +90,21 @@ export default function CollectionItem({
         </button>
       </Modal.Open>
       <Modal.Window name={String(collection.id)}>
-        <div>
-          {isClient && showDetails ? (
-            <DetailsPackageModal
-              packageId={collection.id}
-              isCreator={isCreator}
+        {isClient && showDetails ? (
+          <DetailsPackageModal
+            packageId={collection.id}
+            isCreator={isCreator}
+            onCloseModal={undefined as never}
+          />
+        ) : (
+          isCreator && (
+            <EditPackageModal
               onCloseModal={undefined as never}
+              packageId={collection.id}
+              refetch={refetch}
             />
-          ) : (
-            isCreator && (
-              <EditPackageModal
-                onCloseModal={undefined as never}
-                packageId={collection.id}
-                refetch={refetch}
-              />
-            )
-          )}
-        </div>
+          )
+        )}
       </Modal.Window>
     </>
   );
