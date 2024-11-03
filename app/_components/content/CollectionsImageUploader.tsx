@@ -13,17 +13,15 @@ function CollectionsImageUploader({
   setFile,
 }: ProfileImageUploaderProps) {
   const [isDragOver, setIsDragOver] = useState(false);
-  const [imageSrc, setImageSrc] = useState(
-    file ? URL.createObjectURL(file) : ""
-  );
+  const [imageSrc, setImageSrc] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const types = ["PNG", "JPG", "JPEG"];
 
-  // useEffect(() => {
-  //   if (file) {
-  //     setImageSrc(URL.createObjectURL(file));
-  //   }
-  // }, [file]);
+  useEffect(() => {
+    if (file) {
+      setImageSrc(URL.createObjectURL(file));
+    }
+  }, [file]);
 
   async function handleFile(e: ChangeEvent<HTMLInputElement>) {
     const fileObjInput = e.target.files?.[0];

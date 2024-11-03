@@ -69,16 +69,16 @@ export default function EditPackageModal({
     if (packageId) {
       getCollectionDetails({ collection_id: packageId })
         .unwrap()
-        .then((res) => {
+        .then(async (res) => {
           setArticlesInPackage(res.articles);
-          fetch(res.collection_image_url)
+          const image = await fetch(res.collection_image_url)
             .then((response) => response.blob())
             .then((blob) => {
-              const file = new File([blob], "collection_image.jpg", {
+              return new File([blob], "collection_image.jpg", {
                 type: blob.type,
               });
-              setFile(file);
             });
+          setFile(image);
           setValue("title", res.title);
           setValue("discount_percentage", res.discount_percentage);
           setValue("short_description", res.short_description);

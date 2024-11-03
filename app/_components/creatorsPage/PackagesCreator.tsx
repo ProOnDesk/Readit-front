@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import Modal from "../ui/Modal";
-import CollectionItemLoader from "../content/CollectionItemLoader";
-import CollectionItem from "../content/CollectionItem";
-import { Pagination } from "@mui/material";
-import { useGetCollectionsByUserIdQuery } from "@/app/_redux/features/collectionsApiSlice";
 import { User, useRetrieveUserQuery } from "@/app/_redux/features/authApiSlice";
+import { useGetCollectionsByUserIdQuery } from "@/app/_redux/features/collectionsApiSlice";
+import { Pagination } from "@mui/material";
+import { useEffect, useState } from "react";
+import CollectionItem from "../content/CollectionItem";
+import CollectionItemLoader from "../content/CollectionItemLoader";
+import Modal from "../ui/Modal";
 
 interface PackagesCreatorProps {
   user: User;
