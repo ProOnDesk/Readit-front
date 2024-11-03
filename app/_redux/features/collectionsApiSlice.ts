@@ -85,6 +85,30 @@ const collectionsApiSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    getCollectionsByUserId: builder.query<
+      CollectionsPagination,
+      { user_id: number; page: string }
+    >({
+      query: ({ user_id, page }) => ({
+        url: `/articles/collections/user/${user_id}?page=${page}&size=12`,
+        method: "GET",
+      }),
+    }),
+    getCollectionsByArticleId: builder.query<
+      CollectionsPagination,
+      { article_id: number; page: string }
+    >({
+      query: ({ article_id, page }) => ({
+        url: `/articles/collections/article/${article_id}?page=${page}&size=12`,
+        method: "GET",
+      }),
+    }),
+    buyCollection: builder.mutation<void, { collection_id: number }>({
+      query: ({ collection_id }) => ({
+        url: `/articles/collection/buy/${collection_id}`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -94,4 +118,7 @@ export const {
   useGetCollectionByIdMutation,
   useEditCollectionByIdMutation,
   useDeleteCollectionByIdMutation,
+  useGetCollectionsByUserIdQuery,
+  useBuyCollectionMutation,
+  useGetCollectionsByArticleIdQuery,
 } = collectionsApiSlice;
