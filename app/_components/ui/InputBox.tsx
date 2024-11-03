@@ -10,29 +10,33 @@ import {
 } from 'react-hook-form';
 
 interface InputBoxProps {
-	label: string;
-	register: UseFormRegister<FieldValues>;
-	type?: 'text' | 'email' | 'number' | 'password';
-	validateFunction?: () => boolean | string;
-	id: string;
-	error:
-		| string
-		| FieldError
-		| Merge<FieldError, FieldErrorsImpl<any>>
-		| undefined;
-	icon: React.ReactNode;
-	defaultValue?: string | number;
+  label: string;
+  register: UseFormRegister<FieldValues>;
+  type?: "text" | "email" | "number" | "password";
+  validateFunction?: () => boolean | string;
+  id: string;
+  max?: number;
+  min?: number;
+  error:
+    | string
+    | FieldError
+    | Merge<FieldError, FieldErrorsImpl<any>>
+    | undefined;
+  icon: React.ReactNode;
+  defaultValue?: string | number;
 }
 
 export default function InputBox({
-	type = 'text',
-	id,
-	label,
-	error,
-	validateFunction,
-	register,
-	icon,
-	defaultValue,
+  type = "text",
+  id,
+  label,
+  error,
+  validateFunction,
+  register,
+  icon,
+  max,
+  min,
+  defaultValue,
 }: InputBoxProps) {
 	const [inputValue, setInputValue] = useState<string | number>('');
 	const [focus, setFocus] = useState(false);
@@ -67,6 +71,8 @@ export default function InputBox({
 				<input
 					defaultValue={defaultValue}
 					id={id}
+          max={max}
+          min={min}
 					className='border-none focus:outline-none px-3 w-full'
 					type={type}
 					placeholder={label}
