@@ -24,14 +24,14 @@ export default function MaterialHeader({
 					className='max-h-[600px] w-full object-cover'
 				/>
 				<div className='hidden md:block absolute bg-blackSecond/50 w-full h-full left-0 top-0'></div>
-				<div className='hidden md:flex flex-col gap-10 absolute bottom-0 w-full justify-center text-white pb-2 md:pb-16 px-10 lg:max-w-[70%]'>
-					<h1 className='text-5xl font-semibold'>{title}</h1>
-					<p className='hidden md:block text-xl'>{summary}</p>
+				<div className='hidden md:flex flex-col gap-4 lg:gap-8 absolute bottom-0 w-full justify-center text-white pb-2 md:pb-4 lg:pb-10 px-4 lg:max-w-[80%] lg:px-10'>
+					<h1 className='md:text-3xl lg:text-5xl font-semibold'>{title}</h1>
+					<p className='hidden md:block text-md lg:text-lg'>{summary}</p>
 					<div className='hidden md:flex flex-wrap gap-3'>
 						{tags.map((tag, index) => (
 							<span
 								key={index}
-								className='text-md border-2 border-mainGreen font-semibold text-white px-4 py-2 rounded-full'
+								className='text-xs lg:text-sm border-2 border-mainGreen font-semibold text-white px-4 py-2 rounded-full'
 							>
 								{tag}
 							</span>
