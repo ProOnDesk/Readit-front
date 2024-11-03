@@ -3,8 +3,7 @@
 import { useGetMyCollectionsQuery } from "@/app/_redux/features/collectionsApiSlice";
 import { Pagination } from "@mui/material";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import CollectionItem from "../content/CollectionItem";
 import CollectionItemLoader from "../content/CollectionItemLoader";
 import Modal from "../ui/Modal";

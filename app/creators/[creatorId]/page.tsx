@@ -5,10 +5,12 @@ import {
 } from "@/app/_actions/profileActions";
 import DescriptionCreator from "@/app/_components/creatorsPage/DescriptionCreator";
 import NameTagCreator from "@/app/_components/creatorsPage/NameTagCreator";
+import PackagesCreator from "@/app/_components/creatorsPage/PackagesCreator";
 import ProfileArticlesCreator from "@/app/_components/creatorsPage/ProfileArticlesCreator";
 import ProfileImageCreator from "@/app/_components/creatorsPage/ProfileImageCreator";
 import SkillsCreator from "@/app/_components/creatorsPage/SkillsCreator";
 import FooterHomepage from "@/app/_components/homepage/FooterHomepage";
+import Packages from "@/app/_components/profile/Packages";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -63,6 +65,7 @@ export default async function Page({
         <SkillsCreator user={user} />
         <DescriptionCreator user={user} />
         <ProfileArticlesCreator user={user} page={searchParams.page} />
+        <PackagesCreator user={user} />
       </div>
       <div className="py-5"></div>
       <FooterHomepage colorVariant="dark"/>
