@@ -23,7 +23,7 @@ export default function HeaderHomepage() {
 								Dołącz teraz
 							</Link>
 						</div>
-						<div className="flex flex-col justify-center items-center h-full text-center pb-24 md:items-start md:justify-start md:px-8 md900:px-16 md:mb-36">
+						<div className="flex flex-col justify-center items-center h-full text-center px-8 pb-24 md:items-start md:justify-start md:px-8 md900:px-16 md:mb-36">
 							<div className="flex flex-col gap-y-4  md:w-[50%] md:text-left md:gap-y-0 py-4">
 								<h4 className="text-white  font-bold text-2xl sm500:px-12 sm600:px-16 sm500:text-3xl md:px-0 md:py-6 md:w-[90%] lg:w-[85%] xl1396:text-4xl ">
 									Zamień swoją wiedzę na zysk, odkrywając inspiracjące treści
