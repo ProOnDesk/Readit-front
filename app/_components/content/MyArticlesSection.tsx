@@ -8,6 +8,7 @@ import Spinner from '../ui/Spinner';
 import { useEffect } from 'react';
 import ArticleItemSecLoader from '../boughtAndFav/ArticleItemSecLoader';
 import ArticleItemLoader from '../profile/ArticleItemLoader';
+import { ImFileEmpty } from 'react-icons/im';
 
 function MyArticlesSection({
 	searchParams,
@@ -43,16 +44,24 @@ function MyArticlesSection({
 				</div>
 			) : (
 				<div className='grid grid-cols-1 sm550:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-3 gap-y-6 pb-10 place-content-start'>
-					{articleList?.items?.map((article: Article) => (
-						<MyArticleItem
-							key={article?.id}
-							article={article}
-							refetchArticleList={refetchArticleList}
-						/>
-					))}
+					{articleList?.items.length === 0 ? (
+						<div className='col-span-5 place-self-center flex justify-center items-center gap-2 py-20'>
+							<ImFileEmpty /> Nie stworzyłeś jeszcze żadnych materiałów
+						</div>
+					) : (
+						articleList?.items?.map((article: Article) => (
+							<MyArticleItem
+								key={article?.id}
+								article={article}
+								refetchArticleList={refetchArticleList}
+							/>
+						))
+					)}
 				</div>
 			)}
-			<PaginationArticles data={articleList} scroll={true} />
+			{articleList?.items.length !== 0 && (
+				<PaginationArticles data={articleList} scroll={true} />
+			)}
 		</>
 	);
 }
