@@ -19,8 +19,8 @@ export default function ProfileSettings() {
 		);
 
 	return (
-		<div className='md900:bg-whiteSecond lg1200:pb-20 h-screen py-5 px-2 sm:px-5'>
-			<div className=' md900:px-10 lg:px-20 lg1200:px-12 bg-white max-w-[1200px] mx-auto py-10 rounded-2xl lg1200:shadow-lg'>
+		<div className='md900:bg-whiteSecond lg1200:pb-20 h-screen py-5 px-2 sm:px-5 flex items-center'>
+			<div className='w-full md900:px-10 lg:px-20 lg1200:px-12 bg-white max-w-[1200px] mx-auto py-12 rounded-2xl lg1200:shadow-lg'>
 				<h3 className='font-semibold text-3xl sm:text-4xl text-left pb-10'>
 					Twoje dane
 				</h3>
