@@ -20,8 +20,8 @@ export default function MaterialDetails({
 	viewCount,
 }: MaterialDetailsProps) {
 	return (
-		<div className='lg:flex flex-col lg:px-5 gap-8 text-xl sm600:text-2xl items-center lg:items-start place-items-center sm600:place-items-start grid grid-cols-1 sm600:grid-cols-2'>
-			<div>
+		<div className='lg:flex flex-col lg:px-5 gap-8 text-xl sm600:text-2xl items-center lg:items-start place-items-center sm600:place-items-start grid grid-cols-1 sm600:grid-cols-2 text-center sm600:text-start'>
+			<div >
 				<p className='font-semibold mb-2 items-start'>Data publikacji</p>
 				<div className='flex flex-col gap-2'>
 					<div className='flex flex-row gap-2 items-center'>
@@ -37,7 +37,7 @@ export default function MaterialDetails({
 			</div>
 			<div className=''>
 				<p className='font-semibold mb-2'>Wyświetlenia</p>
-				<div className='flex flex-row gap-1'>
+				<div className='flex flex-row gap-1 justify-center sm600:justify-normal'>
 					<p className='font-medium'>{viewCount}</p>
 				</div>
 			</div>
