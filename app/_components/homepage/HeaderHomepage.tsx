@@ -1,55 +1,48 @@
 /* eslint-disable @next/next/no-img-element */
 
 import Link from "next/link";
+import TopCreators from "./BecomeCreators";
 import ArrowBtn from "./ArrowBtn";
 
 export default function HeaderHomepage() {
-	return (
-		<div className="relative h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] w-full py-14 bg-blackSecond">
-			<div className="max-w-[1800px] w-full mx-auto flex flex-col justify-between h-full items-center">
-				<div className=" grid grid-cols-1 md:grid-cols-2">
-					<div className="relative h-full w-full md:flex md:justify-center md:items-center">
-						<img
-							src="/homepage-big.jpg"
-							className="w-full aspect-video bg-cover bg-center opacity-20 shadow-shadowNew object-cover h-[50vh] sm550:h-fit md:h-[50vh]"
-							alt=""
-						/>
+  return (
+    <div className="w-full bg-blackSecond h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex justify-center items-center">
+      <div className="relative mx-auto max-w-[1800px] w-full h-full pb-8 md:pb-0">
+        <div className="flex flex-col justify-center items-center h-full w-full text-center lg:text-left lg:items-start">
+          <img
+            src="/laptop.jpg"
+            className="absolute top-1/2 -translate-y-1/2 left-0 w-full h-[70%] md:h-[80%] bg-cover bg-center object-cover overflow-hidden brightness-[0.4] pb-8 md:pb-0 lg:hidden"
+            alt=""
+          />
+          <div className="flex flex-col justify-center items-center gap-8 z-10 px-4 sm400:px-12 max-w-[530px] lg:max-w-full lg:justify-center lg:h-full lg:gap-10 lg:items-start">
+            <h4 className="text-white  font-bold text-2xl sm500:text-3xl lg:text-4xl lg:max-w-[45%]">
+              Zamień swoją wiedzę na zysk, odkrywając inspirujące treści
+              tworzone przez innych.
+            </h4>
+            <p className="text-white sm500:text-lg lg:text-xl lg:max-w-[40%]">
+              Zarejestruj się już dziś na{" "}
+              <span className="font-semibold">Readit</span>, zacznij swoją
+              podróż jako twórca lub odkrywca!
+            </p>
+            <Link
+              href="/register"
+              className="text-center font-medium rounded-full bg-mainGreen text-white hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2 self-center lg:self-start"
+            >
+              Dołącz teraz
+            </Link>
+          </div>
+        </div>
 
-						<div className="flex flex-col justify-center items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm px-10 text-center h-full w-full gap-4 sm500:gap-6 ">
-							<h2 className=" text-2xl sm500:text-3xl md:text-4xl text-whiteSecond font-medium text-center	tracking-tight">
-								Czytaj wartościowe materiały lub sam zostań twórcą na Read
-								<span className="text-mainGreenSecond">it</span>!
-							</h2>
+        <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 right-0 h-[75%] xl:h-[85%] max-h-[600px]">
+          <img
+            src="/tlo.png"
+            className="w-full h-full bg-cover bg-center object-cover overflow-hidden brightness-[0.7]"
+            alt=""
+          />
+        </div>
 
-							<p className="text-sm sm500:text-base md:hidden md:text-xl md:text-center text-whiteSecond/75 tracking-tight">
-								Tworząc treści na Readit, zyskujesz szansę dzielenia się swoją{" "}
-								<span className="text-mainGreenSecond">wiedzą</span> i budowania
-								kreatywnej społeczności, a przy okazji{" "}
-								<span className="text-mainGreenSecond">zarabiasz</span>.
-							</p>
-						</div>
-					</div>
-					<div className="text-sm px-10 text-center hidden md:flex md:justify-center md:items-center h-full w-full order-1 ">
-						<p className="  md:text-xl md:text-center text-whiteSecond/75  tracking-tight">
-							Na Read<span className="text-mainGreenSecond">it</span> znajdziesz
-							setki materiałów z różnych dziedzin, które pomogą Ci rozwijać
-							swoje umiejętności i pasje.{" "}
-							<span className="text-mainGreenSecond">Dołącz</span> do naszej
-							społeczności i odkryj nieograniczone możliwości edukacyjne,
-							dostępne na wyciągnięcie ręki.
-						</p>
-					</div>
-				</div>
-				<Link
-					href="/register"
-					className="md:self-start md:ml-20 text-center sm500:text-lg md:text-xl rounded-full bg-mainGreen text-white font-medium hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2 ">
-					Dołącz się &rarr;
-				</Link>
-				<span />
-				<ArrowBtn />
-			</div>
-		</div>
-	);
+        <ArrowBtn />
+      </div>
+    </div>
+  );
 }
-
-// absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2

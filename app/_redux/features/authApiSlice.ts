@@ -131,27 +131,29 @@ const authApiSlice = apiSlice.injectEndpoints({
 				method: 'GET',
 			}),
 		}),
-		// verifyEmail: builder.mutation({
-		//   query: ({ token }) => ({
-		//     url: "/user/confirm_user/",
-		//     method: "POST",
-		//     body: { token },
-		//   }),
-		// }),
-		// resetPassword: builder.mutation({
-		//   query: ({ email }) => ({
-		//     url: "/user/password_reset/",
-		//     method: "POST",
-		//     body: { email },
-		//   }),
-		// }),
-		// confirmPassword: builder.mutation({
-		//   query: ({ token, password }) => ({
-		//     url: "/user/password_reset/confirm/",
-		//     method: "POST",
-		//     body: { token, password },
-		//   }),
-		// }),
+	 verifyEmail: builder.mutation<null, { token: string }>({
+      query: ({ token }) => {
+        console.log(token);
+        return {
+          url: `/user/verify/${token}`,
+          method: "POST",
+        };
+      },
+    }),
+    resetPassword: builder.mutation({
+      query: ({ email }) => ({
+        url: "/user/password-reset/",
+        method: "POST",
+        body: { email },
+      }),
+    }),
+    confirmPassword: builder.mutation({
+      query: ({ key, password }) => ({
+        url: `/user/password-reset/${key}`,
+        method: "POST",
+        body: { password },
+      }),
+    }),
 		updateUser: builder.mutation({
 			query: ({ fieldToUpdate, valueToUpdate }) => ({
 				url: '/user/modify',
@@ -220,4 +222,7 @@ export const {
 	useUnfollowUserMutation,
 	useGetUserFollwedByMeMutation,
 	useGetUserFollowMeMutation,
+  useResetPasswordMutation,
+  useVerifyEmailMutation,
+  useConfirmPasswordMutation,
 } = authApiSlice;

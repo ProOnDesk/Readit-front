@@ -1,33 +1,32 @@
-"use client";
-
-import React from "react";
-import useEmblaCarousel from "embla-carousel-react";
-import EmblaCarousel from "./EmblaCarousel";
+import Link from "next/link";
+import EmblaCarouselHomepage from "./EmblaCarouselHomepage";
 import { EmblaOptionsType } from "embla-carousel";
-import { useGetArticlesHomepageQuery } from "@/app/_redux/features/articleApiSLice";
-import Spinner from "../ui/Spinner";
 
 export default function CarouselHomepage() {
-	const { data, isLoading } = useGetArticlesHomepageQuery();
+  const OPTIONS: EmblaOptionsType = {
+    align: "center",
+    loop: true,
+    duration: 500,
+    slidesToScroll: 1,
+    dragFree: true,
+  };
 
-	const OPTIONS: EmblaOptionsType = {
-		align: "center",
-		loop: true,
-		slidesToScroll: 1,
-		breakpoints: {
-			"(min-width: 768px)": { slidesToScroll: 2 },
-			"(min-width: 1024px)": { slidesToScroll: 3 },
-		},
-	};
-
-	return (
-		<div className="">
-			{" "}
-			{isLoading && !data ? (
-				<Spinner color="green" size="big" />
-			) : (
-				<EmblaCarousel slides={data?.items || []} options={OPTIONS} />
-			)}
-		</div>
-	);
+  return (
+    <div className="max-w-[1800px] w-full mx-auto  bg-white">
+      <div className="flex flex-col justify-center items-center gap-y-6 sm600:gap-y-8 my-10 sm500:my-16">
+        {" "}
+        <p className="px-6 sm500:px-10 sm600:mx-20 md:px-32 md900:px-44 xl:text-3xl xl1396:text-4xl text-xl sm500:text-2xl  text-center text-blackSecond font-bold tracking-wide">
+          Zanurz się w treściach, które poszerzą Twoją wiedzę i zainspirują do
+          działania!
+        </p>
+        <EmblaCarouselHomepage options={OPTIONS} />
+        <Link
+          href="/register"
+          className="text-center rounded-full  bg-blackSecond text-white font-medium hover:bg-blackFour transition-colors duration-300 px-6 py-2"
+        >
+          Zacznij już dziś!
+        </Link>
+      </div>
+    </div>
+  );
 }
