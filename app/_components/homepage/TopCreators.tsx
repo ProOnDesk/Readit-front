@@ -72,5 +72,3 @@ export default function TopCreators() {
     </div>
   );
 }
-
-// relative h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] w-full py-1

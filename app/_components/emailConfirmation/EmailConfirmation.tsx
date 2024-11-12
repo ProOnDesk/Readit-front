@@ -1,6 +1,6 @@
 "use client";
 
-import { useVerifyEmailMutation, useVerifyTokenMutation } from "@/app/_redux/features/authApiSlice";
+import { useVerifyEmailMutation } from "@/app/_redux/features/authApiSlice";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -21,8 +21,8 @@ export default function EmailConfirmation({ keyValue }: { keyValue: string }) {
 			})
 			.catch((error) => {
 				console.log(error);
-				if (error?.detail) {
-					toast.error(error.detail);
+				if (error?.data?.detail) {
+					toast.error(error.data.detail);
 				} else {
 					toast.error("Wystąpił nieoczekiwany błąd");
 				}

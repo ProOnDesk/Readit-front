@@ -19,7 +19,7 @@ export function useRegister() {
       .unwrap()
       .then(() => {
         toast.success(
-          "Konto utworzone. Zaloguj się, aby kontynuować."
+          "Konto utworzone. Potwierdź swój adres email, a następnie zaloguj się."
         );
         router.push("/login");
       })
