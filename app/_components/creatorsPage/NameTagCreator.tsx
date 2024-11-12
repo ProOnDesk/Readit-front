@@ -1,5 +1,6 @@
 import { User } from "@/app/_redux/features/authApiSlice";
 import FollowersAndButton from "./FollowersAndButton";
+import { Rating } from "@mui/material";
 
 interface NameTagProps {
   user: User | undefined;
@@ -24,6 +25,15 @@ export default function NameTagCreator({ user }: NameTagProps) {
         {user?.sex} <span className="h-1 w-1 bg-stone-300 rounded-full" />{" "}
         {user?.email}
       </p>
+      <div className="flex justify-center md900:justify-start items-center gap-3 text-stone -400 mt-1">
+        <p className="">{user?.avg_rating_from_articles.toPrecision(3)}</p>
+        <Rating
+          value={user?.avg_rating_from_articles}
+          readOnly
+          precision={0.1}
+          size="small"
+        />
+      </div>
       <FollowersAndButton user={user} />
     </div>
   );

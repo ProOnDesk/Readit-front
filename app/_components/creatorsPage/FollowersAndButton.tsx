@@ -15,7 +15,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 
 interface FollowersAndButtonProps {
-  user: GetUserType | undefined;
+  user: User | undefined;
 }
 
 export default function FollowersAndButton({ user }: FollowersAndButtonProps) {

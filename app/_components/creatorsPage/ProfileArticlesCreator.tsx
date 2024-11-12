@@ -29,7 +29,7 @@ export default async function ProfileArticlesCreator({
           </span>
         </div>
       </div>
-      <div className="py-4">
+      <div className="pt-4">
         {user?.article_count === 0 && (
           <div className="flex w-full justify-center items-center gap-6 flex-col text-center py-32">
             <p>Twórca nie utworzył żadnych materiałów</p>
@@ -46,8 +46,7 @@ export default async function ProfileArticlesCreator({
           >
             <ArticlesContainerCreator page={page} userId={user.id} />
           </Suspense>
-
-          {data?.pages && data.pages > 1 && (
+          {(data?.pages ?? 0) > 1 && (
             <div className="col-span-1 sm550:col-span-2 md800:col-span-3 lg1100:col-span-4">
               <PaginationArticles data={data!} />
             </div>

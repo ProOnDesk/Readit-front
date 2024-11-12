@@ -63,7 +63,7 @@ export default function ArticleItemSec({
             <Image
               fill
               src={article.title_image_url}
-              className="object-center h-full w-full"
+              className="object-center object-cover h-full w-full"
               alt={`${article.title}`}
             />
             <div className="absolute top-0 left-0 w-full h-full bg-black z-10 opacity-0 group-hover:opacity-25 transition-opacity duration-300" />

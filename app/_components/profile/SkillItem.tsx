@@ -1,7 +1,7 @@
 "use client";
 
 import { useRemoveSkillItem } from "@/app/_hooks/useRemoveSkillItem";
-import React from "react";
+import toast from "react-hot-toast";
 import { RxCross1 } from "react-icons/rx";
 
 interface SkillItemProps {
@@ -18,6 +18,7 @@ export default function SkillItem({ id, skill_name }: SkillItemProps) {
       <button
         onClick={() => {
           removeSkillItemHookFn({ id: String(id) });
+          toast.success("Usunięto umiejętność: " + skill_name);
         }}
         className="p-1 hover:bg-whiteSecond transition-colors duration-300 rounded-md text-red-500"
       >

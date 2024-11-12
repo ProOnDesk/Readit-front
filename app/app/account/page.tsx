@@ -1,10 +1,11 @@
-"use client";
+import ProfileSettings from '@/app/_components/profile/ProfileSettings';
+import { Metadata } from 'next';
 
-import { useRetrieveUserQuery } from "@/app/_redux/features/authApiSlice";
-import React from "react";
+export const metadata = {
+	title: 'Edytuj konto | ReadIt',
+	description: 'Edytuj swoje konto na ReadIt',
+};
 
 export default function Page() {
-  const { data: user, isLoading } = useRetrieveUserQuery();
-
-  return <div>Dane konta uzytkownika o id: {user?.id}</div>;
+	return <ProfileSettings />;
 }

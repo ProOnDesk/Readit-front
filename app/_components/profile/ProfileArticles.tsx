@@ -52,7 +52,7 @@ export default function ProfileArticles({ user }: ProfileArticlesProps) {
           </div>
         )}
       </div>
-      <div className="py-4">
+      <div className="pt-4">
         {user?.article_count === 0 && (
           <div className="flex w-full justify-center items-center gap-6 flex-col text-center py-32">
             <p>

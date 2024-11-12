@@ -11,7 +11,7 @@ import { useAppSelector } from '@/app/_redux/hooks';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import { FaHeart } from 'react-icons/fa';
+import { FaHeart, FaHeartBroken } from 'react-icons/fa';
 import Spinner from '../ui/Spinner';
 
 interface ManageArticleProps {
@@ -36,7 +36,6 @@ export default function ManageArticle({
 		data: isBought,
 		refetch: refechIsBought,
 		isLoading: isBoughtLoading,
-		isFetching: isBoughtFetching,
 	} = useCheckIsBoughtQuery({
 		article_id: articleId,
 	});
@@ -44,25 +43,14 @@ export default function ManageArticle({
 		data: isWished,
 		refetch: refechIsWished,
 		isLoading: IsWishedLoading,
-		isFetching: IsWishedFetching,
 	} = useCheckIsWishedQuery({
 		article_id: articleId,
 	});
-	const [buyArticle, { isLoading: isBuyingArticleLoading }] =
-		useBuyArticleMutation();
-	const [
-		changeArticleFavorites,
-		{ isLoading: isChangingArticleFavoritesLoading },
-	] = useChangeArticleFavoritesMutation();
+	const [buyArticle, { isLoading: isArticleBuying }] = useBuyArticleMutation();
+	const [changeArticleFavorites, { isLoading: isArticleFavoritesChanging }] =
+		useChangeArticleFavoritesMutation();
+
 	const isArticleAuthor = user?.id === userId;
-	const isLoading =
-		isUserLoading ||
-		isBoughtLoading ||
-		IsWishedLoading ||
-		isBoughtFetching ||
-		IsWishedFetching ||
-		isChangingArticleFavoritesLoading ||
-		isBuyingArticleLoading;
 
 	function handleBuyArticle() {
 		if (!isAuth) {
@@ -105,15 +93,8 @@ export default function ManageArticle({
 	}, []);
 
 	if (!isClient) {
-		return null; 
+		return null;
 	}
-
-	if (isLoading)
-		return (
-			<div className='pb-10'>
-				<Spinner color='green' size='small'></Spinner>
-			</div>
-		);
 
 	return (
 		<div className='mb-16 flex flex-col gap-5 sm:min-w-60 px-4 rounded-md'>
@@ -134,9 +115,16 @@ export default function ManageArticle({
 					<button
 						type='button'
 						onClick={handleBuyArticle}
+						disabled={isArticleBuying}
 						className='flex-[3] text-center rounded-full bg-mainGreen text-white text-xl font-medium hover:bg-mainGreenSecond transition-colors duration-300 px-2 py-2'
 					>
-						{is_free ? 'Zapisz się' : 'Kup teraz'}
+						{isArticleBuying ? (
+							<Spinner color='white' size='small' />
+						) : is_free ? (
+							'Zapisz się'
+						) : (
+							'Kup teraz'
+						)}
 					</button>
 				)}
 
@@ -144,13 +132,14 @@ export default function ManageArticle({
 					<button
 						type='button'
 						onClick={handleAddArticleToFavourites}
-						className={`flex-1 flex justify-center items-center rounded-full border-mainGreen border-2  text-2xl  font-medium  transition-colors duration-300 aspect-square max-w-[65px] ${
-							isWished
-								? 'bg-mainGreen text-white hover:bg-white hover:text-mainGreen'
-								: 'text-mainGreen hover:bg-mainGreen hover:text-white'
-						}`}
+						disabled={isArticleFavoritesChanging}
+						className={`flex-1 flex justify-center items-center rounded-full border-mainGreen border-2  text-2xl  font-medium  transition-colors duration-300 aspect-square max-w-[65px] bg-white text-mainGreen hover:text-mainGreenSecond hover:border-mainGreenSecond`}
 					>
-						<FaHeart />
+						{isArticleFavoritesChanging ? (
+							<Spinner color={'green'} size='small' />
+						) : (
+							<>{!isWished ? <FaHeart /> : <FaHeartBroken />}</>
+						)}
 					</button>
 				) : null}
 			</div>

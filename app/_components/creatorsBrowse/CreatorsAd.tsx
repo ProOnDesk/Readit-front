@@ -1,34 +1,35 @@
 import Link from "next/link";
 import React from "react";
+import { EmblaOptionsType } from "embla-carousel";
+import EmblaCarousel from "./EmblaCarousel";
 
 export default function CreatorsAd() {
+  const OPTIONS: EmblaOptionsType = {
+    align: "center",
+    loop: true,
+    duration: 500,
+    slidesToScroll: 1,
+    dragFree: true,
+  };
+
   return (
-    <div className="relative bg-blackSecond h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] w-full flex flex-col justify-center items-center">
-      <div className="absolute top-0 left-0 bg-[url('/creatorBrowseAd.jpg')] w-full h-full bg-cover" />
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80" />
-      <div className="relative z-10 text-white w-full text-center px-6 flex justify-center items-center flex-col gap-5 max-w-[890px]">
-        <h2 className="font-bold text-2xl sm500:text-3xl sm:text-4xl">
-          Zostań twórcą na ReadIt
-        </h2>
-        <p className="sm500:text-lg md:text-xl">
-          Zyskujesz nie tylko możliwość zarabiania na swojej{" "}
-          <span className="text-mainGreenSecond">wiedzy</span>, ale także szansę
-          na zdobycie popularności w dynamicznie rozwijającej się{" "}
-          <span className="text-mainGreenSecond">społeczności</span>. Twórz
-          wartościowe, płatne{" "}
-          <span className="text-mainGreenSecond">treści</span>, które docierają
-          do szerokiego grona odbiorców.{" "}
-          <span className="text-mainGreenSecond">Dołącz do nas</span> i
-          przekształć swoje pasje w realne zyski – Twoje treści mogą inspirować
-          tysiące, jednocześnie zapewniając Ci{" "}
-          <span className="text-mainGreenSecond">dodatkowy dochód</span>.
-        </p>
+    <div className="flex flex-col justify-center items-center">
+      <h3 className="font-bold text-2xl sm550:text-3xl  md:text-4xl text-center pb-16 pt-20 md:pt-24  px-4 sm550:px-8 max-w-[850px]">
+        Zostań Twórcą na ReadIt: Dziel się Pasją i Zarabiaj!
+      </h3>
+      <div>
+        <EmblaCarousel options={OPTIONS} />
       </div>
+      <p className="font-bold lg:text-xl md:text-lg text-center py-14 px-4 sm550:px-6 md:px-8 max-w-[900px]">
+        Podziel się swoją wiedzą i pasją, dołączając do grona twórców na ReadIt!
+        Twórz unikalne materiały, inspiruj innych i zarabiaj na tym, co kochasz.
+        Zostań twórcą już dziś i odkryj, jak Twoje treści mogą zmienić świat!
+      </p>
       <Link
         href="/app/create"
-        className="bg-mainGreen hover:bg-mainGreenSecond rounded-full px-5 py-2 text-white z-10 relative transition-colors duration-300 mt-10"
+        className="px-6 py-4 rounded-full bg-mainGreen hover:bg-mainGreenSecond transition-colors duration-300 text-white font-semibold shadow-md mx-auto md:mt-4 mb-16 md:mb-20"
       >
-        Przejdź do kreatora
+        Zacznij tworzyć
       </Link>
     </div>
   );

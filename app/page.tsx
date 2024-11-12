@@ -12,6 +12,7 @@ export default function Home() {
       <TopCreators />
       <CarouselHomepage />
       <LastPartOfHomepage />
+			<FooterHomepage  />
     </div>
   );
 }

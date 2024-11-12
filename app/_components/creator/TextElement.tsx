@@ -27,7 +27,7 @@ export default function TextElement({
 		<textarea
 			ref={textAreaRef}
 			value={element?.content}
-			className='text-xl w-full focus:outline-none resize-none bg-transparent'
+			className='text-xl w-full text-justify focus:outline-none resize-none bg-transparent'
 			disabled={setArticleList ? false : true}
 			onChange={(e) => {
 				setArticleList &&

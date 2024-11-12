@@ -27,7 +27,11 @@ export default function NavBrowseInput() {
   useEffect(
     function () {
       if (debouncedValue !== "" && debouncedValue.length > 2) {
-        searchForUser({ value: debouncedValue });
+        searchForUser({
+          value: debouncedValue,
+          sortBy: "follower_count",
+          page: "1",
+        });
         searchForArticle({ value: debouncedValue });
         setRequest(true);
         setNotFound(false);

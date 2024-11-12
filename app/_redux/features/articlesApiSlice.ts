@@ -67,6 +67,15 @@ const articleApiSlice = apiSlice.injectEndpoints({
 				method: "GET",
 			}),
 		}),
+    getMyArticles: builder.query<
+      PaginationTypeArticles,
+      { value?: string; page: string }
+    >({
+      query: ({ page, value = "" }) => ({
+        url: `/articles/me?value=${value}&page=${page}&size=12`,
+        method: "GET",
+      }),
+    }),
 	}),
 });
 
@@ -77,4 +86,5 @@ export const {
 	useGetBoughtArticlesMutation,
 	useGetFavArticlesMutation,
 	useArticleForHomepageMutation,
+  useGetMyArticlesQuery,
 } = articleApiSlice;
