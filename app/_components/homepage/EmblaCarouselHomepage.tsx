@@ -10,58 +10,62 @@ import ArticleItem from "../profile/ArticleItem";
 import ArticleItemLoader from "../profile/ArticleItemLoader";
 
 type PropType = {
-	options?: EmblaOptionsType;
+  options?: EmblaOptionsType;
 };
 
 const EmblaCarouselHomepage: React.FC<PropType> = (props) => {
-	const { options } = props;
-	const [getArticleForHomepage, { isLoading, data }] =
-		useArticleForHomepageMutation();
-	const [emblaRef] = useEmblaCarousel(options, [
-		AutoScroll({
-			playOnInit: true,
-			speed: 1,
-			stopOnInteraction: false,
-		}),
-	]);
+  const { options } = props;
+  const [getArticleForHomepage, { isLoading, data }] =
+    useArticleForHomepageMutation();
+  const [emblaRef] = useEmblaCarousel(options, [
+    AutoScroll({
+      playOnInit: true,
+      speed: 1,
+      stopOnInteraction: false,
+    }),
+  ]);
 
-	useEffect(
-		function () {
-			getArticleForHomepage();
-		},
-		[getArticleForHomepage]
-	);
+  useEffect(
+    function () {
+      getArticleForHomepage();
+    },
+    [getArticleForHomepage]
+  );
 
-	console.log(data);
+  return (
+    <section className=" relative max-w-[1800px] mx-auto dark:text-webYellow w-full">
+      <div className="flex flex-col items-center w-full h-full">
+        <div className="overflow-hidden flex-grow w-full" ref={emblaRef}>
+          <div className="flex touch-pan-y touch-pinch-zoom w-full">
+            {isLoading &&
+              Array.from({ length: 20 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="basis-full py-10 ml-6 sm:ml-10 min-w-[230px]"
+                >
+                  <ArticleItemLoader key={index} />
+                </div>
+              ))}
 
-	return (
-		<section className=" relative max-w-[1800px] mx-auto text-white dark:text-webYellow w-full">
-			<div className="flex flex-col items-center w-full h-full">
-				<div className="overflow-hidden flex-grow w-full" ref={emblaRef}>
-					<div className="flex touch-pan-y touch-pinch-zoom w-full">
-						{isLoading &&
-							Array.from({ length: 20 }).map((_, index) => (
-								<div key={index} className="basis-full py-10 ml-10 sm:ml-24 ">
-									<ArticleItemLoader key={index} />
-								</div>
-							))}
-
-						{data?.items.map((article, i) => (
-							<div key={i} className="basis-full py-10 ml-6 sm:ml-10 ">
-								<ArticleItem article={article} key={i} />
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</section>
-	);
+            {data?.items.map((article, i) => (
+              <div
+                key={i}
+                className="basis-full py-10 ml-6 sm:ml-10 min-w-[230px]"
+              >
+                <ArticleItem article={article} key={i} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default EmblaCarouselHomepage;
 
 {
-	/* {data?.items.map((user, i) => (
+  /* {data?.items.map((user, i) => (
 							<div key={i} className="basis-full py-10 ml-10 sm:ml-24 ">
 								<Link
 									href={`/creators/${user.id}`}
