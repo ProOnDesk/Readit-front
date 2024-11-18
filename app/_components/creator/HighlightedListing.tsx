@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import hljs from 'highlight.js';
-import 'highlight.js/styles/github.css';
+import Prism from 'prismjs';
+import 'prismjs/themes/prism.css';
 
 export default function HighlightedListing({
 	codeString,
@@ -8,12 +8,12 @@ export default function HighlightedListing({
 	codeString: string;
 }) {
 	useEffect(() => {
-		hljs.highlightAll(); 
-	}, []);
+		Prism.highlightAll();
+	}, [codeString]);
 
 	return (
-		<pre className='bg-transparent'>
-			<code className='bg-transparent'>{codeString}</code>
+		<pre>
+			<code className='language-javascript'>{codeString}</code>
 		</pre>
 	);
 }
