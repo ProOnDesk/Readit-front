@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/github.css';
 
@@ -7,13 +7,21 @@ export default function HighlightedListing({
 }: {
 	codeString: string;
 }) {
+	const codeRef = useRef<HTMLElement>(null);
+
 	useEffect(() => {
-		hljs.highlightAll(); 
-	}, []);
+		if (codeRef.current) {
+			codeRef.current.removeAttribute('data-highlighted');
+			codeRef.current.innerHTML = codeString;
+			hljs.highlightElement(codeRef.current);
+		}
+	}, [codeString]);
 
 	return (
 		<pre className='bg-transparent'>
-			<code className='bg-transparent'>{codeString}</code>
+			<code ref={codeRef} className='bg-transparent'>
+				{codeString}
+			</code>
 		</pre>
 	);
 }
