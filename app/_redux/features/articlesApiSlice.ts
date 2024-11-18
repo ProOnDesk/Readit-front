@@ -63,7 +63,7 @@ const articleApiSlice = apiSlice.injectEndpoints({
 		}),
 		articleForHomepage: builder.mutation<PaginationTypeArticles, void>({
 			query: () => ({
-				url: `http://localhost:8000/articles/search?sort_order=desc&sort_by=views&page=1&size=20`,
+				url: `/articles/search?sort_order=desc&sort_by=views&page=1&size=20`,
 				method: "GET",
 			}),
 		}),
