@@ -48,6 +48,7 @@ export async function getArticleComments({
         headers: {
           "Content-Type": "application/json",
         },
+		cache: "no-cache",
       }
     );
     if (!response.ok) {
