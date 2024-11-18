@@ -5,7 +5,6 @@ import MaterialDetails from '@/app/_components/materials/MaterialDetails';
 import MaterialHeader from '@/app/_components/materials/MaterialHeader';
 import OpinionSection from '@/app/_components/materials/OpinionSection';
 
-export const revalidate = 0;
 
 interface Params {
 	params: { materialTitle: string };

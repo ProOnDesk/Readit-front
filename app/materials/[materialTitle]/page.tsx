@@ -6,8 +6,6 @@ import MaterialHeader from "@/app/_components/materials/MaterialHeader";
 import OpinionSection from "@/app/_components/materials/OpinionSection";
 import { Suspense } from "react";
 
-export const revalidate = 0;
-
 interface Params {
   params: { materialTitle: string };
   searchParams: any;
