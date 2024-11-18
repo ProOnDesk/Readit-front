@@ -2,15 +2,12 @@
 
 "use client";
 
-import { useRegister } from "@/app/_hooks/useRegister";
+import { useConfirmPasswordMutation } from "@/app/_redux/features/authApiSlice";
+import { useRouter } from "next/navigation";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { GoLock } from "react-icons/go";
 import InputBox from "../ui/InputBox";
-import Spinner from "../ui/Spinner";
-import { useConfirmPasswordMutation } from "@/app/_redux/features/authApiSlice";
-import toast from "react-hot-toast";
-import { red } from "@mui/material/colors";
-import { redirect, useRouter } from "next/navigation";
 
 export default function CreateNewPassword({
   recoveryKey,
