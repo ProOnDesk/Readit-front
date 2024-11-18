@@ -18,7 +18,7 @@ export default async function Content({ params }: ContentProps) {
 
   return (
     <div className="w-full max-w-[1800px] mx-auto">
-      <SelectFilter materialsCount={data.total} />
+      <SelectFilter materialsCount={data?.total} />
       <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] px-4 md:px-8 min-h-screen">
         <Filters />
         <Suspense
