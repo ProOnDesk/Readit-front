@@ -32,7 +32,7 @@ export default function TopCreators() {
             </p>
           </div>
           <div className="relative flex flex-col justify-center items-center mt-4 mb-16">
-            {!isLoading && (
+            {!isLoading && data?.items && (
               <div className="rounded-full w-[180px] h-[180px] ring-[14px] ring-whiteSecond/25">
                 <div className="absolute top-[90%] left-[30%] sm600:left-[38%] md:left-[30%] lg1100:left-[36%] 2xl:left-[39%] transform -translate-x-1/2 -translate-y-1/2 text-center">
                   <img
