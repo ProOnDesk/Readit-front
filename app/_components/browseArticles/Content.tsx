@@ -1,13 +1,12 @@
 import { getArticlesSearch } from "@/app/_actions/articlesActions";
 import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
 import { SearchParams } from "@/app/browse/page";
+import { Suspense } from "react";
+import ArticleItemLoader from "../profile/ArticleItemLoader";
 import ArticlesContainer from "./ArticlesContainer";
 import Filters from "./Filters";
 import PaginationArticles from "./PaginationArticles";
 import SelectFilter from "./SelectFilter";
-import { Suspense } from "react";
-import Spinner from "../ui/Spinner";
-import ArticleItemLoader from "../profile/ArticleItemLoader";
 
 interface ContentProps {
   params: SearchParams;

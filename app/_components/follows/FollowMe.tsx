@@ -50,9 +50,17 @@ export default function FollowMe({ page = "1" }: FollowedByMeProps) {
         ) : (
           <>
             <UsersContainer data={data} />
-            <PaginationArticles
-              data={data as unknown as PaginationTypeArticles}
-            />
+            {data?.total === 0 ? (
+              <div className="flex justify-center items-center w-full h-[300px]">
+                <p className="text-lg font-semibold text-center">
+                  Nikt Cię jeszcze nie obserwuje :(
+                </p>
+              </div>
+            ) : (
+              <PaginationArticles
+                data={data as unknown as PaginationTypeArticles}
+              />
+            )}
           </>
         )}
       </div>

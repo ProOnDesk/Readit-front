@@ -47,7 +47,7 @@ export default function AddArticlesToPackage({
           <button
             key={article.id}
             type="button"
-            className="w-full flex flex-col sm500:flex-row justify-between items-end sm500:items-center py-2 px-2 gap-2 hover:bg-whiteSecond transition-colors duration-300 rounded-md"
+            className="w-full flex flex-col sm500:flex-row justify-between items-end sm500:items-center py-2 px-2 gap-2 hover:bg-whiteSecond transition-colors duration-300 rounded-md text-left"
             onClick={() => {
               setArticlesInPackage(
                 articlesInPackage.filter((a) => a.id !== article.id)
@@ -122,7 +122,7 @@ export default function AddArticlesToPackage({
               <button
                 key={article.id}
                 type="button"
-                className="w-full flex flex-col sm500:flex-row justify-between items-end sm500:items-center py-2 px-2 gap-2 hover:bg-whiteSecond transition-colors duration-300 rounded-md"
+                className="w-full flex flex-col sm500:flex-row justify-between items-end sm500:items-center py-2 px-2 gap-2 hover:bg-whiteSecond transition-colors duration-300 rounded-md text-left"
                 onClick={() => {
                   setArticlesInPackage([...articlesInPackage, article]);
                 }}

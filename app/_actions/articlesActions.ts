@@ -1,12 +1,9 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { SearchParams } from "../browse/page";
 import { notFound } from "next/navigation";
+import { SearchParams } from "../browse/page";
 
 export async function getArticleInfoBySlug({ slug }: { slug: string }) {
-  const s = "chwytliwy-tytuł,-który-zszokuje?-śmiało!...";
-
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST}/articles/slug/`,
@@ -48,7 +45,7 @@ export async function getArticleComments({
         headers: {
           "Content-Type": "application/json",
         },
-		cache: "no-cache",
+        cache: "no-cache",
       }
     );
     if (!response.ok) {

@@ -1,6 +1,6 @@
-import Link from "next/link";
-import EmblaCarouselHomepage from "./EmblaCarouselHomepage";
 import { EmblaOptionsType } from "embla-carousel";
+import ActionBtnCar from "./ActionBtnCar";
+import EmblaCarouselHomepage from "./EmblaCarouselHomepage";
 
 export default function CarouselHomepage() {
   const OPTIONS: EmblaOptionsType = {
@@ -20,12 +20,7 @@ export default function CarouselHomepage() {
           działania!
         </p>
         <EmblaCarouselHomepage options={OPTIONS} />
-        <Link
-          href="/register"
-          className="text-center rounded-full  bg-blackSecond text-white font-medium hover:bg-blackFour transition-colors duration-300 px-6 py-2"
-        >
-          Zacznij już dziś!
-        </Link>
+        <ActionBtnCar />
       </div>
     </div>
   );

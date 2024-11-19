@@ -77,7 +77,7 @@ export default function ProfileArticles({ user }: ProfileArticlesProps) {
               <ArticleItem article={article} key={i} isCreator />
             ))
           )}
-          {data?.pages && data.pages > 1 && (
+          {data?.pages && data.items.length !== 0 && data.pages > 1 && (
             <div className="col-span-1 sm550:col-span-2 md800:col-span-3 lg1100:col-span-4">
               <PaginationArticles data={data!} />
             </div>

@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import Link from "next/link";
-import TopCreators from "./BecomeCreators";
+import ActionBtn from "./ActionBtn";
 import ArrowBtn from "./ArrowBtn";
 
 export default function HeaderHomepage() {
@@ -24,12 +23,7 @@ export default function HeaderHomepage() {
               <span className="font-semibold">Readit</span>, zacznij swoją
               podróż jako twórca lub odkrywca!
             </p>
-            <Link
-              href="/register"
-              className="text-center font-medium rounded-full bg-mainGreen text-white hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2 self-center lg:self-start"
-            >
-              Dołącz teraz
-            </Link>
+            <ActionBtn />
           </div>
         </div>
 

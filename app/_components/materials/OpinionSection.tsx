@@ -79,7 +79,7 @@ export default function OpinionSection({
       <div>
         <>
           {userCollections?.items.length !== 0 && (
-            <div className="">
+            <div className="mr-4">
               <div className="flex w-full justify-between items-start flex-col sm500:items-center sm500:flex-row gap-3">
                 <div className="flex justify-center items-center gap-2 py-3">
                   <h4 className="text-2xl font-medium">

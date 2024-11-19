@@ -37,7 +37,7 @@ export default function ArticlesBought({ page = "1" }: ArticlesBoughtProps) {
         <h3 className="font-semibold text-2xl sm500:text-3xl sm:text-4xl text-left">
           Biblioteka
         </h3>
-        <p>Posiadane materiały: {data?.total}</p>
+        <p>Posiadane materiały: {data?.total ? data.total : 0}</p>
       </div>
       <div>
         {isLoading ? (
@@ -55,7 +55,7 @@ export default function ArticlesBought({ page = "1" }: ArticlesBoughtProps) {
               {data?.items.map((article) => (
                 <ArticleItemSec
                   article={article.article}
-                  isInLib={true}
+                  isInLib={true}  
                   key={article.article.id}
                 />
               ))}
