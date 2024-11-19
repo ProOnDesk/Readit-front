@@ -9,19 +9,12 @@ export default function ActionBtnCar() {
 
   return (
     <>
-      {!isAuthenticated ? (
+      {!isAuthenticated && (
         <Link
           href="/register"
           className="text-center rounded-full  bg-blackSecond text-white font-medium hover:bg-blackFour transition-colors duration-300 px-6 py-2"
         >
           Zacznij już dziś!
-        </Link>
-      ) : (
-        <Link
-          href="/app/create"
-          className="text-center rounded-full  bg-blackSecond text-white font-medium hover:bg-blackFour transition-colors duration-300 px-6 py-2"
-        >
-          Zacznij tworzyć!
         </Link>
       )}
     </>

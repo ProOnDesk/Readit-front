@@ -22,7 +22,8 @@ export async function getArticleInfoBySlug({ slug }: { slug: string }) {
     const data = await response.json();
     return data;
   } catch (error) {
-    notFound();
+    // notFound();
+    console.log("Nie udało się pobrać artykułu", error);
   }
 }
 
