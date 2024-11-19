@@ -1,3 +1,5 @@
+"use client";
+
 import { useAppSelector } from "@/app/_redux/hooks";
 import { Link } from "lucide-react";
 import React from "react";
