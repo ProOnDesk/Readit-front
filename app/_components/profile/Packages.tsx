@@ -57,6 +57,7 @@ export default function Packages() {
                 ))}
               </>
             ) : (
+              userCollections?.items.length !== 0 &&
               userCollections?.items.map((collection, i) => (
                 <CollectionItem
                   collection={collection}

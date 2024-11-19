@@ -73,6 +73,7 @@ export default function ProfileArticles({ user }: ProfileArticlesProps) {
               <Spinner color="green" size="big" />
             </div>
           ) : (
+            data?.items.length !== 0 &&
             data?.items.map((article, i) => (
               <ArticleItem article={article} key={i} isCreator />
             ))

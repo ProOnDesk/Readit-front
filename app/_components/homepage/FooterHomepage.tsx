@@ -29,7 +29,7 @@ export default function FooterHomepage({
               src={
                 colorVariant === "dark"
                   ? "/readit-logo-white.png"
-                  : "/Readit-logo.png"
+                  : "/ReadIt-logo.png"
               }
               fill
               alt="logo Readit"
