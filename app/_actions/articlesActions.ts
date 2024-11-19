@@ -6,7 +6,7 @@ import { SearchParams } from "../browse/page";
 export async function getArticleInfoBySlug({ slug }: { slug: string }) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST}/articles/slug/`,
+      `${process.env.NEXT_PUBLIC_HOST}/articles/slug`,
       {
         method: "POST",
         headers: {
@@ -22,8 +22,7 @@ export async function getArticleInfoBySlug({ slug }: { slug: string }) {
     const data = await response.json();
     return data;
   } catch (error) {
-    // notFound();
-    console.log("Nie udało się pobrać artykułu", error);
+    notFound();
   }
 }
 

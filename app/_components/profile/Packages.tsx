@@ -72,25 +72,25 @@ export default function Packages() {
         </Modal>
         <div className="w-full flex justify-center items-center py-8 sm:py-12">
           {userCollections?.pages &&
-            userCollections.items.length !== 0 &&
-            userCollections.pages > 1 && (
-              <Pagination
-                sx={{
-                  "& .Mui-selected": {
-                    backgroundColor: "#9ef01a !important",
-                    color: "#ffffff !important",
-                    "&:hover": {
-                      backgroundColor: "#70e000 !important",
-                    },
+          userCollections.items.length !== 0 &&
+          userCollections.pages > 1 ? (
+            <Pagination
+              sx={{
+                "& .Mui-selected": {
+                  backgroundColor: "#9ef01a !important",
+                  color: "#ffffff !important",
+                  "&:hover": {
+                    backgroundColor: "#70e000 !important",
                   },
-                }}
-                count={userCollections?.pages || 1}
-                page={+page}
-                disabled={userCollections?.pages === 1 || !userCollections}
-                onChange={(_event, value) => setPage(value.toString())}
-                color="primary"
-              />
-            )}
+                },
+              }}
+              count={userCollections?.pages || 1}
+              page={+page}
+              disabled={userCollections?.pages === 1 || !userCollections}
+              onChange={(_event, value) => setPage(value.toString())}
+              color="primary"
+            />
+          ) : null}
         </div>
       </div>
     </div>
