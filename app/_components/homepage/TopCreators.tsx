@@ -36,32 +36,32 @@ export default function TopCreators() {
               <div className="rounded-full w-[180px] h-[180px] ring-[14px] ring-whiteSecond/25">
                 <div className="absolute top-[90%] left-[30%] sm600:left-[38%] md:left-[30%] lg1100:left-[36%] 2xl:left-[39%] transform -translate-x-1/2 -translate-y-1/2 text-center">
                   <img
-                    src={data?.items[0].avatar_url}
+                    src={data?.items[0]?.avatar_url}
                     className="rounded-full bg-cover bg-center  object-cover h-[90px] w-[90px] lg1100:h-[100px] lg1100:w-[100px]  ring-[4px] md:ring-[5px] ring-whiteSecond/50"
                     alt=""
                   />
                   <p className="block bg-whiteSecond text-[8px] text-center font-medium  rounded-lg px-3 self-center">
-                    {data?.items[0].first_name} {data?.items[0].last_name}
+                    {data?.items[0]?.first_name} {data?.items[0]?.last_name}
                   </p>
                 </div>
                 <div className="absolute top-[5%] md:top-[15%] lg:top-[8%] right-[28%]  sm600:right-[35%] md:right-[33%] lg:right-[40%]  transform -translate-x-1/2 -translate-y-1/2 text-center">
                   <img
-                    src={data?.items[1].avatar_url}
+                    src={data?.items[1]?.avatar_url}
                     className="rounded-full bg-cover bg-center  object-cover h-[70px] w-[70px] lg1100:h-[80px] lg1100:w-[80px] ring-[4px] md:ring-[5px] ring-whiteSecond/50"
                     alt=""
                   />
                   <p className="bg-whiteSecond text-[8px] text-center font-medium  rounded-lg ">
-                    {data?.items[1].first_name} {data?.items[1].last_name}
+                    {data?.items[1]?.first_name} {data?.items[1]?.last_name}
                   </p>
                 </div>
                 <div className="absolute top-[95%] md:top-[86%] lg:top-[90%] right-[16%] sm460:right-[25%] sm600:right-[30%] md:right-[18%] lg:right-[24%] lg1100:right-[24%] xl:right-[28%] 2xl:right-[32%] transform -translate-x-1/2 -translate-y-1/2 text-center">
                   <img
-                    src={data?.items[2].avatar_url}
+                    src={data?.items[2]?.avatar_url}
                     className="rounded-full bg-cover bg-center  object-cover h-[50px] w-[50px] lg1100:h-[60px] lg1100:w-[60px] ring-[4px] md:ring-[5px] ring-whiteSecond/50"
                     alt=""
                   />
                   <p className="bg-whiteSecond text-[8px] text-center font-medium  rounded-lg ">
-                    {data?.items[2].first_name} {data?.items[2].last_name}
+                    {data?.items[2]?.first_name} {data?.items[2]?.last_name}
                   </p>
                 </div>
               </div>

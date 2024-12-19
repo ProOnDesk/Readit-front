@@ -145,8 +145,8 @@ export default function NavBrowseInput() {
                       >
                         <div className="w-10 h-10 rounded-full overflow-hidden">
                           <img
-                            src={user.avatar_url}
-                            alt={user.first_name}
+                            src={user?.avatar_url}
+                            alt={user?.first_name}
                             className="w-full h-full object-cover"
                           />
                         </div>

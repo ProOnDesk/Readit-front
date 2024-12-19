@@ -153,8 +153,8 @@ export default function OpinionSection({
           data.items.map((item: any) => (
             <Opinion
               key={item.id}
-              authorName={item.author.first_name}
-              imageSrc={item.author.avatar_url}
+              authorName={item?.author?.first_name}
+              imageSrc={item?.author?.avatar_url}
               rating={item.rating}
               review={item.content}
             />

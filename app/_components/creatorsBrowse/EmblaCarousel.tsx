@@ -55,7 +55,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 >
                   <div className="absolute top-0 left-0 w-full h-full z-50 group-hover:opacity-15 bg-blackSecond opacity-0 transition-opacity duration-300"></div>
                   <img
-                    src={user.avatar_url}
+                    src={user?.avatar_url}
                     alt={`${user.first_name} ${user.last_name}`}
                     className="object-cover object-center  w-full h-full"
                   />
