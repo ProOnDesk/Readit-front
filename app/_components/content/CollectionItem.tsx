@@ -83,7 +83,7 @@ export default function CollectionItem({
             </div>
             <div className="w-full mt-2">
               <p className="text-right font-bold">
-                {collection.price.toPrecision(3)} PLN
+                {collection.price.toFixed(2)} PLN
               </p>
             </div>
           </div>
