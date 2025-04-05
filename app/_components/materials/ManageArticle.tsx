@@ -62,7 +62,6 @@ export default function ManageArticle({
 		payForArticles({ article_ids: [articleId] })
 			.unwrap()
 			.then((data) => {
-				console.log(data);
 				if (data?.redirect_url) {
 					router.push(data?.redirect_url);
 				} else {
