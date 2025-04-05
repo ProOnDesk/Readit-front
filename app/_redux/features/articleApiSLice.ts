@@ -1,3 +1,4 @@
+import { redirect } from 'next/dist/server/api-utils';
 import { apiSlice } from '../services/apiSlice';
 import { Article } from './authApiSlice';
 
@@ -16,6 +17,16 @@ const authApiSlice = apiSlice.injectEndpoints({
 				url: `/articles/`,
 				method: 'POST',
 				body: formData,
+			}),
+		}),
+		payForArticles: builder.mutation({
+			query: ({ article_ids }) => ({
+				url: `/transactions/create-order`,
+				method: 'POST',
+				body: {
+					items: article_ids,
+					redirect_url: `${process.env.NEXT_PUBLIC_APP_LINK}/app/lib`,
+				},
 			}),
 		}),
 		buyArticle: builder.mutation({
@@ -95,6 +106,7 @@ const authApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	usePostArticleMutation,
+	usePayForArticlesMutation,
 	useBuyArticleMutation,
 	useChangeArticleFavoritesMutation,
 	useGetArticleDetailsByIdQuery,

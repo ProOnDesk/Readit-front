@@ -5,10 +5,11 @@ import {
 	useChangeArticleFavoritesMutation,
 	useCheckIsBoughtQuery,
 	useCheckIsWishedQuery,
+	usePayForArticlesMutation,
 } from '@/app/_redux/features/articleApiSLice';
 import { useRetrieveUserQuery } from '@/app/_redux/features/authApiSlice';
 import { useAppSelector } from '@/app/_redux/hooks';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaHeart, FaHeartBroken } from 'react-icons/fa';
@@ -46,7 +47,8 @@ export default function ManageArticle({
 	} = useCheckIsWishedQuery({
 		article_id: articleId,
 	});
-	const [buyArticle, { isLoading: isArticleBuying }] = useBuyArticleMutation();
+	const [payForArticles, { isLoading: isArticleBuying }] =
+		usePayForArticlesMutation();
 	const [changeArticleFavorites, { isLoading: isArticleFavoritesChanging }] =
 		useChangeArticleFavoritesMutation();
 
@@ -57,11 +59,16 @@ export default function ManageArticle({
 			toast.error('Musisz być zalogowany, aby zakupić materiał');
 			return;
 		}
-		buyArticle({ article_id: articleId })
+		payForArticles({ article_ids: [articleId] })
 			.unwrap()
-			.then(() => {
-				refechIsBought();
-				toast.success('Zakupiono materiał');
+			.then((data) => {
+				console.log(data);
+				if (data?.redirect_url) {
+					router.push(data?.redirect_url);
+				} else {
+					refechIsBought();
+					toast.success('Materiał został zakupiony');
+				}
 			})
 			.catch((error) => {
 				toast.error('Nie udało się zakupić materiału');
@@ -96,6 +103,7 @@ export default function ManageArticle({
 		return null;
 	}
 
+	console.log(articleId);
 	return (
 		<div className='mb-16 flex flex-col gap-5 sm:min-w-60 px-4 rounded-md'>
 			<p className='text-3xl font-semibold text-center'>
