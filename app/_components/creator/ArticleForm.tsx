@@ -102,6 +102,21 @@ export default function ArticleForm({
 					<ErrorMessage>{errors?.summary?.message}</ErrorMessage>
 					<InputAccent />
 				</div>
+				<div className='relative flex flex-col gap-1'>
+					<label className='text-xl'>Cena</label>
+					<input
+						defaultValue='0.00'
+						{...register('price', { required: 'Cena jest wymagana' })}
+						min={0}
+						step={0.01}
+						max={9999}
+						placeholder='0.00'
+						type='number'
+						className='rounded-t-md text-xl p-1 px-2 min-h-[52px] focus:outline-none peer bg-blackSecond/5'
+					/>
+					<InputAccent />
+					<ErrorMessage>{errors?.title?.message}</ErrorMessage>
+				</div>
 			</div>
 			<div className='relative flex flex-col h-auto gap-1 md:w-1/3 max-h-[500px]'>
 				<label className='text-xl'>Zdjęcie</label>

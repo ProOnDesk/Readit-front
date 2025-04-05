@@ -16,6 +16,7 @@ export type CreatorInputs = {
 	summary: string;
 	image: FileList | null;
 	tags: string[];
+	price: number;
 };
 
 function Creator() {
@@ -65,13 +66,14 @@ function Creator() {
 		if (data.image) {
 			formData.append('title_image', data.image[0]);
 		}
-		
-
+		console.log(data.price);
 		const article = {
 			title: data.title,
 			summary: data.summary,
 			tags: tags.map((tag) => ({ value: tag })),
 			content_elements: [...filteredArticleList],
+			price: data.price,
+			is_free: data.price == 0,
 		};
 
 		formData.append('article', JSON.stringify(article));
@@ -84,7 +86,6 @@ function Creator() {
 				formData.append('images_for_content_type_image', file);
 			})
 		);
-
 		postArticle({ formData })
 			.unwrap()
 			.then((res) => {
