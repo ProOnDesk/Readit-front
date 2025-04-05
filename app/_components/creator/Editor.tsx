@@ -22,6 +22,7 @@ type CreatorInputs = {
 	summary: string;
 	image: FileList | null;
 	tags: string[];
+	price: number;
 };
 
 type Article = {
@@ -64,6 +65,7 @@ export default function Editor({ materialSlug }: EditorProps) {
 		setTags(articleInfo?.tags.map((tag: { value: string }) => tag.value));
 		setValue('title', articleInfo?.title);
 		setValue('summary', articleInfo?.summary);
+		setValue('price', articleInfo?.price);
 	}, [articleInfo, setValue]);
 
 	const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
@@ -97,6 +99,8 @@ export default function Editor({ materialSlug }: EditorProps) {
 			summary: data.summary,
 			tags: tags.map((tag: { value: string }) => ({ value: tag })),
 			content_elements: [...modifiedArticleList],
+			price: data.price,
+			is_free: data.price == 0,
 		};
 		formData.append('article', JSON.stringify(article));
 
