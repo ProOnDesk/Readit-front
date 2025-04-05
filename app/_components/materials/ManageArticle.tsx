@@ -107,7 +107,7 @@ export default function ManageArticle({
 	return (
 		<div className='mb-16 flex flex-col gap-5 sm:min-w-60 px-4 rounded-md'>
 			<p className='text-3xl font-semibold text-center'>
-				{is_free ? 'Bezpłatny' : `${price} zł`}
+				{is_free ? 'Bezpłatny' : `${price.toFixed(2)} zł`}
 			</p>
 
 			<div className='flex flex-row gap-2 max-h-[65px]'>

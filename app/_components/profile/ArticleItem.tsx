@@ -69,7 +69,7 @@ export default function ArticleItem({
             <p className="text-right font-bold">Bezpłatny</p>
           ) : (
             <p className="text-right font-bold">
-              {article.price.toPrecision(3)} PLN
+              {article.price.toFixed(2)} PLN
             </p>
           )}
         </div>
