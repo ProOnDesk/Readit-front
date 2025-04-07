@@ -66,7 +66,6 @@ function Creator() {
 		if (data.image) {
 			formData.append('title_image', data.image[0]);
 		}
-		console.log(data.price);
 		const article = {
 			title: data.title,
 			summary: data.summary,

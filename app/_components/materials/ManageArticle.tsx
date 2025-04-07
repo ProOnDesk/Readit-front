@@ -101,7 +101,6 @@ export default function ManageArticle({
 		return null;
 	}
 
-	console.log(articleId);
 	return (
 		<div className='mb-16 flex flex-col gap-5 sm:min-w-60 px-4 rounded-md'>
 			<p className='text-3xl font-semibold text-center'>

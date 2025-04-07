@@ -31,7 +31,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     [getUsersTopFollows]
   );
 
-  console.log(data);
 
   return (
     <section className=" relative max-w-[1800px] mx-auto text-white dark:text-webYellow w-full">

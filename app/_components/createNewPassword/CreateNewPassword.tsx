@@ -24,8 +24,7 @@ export default function CreateNewPassword({
   const { replace } = useRouter();
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-    console.log(recoveryKey);
+
 
     recoveryAccount({
       key: recoveryKey,

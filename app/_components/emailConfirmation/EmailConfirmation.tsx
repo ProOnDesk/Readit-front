@@ -13,7 +13,6 @@ export default function EmailConfirmation({ keyValue }: { keyValue: string }) {
 		verifyEmailMutation({token: keyValue})
 			.unwrap()
 			.then((ee) => {
-				console.log(ee);
 				toast.success(
 					"Email został zweryfikowany, zaloguj się aby kontynuować"
 				);
