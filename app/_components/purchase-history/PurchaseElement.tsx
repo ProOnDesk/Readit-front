@@ -7,15 +7,21 @@ export default function PurchaseElement() {
 				<p>Oczekiwanie na potwierdzenie</p>
 				<p>350.20 PLN</p>
 			</div>
-			<div className='lg:hidden flex flex-col gap-3 p-5 border-2 text-xs sm400:text-sm border-blackSecond/10 rounded-xl  '>
-				<p className='font-semibold'>Numer</p>
-				<p>5be80ea3-9b1f-4d56-a615-88285985209c</p>
-				<p className='font-semibold'>Data</p>
-				<p>24.05.2025</p>
-				<p className='font-semibold'>Status</p>
-				<p>Oczekiwanie na potwierdzenie</p>
-				<p className='font-semibold'>Wartość</p>
-				<p>350.20 PLN</p>
+			<div className='lg:hidden flex flex-wrap w-fit mx-auto sm:px-10 gap-5 sm:gap-10 p-5 border-2 text-xs sm400:text-sm border-blackSecond/10 rounded-xl  '>
+				<div className='flex flex-col gap-2'>
+					<p className='font-semibold'>Numer</p>
+					<p>5be80ea3-9b1f-4d56-a615-88285985209c</p>
+
+					<p className='font-semibold'>Data</p>
+					<p>24.05.2025</p>
+				</div>
+				<div className='flex flex-col gap-2'>
+					<p className='font-semibold'>Status</p>
+					<p>Oczekiwanie na potwierdzenie</p>
+
+					<p className='font-semibold'>Wartość</p>
+					<p>35.20 PLN</p>
+				</div>
 			</div>
 		</>
 	);
