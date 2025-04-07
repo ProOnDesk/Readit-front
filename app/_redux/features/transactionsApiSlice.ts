@@ -2,8 +2,15 @@ import { redirect } from 'next/dist/server/api-utils';
 import { apiSlice } from '../services/apiSlice';
 import { Article } from './authApiSlice';
 
-interface PaginatonType {
-	items: Article[];
+export interface Transaction {
+	id: string;
+	status: string;
+	created_at: string;
+	total_price: string;
+	items: { id: number; title: string; price: number }[];
+}
+interface PaginationTypeTransaction {
+	items: Transaction[];
 	page: number;
 	pages: number;
 	size: number;
@@ -22,7 +29,17 @@ const authApiSlice = apiSlice.injectEndpoints({
 				},
 			}),
 		}),
+		getUserTransactions: builder.query<
+			PaginationTypeTransaction,
+			{ page: number; page_size?: number }
+		>({
+			query: ({ page = 1, page_size }) => ({
+				url: `/transactions/user-transactions?page=${page}&size=${page_size}`,
+				method: 'GET',
+			}),
+		}),
 	}),
 });
 
-export const { usePayForArticlesMutation } = authApiSlice;
+export const { usePayForArticlesMutation, useGetUserTransactionsQuery } =
+	authApiSlice;
