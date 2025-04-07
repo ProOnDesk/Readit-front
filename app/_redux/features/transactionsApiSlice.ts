@@ -38,8 +38,20 @@ const authApiSlice = apiSlice.injectEndpoints({
 				method: 'GET',
 			}),
 		}),
+		getTransactionStatus: builder.query<
+			{ status: string },
+			{ transaction_id: string }
+		>({
+			query: ({ transaction_id }) => ({
+				url: `/transactions/order-status/${transaction_id}`,
+				method: 'GET',
+			}),
+		}),
 	}),
 });
 
-export const { usePayForArticlesMutation, useGetUserTransactionsQuery } =
-	authApiSlice;
+export const {
+	usePayForArticlesMutation,
+	useGetUserTransactionsQuery,
+	useGetTransactionStatusQuery,
+} = authApiSlice;
