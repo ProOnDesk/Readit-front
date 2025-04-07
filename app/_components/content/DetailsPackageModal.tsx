@@ -11,7 +11,7 @@ import { Rating } from '@mui/material';
 import Image from 'next/image';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
-import { usePayForArticlesMutation } from '@/app/_redux/features/articleApiSLice';
+import { usePayForArticlesMutation } from '@/app/_redux/features/transactionsApiSlice';
 
 interface DetailsPackageModalProps {
 	packageId: number;

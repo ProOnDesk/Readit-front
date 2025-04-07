@@ -19,16 +19,6 @@ const authApiSlice = apiSlice.injectEndpoints({
 				body: formData,
 			}),
 		}),
-		payForArticles: builder.mutation({
-			query: ({ article_ids }) => ({
-				url: `/transactions/create-order`,
-				method: 'POST',
-				body: {
-					items: article_ids,
-					redirect_url: `${process.env.NEXT_PUBLIC_APP_LINK}/app/lib`,
-				},
-			}),
-		}),
 		buyArticle: builder.mutation({
 			query: ({ article_id }) => ({
 				url: `/articles/buy/${article_id}`,
@@ -106,7 +96,6 @@ const authApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	usePostArticleMutation,
-	usePayForArticlesMutation,
 	useBuyArticleMutation,
 	useChangeArticleFavoritesMutation,
 	useGetArticleDetailsByIdQuery,

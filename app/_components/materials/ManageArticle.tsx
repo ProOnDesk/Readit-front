@@ -1,11 +1,9 @@
 'use client';
 
 import {
-	useBuyArticleMutation,
 	useChangeArticleFavoritesMutation,
 	useCheckIsBoughtQuery,
 	useCheckIsWishedQuery,
-	usePayForArticlesMutation,
 } from '@/app/_redux/features/articleApiSLice';
 import { useRetrieveUserQuery } from '@/app/_redux/features/authApiSlice';
 import { useAppSelector } from '@/app/_redux/hooks';
@@ -14,6 +12,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaHeart, FaHeartBroken } from 'react-icons/fa';
 import Spinner from '../ui/Spinner';
+import { usePayForArticlesMutation } from '@/app/_redux/features/transactionsApiSlice';
 
 interface ManageArticleProps {
 	is_free: boolean;
