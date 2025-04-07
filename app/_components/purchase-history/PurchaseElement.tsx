@@ -1,3 +1,5 @@
+import { translateTransactionStatus } from '@/utils/translateTransactionStatus';
+
 interface PurchaseElementProps {
 	transactionNumber: string;
 	date: string;
@@ -23,7 +25,7 @@ export default function PurchaseElement({
 			<div className='hidden lg:grid grid-cols-[350px_200px_auto_100px] gap-3 p-5 border-2 text-base border-blackSecond/10 rounded-xl  '>
 				<p>{transactionNumber}</p>
 				<p>{formattedDate}</p>
-				<p>{status}</p>
+				<p>{translateTransactionStatus(status)}</p>
 				<p>{value} PLN</p>
 			</div>
 			<div className='lg:hidden flex flex-col sm500:flex-row w-fit mx-auto sm:px-10 gap-5 sm:gap-10 p-5 border-2 text-xs sm400:text-sm border-blackSecond/10 rounded-xl  '>
