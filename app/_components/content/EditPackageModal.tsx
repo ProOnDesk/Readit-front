@@ -205,10 +205,10 @@ export default function EditPackageModal({
                 PLN
               </span>
               <span className="font-bold">
-                {articlesInPackage
+                {(articlesInPackage
                   .map((a) => a.price)
                   .reduce((a, b) => a + b, 0) *
-                  ((100 - getValues("discount_percentage")) / 100) || 0}{" "}
+                  ((100 - getValues("discount_percentage")) / 100) || 0).toFixed(2)}{" "}
                 PLN
               </span>
             </p>

@@ -18,12 +18,13 @@ interface PaginationTypeTransaction {
 const authApiSlice = apiSlice.injectEndpoints({
 	endpoints: (builder) => ({
 		payForArticles: builder.mutation({
-			query: ({ article_ids }) => ({
+			query: ({ article_ids, discounted_price }) => ({
 				url: `/transactions/create-order`,
 				method: 'POST',
 				body: {
 					items: article_ids,
-					redirect_url: `${process.env.NEXT_PUBLIC_APP_LINK}/app/lib`,
+					redirect_url: `${process.env.NEXT_PUBLIC_APP_LINK}/app/purchase-status/`,
+					discounted_price,
 				},
 			}),
 		}),

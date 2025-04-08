@@ -33,7 +33,10 @@ export default function DetailsPackageModal({
 		usePayForArticlesMutation();
 
 	function handleBuyCollection() {
-		payForArticles({ article_ids: collection?.articles_id })
+		payForArticles({
+			article_ids: collection?.articles_id,
+			discounted_price: collection?.price,
+		})
 			.unwrap()
 			.then((data) => {
 				if (data?.redirect_url) {
