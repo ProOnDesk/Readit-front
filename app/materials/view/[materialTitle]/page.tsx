@@ -57,6 +57,7 @@ export default async function Page({ params, searchParams }: Params) {
               rateCount={rating_count}
               rating={rating}
               viewCount={view_count}
+              questions_count={assessment_questions.length}
             />
           </div>
           <div className="flex-1 py-5">
