@@ -1,14 +1,8 @@
-import React, { Suspense } from "react";
-import ArticleItem from "../profile/ArticleItem";
-import { Article } from "@/app/_redux/features/authApiSlice";
-import Spinner from "../ui/Spinner";
-import { Pagination } from "@mui/material";
-import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import PaginationArticles from "./PaginationArticles";
-import { ImFileEmpty } from "react-icons/im";
-import { SearchParams } from "@/app/browse/page";
 import { getArticlesSearch } from "@/app/_actions/articlesActions";
+import { PaginationTypeArticles } from "@/app/_redux/features/articlesApiSlice";
+import { SearchParams } from "@/app/browse/page";
+import { ImFileEmpty } from "react-icons/im";
+import ArticleItem from "../profile/ArticleItem";
 
 interface ArticlesContainerProps {
   params: SearchParams;

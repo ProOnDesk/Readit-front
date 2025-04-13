@@ -72,7 +72,11 @@ function Window({ children, name, version }: WindowProps) {
       <motion.div
         className={clsx(
           "fixed top-1/2 left-1/2 bg-white -translate-y-1/2 -translate-x-1/2 z-[51] rounded-lg p-6 w-[90vw]  max-h-[90vh] overflow-y-auto",
-          version === "second" ? "max-w-[550px]" : "max-w-[650px]"
+          version === "second"
+            ? "max-w-[550px]"
+            : version === "forQuiz"
+            ? "max-w-5xl"
+            : "max-w-[650px]"
         )}
         animate={{ translateY: "-50%", translateX: "-50%", opacity: 1 }}
         initial={{ translateY: "-40%", translateX: "-50%", opacity: 0 }}

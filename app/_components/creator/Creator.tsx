@@ -17,6 +17,13 @@ export type CreatorInputs = {
   summary: string;
   image: FileList | null;
   tags: string[];
+  assessment_questions: {
+    question_text: string;
+    answers: {
+      answer_text: string;
+      is_correct: boolean;
+    }[];
+  }[];
 };
 
 function Creator() {
@@ -44,10 +51,12 @@ function Creator() {
     setValue,
     setError,
     clearErrors,
+    control,
     formState: { errors },
   } = useForm<CreatorInputs>();
   const [postArticle] = usePostArticleMutation();
   const { refetch } = useRetrieveUserQuery();
+
   const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
     if (data.image?.length === 0) {
       setError("image", { type: "required", message: "Zdjęcie jest wymagane" });
@@ -72,6 +81,7 @@ function Creator() {
       summary: data.summary,
       tags: tags.map((tag) => ({ value: tag })),
       content_elements: [...filteredArticleList],
+      assessment_questions: data.assessment_questions,
     };
 
     formData.append("article", JSON.stringify(article));
@@ -119,7 +129,12 @@ function Creator() {
         />
       </div>
       <div className="relative flex w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md overflow-hidden mt-14">
-        <QuizForm />
+        <QuizForm
+          register={register}
+          control={control}
+          errors={errors}
+          setValue={setValue}
+        />
       </div>
       <button
         className="text-center rounded-full bg-mainGreen text-white font-medium text-2xl hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2 mx-auto mt-10"
