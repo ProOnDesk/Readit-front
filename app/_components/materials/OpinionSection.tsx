@@ -140,7 +140,7 @@ export default function OpinionSection({
           )}
         </>
       </div>
-      <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-6 mx-4">
         {isPossibleToMakeOpinion && (
           <MakeOpinion
             articleId={articleId}

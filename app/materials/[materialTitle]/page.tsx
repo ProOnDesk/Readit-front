@@ -34,11 +34,14 @@ export default async function Page({ params, searchParams }: Params) {
     title_image_url,
     rating,
     rating_count,
+    questions_count,
   } = await getArticleInfoBySlug({
     slug: params?.materialTitle,
   });
   const author = first_name + " " + last_name;
   const convertedTags = tags.map((tag: { value: string }) => tag.value);
+
+  console.log(questions_count);
 
   return (
     <>
@@ -65,6 +68,7 @@ export default async function Page({ params, searchParams }: Params) {
               rateCount={rating_count}
               rating={rating}
               viewCount={view_count}
+              questions_count={+questions_count}
             />
           </div>
           <div className="flex-1 px-2">
