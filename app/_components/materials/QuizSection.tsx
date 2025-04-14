@@ -15,7 +15,7 @@ export default function QuizSection({ articleId }: QuizSectionProps) {
       article_id: articleId,
     });
 
-  if (article?.assessment_questions.length === 0 || isArticleLoading) {
+  if (article?.assessment_questions?.length === 0 || isArticleLoading) {
     return null;
   }
 
