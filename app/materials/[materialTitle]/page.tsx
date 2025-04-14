@@ -41,8 +41,6 @@ export default async function Page({ params, searchParams }: Params) {
   const author = first_name + " " + last_name;
   const convertedTags = tags.map((tag: { value: string }) => tag.value);
 
-  console.log(questions_count);
-
   return (
     <>
       <div className="py-8 md:py-16 md:px-10 px-4 max-w-[1800px] w-screen mx-auto flex flex-col gap-5 md:gap-10 ">

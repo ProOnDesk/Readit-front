@@ -70,7 +70,6 @@ export async function getArticlesSearch(params: SearchParams) {
     link += `&max_price=${params.max_price}`;
   }
   if (params.is_free === "true") {
-    console.log("is free");
     link += `&is_free=true`;
   }
   if (params.min_rating) {

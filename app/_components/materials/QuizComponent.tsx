@@ -4,6 +4,7 @@ import { FaCheck } from "react-icons/fa";
 import clsx from "clsx";
 import { useSendEmailWithQuizScoreMutation } from "@/app/_redux/features/articleApiSLice";
 import toast from "react-hot-toast";
+import { RxCross2 } from "react-icons/rx";
 
 interface QuizSectionProps {
   article_title: string;
@@ -25,12 +26,50 @@ export default function QuizComponent({
   const [showCorrectAnswers, setShowCorrectAnswers] = useState(false);
   const [senEmailWithScore] = useSendEmailWithQuizScoreMutation();
   const [score, setScore] = useState(0);
-
-  console.log(
-    assessment_questions
-      .flatMap((question) => question.answers)
-      .filter((answer) => answer.is_correct).length
+  const [correctAnswersIcons, setCorrectAnswersIcons] = useState<
+    React.ReactNode[]
+  >(Array(assessment_questions.length).fill(null));
+  const [userAnswers, setUserAnswers] = useState<number[][]>(
+    assessment_questions.map((q) => Array(q.answers.length).fill(0))
   );
+
+  const correctAnswersArr = assessment_questions.map((question) => {
+    return question.answers.map((answer) =>
+      answer.is_correct === true ? 1 : 0
+    );
+  });
+
+  const calculateScore = () => {
+    let newScore = 0;
+
+    for (let i = 0; i < correctAnswersArr.length; i++) {
+      const correct = correctAnswersArr[i];
+      const user = userAnswers[i];
+
+      const isCorrect = correct.every((val, index) => {
+        const isCorrect = val === user[index];
+
+        setCorrectAnswersIcons((prev) => {
+          const newIcons = [...prev];
+          newIcons[i] = isCorrect ? (
+            <FaCheck size={20} className="text-mainGreen" />
+          ) : (
+            <RxCross2 size={22} className="text-red-500" />
+          );
+          return newIcons;
+        });
+
+        return isCorrect;
+      });
+
+      if (isCorrect) {
+        newScore += 1;
+      }
+    }
+
+    return newScore;
+  };
+
   return (
     <div className="">
       <p className="text-2xl text-center font-semibold mb-3">
@@ -44,7 +83,11 @@ export default function QuizComponent({
       ) : (
         assessment_questions.map((question, index) => (
           <div key={index} className="mb-1 p-4 text-lg">
-            <p className="font-semibold">{question.question_text}</p>
+            <p className="font-semibold flex justify-start items-center gap-2">
+              <span>{index + 1}. </span>
+              {question.question_text}
+              <span>{showCorrectAnswers && correctAnswersIcons[index]}</span>
+            </p>
             <ul className="pl-5 mt-2">
               {question.answers.map((answer, idx) => (
                 <div
@@ -58,9 +101,9 @@ export default function QuizComponent({
                         className="peer hidden"
                         disabled={showCorrectAnswers}
                         onChange={(e) => {
-                          if (e.target.checked && answer.is_correct) {
-                            setScore(score + 1);
-                          }
+                          const updatedAnswers = [...userAnswers];
+                          updatedAnswers[index][idx] = e.target.checked ? 1 : 0;
+                          setUserAnswers(updatedAnswers);
                         }}
                       />
                       <span
@@ -104,15 +147,8 @@ export default function QuizComponent({
               Świetna robota!
             </span>
             Zdobyłeś <strong>{score}</strong> na{" "}
-            <strong>
-              {
-                assessment_questions
-                  .flatMap((question) => question.answers)
-                  .filter((answer) => answer.is_correct).length
-              }
-            </strong>{" "}
-            możliwych punktów. Każda poprawna odpowiedź to krok bliżej
-            osiągnięcia celu.
+            <strong>{correctAnswersArr.length}</strong> możliwych punktów. Każda
+            poprawna odpowiedź to krok bliżej osiągnięcia celu.
             <br />
             <br />
             Twój wynik został wysłany na Twój adres e-mail — potraktuj go jako
@@ -123,12 +159,12 @@ export default function QuizComponent({
             className="text-center rounded-full bg-mainGreen text-white font-medium text-lg hover:bg-mainGreenSecond transition-colors duration-300 px-5 py-2 mx-auto mt-2"
             disabled={showCorrectAnswers}
             onClick={() => {
+              const finalScore = calculateScore();
               setShowCorrectAnswers(true);
+              setScore(finalScore);
               senEmailWithScore({
-                score: score,
-                total: assessment_questions
-                  .flatMap((question) => question.answers)
-                  .filter((answer) => answer.is_correct).length,
+                score: finalScore,
+                total: correctAnswersArr.length,
                 article_title: article_title,
               })
                 .unwrap()
