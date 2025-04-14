@@ -1,5 +1,7 @@
-import { apiSlice } from "../services/apiSlice";
-import { Article } from "./authApiSlice";
+import { redirect } from 'next/dist/server/api-utils';
+import { apiSlice } from '../services/apiSlice';
+import { Article } from './authApiSlice';
+
 
 interface PaginatonType {
   items: Article[];

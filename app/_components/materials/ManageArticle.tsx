@@ -1,18 +1,18 @@
 'use client';
 
 import {
-	useBuyArticleMutation,
 	useChangeArticleFavoritesMutation,
 	useCheckIsBoughtQuery,
 	useCheckIsWishedQuery,
 } from '@/app/_redux/features/articleApiSLice';
 import { useRetrieveUserQuery } from '@/app/_redux/features/authApiSlice';
 import { useAppSelector } from '@/app/_redux/hooks';
-import { useRouter } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { FaHeart, FaHeartBroken } from 'react-icons/fa';
 import Spinner from '../ui/Spinner';
+import { usePayForArticlesMutation } from '@/app/_redux/features/transactionsApiSlice';
 
 interface ManageArticleProps {
 	is_free: boolean;
@@ -46,7 +46,8 @@ export default function ManageArticle({
 	} = useCheckIsWishedQuery({
 		article_id: articleId,
 	});
-	const [buyArticle, { isLoading: isArticleBuying }] = useBuyArticleMutation();
+	const [payForArticles, { isLoading: isArticleBuying }] =
+		usePayForArticlesMutation();
 	const [changeArticleFavorites, { isLoading: isArticleFavoritesChanging }] =
 		useChangeArticleFavoritesMutation();
 
@@ -57,11 +58,15 @@ export default function ManageArticle({
 			toast.error('Musisz być zalogowany, aby zakupić materiał');
 			return;
 		}
-		buyArticle({ article_id: articleId })
+		payForArticles({ article_ids: [articleId] })
 			.unwrap()
-			.then(() => {
-				refechIsBought();
-				toast.success('Zakupiono materiał');
+			.then((data) => {
+				if (data?.redirect_url) {
+					router.push(data?.redirect_url);
+				} else {
+					refechIsBought();
+					toast.success('Materiał został zakupiony');
+				}
 			})
 			.catch((error) => {
 				toast.error('Nie udało się zakupić materiału');
@@ -99,7 +104,7 @@ export default function ManageArticle({
 	return (
 		<div className='mb-16 flex flex-col gap-5 sm:min-w-60 px-4 rounded-md'>
 			<p className='text-3xl font-semibold text-center'>
-				{is_free ? 'Bezpłatny' : `${price} zł`}
+				{is_free ? 'Bezpłatny' : `${price.toFixed(2)} zł`}
 			</p>
 
 			<div className='flex flex-row gap-2 max-h-[65px]'>
