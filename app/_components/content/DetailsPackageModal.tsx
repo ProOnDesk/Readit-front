@@ -32,6 +32,10 @@ export default function DetailsPackageModal({
 	const [payForArticles, { isLoading: isArticleBuying }] =
 		usePayForArticlesMutation();
 
+	const isAllArticleBought = collection?.articles.every(
+		(article) => article.is_bought === true
+	);
+
 	function handleBuyCollection() {
 		payForArticles({
 			article_ids: collection?.articles_id,
@@ -121,7 +125,9 @@ export default function DetailsPackageModal({
 											<p className='line-clamp-2'>{article.title}</p>
 										</div>
 										<div>
-											{article.is_free ? (
+											{article.is_bought ? (
+												<p className='text-right font-bold'>Zakupiony</p>
+											) : article.is_free ? (
 												<p className='text-right font-bold'>Bezpłatny</p>
 											) : (
 												<p className='text-right font-bold'>
@@ -134,25 +140,34 @@ export default function DetailsPackageModal({
 							</div>
 						</div>
 
-						<div className='w-full flex justify-end items-center'>
-							{isCreator ? (
-								<Link
-									href='/app/content'
-									className='border border-stone-300 rounded-md px-4 py-2'
-								>
-									Zarządzaj
-								</Link>
-							) : (
-								<button
-									type='submit'
-									disabled={isArticleBuying}
-									onClick={handleBuyCollection}
-									className='bg-mainGreen hover:bg-mainGreenSecond transition-colors duration-300 text-white rounded-md px-4 py-2'
-								>
-									Zakup zestaw
-								</button>
-							)}
-						</div>
+						{!collection?.is_bought ? (
+							<div className='w-full flex gap-4 justify-end items-center'>
+								<p className='text-lg font-semibold'>
+									{collection?.price === 0
+										? 'Bezpłatny'
+										: `${collection?.price.toFixed(2)} PLN`}
+								</p>
+								{isCreator ? (
+									<Link
+										href='/app/content'
+										className='border border-stone-300 rounded-md px-4 py-2'
+									>
+										Zarządzaj
+									</Link>
+								) : (
+									<button
+										type='submit'
+										disabled={isArticleBuying}
+										onClick={handleBuyCollection}
+										className='bg-mainGreen hover:bg-mainGreenSecond transition-colors duration-300 text-white rounded-md px-4 py-2'
+									>
+										Zakup zestaw
+									</button>
+								)}
+							</div>
+						) : (
+							<p className='text-lg font-semibold'>Posiadasz już ten zestaw</p>
+						)}
 					</div>
 				</>
 			)}

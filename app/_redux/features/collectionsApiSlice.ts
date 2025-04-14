@@ -15,6 +15,7 @@ export interface Collection {
 	articles_count: number;
 	rating: number;
 	articles_id: number[];
+	is_bought: boolean;
 }
 
 export interface CollectionsPagination {
@@ -27,6 +28,7 @@ export interface CollectionsPagination {
 
 export interface CollectionWithDetails extends Collection {
 	articles: Article[];
+	
 }
 
 const collectionsApiSlice = apiSlice.injectEndpoints({
