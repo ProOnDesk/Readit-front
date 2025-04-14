@@ -1,6 +1,5 @@
 import React from 'react';
 import ArticleItem from '../profile/ArticleItem';
-
 import { PaginationTypeArticles } from '@/app/_redux/features/articlesApiSlice';
 import { ImFileEmpty } from 'react-icons/im';
 import { SearchParams } from '@/app/browse/page';

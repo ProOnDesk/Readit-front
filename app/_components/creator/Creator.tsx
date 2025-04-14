@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-
 import Article from './Article';
 import ArticleSettings from './ArticleSettings';
 import ArticleForm from './ArticleForm';
@@ -10,44 +9,54 @@ import { usePostArticleMutation } from '@/app/_redux/features/articleApiSLice';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { useRetrieveUserQuery } from '@/app/_redux/features/authApiSlice';
+import QuizForm from "./QuizForm";
 
 export type CreatorInputs = {
-	title: string;
-	summary: string;
-	image: FileList | null;
-	tags: string[];
-	price: number;
+  title: string;
+  summary: string;
+  image: FileList | null;
+  tags: string[];
+  price: number;
+  assessment_questions: {
+    question_text: string;
+    answers: {
+      answer_text: string;
+      is_correct: boolean;
+    }[];
+  }[];
 };
-
+       
 function Creator() {
-	const [articleList, setArticleList] = useState([
-		{
-			content_type: 'title',
-			content: 'Lorem ipsum dolor sit amet.',
-		},
-		{
-			content_type: 'image',
-			content: '',
-		},
-		{
-			content_type: 'text',
-			content:
-				'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni neque cupiditate harum iure, ducimus autem! Eaque vel est totam reiciendis nulla vero, excepturi blanditiis ullam officiis distinctio aut nobis repellendus soluta sed corporis quod iusto quibusdam minima sunt voluptatum itaque! Corrupti earum mollitia ullam fugiat harum, reiciendis voluptatibus omnis sequi?',
-		},
-	]);
-	const router = useRouter();
-	const [tags, setTags] = useState<string[]>([]);
-	const {
-		register,
-		handleSubmit,
-		watch,
-		setValue,
-		setError,
-		clearErrors,
-		formState: { errors },
-	} = useForm<CreatorInputs>();
-	const [postArticle] = usePostArticleMutation();
-	const { refetch } = useRetrieveUserQuery();
+ const [articleList, setArticleList] = useState([
+    {
+      content_type: "title",
+      content: "Lorem ipsum dolor sit amet.",
+    },
+    {
+      content_type: "image",
+      content: "",
+    },
+    {
+      content_type: "text",
+      content:
+        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magni neque cupiditate harum iure, ducimus autem! Eaque vel est totam reiciendis nulla vero, excepturi blanditiis ullam officiis distinctio aut nobis repellendus soluta sed corporis quod iusto quibusdam minima sunt voluptatum itaque! Corrupti earum mollitia ullam fugiat harum, reiciendis voluptatibus omnis sequi?",
+    },
+  ]);
+  const router = useRouter();
+  const [tags, setTags] = useState<string[]>([]);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    setError,
+    clearErrors,
+    control,
+    formState: { errors },
+  } = useForm<CreatorInputs>();
+  const [postArticle] = usePostArticleMutation();
+  const { refetch } = useRetrieveUserQuery();
+  
 	const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
 		if (data.image?.length === 0) {
 			setError('image', { type: 'required', message: 'Zdjęcie jest wymagane' });
@@ -65,18 +74,20 @@ function Creator() {
 
 		if (data.image) {
 			formData.append('title_image', data.image[0]);
-		}
-		const article = {
-			title: data.title,
-			summary: data.summary,
-			tags: tags.map((tag) => ({ value: tag })),
-			content_elements: [...filteredArticleList],
-			price: data.price,
+		} 
+      
+    const article = {
+      title: data.title,
+      summary: data.summary,
+      tags: tags.map((tag) => ({ value: tag })),
+      content_elements: [...filteredArticleList],
+      assessment_questions: data.assessment_questions,
+      price: data.price,
 			is_free: data.price == 0,
-		};
+    };
 
-		formData.append('article', JSON.stringify(article));
-
+    formData.append("article", JSON.stringify(article));
+   
 		await Promise.all(
 			imageList.map(async (element, index) => {
 				const response = await fetch(element.content);
@@ -118,6 +129,14 @@ function Creator() {
 					setArticleList={setArticleList}
 				/>
 			</div>
+        <div className="relative flex w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md overflow-hidden mt-14">
+        <QuizForm
+          register={register}
+          control={control}
+          errors={errors}
+          setValue={setValue}
+        />
+      </div>
 			<button
 				className='text-center rounded-full bg-mainGreen text-white font-medium text-2xl hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2 mx-auto mt-10'
 				type='submit'

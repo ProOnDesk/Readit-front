@@ -4,6 +4,7 @@ import Article from "@/app/_components/materials/Article";
 import MaterialDetails from "@/app/_components/materials/MaterialDetails";
 import MaterialHeader from "@/app/_components/materials/MaterialHeader";
 import OpinionSection from "@/app/_components/materials/OpinionSection";
+import QuizSection from "@/app/_components/materials/QuizSection";
 
 interface Params {
   params: { materialTitle: string };
@@ -31,6 +32,7 @@ export default async function Page({ params, searchParams }: Params) {
     title_image_url,
     rating,
     rating_count,
+    assessment_questions,
   } = await getArticleInfoBySlug({
     slug: params?.materialTitle,
   });
@@ -55,10 +57,12 @@ export default async function Page({ params, searchParams }: Params) {
               rateCount={rating_count}
               rating={rating}
               viewCount={view_count}
+              questions_count={assessment_questions.length}
             />
           </div>
           <div className="flex-1 py-5">
             <Article articleId={id} slug={slug} />
+            <QuizSection articleId={id} />
             <OpinionSection
               articleId={id}
               authorId={userId}

@@ -1,20 +1,22 @@
-'use client';
+"use client";
 
 import {
-	useGetArticleInfoToEditMutation,
-	useUpdateArticleMutation,
-} from '@/app/_redux/features/articleApiSLice';
-import { useEffect, useState } from 'react';
-import ArticleForm from './ArticleForm';
-import ArticleSettings from './ArticleSettings';
-import Article from './Article';
-import { set, SubmitHandler, useForm } from 'react-hook-form';
-import Spinner from '../ui/Spinner';
-import { useRouter } from 'next/navigation';
-import toast from 'react-hot-toast';
+  useGetArticleInfoToEditMutation,
+  useUpdateArticleMutation,
+} from "@/app/_redux/features/articleApiSLice";
+import { useEffect, useState } from "react";
+import ArticleForm from "./ArticleForm";
+import ArticleSettings from "./ArticleSettings";
+import Article from "./Article";
+import { set, SubmitHandler, useForm } from "react-hook-form";
+import Spinner from "../ui/Spinner";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import QuizForm from "./QuizForm";
+import { CreatorInputs } from "./Creator";
 
 interface EditorProps {
-	materialSlug: string;
+  materialSlug: string;
 }
 
 type CreatorInputs = {
@@ -25,9 +27,10 @@ type CreatorInputs = {
 	price: number;
 };
 
+
 type Article = {
-	content_type: string;
-	content: string;
+  content_type: string;
+  content: string;
 };
 
 export default function Editor({ materialSlug }: EditorProps) {
@@ -46,6 +49,7 @@ export default function Editor({ materialSlug }: EditorProps) {
 		setValue,
 		setError,
 		clearErrors,
+    control,
 		formState: { errors },
 	} = useForm<CreatorInputs>();
 
@@ -59,13 +63,14 @@ export default function Editor({ materialSlug }: EditorProps) {
 	useEffect(() => {
 		getArticleInfoToEdit({ article_slug: materialSlug });
 	}, [materialSlug, getArticleInfoToEdit]);
-
+    
 	useEffect(() => {
 		setArticleList(articleInfo?.content_elements);
 		setTags(articleInfo?.tags.map((tag: { value: string }) => tag.value));
 		setValue('title', articleInfo?.title);
 		setValue('summary', articleInfo?.summary);
 		setValue('price', articleInfo?.price);
+    setValue("assessment_questions", articleInfo?.assessment_questions);
 	}, [articleInfo, setValue]);
 
 	const onSubmit: SubmitHandler<CreatorInputs> = async (data) => {
@@ -101,6 +106,7 @@ export default function Editor({ materialSlug }: EditorProps) {
 			content_elements: [...modifiedArticleList],
 			price: data.price,
 			is_free: data.price == 0,
+      assessment_questions: data.assessment_questions,
 		};
 		formData.append('article', JSON.stringify(article));
 
@@ -125,7 +131,6 @@ export default function Editor({ materialSlug }: EditorProps) {
 			})
 			.catch((err) => {
 				toast.error('Wystąpił błąd podczas aktualizacji materiału');
-				// console.log(err);
 			});
 	};
 
@@ -155,6 +160,14 @@ export default function Editor({ materialSlug }: EditorProps) {
 					actualImage={image}
 				/>
 			</div>
+      <div className="relative flex w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] rounded-md overflow-hidden mt-14">
+        <QuizForm
+          register={register}
+          control={control}
+          errors={errors}
+          setValue={setValue}
+        />
+      </div>
 			<button
 				className='text-center rounded-full bg-mainGreen text-white font-medium text-2xl hover:bg-mainGreenSecond transition-colors duration-300 px-6 py-2 mx-auto mt-10'
 				type='submit'
@@ -163,4 +176,5 @@ export default function Editor({ materialSlug }: EditorProps) {
 			</button>
 		</form>
 	);
+
 }
