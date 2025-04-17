@@ -53,7 +53,7 @@ The project was born out of the need to create a functional, easy-to-use educati
 
 1. Clone the repository
    ```bash
-   git clone [https://github.com/ProOnDesk/Readit-front.git  ](https://github.com/ProOnDesk/Readit-front.git)
+   git clone https://github.com/ProOnDesk/Readit-front.git
 
 2. Go to folder
    ```bash
@@ -62,8 +62,6 @@ The project was born out of the need to create a functional, easy-to-use educati
 3. Install dependencies
    ```bash
    npm install
-
-
 
 ## 🏃‍♂️ Launching
 
