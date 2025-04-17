@@ -49,7 +49,7 @@ The project was born out of the need to create a functional, easy-to-use educati
 
 
 
-## 🛠 Instalacja
+## 🛠 Installation
 
 1. Clone the repository
    ```bash
