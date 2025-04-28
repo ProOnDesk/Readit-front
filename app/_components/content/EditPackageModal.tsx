@@ -201,7 +201,7 @@ export default function EditPackageModal({
               <span className="line-through">
                 {articlesInPackage
                   .map((a) => a.price)
-                  .reduce((a, b) => a + b, 0)}{" "}
+                  .reduce((a, b) => a + b, 0).toFixed(2)}{" "}
                 PLN
               </span>
               <span className="font-bold">
