@@ -26,7 +26,7 @@ export default function PurchaseElement({
 				<p>{transactionNumber}</p>
 				<p>{formattedDate}</p>
 				<p>{translateTransactionStatus(status)}</p>
-				<p>{value} PLN</p>
+				<p>{Number(value).toFixed(2)} PLN</p>
 			</div>
 			<div className='lg:hidden flex flex-col sm500:flex-row w-fit mx-auto sm:px-10 gap-5 sm:gap-10 p-5 border-2 text-xs sm400:text-sm border-blackSecond/10 rounded-xl  '>
 				<div className='flex flex-col gap-2'>
