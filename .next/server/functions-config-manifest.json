@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/app/account":{},"/app/profile":{},"/app/create":{},"/app/content":{},"/creators":{},"/help":{},"/creators/[creatorId]":{},"/app/edit/[materialSlug]":{}}}
+{"version":1,"functions":{"/app/create":{},"/app/account":{},"/app/content":{},"/app/edit/[materialSlug]":{},"/app/profile":{},"/creators/[creatorId]":{},"/creators":{},"/help":{}}}
